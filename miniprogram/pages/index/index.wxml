@@ -3,4 +3,4 @@
 <view name="backText"></view>
 </cu-custom>
 <text>miniprogram/pages/index/index.wxml</text>
-<van-button type="primary">66666</van-button>
+<van-button type="primary">9999</van-button>
