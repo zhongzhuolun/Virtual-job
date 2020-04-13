@@ -1,12 +1,35 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/addTodo/addTodo",
+    "pages/todoInfo/todoInfo",
+    "pages/home/index/index",
+    "pages/home/IndustryChoose/IndustryChoose",
+    "pages/home/enterWritten/enterWritten",
+    "pages/home/examWritten/examWritten",
+    "pages/home/confirmSubmit/confirmSubmit",
+    "pages/home/score/score",
+    "pages/home/wrongAll/wrongAll",
+    "pages/home/enterInterview/enterInterview",
+    "pages/home/examInterview/examInterview",
+    "pages/home/endInterview/endInterview",
+    "pages/questionBank/index/index",
+    "pages/questionBank/answerQuestions/answerQuestions",
+    "pages/questionBank/endQuestion/endQuestion",
+    "pages/questionBank/viewQuestions/viewQuestions"
   ],
   "window": {
-    "navigationStyle": "custom"
+    "backgroundColor": "#f6f6f6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f6f6f6",
+    "navigationBarTitleText": "云待办",
+    "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
+    "van-button": "vant-weapp/button",
+    "van-cell": "vant-weapp/cell/index",
+    "van-cell-group": "vant-weapp/cell-group/index",
+    "van-icon": "vant-weapp/icon/index"
   },
   "sitemapLocation": "sitemap.json"
 }
