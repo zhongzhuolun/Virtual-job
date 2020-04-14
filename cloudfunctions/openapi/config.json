@@ -11,5 +11,12 @@
       "templateMessage.getTemplateLibraryById",
       "templateMessage.getTemplateLibraryList"
     ]
-  }
+  },
+  "triggers": [
+    {
+      "name": "sendMessagerTimer",
+      "type": "timer",
+      "config": "0 * * * * * *"
+    }
+  ]
 }

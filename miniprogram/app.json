@@ -1,8 +1,5 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/addTodo/addTodo",
-    "pages/todoInfo/todoInfo",
     "pages/home/index/index",
     "pages/home/IndustryChoose/IndustryChoose",
     "pages/home/enterWritten/enterWritten",
@@ -16,13 +13,14 @@
     "pages/questionBank/index/index",
     "pages/questionBank/answerQuestions/answerQuestions",
     "pages/questionBank/endQuestion/endQuestion",
-    "pages/questionBank/viewQuestions/viewQuestions"
+    "pages/questionBank/viewQuestions/viewQuestions",
+    "pages/center/index/index"
   ],
   "window": {
-    "backgroundColor": "#f6f6f6",
+    "backgroundColor": "#FABF01",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#f6f6f6",
-    "navigationBarTitleText": "云待办",
+    "navigationBarBackgroundColor": "#FABF01",
+    "navigationBarTitleText": "虚拟求职",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
@@ -31,5 +29,8 @@
     "van-cell-group": "vant-weapp/cell-group/index",
     "van-icon": "vant-weapp/icon/index"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+   
+  }
 }
