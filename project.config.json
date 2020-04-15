@@ -70,6 +70,12 @@
 					"pathName": "pages/todoInfo/todoInfo",
 					"query": "id=42c9a7b15e93d22b008539bd27505124",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/index/index",
+					"pathName": "pages/questionBank/index/index",
+					"scene": null
 				}
 			]
 		}

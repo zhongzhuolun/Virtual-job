@@ -1,2 +1,25 @@
-<!--miniprogram/pages/questionBank/index/index.wxml-->
-<text>题库首页界面（面试和笔试题库可共用该首页）</text>
+<view class="wrap">
+  <!-- <view class="btn-group"> -->
+    <view class="written">
+      <text>笔试</text>
+    </view>
+    <view class="interview">
+      <text>面试</text>
+    </view>
+  <!-- </view> -->
+  <swiper>
+    <swiper-item>
+      <image src="../../../images/icon/home1.png"></image>
+    </swiper-item>
+     <swiper-item>
+      <image src="../../../images/icon/home1.png"></image>
+    </swiper-item>
+  </swiper>
+  <view class="title">
+    <view class="linel"></view>
+      <text>在线答题</text>
+    <view class="liner"></view>
+  </view>
+  <view class="bank-wrap">
+  </view>
+</view>

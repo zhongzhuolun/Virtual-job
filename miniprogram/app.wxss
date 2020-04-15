@@ -2,3 +2,11 @@
 /* @import "colorui/main.wxss";
 @import "colorui/icon.wxss"; */
 /* @import "app.css"; 你的项目css */
+page {
+  height: 100%;
+  background-color: #FABF01;
+  position: relative;
+}
+view {
+  box-sizing: border-box;
+}
