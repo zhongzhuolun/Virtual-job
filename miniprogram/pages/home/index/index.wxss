@@ -1,1 +1,51 @@
 /* miniprogram/pages/home/index/index.wxss */
+page {
+  background-color: #FABF01;
+  height: 100%;
+  /* width: 25.94rem; */
+  width: 100%;
+}
+.wrap {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.exam {
+  display: flex;
+}
+.offer {
+  width: 361rpx;
+  height: 361rpx;
+  border: 1px solid;
+}
+.written {
+  width: 264rpx;
+  height: 264rpx;
+  line-height: 264rpx;
+  background-color: rgba(85, 65, 3, 1);
+  color: #FABF01;
+  font-size: 72rpx;
+  text-align: center;
+  box-shadow: 4rpx 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  font-family: -apple-system;
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  border-radius: 100%;
+
+}
+.interview {
+  width: 264rpx;
+  height: 264rpx;
+  line-height: 264rpx;
+  background-color: rgba(85, 65, 3, 1);
+  color: #FABF01;
+  font-size: 72rpx;
+  text-align: center;
+  box-shadow: 4rpx 4rpx 12rpx 0 rgba(0, 0, 0, 0.4);
+  font-family: -apple-system;
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  border-radius: 100%;
+
+}

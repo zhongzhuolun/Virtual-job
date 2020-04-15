@@ -1,2 +1,10 @@
 <!--miniprogram/pages/home/index/index.wxml-->
-<text>首页的主页</text>
+<view class="wrap">
+  <view class="offer">
+  </view>
+  <view class="exam">
+    <view class="written">笔试</view>
+    <view class="interview">面试</view>
+  </view>
+</view>
+

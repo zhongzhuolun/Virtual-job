@@ -20,7 +20,7 @@
     "backgroundColor": "#FABF01",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FABF01",
-    "navigationBarTitleText": "虚拟求职",
+    "navigationBarTitleText": "offer",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
@@ -29,8 +29,34 @@
     "van-cell-group": "vant-weapp/cell-group/index",
     "van-icon": "vant-weapp/icon/index"
   },
-  "sitemapLocation": "sitemap.json",
-  "permission": {
-   
-  }
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/index/index",
+        "text": "首页",
+        "iconPath": "./images/icon/home1.png",
+        "selectedIconPath": "./images/icon/home2.png",
+        "color": "#344256",
+        "selectedColor": "#ffc200"
+      },
+      {
+        "pagePath": "pages/questionBank/index/index",
+        "text": "题库",
+        "iconPath": "./images/icon/question1.png",
+        "selectedIconPath": "./images/icon/question2.png",
+        "color": "#344256",
+        "selectedColor": "#ffc200"
+      },
+      {
+        "pagePath": "pages/center/index/index",
+        "text": "我的",
+        "iconPath": "./images/icon/mine1.png",
+        "selectedIconPath": "./images/icon/mine2.png",
+        "color": "#344256",
+        "selectedColor": "#ffc200"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+
 }
