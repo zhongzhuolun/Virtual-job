@@ -5,7 +5,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    active: 0,
+    checkoutBank: 'written'
+  },
+  onChange(event) {
+    wx.showToast({
+      title: `切换到标签 ${event.detail.index + 1}`,
+      icon: 'none'
+    });
+  },
+  handleWritten() {
+    // 处理点击笔试按钮的事件
+    this.setData({
+      checkoutBank: 'written'
+    })
+  },
+  handleInterview() {
+    // 处理点击面试按钮的事件
+    console.log(11)
+    this.setData({
+      checkoutBank: 'interview'
+    })
   },
 
   /**

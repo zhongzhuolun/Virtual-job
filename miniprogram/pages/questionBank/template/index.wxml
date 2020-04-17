@@ -1,0 +1,19 @@
+<template name="bankItem">
+    <view class="bank">
+    <text class="bank-title">
+    笔试题库的第一份
+    </text>
+    <van-icon class="exam-icon" name="records" color="#ffc200" size="60rpx"/>
+    <text class="exam">
+    考试
+    </text>
+    <view class="start-exam">
+    开始答题
+    </view>
+    <view class="limit-time">
+      <text>限时</text>
+      <text style="color:#ffc200">50</text>
+      <text>分钟</text>
+    </view>
+    </view>
+</template>
