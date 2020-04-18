@@ -41,10 +41,20 @@
     </view>
   </van-tab> -->
    <van-tab title="精选">
-   <template is="bankItem" />
+   <block wx:if="{{bankList.length > 0}}">
+    <view   wx:for="{{bankList}}" wx:key="id" >
+   <template is="bankItem" data="{{item}}"/>
+   </view>
+   </block>
+   <block wx:else>
+   该行业暂时还没有题目哦
+   </block>
+  
+ 
+   
   </van-tab>
-  <van-tab title="选择题">选择题</van-tab>
-  <van-tab title="填空题">填空题</van-tab>
+  <van-tab title="收藏">收藏</van-tab>
+  <van-tab title="错题集">错题集</van-tab>
 </van-tabs>
   </view>
 </view>

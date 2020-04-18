@@ -1,32 +1,57 @@
 // miniprogram/pages/questionBank/index/index.js
-Page({
+const db = wx.cloud.database()
+const banksList = db.collection('banks-list')
+import tempObj from '../template/index'
+var indexObj = {
 
   /**
    * 页面的初始数据
    */
   data: {
     active: 0,
-    checkoutBank: 'written'
+    checkoutBank: 'written',
+    banners: [],
+    bankList: [],
   },
   onChange(event) {
-    wx.showToast({
-      title: `切换到标签 ${event.detail.index + 1}`,
-      icon: 'none'
-    });
+    // wx.showToast({
+    //   title: `切换到标签 ${event.detail.index + 1}`,
+    //   icon: 'none'
+    // });
   },
-  handleWritten() {
+   handleWritten() {
     // 处理点击笔试按钮的事件
+    banksList.where({
+      class: '笔试题',
+      industry: '前端'
+
+    }).get().then(res => {
+      console.log(res.data)
+      this.setData({
+        bankList: res.data,
+      })
+    })
     this.setData({
       checkoutBank: 'written'
     })
   },
   handleInterview() {
     // 处理点击面试按钮的事件
-    console.log(11)
+    banksList.where({
+      class: '面试题',
+      industry: '前端'
+
+    }).get().then(res => {
+      console.log(res.data)
+      this.setData({
+        bankList: res.data,
+      })
+    })
     this.setData({
       checkoutBank: 'interview'
     })
   },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -83,4 +108,6 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}
+indexObj["handleClick"] = tempObj.handleClick
+Page(indexObj)
