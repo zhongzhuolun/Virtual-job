@@ -1,7 +1,7 @@
 <!--miniprogram/pages/home/index/index.wxml-->
 <view class="wrap">
   <view class="offer">
-  <image src="../../../images/icon/home1.png"></image>
+  <image src="../../../images/logo/logo.png"></image>
   </view>
   <!-- <view class="exam"> -->
   <navigator url="../enterWritten/enterWritten">
