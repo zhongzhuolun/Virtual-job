@@ -8,14 +8,30 @@
     考试
     </text>
     <!-- <view  catchtap="{{foo.handleStatus(item.id)}}"></view> -->
-    <view class="start-exam" bindtap="handleClick">
-    开始答题
-    </view>
-    <view class="limit-time">
+    <block wx:if="{{item.status.done}}">
+    <view class="start-exam" style="background: #bbb">
+      已结束
+      </view>
+    <navigator url="../viewQuestions/viewQuestions">
+      <view class="view-result">
+      查看结果
+      </view>
+    </navigator>
+    </block>
+    <block wx:else>
+    <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
+      <view class="start-exam" >
+      开始答题
+      </view>
+    </navigator>
+    </block>
+    
+  
+    <!-- <view class="limit-time">
       <text>限时</text>
       <text style="color:#ffc200">{{item.limit_time}}</text>
       <text>分钟</text>
-    </view>
+    </view> -->
     </view>
 </template>
 <wxs module="foo">

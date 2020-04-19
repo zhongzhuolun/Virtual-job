@@ -1,10 +1,20 @@
 <!--miniprogram/pages/home/index/index.wxml-->
 <view class="wrap">
   <view class="offer">
+  <image src="../../../images/icon/home1.png"></image>
   </view>
-  <view class="exam">
-    <view class="written">笔试</view>
-    <view class="interview">面试</view>
-  </view>
+  <!-- <view class="exam"> -->
+  <navigator url="../enterWritten/enterWritten">
+    <view class="written">
+      <text>笔试</text>
+    </view>
+  </navigator>
+  <navigator url="../enterInterview/enterInterview">
+     <view class="interview">
+      <text>面试</text>
+    </view>
+  </navigator>
+ 
+  <!-- </view> -->
 </view>
 

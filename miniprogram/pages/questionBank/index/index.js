@@ -1,8 +1,10 @@
 // miniprogram/pages/questionBank/index/index.js
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
+const bankStatusList = db.collection('bank-status')
 import tempObj from '../template/index'
-var indexObj = {
+
+Page({
 
   /**
    * 页面的初始数据
@@ -11,7 +13,12 @@ var indexObj = {
     active: 0,
     checkoutBank: 'written',
     banners: [],
-    bankList: [],
+    // statusList: [],
+    // bankList: [],
+    item: {
+      bankList: [],
+      statusList: []
+    }
   },
   onChange(event) {
     // wx.showToast({
@@ -21,15 +28,31 @@ var indexObj = {
   },
    handleWritten() {
     // 处理点击笔试按钮的事件
+    wx.showLoading({
+      title: '数据加载中',
+    })
     banksList.where({
       class: '笔试题',
       industry: '前端'
-
     }).get().then(res => {
-      console.log(res.data)
-      this.setData({
-        bankList: res.data,
+      let item = {...this.data.item}
+      item.bankList = res.data
+      bankStatusList.get().then(res => {
+        let statusList = res.data[0].statusList
+        item.bankList.forEach((item, index) => {
+          let result = statusList.find((value) => {
+            console.log(value)
+            return value.id === item.id
+          })
+          console.log(result)
+        })
+        // console.log(res.data[0].statusList)
+
       })
+      this.setData({
+        item: {...item}
+      })
+      wx.hideLoading()
     })
     this.setData({
       checkoutBank: 'written'
@@ -37,15 +60,35 @@ var indexObj = {
   },
   handleInterview() {
     // 处理点击面试按钮的事件
+    wx.showLoading({
+      title: '数据加载中',
+    })
     banksList.where({
       class: '面试题',
       industry: '前端'
 
     }).get().then(res => {
       console.log(res.data)
-      this.setData({
-        bankList: res.data,
+      let item = {...this.data.item}
+      item.bankList = res.data
+      bankStatusList.get().then(res => {
+        let statusList = res.data[0].statusList
+        console.log(res.data)
+        item.bankList.forEach((item, index) => {
+          let result = statusList.find((value) => {
+            return value.id === item.id
+          })
+          if(result) {
+            item.status = result.status
+          }
+        })
+        this.setData({
+          item: {...item}
+        })
+        wx.hideLoading()
+        // console.log(res.data[0].statusList)
       })
+     
     })
     this.setData({
       checkoutBank: 'interview'
@@ -57,7 +100,11 @@ var indexObj = {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(this.data.checkoutBank === 'written') {
+      this.handleWritten()
+    } else {
+      this.handleInterview()
+    }
   },
 
   /**
@@ -107,7 +154,5 @@ var indexObj = {
    */
   onShareAppMessage: function () {
 
-  }
-}
-indexObj["handleClick"] = tempObj.handleClick
-Page(indexObj)
+  }}
+  )

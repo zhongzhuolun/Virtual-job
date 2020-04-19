@@ -14,7 +14,9 @@
     "pages/questionBank/answerQuestions/answerQuestions",
     "pages/questionBank/endQuestion/endQuestion",
     "pages/questionBank/viewQuestions/viewQuestions",
-    "pages/center/index/index"
+    "pages/center/index/index",
+    "pages/questionBank/enterWritten/enterWritten",
+    "pages/questionBank/endInterviewQuestion/endInterviewQuestion"
   ],
   "window": {
     "backgroundColor": "#FABF01",
@@ -60,5 +62,4 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
-
 }

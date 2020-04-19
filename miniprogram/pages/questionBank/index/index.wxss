@@ -51,7 +51,8 @@ swiper {
   position: absolute;
   left: 0px;
   top: 586rpx;
-  width: 374px;
+  width: 750rpx;
+  /* width: 375px; */
   height: 132rpx;
   line-height: 132rpx;
   text-align: center;
@@ -136,7 +137,7 @@ swiper {
 }
 .start-exam {
   position: absolute;
-  left: 82rpx;
+  left: 40rpx;
   top: 110rpx;
   width: 160rpx;
   height: 60rpx;
@@ -160,4 +161,16 @@ swiper {
   font-size: 28rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+}
+.view-result {
+    left: 208rpx;
+    top: 129rpx;
+    width: 113rpx;
+    height: 40rpx;
+    color: rgba(139, 137, 129, 1);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-regular;
+    position: absolute;
+    border-bottom: 1rpx solid;
 }

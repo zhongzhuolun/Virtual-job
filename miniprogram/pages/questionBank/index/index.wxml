@@ -41,8 +41,8 @@
     </view>
   </van-tab> -->
    <van-tab title="精选">
-   <block wx:if="{{bankList.length > 0}}">
-    <view   wx:for="{{bankList}}" wx:key="id" >
+   <block wx:if="{{item.bankList.length > 0}}">
+    <view   wx:for="{{item.bankList}}" wx:key="id" >
    <template is="bankItem" data="{{item}}"/>
    </view>
    </block>
