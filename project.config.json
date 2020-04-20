@@ -75,6 +75,13 @@
 					"id": -1,
 					"name": "pages/questionBank/index/index",
 					"pathName": "pages/questionBank/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/enterWritten/enterWritten",
+					"pathName": "pages/questionBank/enterWritten/enterWritten",
 					"scene": null
 				}
 			]

@@ -1,1 +1,65 @@
 /* miniprogram/pages/questionBank/enterWritten/enterWritten.wxss */
+.enterWritten{
+  position: absolute;
+  left: 238rpx;
+  top: 214rpx;
+  width: 288rpx;
+  height: 102rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 72rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.line1{
+  position: absolute;
+  left: 72rpx;
+  top: 266rpx;
+  width: 122rpx;
+  height: NaNpx;
+  border: 1rpx solid rgba(12, 12, 12, 1);
+}
+.line2{
+  position: absolute;
+  left: 570rpx;
+  top: 266rpx;
+  width: 122rpx;
+  height: NaNpx;
+  border: 1rpx solid rgba(12, 12, 12, 1);
+}
+.frist1{
+  position: absolute;
+  left: 154rpx;
+  top: 410rpx;
+  width: 448rpx;
+  height: 80rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 56rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.sentence{
+  position: absolute;
+  left: 232rpx;
+  top: 640rpx;
+  width: 344rpx;
+  height: 40rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.startAnswer{
+  position: absolute;
+  left: 230rpx;
+  top: 886rpx;
+  width: 288rpx;
+  height: 118rpx;
+  border-radius: 40rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 40rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.4);
+  font-family: Microsoft Yahei;
+  border: 2rpx solid rgba(12, 12, 12, 1);
+}
