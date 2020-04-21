@@ -1,2 +1,7 @@
 <!--miniprogram/pages/questionBank/enterWritten/enterWritten.wxml-->
-<text>miniprogram/pages/questionBank/enterWritten/enterWritten.wxml</text>
+<view class="line1"></view>
+<view class="enterWritten">笔试题目</view>
+<view class="line2"></view>
+<view class="frist1">笔试题库的第一份</view>
+<view class="sentence">“每日一套，早日offer”</view>
+<navigator url="../answerQuestions/answerQuestions" ><button plain="#000000" class="startAnswer" >开始答题 </button></navigator>
