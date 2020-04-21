@@ -26,12 +26,14 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "van-button": "vant-weapp/button",
-    "van-cell": "vant-weapp/cell/index",
-    "van-cell-group": "vant-weapp/cell-group/index",
-    "van-icon": "vant-weapp/icon/index",
-    "van-tab": "vant-weapp/tab/index",
-    "van-tabs": "vant-weapp/tabs/index"
+    "van-button": "./miniprogram_npm/vant-weapp/button/index",
+    "van-cell": "./miniprogram_npm/vant-weapp/cell/index",
+    "van-cell-group": "./miniprogram_npm/vant-weapp/cell-group/index",
+    "van-icon": "./miniprogram_npm/vant-weapp/icon/index",
+    "van-tab": "./miniprogram_npm/vant-weapp/tab/index",
+    "van-tabs": "./miniprogram_npm/vant-weapp/tabs/index",
+    "van-collapse": "./miniprogram_npm/vant-weapp/collapse/index",
+    "van-collapse-item": "./miniprogram_npm/vant-weapp/collapse-item/index"
   },
   "tabBar": {
     "list": [

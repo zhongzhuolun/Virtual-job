@@ -14,11 +14,18 @@
       <image src="../../../images/icon/home1.png"></image>
     </swiper-item>
   </swiper>
+
   <view class="title">
     <view class="linel"></view>
       <text>在线答题</text>
     <view class="liner"></view>
   </view>
+    <!-- 用于添加题库简介的代码 -->
+    <view style="position:absolute; margin-top: 200rpx;">
+      <button bindtap="addWritten">添加题库简介</button>
+    </view>
+
+  <!-- 用于添加题库简介的代码 -->
   <view class="bank-wrap" >
   <van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
   <!-- <van-tab title="精选">
@@ -53,8 +60,26 @@
  
    
   </van-tab>
-  <van-tab title="收藏">收藏</van-tab>
-  <van-tab title="错题集">错题集</van-tab>
+  <van-tab title="收藏">
+    <block wx:if="{{colBankList.length > 0}}">
+    <view   wx:for="{{colBankList}}" wx:key="id" >
+   <template is="bankItem" data="{{item}}"/>
+   </view>
+   </block>
+   <block wx:else>
+   暂时还没有收藏任何题库哦
+   </block>
+  </van-tab>
+  <van-tab title="错题集">
+      <block wx:if="{{errBankList.length > 0}}">
+    <view   wx:for="{{errBankList}}" wx:key="id" >
+   <template is="bankItem" data="{{item}}"/>
+   </view>
+   </block>
+   <block wx:else>
+   暂时还没有做错任何题哦
+   </block>
+  </van-tab>
 </van-tabs>
   </view>
 </view>

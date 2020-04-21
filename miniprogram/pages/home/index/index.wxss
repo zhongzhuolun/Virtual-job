@@ -20,7 +20,7 @@ image {
 }
 .interview, .written {
   position: absolute;
-  top: 800rpx;
+  top: 700rpx;
   width: 248rpx;
   height: 254rpx;
   line-height: 254rpx;

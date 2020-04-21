@@ -1,4 +1,5 @@
 //app.js
+
 App({
   onLaunch: function () {
     
@@ -13,6 +14,20 @@ App({
         env: 'virtual-bxkak',
         traceUser: true,
       })
+      const db = wx.cloud.database()
+      const banksList = db.collection('banks-list')
+      const bankStatusList = db.collection('bank-status')
+      bankStatusList.get().then((res) => {
+        if (res.data.length === 0) {
+          bankStatusList.add({
+            data: {
+              statusList: []
+            }
+          }).then(console.log)
+        }
+      })
+
+
     }
 
     this.globalData = {}

@@ -2,6 +2,7 @@
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
+
 import tempObj from '../template/index'
 
 Page({
@@ -13,87 +14,176 @@ Page({
     active: 0,
     checkoutBank: 'written',
     banners: [],
-    // statusList: [],
-    // bankList: [],
+    errBankList: [],
+    colBankList: [],
     item: {
       bankList: [],
       statusList: []
     }
   },
   onChange(event) {
+    // wx.showLoading({
+    //   title: '数据加载中',
+    // })
+    let item = {...this.data.item}
+    this.refleshStatus(item)
+    // wx.hideLoading()
+
+    // bankStatusList.get().then(res => {
+    //   let statusList = res.data[0].statusList
+    //   item.bankList.forEach((item, index) => {
+    //     let result = statusList.find((value) => {
+    //       console.log(value)
+    //       return value.id === item.id
+    //     })
+    //     if(result) {
+    //       item.status = result.status
+    //     }
+    //   })
+    //    this.setData({
+    //     item: {...item}
+    //   }, () => {
+    //     this.getColErrBank()
+    //     wx.hideLoading()
+    //   })
+    // })
+   
     // wx.showToast({
-    //   title: `切换到标签 ${event.detail.index + 1}`,
+    //   title: `切换到标签 ${event.detail.title}`,
     //   icon: 'none'
     // });
   },
-   handleWritten() {
-    // 处理点击笔试按钮的事件
+  getColErrBank() {
+    let bankList = this.data.item.bankList
+    let colres = bankList.filter((item) => {
+      return item.status.collection === true
+    })
+    let errres = bankList.filter((item) => {
+      return item.status.mistaked === true
+    })
+    this.setData({
+      colBankList: colres,
+      errBankList: errres
+    })
+  },
+  refleshStatus(item) {
+    // let item = {...this.data.item}
     wx.showLoading({
       title: '数据加载中',
     })
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+      item.bankList.forEach((item, index) => {
+        let result = statusList.find((value) => {
+          return value.id === item.id
+        })
+        if(result) {
+          item.status = result.status
+        }
+      })
+      this.setData({
+        item: {...item}
+      }, () => {
+        this.getColErrBank()
+        wx.hideLoading()
+      })
+
+    })
+  
+  },
+   handleWritten(tabtitle) {
+    // 处理点击笔试按钮的事件
+    // wx.showLoading({
+    //   title: '数据加载中',
+    // })
     banksList.where({
       class: '笔试题',
       industry: '前端'
     }).get().then(res => {
       let item = {...this.data.item}
       item.bankList = res.data
-      bankStatusList.get().then(res => {
-        let statusList = res.data[0].statusList
-        item.bankList.forEach((item, index) => {
-          let result = statusList.find((value) => {
-            console.log(value)
-            return value.id === item.id
-          })
-          console.log(result)
-        })
-        // console.log(res.data[0].statusList)
+      this.refleshStatus(item)
+      // wx.hideLoading()
 
-      })
-      this.setData({
-        item: {...item}
-      })
-      wx.hideLoading()
+      // bankStatusList.get().then(res => {
+      //   let statusList = res.data[0].statusList
+      //   item.bankList.forEach((item, index) => {
+      //     let result = statusList.find((value) => {
+      //       return value.id === item.id
+      //     })
+      //     if(result) {
+      //       item.status = result.status
+      //     }
+      //   })
+
+      // })
+      // this.setData({
+      //   item: {...item}
+      // }, () => {
+      //   this.getColErrBank()
+      //   wx.hideLoading()
+      // })
     })
     this.setData({
       checkoutBank: 'written'
     })
+   
   },
-  handleInterview() {
+  handleInterview(tabtitle) {
     // 处理点击面试按钮的事件
-    wx.showLoading({
-      title: '数据加载中',
-    })
     banksList.where({
       class: '面试题',
       industry: '前端'
 
     }).get().then(res => {
-      console.log(res.data)
       let item = {...this.data.item}
       item.bankList = res.data
-      bankStatusList.get().then(res => {
-        let statusList = res.data[0].statusList
-        console.log(res.data)
-        item.bankList.forEach((item, index) => {
-          let result = statusList.find((value) => {
-            return value.id === item.id
-          })
-          if(result) {
-            item.status = result.status
-          }
-        })
-        this.setData({
-          item: {...item}
-        })
-        wx.hideLoading()
-        // console.log(res.data[0].statusList)
-      })
-     
+      this.refleshStatus(item)
     })
     this.setData({
       checkoutBank: 'interview'
     })
   },
+  addBank() {
+    banksList.field({
+      id: true
+    }).get().then(res => {
+      let id = res.data[res.data.length - 1].id
+      wx.cloud.callFunction({
+        name: 'addBank',
+        data: {
+          "id": id + 1, 
+          "industry": "前端", 
+          "class": "笔试题",
+          "title": "腾讯前端笔试题库", 
+          "limit_time": "50",
+          "status": { 
+            "done": false, 
+            "doing": false,
+            "collection": false,
+            "mistaked": false
+          }
+        }
+      }).then(console.log)
+      // banksList.add({
+      //   data: {
+      //     "id": id + 1, 
+      //     "industry": "后台", 
+      //     "class": "笔试题",
+      //     "title": "虎牙后台笔试题库", 
+      //     "limit_time": "50",
+      //     "status": { 
+      //       "done": false, 
+      //       "doing": false,
+      //       "collection": false,
+      //       "mistaked": false
+      //     }
+      //   }
+      // }).then(console.log)
+      // console.log(id)
+    })
+  },
+ 
 
 
   /**
@@ -105,6 +195,7 @@ Page({
     } else {
       this.handleInterview()
     }
+
   },
 
   /**
