@@ -34,11 +34,17 @@
     </block>
     
   
-    <!-- <view class="limit-time">
-      <text>限时</text>
+    <view bindtap="handleCollection" id="{{item.id}}" class="limit-time">
+      <text wx:if="{{item.status.collection}}">
+      取消收藏
+      </text>
+      <text wx:else>
+      收藏
+      </text>
+      <!-- <text>限时</text>
       <text style="color:#ffc200">{{item.limit_time}}</text>
-      <text>分钟</text>
-    </view> -->
+      <text>分钟</text> -->
+    </view>
     </view>
 </template>
 <wxs module="foo">

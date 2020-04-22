@@ -153,13 +153,13 @@ swiper {
 .limit-time {
   position: absolute;
   left: 502rpx;
-  top: 130rpx;
+  top: 88rpx;
   width: 146rpx;
   height: 40rpx;
   line-height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
-  text-align: left;
+  text-align: center;
   font-family: PingFangSC-regular;
 }
 .view-result {

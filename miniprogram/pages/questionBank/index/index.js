@@ -93,38 +93,36 @@ Page({
     })
   
   },
-  handleWritten(tabtitle) {
-    // 处理点击笔试按钮的事件
-    // wx.showLoading({
-    //   title: '数据加载中',
-    // })
+  // 处理点击笔试按钮的事件
+  handleWritten(e) {
+    let pagesize;
+    if (e) {
+      this.pageObj.pagesize = 0
+      pagesize = 0
+    } else {
+      pagesize = this.pageObj.pagesize
+    }
     banksList.where({
       class: '笔试题',
       industry: this.data.industry
-    }).get().then(res => {
+    }).skip(pagesize).get().then(res => {
+      console.log(res.data)
       let item = {...this.data.item}
-      item.bankList = res.data
-      this.refleshStatus(item)
-      // wx.hideLoading()
+      if (e) {
+        item.bankList = []
+      }
+      if (res.data.length === 20) {
+        this.pageObj.ifAdd = true
+      } else {
+        this.pageObj.ifAdd = false
+      }
+      if (res.data.length > 0) {
+        item.bankList = item.bankList.concat(res.data)
+        // item.bankList = res.data
+        console.log(item)
+        this.refleshStatus(item)
+      }
 
-      // bankStatusList.get().then(res => {
-      //   let statusList = res.data[0].statusList
-      //   item.bankList.forEach((item, index) => {
-      //     let result = statusList.find((value) => {
-      //       return value.id === item.id
-      //     })
-      //     if(result) {
-      //       item.status = result.status
-      //     }
-      //   })
-
-      // })
-      // this.setData({
-      //   item: {...item}
-      // }, () => {
-      //   this.getColErrBank()
-      //   wx.hideLoading()
-      // })
     })
     this.setData({
       checkoutBank: 'written'
@@ -132,15 +130,37 @@ Page({
     app.updataType('written')
    
   },
-  handleInterview(tabtitle) {
+  handleInterview(e) {
+
+    let pagesize;
+    if (e) {
+      this.pageObj.pagesize = 0
+      pagesize = 0
+    } else {
+      pagesize = this.pageObj.pagesize
+    }
+ 
     // 处理点击面试按钮的事件
     banksList.where({
       class: '面试题',
       industry: this.data.industry
-    }).get().then(res => {
+    }).skip(pagesize).get().then(res => {
       let item = {...this.data.item}
-      item.bankList = res.data
-      this.refleshStatus(item)
+      if (e) {
+        item.bankList = []
+      }
+      if (res.data.length === 20) {
+        this.pageObj.ifAdd = true
+      } else {
+        this.pageObj.ifAdd = false
+      }
+      if (res.data.length > 0) {
+        item.bankList = item.bankList.concat(res.data)
+        // item.bankList = res.data
+        this.refleshStatus(item)
+      }
+      // item.bankList = res.data
+      // this.refleshStatus(item)
     })
     this.setData({
       checkoutBank: 'interview'
@@ -148,45 +168,6 @@ Page({
     app.updataType('interview')
 
   },
-  // addBank() {
-  //   banksList.field({
-  //     id: true
-  //   }).get().then(res => {
-  //     let id = res.data[res.data.length - 1].id
-  //     wx.cloud.callFunction({
-  //       name: 'addBank',
-  //       data: {
-  //         "id": id + 1, 
-  //         "industry": "前端", 
-  //         "class": "笔试题",
-  //         "title": "腾讯前端笔试题库", 
-  //         "limit_time": "50",
-  //         "status": { 
-  //           "done": false, 
-  //           "doing": false,
-  //           "collection": false,
-  //           "mistaked": false
-  //         }
-  //       }
-  //     }).then(console.log)
-  //     // banksList.add({
-  //     //   data: {
-  //     //     "id": id + 1, 
-  //     //     "industry": "后台", 
-  //     //     "class": "笔试题",
-  //     //     "title": "虎牙后台笔试题库", 
-  //     //     "limit_time": "50",
-  //     //     "status": { 
-  //     //       "done": false, 
-  //     //       "doing": false,
-  //     //       "collection": false,
-  //     //       "mistaked": false
-  //     //     }
-  //     //   }
-  //     // }).then(console.log)
-  //     // console.log(id)
-  //   })
-  // },
  
   handleStartExam(e) {
     let bankId = e.target.id * 1
@@ -196,9 +177,8 @@ Page({
     let result = this.data.item.bankList.find((value) => {
       return value.id == bankId
     })
+    result.status.doing = true
     statusObj.status = result.status
-
-    // wx.showLoading()
     bankStatusList.get().then(res => {
       console.log(res)
       let statusList = res.data[0].statusList
@@ -217,17 +197,45 @@ Page({
             statusList
           }
         }).then(console.log)
-        // bankStatusList.update({
-        //   data: {
-        //     // statusList
-        //   }
-        // }).then(console.log)
-      // this.setData({
-      //   item: {...item}
-      // }, () => {
-      //   wx.hideLoading()
-      // })
+    })
+  },
+  handleCollection(e) {
 
+    let bankId = e.currentTarget.id * 1
+    let statusObj = {
+      id: bankId
+    }
+    console.log(bankId)
+    let result1 = this.data.item.bankList.find((value) => {
+      return value.id == bankId
+    })
+    if (result1.status.collection) {
+      result1.status.collection = false
+    } else {
+      result1.status.collection = true
+    }
+    statusObj.status = result1.status
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+        let result = statusList.findIndex((value) => {
+          return value.id == bankId
+        })
+        if(result !== -1) {
+          if (!result1.status.collection) {
+            statusList[result].status.collection = false
+          } else {
+            statusList[result].status.collection = true
+          }
+          // statusList[result].status.collection = true
+        } else {
+          statusList.push(statusObj)
+        }
+        wx.cloud.callFunction({
+          name: 'updateBankStatus',
+          data: {
+            statusList
+          }
+        }).then(console.log)
     })
   },
 
@@ -254,6 +262,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let item = {...this.data.item}
+      item.bankList = []
+      this.setData({
+        item: {...item}
+      })
     if(this.data.checkoutBank === 'written') {
       this.handleWritten()
     } else {
@@ -265,7 +278,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.pageObj.pagesize = 0
   },
 
   /**
@@ -278,15 +291,29 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function (e) {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
+  pageObj: {
+    pagesize: 0,
+    ifAdd: true,
+    ifBottom: false
+  },
+  onReachBottom: function (e) {
+    this.pageObj.ifBottom = true
+    if (this.pageObj.ifAdd) {
+      this.pageObj.pagesize += 20
+      if(this.data.checkoutBank === 'written') {
+        this.handleWritten()
+      } else {
+        this.handleInterview()
+      }
+    } 
+  
   },
 
   /**
