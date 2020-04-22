@@ -1,4 +1,7 @@
 // miniprogram/pages/center/index/index.js
+const db = wx.cloud.database()
+const banksList = db.collection('banks-list')
+const bankStatusList = db.collection('bank-status')
 Page({
 
   /**
@@ -7,7 +10,29 @@ Page({
   data: {
 
   },
-
+  addBank() {
+    banksList.field({
+      id: true
+    }).get().then(res => {
+      let id = res.data[res.data.length - 1].id
+      wx.cloud.callFunction({
+        name: 'addBank',
+        data: {
+          "id": id + 1, 
+          "industry": "前端", 
+          "class": "笔试题",
+          "title": "腾讯前端笔试题库1", 
+          "limit_time": "50",
+          "status": { 
+            "done": false, 
+            "doing": false,
+            "collection": false,
+            "mistaked": false
+          }
+        }
+      }).then(console.log)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

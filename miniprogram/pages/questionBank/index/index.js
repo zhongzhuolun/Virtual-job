@@ -2,7 +2,8 @@
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
-
+const _ = db.command
+const app = getApp()
 import tempObj from '../template/index'
 
 Page({
@@ -12,8 +13,9 @@ Page({
    */
   data: {
     active: 0,
-    checkoutBank: 'written',
+    checkoutBank: app.globalData.examType,
     banners: [],
+    industry: '',
     errBankList: [],
     colBankList: [],
     item: {
@@ -91,14 +93,14 @@ Page({
     })
   
   },
-   handleWritten(tabtitle) {
+  handleWritten(tabtitle) {
     // 处理点击笔试按钮的事件
     // wx.showLoading({
     //   title: '数据加载中',
     // })
     banksList.where({
       class: '笔试题',
-      industry: '前端'
+      industry: this.data.industry
     }).get().then(res => {
       let item = {...this.data.item}
       item.bankList = res.data
@@ -127,14 +129,14 @@ Page({
     this.setData({
       checkoutBank: 'written'
     })
+    app.updataType('written')
    
   },
   handleInterview(tabtitle) {
     // 处理点击面试按钮的事件
     banksList.where({
       class: '面试题',
-      industry: '前端'
-
+      industry: this.data.industry
     }).get().then(res => {
       let item = {...this.data.item}
       item.bankList = res.data
@@ -143,58 +145,101 @@ Page({
     this.setData({
       checkoutBank: 'interview'
     })
+    app.updataType('interview')
+
   },
-  addBank() {
-    banksList.field({
-      id: true
-    }).get().then(res => {
-      let id = res.data[res.data.length - 1].id
-      wx.cloud.callFunction({
-        name: 'addBank',
-        data: {
-          "id": id + 1, 
-          "industry": "前端", 
-          "class": "笔试题",
-          "title": "腾讯前端笔试题库", 
-          "limit_time": "50",
-          "status": { 
-            "done": false, 
-            "doing": false,
-            "collection": false,
-            "mistaked": false
-          }
+  // addBank() {
+  //   banksList.field({
+  //     id: true
+  //   }).get().then(res => {
+  //     let id = res.data[res.data.length - 1].id
+  //     wx.cloud.callFunction({
+  //       name: 'addBank',
+  //       data: {
+  //         "id": id + 1, 
+  //         "industry": "前端", 
+  //         "class": "笔试题",
+  //         "title": "腾讯前端笔试题库", 
+  //         "limit_time": "50",
+  //         "status": { 
+  //           "done": false, 
+  //           "doing": false,
+  //           "collection": false,
+  //           "mistaked": false
+  //         }
+  //       }
+  //     }).then(console.log)
+  //     // banksList.add({
+  //     //   data: {
+  //     //     "id": id + 1, 
+  //     //     "industry": "后台", 
+  //     //     "class": "笔试题",
+  //     //     "title": "虎牙后台笔试题库", 
+  //     //     "limit_time": "50",
+  //     //     "status": { 
+  //     //       "done": false, 
+  //     //       "doing": false,
+  //     //       "collection": false,
+  //     //       "mistaked": false
+  //     //     }
+  //     //   }
+  //     // }).then(console.log)
+  //     // console.log(id)
+  //   })
+  // },
+ 
+  handleStartExam(e) {
+    let bankId = e.target.id * 1
+    let statusObj = {
+      id: bankId
+    }
+    let result = this.data.item.bankList.find((value) => {
+      return value.id == bankId
+    })
+    statusObj.status = result.status
+
+    // wx.showLoading()
+    bankStatusList.get().then(res => {
+      console.log(res)
+      let statusList = res.data[0].statusList
+      console.log(statusList)
+        let result = statusList.findIndex((value) => {
+          return value.id == bankId
+        })
+        if(result !== -1) {
+          statusList[result].status.doing = true
+        } else {
+          statusList.push(statusObj)
         }
-      }).then(console.log)
-      // banksList.add({
-      //   data: {
-      //     "id": id + 1, 
-      //     "industry": "后台", 
-      //     "class": "笔试题",
-      //     "title": "虎牙后台笔试题库", 
-      //     "limit_time": "50",
-      //     "status": { 
-      //       "done": false, 
-      //       "doing": false,
-      //       "collection": false,
-      //       "mistaked": false
-      //     }
-      //   }
-      // }).then(console.log)
-      // console.log(id)
+        wx.cloud.callFunction({
+          name: 'updateBankStatus',
+          data: {
+            statusList
+          }
+        }).then(console.log)
+        // bankStatusList.update({
+        //   data: {
+        //     // statusList
+        //   }
+        // }).then(console.log)
+      // this.setData({
+      //   item: {...item}
+      // }, () => {
+      //   wx.hideLoading()
+      // })
+
     })
   },
- 
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(this.data.checkoutBank === 'written') {
-      this.handleWritten()
-    } else {
-      this.handleInterview()
-    }
+    let industry =  wx.getStorageSync('industry')
+    this.setData({
+      industry
+    })
+
 
   },
 
@@ -209,7 +254,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(this.data.checkoutBank === 'written') {
+      this.handleWritten()
+    } else {
+      this.handleInterview()
+    }
   },
 
   /**

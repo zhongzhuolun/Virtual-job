@@ -54,6 +54,7 @@
   top: 886rpx;
   width: 288rpx;
   height: 118rpx;
+  line-height: 118rpx;
   border-radius: 40rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);

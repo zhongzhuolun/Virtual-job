@@ -30,7 +30,12 @@ App({
 
     }
 
-    this.globalData = {}
+  },
+  globalData: {
+    examType: 'written'
 
+  },
+  updataType(type) {
+    this.globalData.examType = type
   }
 })

@@ -9,21 +9,28 @@
     </text>
     <!-- <view  catchtap="{{foo.handleStatus(item.id)}}"></view> -->
     <block wx:if="{{item.status.done}}">
-    <view class="start-exam" style="background: #bbb">
-      已结束
+      <view class="start-exam" style="background: #bbb">
+        已结束
       </view>
-    <navigator url="../viewQuestions/viewQuestions">
-      <view class="view-result">
-      查看结果
-      </view>
-    </navigator>
+      <navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
+        <view class="view-result">
+        查看结果
+        </view>
+      </navigator>
+    </block>
+    <block wx:elif="{{item.status.doing}}">
+      <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
+        <view class="start-exam" id="{{item.id}}">
+        继续答题
+        </view>
+      </navigator>
     </block>
     <block wx:else>
-    <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
-      <view class="start-exam" >
-      开始答题
-      </view>
-    </navigator>
+      <navigator url="../enterWritten/enterWritten?id={{item.id}}">
+        <view class="start-exam" id="{{item.id}}" bindtap="handleStartExam">
+        开始答题
+        </view>
+      </navigator>
     </block>
     
   
