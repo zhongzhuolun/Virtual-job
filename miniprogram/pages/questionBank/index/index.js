@@ -200,7 +200,9 @@ Page({
     })
   },
   handleCollection(e) {
-
+    let title = ''
+    let item = {...this.data.item}
+    wx.showLoading()
     let bankId = e.currentTarget.id * 1
     let statusObj = {
       id: bankId
@@ -211,9 +213,13 @@ Page({
     })
     if (result1.status.collection) {
       result1.status.collection = false
+      title = '取消收藏成功'
+
     } else {
       result1.status.collection = true
+      title = '收藏成功'
     }
+    item.bankList.status = result1.status
     statusObj.status = result1.status
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
@@ -235,7 +241,18 @@ Page({
           data: {
             statusList
           }
-        }).then(console.log)
+        }).then(() => {
+       
+          this.refleshStatus(item)
+          wx.hideLoading()
+          wx.showToast({
+            title: title,
+            icon: 'success'
+          })
+          // this.setData({
+          //   item: {...item}
+          // })
+        })
     })
   },
 
@@ -243,10 +260,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let industry =  wx.getStorageSync('industry')
-    this.setData({
-      industry
-    })
+
 
 
   },
@@ -262,10 +276,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let industry =  wx.getStorageSync('industry')
+    // this.setData({
+    //   industry
+    // })
     let item = {...this.data.item}
       item.bankList = []
       this.setData({
-        item: {...item}
+        item: {...item},
+        industry
       })
     if(this.data.checkoutBank === 'written') {
       this.handleWritten()
