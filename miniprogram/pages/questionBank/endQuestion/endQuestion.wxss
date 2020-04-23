@@ -1,1 +1,77 @@
 /* miniprogram/pages/questionBank/endQuestion/endQuestion.wxss */
+.title{
+  position: absolute;
+  left: 230rpx;
+  top: 32rpx;
+  width: 288rpx;
+  height: 102rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 72rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.frist1{
+  position: absolute;
+  left: 154rpx;
+  top: 200rpx;
+  width: 448rpx;
+  height: 80rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 56rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.sentence{
+  position: absolute;
+  left: 232rpx;
+  top: 342rpx;
+  width: 335rpx;
+  height: 40rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.blankBox{
+  position: absolute;
+  left: 94rpx;
+  top: 420rpx;
+  width: 564rpx;
+  height: 631rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: white;
+  border: 2rpx solid rgba(12, 12, 12, 1);
+}
+.summary{
+  position: absolute;
+  left: 156rpx;
+  top: 542rpx;
+  width: 438rpx;
+  height: 368rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 40rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.backBank,.seekWrong{
+  position: absolute;
+  top: 1074rpx;
+  width: 268rpx;
+  height: 118rpx;
+  border-radius: 40rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 44rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.4);
+  font-family: Microsoft Yahei;
+  border: 1rpx solid rgba(12, 12, 12, 1);
+}
+.backBank{
+  left: 86rpx;
+}
+.seekWrong{
+  left: 414rpx;
+}
