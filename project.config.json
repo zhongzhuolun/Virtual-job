@@ -90,6 +90,13 @@
 					"id": -1,
 					"name": "pages/questionBank/endQuestion/endQuestion",
 					"pathName": "pages/questionBank/endQuestion/endQuestion",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/IndustryChoose/IndustryChoose",
+					"pathName": "pages/home/IndustryChoose/IndustryChoose",
 					"scene": null
 				}
 			]

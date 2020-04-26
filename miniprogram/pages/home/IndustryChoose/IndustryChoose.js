@@ -16,6 +16,19 @@ Page({
     industryData: {
       "classes": [
         {
+          "class": "校园",
+          "posts": [
+            {
+              "post": "学生会",
+              "skill": ["学习部", "体育部", "组织部", "主席团"]
+            },
+            {
+              "post": "校团委",
+              "skill": ["主席团",]
+            }
+          ]
+        },
+        {
           "class": "技术",
           "posts": [
             {
@@ -46,7 +59,7 @@ Page({
           ]
         },
         {
-          "class": "设计",
+          "class": "经理",
           "posts": [
             {
               "post": "产品经理",

@@ -4,5 +4,9 @@
 <view class="sentence">“每日一套，早日offer”</view>
 <view class="blankBox"></view>
 <view class="summary">总结：对于这份试卷的总结</view>
-<navigator url="../../questionBank/index/index"><button class="backBank">返回题库</button> </navigator>
-<navigator url="../viewQuestions/viewQuestions"><button class="seekWrong">查找错题</button> </navigator>
+<navigator url="../index/index" open-type="switchTab">
+<button class="backBank">返回题库</button>
+ </navigator>
+<navigator url="../viewQuestions/viewQuestions" >
+<button class="seekWrong">查找错题</button>
+ </navigator>
