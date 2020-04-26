@@ -1,1 +1,132 @@
 /* miniprogram/pages/home/score/score.wxss */
+.score1{
+  position: absolute;
+  left: 244rpx;
+  top: 30rpx;
+  width: 262rpx;
+  height: 190rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 200rpx;
+  text-align: left;
+  font-family: 方正汉真广标-标准;
+}
+.blank{
+  position: absolute;
+  left: 66rpx;
+  top: 332rpx;
+  width: 616rpx;
+  height: 550rpx;
+  line-height: 52rpx;
+  border-radius: 50rpx;
+  background-color: rgba(255, 255, 255, 0.47);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0px 4px 9px 0px rgba(178, 178, 178, 0.4);
+  font-family: Arial;
+  border: 1rpx solid rgba(255, 255, 255, 0);
+}
+.qusetionType,.singleChoice,.multipleChoice,.bianchengti,.wendati{
+  position: absolute;
+  left: 133rpx;
+  width: 222rpx;
+  height: 78rpx;
+  line-height: 40rpx;
+  color: rgba(91, 107, 115, 1);
+  font-size: 32rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  padding: 20rpx;
+  width: 32%;
+  text-align: center;
+  border:1px solid black;
+  outline-style:solid;
+	outline-width:2rpx;
+}
+.qusetionType{
+  position: absolute;
+  top: 406rpx;
+}
+.singleChoice{
+  position: absolute;
+  top: 484rpx;
+}
+.multipleChoice{
+  position: absolute;
+  top:562rpx;
+}
+.bianchengti{
+  position: absolute;
+  top: 640rpx;
+}
+.wendati{
+  position: absolute;
+  top: 718rpx;
+}
+.accuracy,.score2,.score3,.score4,.score5{
+  position: absolute;
+  left: 377rpx;
+  width: 222rpx;
+  height: 78rpx;
+  line-height: 40rpx;
+  color: rgba(91, 107, 115, 1);
+  font-size: 32rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  padding: 20rpx;
+  width: 32%;
+  text-align: center;
+  border:1px solid black;
+  outline-style:solid;
+	outline-width:2rpx;
+}
+.accuracy{
+  position: absolute;
+  top: 406rpx;
+}
+.score2{
+  position: absolute;
+  top: 484rpx;
+}
+.score3{
+  position: absolute;
+  top: 562rpx;
+}
+.score4{
+  position: absolute;
+  top:640rpx;
+}
+.score5{
+  position: absolute;
+  top: 718rpx;
+}
+.button1{
+  position: absolute;
+  left: 82rpx;
+  top: 980rpx;
+  width: 264rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+}
+.button2{
+  position: absolute;
+  left: 390rpx;
+  top: 980rpx;
+  width: 264rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+}

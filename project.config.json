@@ -81,12 +81,8 @@
 				},
 				{
 					"id": -1,
-<<<<<<< Updated upstream
 					"name": "pages/home/IndustryChoose/IndustryChoose",
 					"pathName": "pages/home/IndustryChoose/IndustryChoose",
-=======
-					"name": "pages/questionBank/enterWritten/enterWritten",
-					"pathName": "pages/questionBank/enterWritten/enterWritten",
 					"query": "",
 					"scene": null
 				},
@@ -94,7 +90,20 @@
 					"id": -1,
 					"name": "pages/questionBank/endQuestion/endQuestion",
 					"pathName": "pages/questionBank/endQuestion/endQuestion",
->>>>>>> Stashed changes
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/enterWritten/enterWritten",
+					"pathName": "pages/questionBank/enterWritten/enterWritten",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/score/score",
+					"pathName": "pages/home/score/score",
 					"scene": null
 				}
 			]
