@@ -1,2 +1,9 @@
 <!--miniprogram/pages/questionBank/endInterviewQuestion/endInterviewQuestion.wxml-->
-<text>miniprogram/pages/questionBank/endInterviewQuestion/endInterviewQuestion.wxml</text>
+<view class="blankBox"></view>
+<view class="answer1">面试常见评分标准：
+<view> ⭕衣着整洁整齐 </view> 
+<view>⭕面带笑容 </view>
+<view>⭕语言流畅无语病</view>
+</view>
+<navigator url="../viewQuestions/viewQuestions"> <button class="allExam">查看完整试卷 </button> </navigator>
+<navigator url="../index/index" open-type="switchTab"> <button class="questiobBank">返回题库</button> </navigator>
