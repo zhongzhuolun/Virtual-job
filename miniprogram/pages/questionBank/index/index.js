@@ -4,7 +4,6 @@ const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const _ = db.command
 const app = getApp()
-import tempObj from '../template/index'
 
 Page({
 
