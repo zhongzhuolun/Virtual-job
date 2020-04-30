@@ -1,8 +1,1 @@
-<<<<<<< HEAD
-/* miniprogram/pages/center/viewReplay/viewReplay.wxss */
-=======
-/* miniprogram/pages/center/viewReplay/viewReplay.wxss */
-page{
-  background-color: white;
-}
->>>>>>> dev
+

@@ -1,8 +1,1 @@
-<<<<<<< HEAD
-/* miniprogram/pages/center/myMsg/myMsg.wxss */
-=======
-/* miniprogram/pages/center/myMsg/myMsg.wxss */
-page{
-  background-color: white;
-}
->>>>>>> dev
+

@@ -1,8 +1,1 @@
-<<<<<<< HEAD
-/* miniprogram/pages/center/myBanks/myBanks.wxss */
-=======
-/* miniprogram/pages/center/myBanks/myBanks.wxss */
-page{
-  background-color: white;
-}
->>>>>>> dev
+

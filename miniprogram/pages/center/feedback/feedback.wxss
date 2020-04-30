@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-/* miniprogram/pages/center/feedback/feedback.wxss */
-=======
-/* miniprogram/pages/center/feedback/feedback.wxss */
 page{
   background-color: white;
 }
->>>>>>> dev
+

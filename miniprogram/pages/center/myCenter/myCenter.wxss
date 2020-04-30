@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-/* miniprogram/pages/center/myCenter/myCenter.wxss */
-=======
+
 /* miniprogram/pages/center/myCenter/myCenter.wxss */
 page{
   background-color: white;
@@ -63,4 +61,4 @@ page{
     box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
     border: 1rpx solid rgba(255, 255, 255, 0);
   }
->>>>>>> dev
+
