@@ -10,7 +10,7 @@
 <image src="../../../images/icon/graysou.png" class="img3"></image>
 <view class="txt5">让面试官再讲一遍</view>
 <view class="txt6">下一题</view>
-<view class="txt7">正在录制中......</view>
+<view class="txt7">正在录制中...</view>
 <!-- 以下代码仅做为测试 -->
 <!-- <block wx:if="{{type === 'audio'}}">
 <block wx:if="{{type === 'audio'}}">
