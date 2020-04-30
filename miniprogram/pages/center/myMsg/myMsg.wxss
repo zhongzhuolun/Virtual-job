@@ -1,1 +1,4 @@
 /* miniprogram/pages/center/myMsg/myMsg.wxss */
+page{
+  background-color: white;
+}

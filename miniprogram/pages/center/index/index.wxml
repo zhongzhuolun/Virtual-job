@@ -1,3 +1,6 @@
 <!--miniprogram/pages/center/index/index.wxml-->
-<text>个人中心界面</text>
+<view class="center1">
+
+</view>
+<view class=""></view>
 

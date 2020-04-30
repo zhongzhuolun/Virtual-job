@@ -1,1 +1,4 @@
 /* miniprogram/pages/center/myBanks/myBanks.wxss */
+page{
+  background-color: white;
+}

@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "backgroundColor": "#000000"
+  
+  
 }

@@ -1,1 +1,4 @@
 /* miniprogram/pages/center/InterviewScenes/InterviewScenes.wxss */
+page{
+  background-color: white;
+} 
