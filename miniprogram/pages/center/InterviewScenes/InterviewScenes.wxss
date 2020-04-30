@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 /* miniprogram/pages/center/InterviewScenes/InterviewScenes.wxss */
+=======
+/* miniprogram/pages/center/InterviewScenes/InterviewScenes.wxss */
+page{
+  background-color: white;
+} 
+>>>>>>> dev

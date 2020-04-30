@@ -109,22 +109,22 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/home/index/index",
-					"pathName": "pages/home/index/index",
+					"name": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
+					"pathName": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/home/enterInterview/enterInterview",
-					"pathName": "pages/home/enterInterview/enterInterview",
+					"name": "pages/center/index/index",
+					"pathName": "pages/center/index/index",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/home/examInterview/examInterview",
-					"pathName": "pages/home/examInterview/examInterview",
+					"name": "pages/center/myCenter/myCenter",
+					"pathName": "pages/center/myCenter/myCenter",
 					"scene": null
 				}
 			]
