@@ -1,2 +1,7 @@
 <!--miniprogram/pages/home/enterInterview/enterInterview.wxml-->
-<text>面试进入界面</text>
+<view class="topic"></view>
+<text class="txt1">银行招聘面试真题</text>
+<text class="txt2">题目数量：5道</text>
+<text class="txt3">请选择录制方式</text>
+<view class="button1">音频</view>
+<view class="button2">视频</view>

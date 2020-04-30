@@ -1,1 +1,79 @@
 /* miniprogram/pages/home/enterInterview/enterInterview.wxss */
+.topic{
+  position: absolute;
+  left: 66rpx;
+  top: 296rpx;
+  width: 616rpx;
+  height: 282rpx;
+  line-height: 40rpx;
+  border-radius: 50rpx;
+  background-color: rgba(255, 255, 255, 0.47);
+  text-align: center;
+  box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+}
+.txt1{
+  position: absolute;
+  left: 110rpx;
+  top: 356rpx;
+  width: 516rpx;
+  height: 80rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 46rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.txt2{
+  position: absolute;
+  left: 424rpx;
+  top: 482rpx;
+  width: 212rpx;
+  height: 46rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 32rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.txt3{
+  position: absolute;
+  left: 244rpx;
+  top: 808rpx;
+  width: 254rpx;
+  height: 50rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 36rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.button1{
+  position: absolute;
+  left: 108rpx;
+  top: 944rpx;
+  width: 220rpx;
+  height: 104rpx;
+  border-radius: 50rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(0, 0, 0, 1);
+  font-size: 40rpx;
+  text-align: center;
+  line-height:104rpx ;
+  box-shadow: 0px 4rpx 10rpx 0px rgba(0, 0, 0, 0.39);
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+}
+.button2{
+  position: absolute;
+  left: 412rpx;
+  top: 944rpx;
+  width: 220rpx;
+  line-height:104rpx ;
+  height: 104rpx;
+  border-radius: 50rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(12, 12, 12, 1);
+  font-size: 40rpx;
+  text-align: center;
+  box-shadow: 0px 4rpx 10rpx 0px rgba(0, 0, 0, 0.39);
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(12, 12, 12, 1);
+}

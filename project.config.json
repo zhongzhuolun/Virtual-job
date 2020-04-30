@@ -109,8 +109,13 @@
 				},
 				{
 					"id": -1,
+<<<<<<< Updated upstream
 					"name": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
 					"pathName": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
+=======
+					"name": "pages/home/index/index",
+					"pathName": "pages/home/index/index",
+>>>>>>> Stashed changes
 					"scene": null
 				}
 			]
