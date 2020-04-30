@@ -97,6 +97,13 @@
 					"id": -1,
 					"name": "pages/home/IndustryChoose/IndustryChoose",
 					"pathName": "pages/home/IndustryChoose/IndustryChoose",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/enterInterview/enterInterview",
+					"pathName": "pages/home/enterInterview/enterInterview",
 					"scene": null
 				}
 			]

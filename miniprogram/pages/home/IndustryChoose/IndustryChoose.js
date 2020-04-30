@@ -155,11 +155,11 @@ Page({
       })
       if (examType === '面试') {
         wx.navigateTo({
-          url: '../enterInterview/enterInterview',
+          url: '../enterInterview/enterInterview?examType=面试题',
         })
       } else {
         wx.navigateTo({
-          url: '../enterWritten/enterWritten',
+          url: '../enterWritten/enterWritten?examType=笔试题',
         })
       }
 
