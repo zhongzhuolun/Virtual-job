@@ -1,2 +1,19 @@
 <!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
-<text>错题界面和所有题目界面</text>
+<view class="body"></view>
+<view class="txt1">银行招聘面试真题</view>
+<view class="txt2">题目数量：5道</view>
+<view class="line1"></view>
+<view class="txt3">1.如果你的同事让你帮他完成工作，可是你……，但他……，你会怎么做？</view>
+<view class="line2"></view>
+<view class="txt4">题目解读：巴拉巴拉</view>
+<view class="txt5">参考答案：巴拉巴拉</view>
+<image class="img1" src="../../../images/icon/mine1.png"></image>
+<view class="txt6">offer007</view>
+<image class="img2" src="../../../images/icon/like.png"></image>
+<view class="txt7">12</view>
+<view class="txt8">这道题面试官是想考你在工作中能不能做到……，所以你只要答到……就可以了。</view>
+<view class="txt9">查看全部评论</view>
+<view class="line3"></view>
+<input placeholder="发表你对这道题的想法" class="intxt"></input>
+<view class="txt10">提交</view>
+<view class="txt11">下一题</view>

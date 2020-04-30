@@ -1,2 +1,8 @@
 <!--miniprogram/pages/center/myCenter/myCenter.wxml-->
 <text>个人资料</text>
+<view class="myCenter1">
+<navigator class="changeTouxiang">更换头像</navigator>
+<image class="touxiang"></image>
+</view>
+<view class="blankBox1"></view>
+

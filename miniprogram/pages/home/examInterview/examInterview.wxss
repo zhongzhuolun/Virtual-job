@@ -1,3 +1,123 @@
+/* miniprogram/pages/home/examInterview/examInterview.wxss */
+.body{
+  position: absolute;
+  width: 750rpx;
+  height: 1624rpx;
+  background-color: rgba(255, 255, 255, 1);
+}
+.txt1{
+  position: absolute;
+  left: 34rpx;
+  top: 58rpx;
+  width: 754rpx;
+  height: 80rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 56rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.txt2{
+  position: absolute;
+  left: 38rpx;
+  top: 150rpx;
+  width: 186rpx;
+  height: 40rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.txt3{
+  position: absolute;
+  left: 292rpx;
+  top: 566rpx;
+  width: 172rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+}
+.txt4{
+  position: absolute;
+  left: 172rpx;
+  top: 690rpx;
+  width: 354rpx;
+  height: 46rpx;
+  color: rgba(163, 163, 163, 1);
+  font-size: 32rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.txt5{
+  position: absolute;
+  left: 172rpx;
+  top: 740rpx;
+  width: 258rpx;
+  height: 46rpx;
+  color: rgba(163, 163, 163, 1);
+  font-size: 32rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.txt6{
+  position: absolute;
+  left: 252rpx;
+  top: 996rpx;
+  width: 246rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  line-height: 72rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 39rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(255, 255, 255, 1);
+}
+.txt7{
+  position: absolute;
+  left: 432rpx;
+  top: 1234rpx;
+  width: 296rpx;
+  height: 70rpx;
+  line-height: 52rpx;
+  border-radius: 52rpx;
+  color: rgba(250, 191, 1, 1);
+  font-size: 39rpx;
+  text-align: center;
+  font-family: Arial;
+}
+.img1{
+  position: absolute;
+  left: 292rpx;
+  top: 372rpx;
+  width: 172rpx;
+  height: 172rpx;
+}
+.img2{
+  position: absolute;
+  left: 654rpx;
+  top: 256rpx;
+  width: 70rpx;
+  height: 60rpx;
+}
+.img3{
+  position: absolute;
+  left: 520rpx;
+  top: 692rpx;
+  width: 44rpx;
+  height: 40rpx;
+}
+.line{
+  position: absolute;
+  left: 0px;
+  top: 212rpx;
+  width: 750rpx;
+  height: NaNpx;
+  border: 2rpx solid rgba(187, 187, 187, 1);
+}
+
 .yuyinWrap {
   position: relative;
   margin-top:300rpx;
