@@ -1,13 +1,12 @@
-// miniprogram/pages/questionBank/endInterviewQuestion/endInterviewQuestion.js
+// miniprogram/pages/center/myBanks/myBanks.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-   
+
   },
-  
 
   /**
    * 生命周期函数--监听页面加载

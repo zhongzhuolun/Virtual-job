@@ -13,7 +13,7 @@
 .frist1{
   position: absolute;
   left: 154rpx;
-  top: 200rpx;
+  top: 160rpx;
   width: 448rpx;
   height: 80rpx;
   color: rgba(12, 12, 12, 1);
@@ -24,7 +24,7 @@
 .sentence{
   position: absolute;
   left: 232rpx;
-  top: 342rpx;
+  top: 266rpx;
   width: 335rpx;
   height: 40rpx;
   color: rgba(12, 12, 12, 1);
@@ -32,7 +32,7 @@
   text-align: left;
   font-family: PingFangSC-regular;
 }
-.blankBox{
+/* .blankBox{
   position: absolute;
   left: 94rpx;
   top: 420rpx;
@@ -43,8 +43,8 @@
   text-align: center;
   background-color: white;
   border: 2rpx solid rgba(12, 12, 12, 1);
-}
-.summary{
+} */
+/* .summary{
   position: absolute;
   left: 156rpx;
   top: 542rpx;
@@ -54,10 +54,101 @@
   font-size: 40rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+} */
+
+.blank{
+  position: absolute;
+  left: 66rpx;
+  top: 362rpx;
+  width: 616rpx;
+  height: 550rpx;
+  line-height: 52rpx;
+  border-radius: 50rpx;
+  background-color: rgba(255, 255, 255, 0.47);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0px 4px 9px 0px rgba(178, 178, 178, 0.4);
+  font-family: Arial;
+  border: 1rpx solid rgba(255, 255, 255, 0);
+}
+.qusetionType,.singleChoice,.multipleChoice,.bianchengti,.wendati{
+  position: absolute;
+  left: 133rpx;
+  width: 222rpx;
+  height: 78rpx;
+  line-height: 40rpx;
+  color: rgba(91, 107, 115, 1);
+  font-size: 32rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  padding: 20rpx;
+  width: 32%;
+  text-align: center;
+  border:1px solid black;
+  outline-style:solid;
+	outline-width:2rpx;
+}
+.qusetionType{
+  position: absolute;
+  top: 436rpx;
+}
+.singleChoice{
+  position: absolute;
+  top: 514rpx;
+}
+.multipleChoice{
+  position: absolute;
+  top:592rpx;
+}
+.bianchengti{
+  position: absolute;
+  top: 670rpx;
+}
+.wendati{
+  position: absolute;
+  top: 748rpx;
+}
+.accuracy,.score2,.score3,.score4,.score5{
+  position: absolute;
+  left: 377rpx;
+  width: 222rpx;
+  height: 78rpx;
+  line-height: 40rpx;
+  color: rgba(91, 107, 115, 1);
+  font-size: 32rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  padding: 20rpx;
+  width: 32%;
+  text-align: center;
+  border:1px solid black;
+  outline-style:solid;
+	outline-width:2rpx;
+}
+.accuracy{
+  position: absolute;
+  top: 436rpx;
+}
+.score2{
+  position: absolute;
+  top: 514rpx;
+}
+.score3{
+  position: absolute;
+  top: 592rpx;
+}
+.score4{
+  position: absolute;
+  top:670rpx;
+}
+.score5{
+  position: absolute;
+  top: 748rpx;
 }
 .backBank,.seekWrong{
   position: absolute;
-  top: 1074rpx;
+  top: 980rpx;
   width: 268rpx;
   height: 118rpx;
   border-radius: 40rpx;

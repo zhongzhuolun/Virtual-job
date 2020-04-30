@@ -102,8 +102,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/home/enterInterview/enterInterview",
-					"pathName": "pages/home/enterInterview/enterInterview",
+					"name": "pages/home/score/score",
+					"pathName": "pages/home/score/score",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
+					"pathName": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
 					"scene": null
 				}
 			]

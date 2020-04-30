@@ -1,2 +1,15 @@
 <!--miniprogram/pages/home/score/score.wxml-->
-<text>评分界面</text>
+<view class="score1">80</view>
+<view class="blank"></view>
+<view class="qusetionType">题型</view>
+<view class="singleChoice">单选题</view>
+<view class="multipleChoice">不定项选择题</view>
+<view class="bianchengti">编程题</view>
+<view class="wendati">问答题</view>
+<view class="accuracy">正确率/%</view>
+<view class="score2">90</view>
+<view class="score3">80</view>
+<view class="score4">90</view>
+<view class="score5">60</view>
+<navigator url="../index/index" open-type="switchTab"><button  class="button1">返回题库</button></navigator>
+<navigator url="../wrongAll/wrongAll"><button class="button2">查看错题</button></navigator>
