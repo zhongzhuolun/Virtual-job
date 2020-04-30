@@ -125,6 +125,27 @@
 					"id": -1,
 					"name": "pages/center/myCenter/myCenter",
 					"pathName": "pages/center/myCenter/myCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/examInterview/examInterview",
+					"pathName": "pages/home/examInterview/examInterview",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/index/index",
+					"pathName": "pages/home/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/wrongAll/wrongAll",
+					"pathName": "pages/home/wrongAll/wrongAll",
 					"scene": null
 				}
 			]

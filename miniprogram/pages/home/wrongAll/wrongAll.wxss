@@ -20,7 +20,7 @@
   position: absolute;
   left: 36rpx;
   top: 150rpx;
-  width: 178rpx;
+  width: 190rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
@@ -37,7 +37,7 @@
 .txt3{
   position: absolute;
   left: 42rpx;
-  top: 282rpx;
+  top: 250rpx;
   width: 658rpx;
   height: 100rpx;
   color: rgba(16, 16, 16, 1);
@@ -55,7 +55,7 @@
 .txt4{
   position: absolute;
   left: 32rpx;
-  top: 570rpx;
+  top: 540rpx;
   width: 360rpx;
   height: 110rpx;
   color: rgba(16, 16, 16, 1);
@@ -66,7 +66,7 @@
 .txt5{
   position: absolute;
   left: 32rpx;
-  top: 620rpx;
+  top: 600rpx;
   width: 360rpx;
   height: 110rpx;
   color: rgba(16, 16, 16, 1);
@@ -125,7 +125,7 @@
   position: absolute;
   left: 302rpx;
   top: 1090rpx;
-  width: 156rpx;
+  width: 170rpx;
   height: 34rpx;
   color: rgba(163, 163, 163, 1);
   font-size: 28rpx;
