@@ -1,5 +1,4 @@
-// miniprogram/pages/home/enterWritten/enterWritten.js
-
+// miniprogram/pages/center/InterviewScenes/InterviewScenes.js
 Page({
 
   /**
@@ -13,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
 
   /**

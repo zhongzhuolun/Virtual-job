@@ -81,8 +81,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/home/IndustryChoose/IndustryChoose",
-					"pathName": "pages/home/IndustryChoose/IndustryChoose",
+					"name": "pages/questionBank/enterWritten/enterWritten",
+					"pathName": "pages/questionBank/enterWritten/enterWritten",
 					"query": "",
 					"scene": null
 				},
@@ -95,8 +95,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/questionBank/enterWritten/enterWritten",
-					"pathName": "pages/questionBank/enterWritten/enterWritten",
+					"name": "pages/home/IndustryChoose/IndustryChoose",
+					"pathName": "pages/home/IndustryChoose/IndustryChoose",
 					"query": "",
 					"scene": null
 				},
@@ -109,13 +109,22 @@
 				},
 				{
 					"id": -1,
-<<<<<<< Updated upstream
-					"name": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
-					"pathName": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
-=======
 					"name": "pages/home/index/index",
 					"pathName": "pages/home/index/index",
->>>>>>> Stashed changes
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/enterInterview/enterInterview",
+					"pathName": "pages/home/enterInterview/enterInterview",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/examInterview/examInterview",
+					"pathName": "pages/home/examInterview/examInterview",
 					"scene": null
 				}
 			]

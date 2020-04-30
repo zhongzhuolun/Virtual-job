@@ -16,7 +16,14 @@
     "pages/questionBank/viewQuestions/viewQuestions",
     "pages/center/index/index",
     "pages/questionBank/enterWritten/enterWritten",
-    "pages/questionBank/endInterviewQuestion/endInterviewQuestion"
+    "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
+    "pages/center/myCenter/myCenter",
+    "pages/center/InterviewScenes/InterviewScenes",
+    "pages/center/myBanks/myBanks",
+    "pages/center/myMsg/myMsg",
+    "pages/center/feedback/feedback",
+    "pages/center/replay/replay",
+    "pages/center/viewReplay/viewReplay"
   ],
   "window": {
     "backgroundColor": "#FABF01",
@@ -63,5 +70,11 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.3",
+      "provider": "wx069ba97219f66d99"
+    }
+  }
 }

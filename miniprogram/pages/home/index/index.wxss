@@ -25,13 +25,11 @@ image {
   height: 254rpx;
   line-height: 254rpx;
   background-color: rgba(85, 65, 3, 1);
-  color: rgba(16, 16, 16, 1);
   font-size: 72rpx;
   text-align: center;
   box-shadow: 4rpx 4rpx 13rpx 0rpx rgba(0, 0, 0, 0.4);
   font-family: -apple-system;
   border: 1rpx solid rgba(255, 255, 255, 0);
-  color: #ffc200;
   border-radius: 100%;
   color: #FABF01;
 }
