@@ -1,5 +1,8 @@
 
-
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">模拟面试</view>
+</cu-custom>
 
 <view class="bank">
   <text class="title">{{bank.title}}</text>

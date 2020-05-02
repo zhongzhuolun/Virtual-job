@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">行业选择</view>
+</cu-custom>
 <view class="checked-industry">
 <text>您当前选择的行业是：{{industry?industry:'xx'}}</text>
 <button bindtap="handleConfirm">确定</button>

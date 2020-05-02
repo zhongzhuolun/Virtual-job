@@ -1,19 +1,30 @@
 // miniprogram/pages/home/enterWritten/enterWritten.js
-
+const db = wx.cloud.database()
+const banksList = db.collection('banks-list')
+const bankStatusList = db.collection('bank-status')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    bank: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    banksList.where({
+      class: '面试题',
+      industry: this.data.industry,
+      id: 1
+    }).get().then((res) => {
+      this.setData({
+        bank: res.data[0]
+      })
+      console.log(res.data[0])
+    })
   },
 
   /**

@@ -1,4 +1,8 @@
 <!--miniprogram/pages/home/score/score.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">模拟笔试</view>
+</cu-custom>
 <view class="score1">80</view>
 <view class="blank"></view>
 <view class="qusetionType">题型</view>

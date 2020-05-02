@@ -1,4 +1,8 @@
 <!--miniprogram/pages/home/examInterview/examInterview.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">模拟面试</view>
+</cu-custom>
 <view class="body"></view>
 <view class="txt1">银行招聘面试真题</view>
 <view class="txt2">题目数量：5道</view>

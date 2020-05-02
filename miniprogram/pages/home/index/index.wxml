@@ -1,3 +1,6 @@
+<cu-custom bgColor="bg-yellow">
+	<view slot="content">offer</view>
+</cu-custom>
 <view class="wrap">
   <view class="offer">
   <image src="../../../images/logo/logo.png"></image>

@@ -26,11 +26,8 @@
     "pages/center/viewReplay/viewReplay"
   ],
   "window": {
-    "backgroundColor": "#FABF01",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FABF01",
-    "navigationBarTitleText": "offer",
-    "navigationBarTextStyle": "black"
+ 
+    "navigationStyle": "custom"
   },
   "usingComponents": {
     "van-button": "./miniprogram_npm/vant-weapp/button/index",
@@ -40,7 +37,8 @@
     "van-tab": "./miniprogram_npm/vant-weapp/tab/index",
     "van-tabs": "./miniprogram_npm/vant-weapp/tabs/index",
     "van-collapse": "./miniprogram_npm/vant-weapp/collapse/index",
-    "van-collapse-item": "./miniprogram_npm/vant-weapp/collapse-item/index"
+    "van-collapse-item": "./miniprogram_npm/vant-weapp/collapse-item/index",
+    "cu-custom":"/colorui/components/cu-custom"
   },
   "tabBar": {
     "list": [

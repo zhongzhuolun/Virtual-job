@@ -1,2 +1,6 @@
 <!--miniprogram/pages/home/endInterview/endInterview.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">模拟面试</view>
+</cu-custom>
 <text>面试结束界面</text>
