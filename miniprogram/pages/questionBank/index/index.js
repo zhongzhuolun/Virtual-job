@@ -20,7 +20,8 @@ Page({
     item: {
       bankList: [],
       statusList: []
-    }
+    },
+    ifPullDown: false
   },
   onChange(event) {
     // wx.showLoading({
@@ -86,6 +87,13 @@ Page({
         item: {...item}
       }, () => {
         this.getColErrBank()
+        wx.stopPullDownRefresh({
+          success: () => {
+            this.setData({
+              ifPullDown: false
+            })
+          }
+        }); // 默认停止用户下拉刷新的状态
         wx.hideLoading()
       })
 
@@ -116,9 +124,11 @@ Page({
         this.pageObj.ifAdd = false
       }
       if (res.data.length > 0) {
-        item.bankList = item.bankList.concat(res.data)
-        // item.bankList = res.data
-        console.log(item)
+        if (this.data.ifPullDown) {
+          item.bankList = res.data
+        } else {
+          item.bankList = item.bankList.concat(res.data)
+        }
         this.refleshStatus(item)
       }
 
@@ -154,12 +164,16 @@ Page({
         this.pageObj.ifAdd = false
       }
       if (res.data.length > 0) {
-        item.bankList = item.bankList.concat(res.data)
-        // item.bankList = res.data
+        // item.bankList = item.bankList.concat(res.data)
+        // // item.bankList = res.data
+        // this.refleshStatus(item)
+        if (this.data.ifPullDown) {
+          item.bankList = res.data
+        } else {
+          item.bankList = item.bankList.concat(res.data)
+        }
         this.refleshStatus(item)
       }
-      // item.bankList = res.data
-      // this.refleshStatus(item)
     })
     this.setData({
       checkoutBank: 'interview'
@@ -259,26 +273,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
-
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     let industry =  wx.getStorageSync('industry')
-    // this.setData({
-    //   industry
-    // })
     let item = {...this.data.item}
       item.bankList = []
       this.setData({
@@ -300,27 +303,32 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function (e) {
-
+    console.log(e)
+    this.pageObj.pagesize = 0
+    console.log(this.pageObj)
+    this.setData({
+      ifPullDown: true
+    }, () => {
+      if(this.data.checkoutBank === 'written') {
+        this.handleWritten()
+      } else {
+        this.handleInterview()
+      }
+    })
+    
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   pageObj: {
     pagesize: 0,
     ifAdd: true,
     ifBottom: false
   },
+    /**
+   * 页面上拉触底事件的处理函数
+   */
   onReachBottom: function (e) {
     this.pageObj.ifBottom = true
     if (this.pageObj.ifAdd) {
@@ -334,10 +342,5 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }}
-  )
+}
+)

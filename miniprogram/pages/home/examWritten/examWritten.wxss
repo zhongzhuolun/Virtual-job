@@ -1,1 +1,109 @@
-/* miniprogram/pages/home/examWritten/examWritten.wxss */
+page {
+  background: white;
+}
+.bank-title {
+  /* position: absolute; */
+  /* left: 34rpx; */
+  margin-left: 34rpx;
+  margin-top: 42rpx;
+  width: 676rpx;
+  height: 160rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 56rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.score-time {
+  /* position: absolute; */
+  margin-left: 34rpx;
+  margin-top: 24rpx;
+  margin-bottom: 10rpx;
+  width: 378rpx;
+  height: 40rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.line {
+  /* position: absolute; */
+  width: 750rpx;
+  border: 1rpx solid rgba(187, 187, 187, 1);
+}
+.bank {
+  margin-left: 34rpx;
+  padding-top: 45rpx;
+}
+.radio-question,
+.checkbox-question,
+.blank-question,
+.sort-question {
+  display: flex;
+  flex-direction: column;
+  color: rgba(16, 16, 16, 1);
+  font-size: 30rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  margin-bottom: 15rpx;
+}
+
+.my-choosebox {
+  display: block;
+}
+.my-choosebox text {
+  margin-left: 20rpx;
+}
+.my-choosebox radio{
+  transform: scale(0.6);
+  border-radius: 50%;
+  border: 4rpx solid #ffc200;
+  background: transparent;
+}
+ .my-choosebox checkbox{
+  transform: scale(0.6);
+  border: 4rpx solid #ffc200;
+  background: transparent;
+}
+.blank-question input, .sort-question input {
+  width: 690rpx;
+  height: 72rpx;
+  color: rgba(136, 136, 136, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: -apple-system;
+  border: 1rpx solid rgba(187, 187, 187, 1);
+  padding-left: 1em;
+  margin-top: 10rpx;
+}
+.submit {
+  position: relative;
+  left: 254rpx;
+  top: 61rpx;
+  width: 242rpx;
+  height: 70rpx;
+  line-height: 64rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: PingFang SC;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+  margin: 100rpx 0 200rpx;
+}
+.timer {
+  position: fixed;
+  left: 550rpx;
+  bottom: 40rpx;
+  width: 168rpx;
+  height: 70rpx;
+  line-height: 64rpx;
+  border-radius: 52rpx;
+  color: rgba(250, 191, 1, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 4rpx 0rpx rgba(0, 0, 0, 0.24);
+  font-family: -apple-system;
+  border: 4rpx solid rgba(250, 191, 1, 1);
+}
+

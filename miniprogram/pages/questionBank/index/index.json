@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "题库"
+  "navigationBarTitleText": "题库",
+  "enablePullDownRefresh": true
 }

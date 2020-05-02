@@ -125,6 +125,20 @@
 					"id": -1,
 					"name": "pages/center/myCenter/myCenter",
 					"pathName": "pages/center/myCenter/myCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/wrongAll/wrongAll",
+					"pathName": "pages/home/wrongAll/wrongAll",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/examWritten/examWritten",
+					"pathName": "pages/home/examWritten/examWritten",
 					"scene": null
 				}
 			]
