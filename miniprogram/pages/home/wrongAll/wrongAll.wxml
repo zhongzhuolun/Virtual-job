@@ -1,23 +1,90 @@
 <!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}" >
 	<view slot="content"></view>
-	<view slot="backText">模拟面试</view>
+	<view slot="backText">模拟{{class==='面试'?'面试':'笔试'}}</view>
 </cu-custom>
-<view class="body"></view>
-<view class="txt1">银行招聘面试真题</view>
-<view class="txt2">题目数量：5道</view>
-<view class="line1"></view>
-<view class="txt3">1.如果你的同事让你帮他完成工作，可是你……，但他……，你会怎么做？</view>
-<view class="line2"></view>
-<view class="txt4">题目解读：巴拉巴拉</view>
-<view class="txt5">参考答案：巴拉巴拉</view>
-<image class="img1" src="../../../images/icon/mine1.png"></image>
-<view class="txt6">offer007</view>
-<image class="img2" src="../../../images/icon/like.png"></image>
-<view class="txt7">12</view>
-<view class="txt8">这道题面试官是想考你在工作中能不能做到……，所以你只要答到……就可以了。</view>
-<view class="txt9">查看全部评论</view>
-<view class="line3"></view>
-<input placeholder="发表你对这道题的想法" class="intxt"></input>
-<view class="txt10">提交</view>
-<view class="txt11">下一题</view>
+<block wx:if="{{class==='面试'}}">
+	<view class="body"></view>
+	<view class="txt1">银行招聘面试真题</view>
+	<view class="txt2">题目数量：5道</view>
+	<view class="line1"></view>
+	<view class="txt3">1.如果你的同事让你帮他完成工作，可是你……，但他……，你会怎么做？</view>
+	<view class="line2"></view>
+	<view class="txt4">题目解读：巴拉巴拉</view>
+	<view class="txt5">参考答案：巴拉巴拉</view>
+	<image class="img1" src="../../../images/icon/mine1.png"></image>
+	<view class="txt6">offer007</view>
+	<image class="img2" src="../../../images/icon/like.png"></image>
+	<view class="txt7">12</view>
+	<view class="txt8">这道题面试官是想考你在工作中能不能做到……，所以你只要答到……就可以了。</view>
+	<view class="txt9">查看全部评论</view>
+	<view class="line3"></view>
+	<input placeholder="发表你对这道题的想法" class="intxt"></input>
+	<view class="txt10">提交</view>
+	<view class="txt11">下一题</view>
+</block>
+<block wx:else>
+<view class="bank-wrap" >
+	<view class="bank-title">
+		<text>{{bank.title}}</text>
+	</view>
+	<view class="score-time">
+		<text class="score" style="padding-right: 44rpx">满分：{{bank.total_points}}分</text>
+		<text class="time">时间：{{bank.limit_time}}分钟</text>
+	</view>
+	<view class="menu">
+	<text class="cuIcon-apps lg text-yellow"></text>
+	</view>
+	<view class="line">
+	</view>
+	<view class="bank"  wx:key="id">
+		<block wx:for="{{bank.bank}}" >
+			<view wx:if="{{item.type === '单选'}}" class="radio-question" >
+				<view class="quetion-title">
+					<text>{{item.id}}. {{item.title}}【单选】（ {{item.score}}分 ）</text>
+				</view>
+				<radio-group data-type="{{item.type}}" id="{{item.id}}" bindchange="radioChange" class="radio-group" >
+				<label wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value"  class="my-choosebox">
+					<radio checked="{{bank.bank[index].checked}}" class="black radio" wx:if="{{value}}" value="{{key}}">
+					</radio>
+					<text>{{value}}</text> 
+				</label>
+				</radio-group>
+				<view class="correct-analyse">
+					<view>正确答案：<text style="color: yellow">A</text></view> <br />
+					<view>解析：{{item.parsing}}</view>
+				</view>
+			</view>
+		
+		</block>
+	</view>
+	<view style="margin-top: 40rpx" class="line"></view>
+	<view class="comments">
+		<view class="comment">
+			<view class="user">
+					<view class="user-info">
+						<image class="mine" src="../../../images/icon/mine1.png"></image>
+						<view class="user-name">offer007</view>
+					</view>
+					<view class="like-dot">
+						<image class="like" src="../../../images/icon/like.png"></image>
+						<view class="dot-num">12</view>
+					</view>
+			</view>
+			<view class="content">选A，tcp才是面向字节流的协议传输控制协议（TCP，Transmission Control Protocol）啊啊啊大萨达assay史蒂夫史蒂夫1是否选A，tcp才是面向字节流的协议传输控制协议（TCP，Transmission Control Protocol）啊啊啊大萨达assay史蒂夫史蒂夫1是否
+			</view>
+		</view>
+			<view class="view-all">查看全部评论</view>
+			<view class="publish">
+				<input placeholder="发表你对这道题的想法"></input>
+				<view class="publish-comment">提交</view>
+			</view>
+		</view>
+	</view>
+	<view class="next-size">
+		<view class="next-question">下一题</view>
+		<view class="page-size">1/34</view>
+	</view>
+
+
+</block>

@@ -39,7 +39,8 @@ App({
 
   },
   globalData: {
-    examType: 'written'
+    examType: 'written',
+    examBank: {}
 
   },
   updataType(type) {

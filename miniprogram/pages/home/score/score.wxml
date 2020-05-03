@@ -21,7 +21,7 @@
 <view class="score6">60</view>
 <view class="score7">60</view>
 <navigator url="../index/index" open-type="switchTab"><button  class="button1">返回题库</button></navigator>
-<navigator url="../wrongAll/wrongAll"><button class="button2">查看错题</button></navigator>
+<navigator url="../wrongAll/wrongAll?class=笔试"><button class="button2">查看错题</button></navigator>
 <!-- <van-row>
   <van-col span="8" offset="4">span: 8</van-col>
   <van-col span="8" offset="13">span: 8</van-col>

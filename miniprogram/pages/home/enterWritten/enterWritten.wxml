@@ -4,6 +4,6 @@
 	<view slot="backText">模拟笔试</view>
 </cu-custom>
 <text>笔试进入界面</text>
-<navigator url="../examWritten/examWritten?id={{bank.id}}">
-  <button>开始考试</button>
-</navigator>
+<!-- <navigator url="../examWritten/examWritten?id={{bank.id}}"> -->
+  <button bindtap="handleStartExam">开始考试</button>
+<!-- </navigator> -->

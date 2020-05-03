@@ -143,16 +143,23 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 13,
 					"name": "pages/home/wrongAll/wrongAll",
 					"pathName": "pages/home/wrongAll/wrongAll",
-					"query": "",
+					"query": "class='面试'",
 					"scene": null
 				},
 				{
 					"id": 14,
 					"name": "pages/home/examWritten/examWritten",
 					"pathName": "pages/home/examWritten/examWritten",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/enterWritten/enterWritten",
+					"pathName": "pages/home/enterWritten/enterWritten",
 					"query": "id=10",
 					"scene": null
 				}

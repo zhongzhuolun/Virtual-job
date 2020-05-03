@@ -10,20 +10,48 @@ Page({
   data: {
     bank: {}
   },
+  handleStartExam: function(e) {
+    let bank = this.data.bank
+    let bankId = bank.id
+    let statusObj = {
+      id: bankId
+    }
+    bank.status.doing = true
+    statusObj.status = bank.status
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+        let result = statusList.findIndex((value) => {
+          return value.id == bankId
+        })
+        if(result !== -1) {
+          statusList[result].status.doing = true
+        } else {
+          statusList.push(statusObj)
+        }
+        wx.cloud.callFunction({
+          name: 'updateBankStatus',
+          data: {
+            statusList,
+          }
+        }).then(console.log)
+        wx.navigateTo({
+          url: '../examWritten/examWritten?id=' + bankId
+        })
+  })
 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     banksList.where({
-      class: '笔试题',
+      class: '笔试题', 
       industry: this.data.industry,
-      id: 10
+      id: 10 // 暂时写死（后期应该为随机，且优先选择用户未曾刷过的题）
     }).get().then((res) => {
       this.setData({
         bank: res.data[0]
       })
-      console.log(res.data[0])
     })
   },
 

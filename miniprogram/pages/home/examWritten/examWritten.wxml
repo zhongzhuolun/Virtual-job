@@ -119,7 +119,7 @@
         </text>
       </block>
       <block wx:else>
-        <text>提交之后无法更改答案是否确认提交？</text>
+        <text>提交之后无法更改答案是否确认提交</text>
       </block>
     
     </view>

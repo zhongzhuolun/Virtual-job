@@ -3,6 +3,8 @@ const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const writtenQuestions = db.collection('writtenQuestions')
+const writtenBankForUser = db.collection('writtenBankForUser')
+const app = getApp()
 Page({
 
   /**
@@ -351,7 +353,11 @@ Page({
       }
       if (value.type !== '填空') { // 代表不为填空题的时候
         correctAnswer = correctAnswer.toString()
-        if(choose !== correctAnswer) { // 代表做错了并且做完了
+        if(choose !== correctAnswer) { // 代表做错了
+          // if (choose !== undefined) {
+          //   console.log(correctAnswer,correctAnswer.replace(',','').indexOf(choose.replace(',', '')) != -1,choose ) // true代表该题目半对，false代表该题目全错（只针对多选题和不定项选择题）
+          // }
+         
           this.data.wrongList.push(index);
         } 
       } else { // 代表为填空题的时候
@@ -362,6 +368,7 @@ Page({
         let wrongBlankObj = {
           indexArry: [], // 填空题的错误空的序列集合
           blankScore: 0, // 该填空题获得的分数
+          index: null
         }
         if (choose) { // 代表用户填了该填空题
           chooseArr = choose.split(',')
@@ -374,22 +381,28 @@ Page({
           }
         })
         if (wrongBlankObj.indexArry.length > 0) {
+          wrongBlankObj.index = index
           this.data.wrongList.push(wrongBlankObj); // 代表填空题至少有一个空出错了
         }
       }    
     })
     if (this.data.wrongList.length > 0) { // 代表除去填空题以外 
       // 代表有错题
-      this.data.bank.status.mistaked = false
+      this.data.bank.status.mistaked = true
       this.data.wrongList.forEach((value, index) => {
         if (typeof value === 'object') {// 填空题
-          totalScore -= value.blankScore
-        } else { 
+          totalScore -= value.blankScore // 题库的总分减去错题的分数
+          bank[value.index].mistaked = true
+
+        } else { // 非填空题
           totalScore -= bank[value].score
+          bank[value].mistaked = true
         }
       })
     }
-    return totalScore
+    this.data.bank.status.done = true // 做完了
+    this.data.bank.status.doing = false // 结束在做的状态
+    return totalScore // 返回总分
   },
 
   // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
@@ -399,17 +412,24 @@ Page({
 
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function() {
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+      console.log(statusList)
 
+    })
   },
 
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function() {
+
   },
 
   // 处理确定提交 （此时真正提交）
   handleComplete: function(e) {
     // 调用处理分数的函数
     let score = this.handleWrongAndScore()
+    this.data.bank.score = score
+    this.handleBankStatus()
     // console.log(score)
     // 调用更新题库简介状态和更新题库详情状态的函数
 
@@ -417,6 +437,12 @@ Page({
     wx.navigateTo({
       url: '../score/score?score=' + score,
     })
+    let examBank = {
+      bank: this.data.bank,
+      wrongList: this.data.wrongList,
+      chooseValue: this.data.chooseValue
+    }
+    app.globalData.examBank = examBank
     // this.setData({
     //   wrongList: []
     // }) 
@@ -513,21 +539,26 @@ Page({
               })
             } else { // 答题时间结束
               clearInterval(timer)
-              wx.showModal({
-                title: '提示',
-                content: '答题时间结束，点击确定后将会自动提交',
-                showCancel: false,
-                success (res) {
-                  if (res.confirm) {
-                    wx.showToast({
-                      title: '已提交',
-                    })
-                    wx.navigateTo({
-                      url: '../score/score',
-                    })
-                  } 
-                }
+              wx.showToast({
+                title: '答题结束',
+                duration: 2000
               })
+              this.handleComplete() // 答题时间结束，自动提交
+              // wx.showModal({
+              //   title: '提示',
+              //   content: '答题时间结束，点击确定后将会自动提交',
+              //   showCancel: false,
+              //   success (res) {
+              //     if (res.confirm) {
+              //       wx.showToast({
+              //         title: '已提交',
+              //       })
+              //       wx.navigateTo({
+              //         url: '../score/score',
+              //       })
+              //     } 
+              //   }
+              // })
             }
           }, 1000)
         })

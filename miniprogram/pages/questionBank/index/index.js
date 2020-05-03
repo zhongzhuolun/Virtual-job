@@ -24,36 +24,8 @@ Page({
     ifPullDown: false
   },
   onChange(event) {
-    // wx.showLoading({
-    //   title: '数据加载中',
-    // })
     let item = {...this.data.item}
     this.refleshStatus(item)
-    // wx.hideLoading()
-
-    // bankStatusList.get().then(res => {
-    //   let statusList = res.data[0].statusList
-    //   item.bankList.forEach((item, index) => {
-    //     let result = statusList.find((value) => {
-    //       console.log(value)
-    //       return value.id === item.id
-    //     })
-    //     if(result) {
-    //       item.status = result.status
-    //     }
-    //   })
-    //    this.setData({
-    //     item: {...item}
-    //   }, () => {
-    //     this.getColErrBank()
-    //     wx.hideLoading()
-    //   })
-    // })
-   
-    // wx.showToast({
-    //   title: `切换到标签 ${event.detail.title}`,
-    //   icon: 'none'
-    // });
   },
   getColErrBank() {
     let bankList = this.data.item.bankList
@@ -69,7 +41,6 @@ Page({
     })
   },
   refleshStatus(item) {
-    // let item = {...this.data.item}
     wx.showLoading({
       title: '数据加载中',
     })
@@ -164,9 +135,6 @@ Page({
         this.pageObj.ifAdd = false
       }
       if (res.data.length > 0) {
-        // item.bankList = item.bankList.concat(res.data)
-        // // item.bankList = res.data
-        // this.refleshStatus(item)
         if (this.data.ifPullDown) {
           item.bankList = res.data
         } else {
