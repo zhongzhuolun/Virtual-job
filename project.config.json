@@ -155,6 +155,12 @@
 					"pathName": "pages/home/examWritten/examWritten",
 					"query": "id=10",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/myMsg/myMsg",
+					"pathName": "pages/center/myMsg/myMsg",
+					"scene": null
 				}
 			]
 		}

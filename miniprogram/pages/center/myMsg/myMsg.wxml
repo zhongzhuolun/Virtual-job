@@ -3,4 +3,25 @@
 	<view slot="content"></view>
 	<view slot="backText">我的消息</view>
 </cu-custom>
-<text>我的消息</text>
+<!--主页面-->
+<view class="blankBox">
+<navigator  url="../viewReplay/viewReplay" class="viewReplay1">
+<image src="../../../images/icon/graysou.png" class="tupian1"></image>
+<text class="wenben1">收到回复</text>  
+<view class="geshu"></view><text class="ziti">1</text> 
+</navigator>
+
+<view class="line1"></view>
+<navigator url="../viewReplay/viewReplay" class="viewReplay2">
+<image src="../../../images/icon/graysou.png" class="tupian2"></image>
+<text class="wenben2">收到的赞</text> 
+</navigator>
+
+<view class="line2"></view>
+<navigator url="../viewReplay/viewReplay" class="viewReplay3">
+<image src="../../../images/icon/graysou.png" class="tupian3"></image>
+<text class="wenben3">系统通知</text> 
+ </navigator>
+
+
+</view>
