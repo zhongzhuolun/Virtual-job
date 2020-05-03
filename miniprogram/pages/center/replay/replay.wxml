@@ -1,2 +1,6 @@
 <!--miniprogram/pages/center/replay/replay.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">收到回复/点赞/系统通知</view>
+</cu-custom>
 <text>收到回复，收到点赞，系统通知都在这个页面</text>

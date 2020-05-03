@@ -1,2 +1,6 @@
 <!--miniprogram/pages/center/myMsg/myMsg.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">我的消息</view>
+</cu-custom>
 <text>我的消息</text>

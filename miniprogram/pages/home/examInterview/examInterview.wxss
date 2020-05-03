@@ -2,13 +2,13 @@
 .body{
   position: absolute;
   width: 750rpx;
-  height: 1624rpx;
+  height: 100%;
   background-color: rgba(255, 255, 255, 1);
 }
 .txt1{
   position: absolute;
   left: 34rpx;
-  top: 58rpx;
+  top: 158rpx;
   width: 754rpx;
   height: 80rpx;
   color: rgba(16, 16, 16, 1);
@@ -19,7 +19,7 @@
 .txt2{
   position: absolute;
   left: 38rpx;
-  top: 150rpx;
+  top: 250rpx;
   width: 186rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
@@ -30,7 +30,7 @@
 .txt3{
   position: absolute;
   left: 292rpx;
-  top: 566rpx;
+  top: 666rpx;
   width: 172rpx;
   height: 72rpx;
   line-height: 72rpx;
@@ -41,7 +41,7 @@
 .txt4{
   position: absolute;
   left: 172rpx;
-  top: 690rpx;
+  top: 790rpx;
   width: 354rpx;
   height: 46rpx;
   color: rgba(163, 163, 163, 1);
@@ -52,7 +52,7 @@
 .txt5{
   position: absolute;
   left: 172rpx;
-  top: 740rpx;
+  top: 840rpx;
   width: 258rpx;
   height: 46rpx;
   color: rgba(163, 163, 163, 1);
@@ -63,7 +63,7 @@
 .txt6{
   position: absolute;
   left: 252rpx;
-  top: 996rpx;
+  top: 1096rpx;
   width: 246rpx;
   height: 72rpx;
   border-radius: 20rpx;
@@ -78,7 +78,7 @@
 .txt7{
   position: absolute;
   left: 432rpx;
-  top: 1234rpx;
+  top: 1334rpx;
   width: 296rpx;
   height: 70rpx;
   line-height: 52rpx;
@@ -91,28 +91,28 @@
 .img1{
   position: absolute;
   left: 292rpx;
-  top: 372rpx;
+  top: 472rpx;
   width: 172rpx;
   height: 172rpx;
 }
 .img2{
   position: absolute;
   left: 654rpx;
-  top: 256rpx;
+  top: 356rpx;
   width: 70rpx;
   height: 60rpx;
 }
 .img3{
   position: absolute;
   left: 520rpx;
-  top: 692rpx;
+  top: 792rpx;
   width: 44rpx;
   height: 40rpx;
 }
 .line{
   position: absolute;
   left: 0px;
-  top: 212rpx;
+  top: 312rpx;
   width: 750rpx;
   height: NaNpx;
   border: 2rpx solid rgba(187, 187, 187, 1);

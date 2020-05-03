@@ -2,7 +2,7 @@
 .score1{
   position: absolute;
   left: 244rpx;
-  top: 180rpx;
+  top: 120rpx;
   width: 262rpx;
   height: 190rpx;
   color: rgba(16, 16, 16, 1);
@@ -13,9 +13,9 @@
 .blank{
   position: absolute;
   left: 66rpx;
-  top: 482rpx;
+  top: 422rpx;
   width: 616rpx;
-  height: 550rpx;
+  height: 680rpx;
   line-height: 52rpx;
   border-radius: 50rpx;
   background-color: rgba(255, 255, 255, 0.47);
@@ -26,7 +26,8 @@
   font-family: Arial;
   border: 1rpx solid rgba(255, 255, 255, 0);
 }
-.qusetionType,.singleChoice,.multipleChoice,.bianchengti,.wendati{
+.qusetionType,.singleChoice,.multipleChoice,.budingxiang,.panduan,
+.tiankong, .paixu{
   position: absolute;
   left: 133rpx;
   width: 222rpx;
@@ -42,27 +43,28 @@
   outline-style:solid;
 	outline-width:2rpx;
 }
-.qusetionType{
-  position: absolute;
-  top: 556rpx;
+.qusetionType, .accuracy{
+  top: 496rpx;
 }
-.singleChoice{
-  position: absolute;
-  top: 634rpx;
+.singleChoice, .score2{
+  top: 574rpx;
 }
-.multipleChoice{
-  position: absolute;
-  top:712rpx;
+.multipleChoice, .score3{
+  top: 652rpx;
 }
-.bianchengti{
-  position: absolute;
-  top: 790rpx;
+.budingxiang, .score4{
+  top: 730rpx;
 }
-.wendati{
-  position: absolute;
-  top: 868rpx;
+.panduan, .score5{
+  top: 812rpx;
 }
-.accuracy,.score2,.score3,.score4,.score5{
+.tiankong, .score6{
+  top: 890rpx;
+}
+.paixu, .score7{
+  top: 972rpx;
+}
+.accuracy,.score2,.score3,.score4,.score5,.score6,.score7{
   position: absolute;
   left: 377rpx;
   width: 222rpx;
@@ -78,26 +80,27 @@
   outline-style:solid;
 	outline-width:2rpx;
 }
-.accuracy{
-  position: absolute;
+/* .accuracy{
   top: 556rpx;
 }
 .score2{
-  position: absolute;
   top: 634rpx;
 }
 .score3{
-  position: absolute;
   top: 712rpx;
 }
 .score4{
-  position: absolute;
   top:790rpx;
 }
 .score5{
-  position: absolute;
-  top: 868rpx;
+  top: 873rpx;
 }
+.score6 {
+  top: 951rpx;
+}
+.score7 {
+  top: 1032rpx;
+} */
 .button1{
   position: absolute;
   left: 82rpx;
@@ -130,4 +133,8 @@
   border: 2rpx solid rgba(0, 0, 0, 1);
   line-height: 70rpx;
 
+}
+van-row van-col {
+  border: 1rpx solid; 
+  background: red;
 }

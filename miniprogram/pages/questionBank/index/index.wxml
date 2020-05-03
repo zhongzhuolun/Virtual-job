@@ -1,4 +1,7 @@
 <import src="../template/index.wxml"/>
+<cu-custom bgColor="bg-yellow" >
+	<view slot="content">题库</view>
+</cu-custom>
 <view class="wrap">
     <view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
       <text>笔试</text>

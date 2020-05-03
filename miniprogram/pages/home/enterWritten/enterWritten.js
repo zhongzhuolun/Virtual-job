@@ -16,9 +16,9 @@ Page({
    */
   onLoad: function (options) {
     banksList.where({
-      class: '面试题',
+      class: '笔试题',
       industry: this.data.industry,
-      id: 1
+      id: 10
     }).get().then((res) => {
       this.setData({
         bank: res.data[0]

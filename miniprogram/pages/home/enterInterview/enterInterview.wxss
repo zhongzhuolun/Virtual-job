@@ -24,6 +24,8 @@
   font-size: 56rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  line-height: 63rpx;
+
 }
 .num {
   position: absolute;

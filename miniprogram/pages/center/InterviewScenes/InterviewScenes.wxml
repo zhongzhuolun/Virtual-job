@@ -1,2 +1,6 @@
 <!--miniprogram/pages/center/InterviewScenes/InterviewScenes.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">面试现场</view>
+</cu-custom>
 <text>面试现场</text>

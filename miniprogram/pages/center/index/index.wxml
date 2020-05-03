@@ -1,5 +1,7 @@
 <!--miniprogram/pages/center/index/index.wxml-->
-
+<cu-custom bgColor="bg-yellow" >
+	<view slot="content">个人中心</view>
+</cu-custom>
 <text>个人中心界面</text>
 
 <view class="center1">

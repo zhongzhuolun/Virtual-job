@@ -1,4 +1,8 @@
 <!--miniprogram/pages/questionBank/endQuestion/endQuestion.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">笔试</view>
+</cu-custom>
 <view class="title">笔试题目</view>
 <view class="frist1">笔试题库的第一份</view>
 <view class="sentence">“每日一套，早日offer”</view>

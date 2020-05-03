@@ -1,2 +1,6 @@
 <!--miniprogram/pages/questionBank/viewQuestions/viewQuestions.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">笔试</view>
+</cu-custom>
 <text>查看错题，看完错题，查看完整题库</text>

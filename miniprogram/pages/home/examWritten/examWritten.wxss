@@ -133,9 +133,13 @@
 }
 .show {
   display: block;
+  visibility: visible;
 }
 .hide {
   display: none;
+  visibility: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .my-btn {
@@ -158,7 +162,4 @@
 }
 .unfinished .complete {
   left: 408rpx;
-}
-.finished .complete {
-
 }

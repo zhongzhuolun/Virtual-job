@@ -1,2 +1,6 @@
 <!--miniprogram/pages/center/viewReplay/viewReplay.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">收到的赞/回复</view>
+</cu-custom>
 <text>查看回复，查看点赞</text>

@@ -1,4 +1,8 @@
 <!--miniprogram/pages/questionBank/enterWritten/enterWritten.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">{{examType==='written'?'笔试':'面试'}}</view>
+</cu-custom>
 <view class="line1"></view>
 <view class="enterWritten">{{examType==='written'?'笔试':'面试'}}题目</view>
 <view class="line2"></view>

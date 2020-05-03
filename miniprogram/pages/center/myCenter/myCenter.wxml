@@ -1,4 +1,8 @@
 <!--miniprogram/pages/center/myCenter/myCenter.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">个人资料</view>
+</cu-custom>
 <text>个人资料</text>
 <view class="myCenter1">
 <navigator class="changeTouxiang">更换头像</navigator>

@@ -1,2 +1,6 @@
 <!--miniprogram/pages/center/myBanks/myBanks.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">我的题库</view>
+</cu-custom>
 <text>我的题库</text>

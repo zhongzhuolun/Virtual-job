@@ -3,7 +3,7 @@
 .offer {
   position: absolute;
   left: 154rpx;
-  top: 180rpx;
+  top: 280rpx;
   width: 440rpx;
   height: 430rpx;
   
@@ -20,7 +20,7 @@ image {
 }
 .interview, .written {
   position: absolute;
-  top: 700rpx;
+  top: 800rpx;
   width: 248rpx;
   height: 254rpx;
   line-height: 254rpx;

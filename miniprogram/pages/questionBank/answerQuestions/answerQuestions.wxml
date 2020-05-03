@@ -1,2 +1,6 @@
 <!--miniprogram/pages/questionBank/answerQuestions/answerQuestions.wxml-->
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">笔试/面试</view>
+</cu-custom>
 <text>笔试答题界面（下方四个模块可共用该界面）</text>

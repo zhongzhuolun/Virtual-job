@@ -1,6 +1,6 @@
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{!ifSubmit?true:false}}" >
 	<view slot="content"></view>
-	<view slot="backText">模拟笔试</view>
+	<view wx:if="{{!ifSubmit}}" slot="backText">模拟笔试</view>
 </cu-custom>
 
 <view class="bank-wrap {{ifSubmit?'hide':'show'}}" >
@@ -112,10 +112,16 @@
 
 <view class="bg-sbumit {{ifSubmit?'show':'hide'}}">
     <view class="detail">
-      <text>你还有题目未完成
-        （2，4，18，30）
-        是否确认提交？
-      </text>
+      <block wx:if="{{emptyQuestions.length > 0}}">
+        <text>你还有题目未完成
+        （{{emptyStr}}）
+          是否确认提交？
+        </text>
+      </block>
+      <block wx:else>
+        <text>提交之后无法更改答案是否确认提交？</text>
+      </block>
+    
     </view>
     <view class="unfinished">
       <view class="continute my-btn" bindtap="handleContinue">

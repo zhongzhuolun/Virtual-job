@@ -150,9 +150,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 14,
 					"name": "pages/home/examWritten/examWritten",
 					"pathName": "pages/home/examWritten/examWritten",
+					"query": "id=10",
 					"scene": null
 				}
 			]

@@ -286,35 +286,113 @@ Page({
     blankArry: [], // 专门用于存储填空题答案的数组
     type: '', // 此时题目的类型
     time: "", // 页面上的时间
-    ifSubmit: false // 是否点击了提交
+    ifSubmit: false, // 是否点击了提交
+    emptyQuestions: [], // 用于存储未完成的题目序列
+    emptyStr: '', // 用于存储未完成的题目序列的字符串
+    score: 0, // 用户答题的总分数
+
   },
 
-  // 处理提交
+  // 处理提交(此时未真正提交)
   handleSubmit: function(e) {
     console.log(this.data.chooseValue)
+    // 显示自定义的确认提交模态框
     this.setData({
       ifSubmit: true
     })
+    // 调用处理未完成的函数
+    this.handleUnfinished()
   },
 
   // 处理继续答题（功能针对所有用户）
   handleContinue: function(e) {
+    // 显示答题界面，同时重置错题集合
     this.setData({
-      ifSubmit: false
+      ifSubmit: false,
+      wrongList: []
     })
   },
 
   // 处理未完成 （功能针对所有用户）
   handleUnfinished: function() {
-
+    let len = this.data.bank.bank.length
+    let emptyQuestions = []
+    let emptyStr = ''
+    for(let i = 0; i < len; i++) {
+      if (this.data.chooseValue[i] == undefined || this.data.chooseValue[i].length == 0) {
+        emptyQuestions.push(i+1)
+      }
+    }
+    emptyStr = emptyQuestions.toString()
+    this.setData({
+      emptyQuestions,
+      emptyStr
+    })
+   
   },
 
-  // 处理分数评判 （功能针对所有用户，但获得的分数只针对该用户）
-  handleSore: function() {
+  // 处理题型的正确率 （功能针对所有用户，但获得的正确率只针对该用户）
+  handleCorrectRate: function() {
+    let score = this.data.score // 拿到分数
+    console.log(score)
 
   },
+  // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户）
+  handleWrongAndScore: function() {
+    let bank = this.data.bank.bank
+    let chooseValue = this.data.chooseValue
+    let totalScore = this.data.bank.total_points // 获取到总分
+    
+    bank.forEach((value, index) => {
+      let correctAnswer = value.correct_answer
+      let choose = chooseValue[index]
+      if (choose) { // 用户填的题目不为空的时候
+        choose = choose.toString()
+      }
+      if (value.type !== '填空') { // 代表不为填空题的时候
+        correctAnswer = correctAnswer.toString()
+        if(choose !== correctAnswer) { // 代表做错了并且做完了
+          this.data.wrongList.push(index);
+        } 
+      } else { // 代表为填空题的时候
+        let blankScore = 0
+        blankScore = value.score // 获取到该填空题的分数
+        let oneBlankScore = Math.floor(blankScore/correctAnswer.length) // 获取该填空题每个空的分数
+        let chooseArr = []
+        let wrongBlankObj = {
+          indexArry: [], // 填空题的错误空的序列集合
+          blankScore: 0, // 该填空题获得的分数
+        }
+        if (choose) { // 代表用户填了该填空题
+          chooseArr = choose.split(',')
+        }
+        correctAnswer.forEach((value, index) => {
+          if (!(chooseArr[index] === value)) {
+            // 代表该空做错了
+            wrongBlankObj.blankScore += oneBlankScore
+            wrongBlankObj.indexArry.push(index)
+          }
+        })
+        if (wrongBlankObj.indexArry.length > 0) {
+          this.data.wrongList.push(wrongBlankObj); // 代表填空题至少有一个空出错了
+        }
+      }    
+    })
+    if (this.data.wrongList.length > 0) { // 代表除去填空题以外 
+      // 代表有错题
+      this.data.bank.status.mistaked = false
+      this.data.wrongList.forEach((value, index) => {
+        if (typeof value === 'object') {// 填空题
+          totalScore -= value.blankScore
+        } else { 
+          totalScore -= bank[value].score
+        }
+      })
+    }
+    return totalScore
+  },
 
-  // 处理本地存储 （只针对登录用户）
+  // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
   handleStorage: function() {
 
   },
@@ -326,14 +404,22 @@ Page({
 
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function() {
-
   },
 
-  // 处理确定提交
+  // 处理确定提交 （此时真正提交）
   handleComplete: function(e) {
+    // 调用处理分数的函数
+    let score = this.handleWrongAndScore()
+    // console.log(score)
+    // 调用更新题库简介状态和更新题库详情状态的函数
+
+    // 跳转到分数界面，并将数据传送过去，包括分数和比例
     wx.navigateTo({
-      url: '../score/score',
+      url: '../score/score?score=' + score,
     })
+    // this.setData({
+    //   wrongList: []
+    // }) 
 
   },
 
@@ -399,6 +485,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     // wx.setNavigationBarTitle({ title: this.data.bank.title }) // 动态设置导航条标题
     wx.showLoading({
       title: '加载中',
@@ -448,6 +535,7 @@ Page({
     })
 
   },
+  // 考试时间格式化
   format(time, normal) {
     let finalTime = 0
     if (normal) { // 代表正常格式化 MM:SS，说明此时传入的是一个以秒为单位的数据
