@@ -160,6 +160,13 @@
 					"id": -1,
 					"name": "pages/center/myMsg/myMsg",
 					"pathName": "pages/center/myMsg/myMsg",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/myCenter/myCenter",
+					"pathName": "pages/center/myCenter/myCenter",
 					"scene": null
 				}
 			]
