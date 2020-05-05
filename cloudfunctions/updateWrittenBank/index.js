@@ -3,16 +3,15 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 const db = cloud.database()
-const bankStatusList = db.collection('bank-status')
+const writtenBankForUser = db.collection('writtenBankForUser')
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { OPENID } = cloud.getWXContext()
-  return await bankStatusList.where({
+  return await writtenBankForUser.where({
     _openid: OPENID,
     }).update({
     data: {
-      statusList: event.statusList
+      writtenBankList: event.writtenBankList
     }
   })
-
 }

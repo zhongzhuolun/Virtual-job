@@ -55,7 +55,11 @@
   transform: scale(0.6);
   border-radius: 50%;
   border: 4rpx solid #ffc200;
+  /* border: 4rpx solid transparent; */
   background: transparent;
+}
+.my-choosebox radio.checked {
+  border: 4rpx solid transparent;
 }
  .my-choosebox checkbox{
   transform: scale(0.6);

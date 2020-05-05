@@ -11,22 +11,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    active: 0,
-    checkoutBank: app.globalData.examType,
-    banners: [],
-    industry: '',
-    errBankList: [],
-    colBankList: [],
+    active: 0, // 当前tabar被激活的序列
+    checkoutBank: app.globalData.examType, // 当前所选的类型按钮
+    banners: [], // 当前轮播图
+    industry: '', // 当前所选行业
+    errBankList: [], // 错题集数据
+    colBankList: [], // 收藏的题库数据
     item: {
-      bankList: [],
-      statusList: []
+      bankList: [], // 题库简介数据
+      statusList: [] // 题库状态数据
     },
-    ifPullDown: false
+    ifPullDown: false, // 是否下拉
   },
+  // tabar发生改变的时候重新渲染数据
   onChange(event) {
     let item = {...this.data.item}
     this.refleshStatus(item)
   },
+  // 获取收藏和错题集
   getColErrBank() {
     let bankList = this.data.item.bankList
     let colres = bankList.filter((item) => {
@@ -40,6 +42,7 @@ Page({
       errBankList: errres
     })
   },
+  // 刷新重置状态
   refleshStatus(item) {
     wx.showLoading({
       title: '数据加载中',
@@ -110,6 +113,7 @@ Page({
     app.updataType('written')
    
   },
+  // 处理点击面试按钮的事件
   handleInterview(e) {
 
     let pagesize;
@@ -149,7 +153,7 @@ Page({
     app.updataType('interview')
 
   },
- 
+ // 处理开始考试
   handleStartExam(e) {
     let bankId = e.target.id * 1
     let statusObj = {
@@ -180,6 +184,7 @@ Page({
         }).then(console.log)
     })
   },
+  // 处理收藏
   handleCollection(e) {
     let title = ''
     let item = {...this.data.item}

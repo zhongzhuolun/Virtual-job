@@ -1,1 +1,92 @@
+page{
+  background-color: white;
+}
+.blankBox{
+  position: absolute;
+  left: 26rpx;
+  top: 200rpx;
+  width: 698rpx;
+  height: 418rpx;
+  line-height: 40rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
+  border: 1rpx solid rgba(255, 255, 255, 0);
+}
+.line1,.line2{
+  position: absolute;
+  left: 0rpx;
+  width: 698rpx;
+  height: NaNpx;
+  border: 1rpx solid rgba(250, 191, 1, 0.47);
+}
+.line1{
+  position: absolute;
+  top: 139rpx;
+}
+.line2{
+  position: absolute;
+  top: 139px;
 
+}
+.viewReplay1,.viewReplay2,.viewReplay3{
+  position: absolute;
+  left: 0rpx;
+  width: 698rpx;
+  height: 141rpx;
+  border: 1rpx solid rgba(250, 191, 1, 0.47);
+}
+.viewReplay1{
+  position: absolute;
+  top: 0rpx;
+}
+.viewReplay2{
+  position: absolute;
+  top: 143rpx;
+}
+.viewReplay3{
+  position: absolute;
+  top: 274rpx;
+}
+.tupian1,.tupian2,.tupian3{
+    position: absolute;
+    left: 66rpx;
+    top: 35rpx;
+    width: 64rpx;
+    height: 64rpx;
+    background-color: rgba(250, 191, 1, 1);
+}
+.wenben1,.wenben2,.wenben3{
+  position: absolute;
+  left: 152rpx;
+  top: 45rpx;
+  width: 146rpx;
+  height: 54rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: left;
+  font-family: SourceHanSansSC-regular;
+}
+.geshu{
+  position: absolute;
+  left: 642rpx;
+  top: 45rpx;
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 40rpx;
+  border-radius: 24rpx;
+  background-color: rgba(250, 191, 1, 1);
+  text-align: center;
+  border: 4rpx solid rgba(255, 255, 255, 0);
+}
+.ziti{
+  position: absolute;
+  left: 656rpx;
+  top: 49rpx;
+  width: 18rpx;
+  height: 32rpx;
+  color: rgba(255, 255, 255, 1);
+  font-size: 32rpx;
+  text-align: center;
+  font-family: Helvetica-regular;
+}

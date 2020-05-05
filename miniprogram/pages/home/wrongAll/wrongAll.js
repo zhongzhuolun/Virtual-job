@@ -1,248 +1,143 @@
 // miniprogram/pages/home/wrongAll/wrongAll.js
 const app = getApp()
+const db = wx.cloud.database()
+const banksList = db.collection('banks-list')
+const bankStatusList = db.collection('bank-status')
+const writtenQuestions = db.collection('writtenQuestions')
+const writtenBankForUser = db.collection('writtenBankForUser')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      bank: {
-      "id": 10, 
-      "industry": "前端", 
-      "class": "笔试题",
-      "title": "百度2019校招Web前端工程师笔试卷", 
-      "limit_time": "60:00",
-      "score": "",
-      "total_points": "100",
-      "status": { 
-        "done": false, 
-        "doing": true,
-        "collection": false, 
-        "mistaked": false 
-      }, 
-      "bank": [ 
-        {
-          "title": "TCP和UDP说法错误的是（  ）",  
-          "type": "单选",  
-          "mistaked": false,
-          "check": false,
-          "id": 1,
-          "options": {
-            "A": "UDP是面向字节流的协议",
-            "B": "TCP的头部消息较UDP来说更全面",
-            "C": "TCP是端对端的不支持广播、多播",
-            "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-          },  
-          "correct_answer": ["A"],  
-          "parsing": "这是常识来着", 
-          "score": 8,  
-          "note": "这是一条备注",  
-          "comments": [  
-            {
-              "user_name": "zarek",  
-              "avatar": "https://wdwd1312.jpg",  
-              "user_id": 1,  
-              "content": "这道题好难啊！！！",
-              "spot_count": 666,  
-              "create_time":  "2020-04-14 19:30",  
-              "reply": [  
-                {
-                  "user_name": "zzl",  
-                  "avatar": "https://wdwd1323412.jpg",  
-                  "user_id": 2,  
-                  "content": "是啊是啊！",  
-                  "spot_count": 111,  
-                  "create_time":  "2020-04-14 19:35"  
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "下面关于进程三态模型说法错误的是（  ）",  
-          "type": "多选",  
-          "mistaked": false,
-          "check": false,
-          "id": 2,
-          "options": {
-            "A": "就绪状态和执行状态可以互相转换",
-            "B": "阻塞状态可以直接转换为执行状态",
-            "C": "就绪状态转换为执行状态进行了进程调度",
-            "D": "阻塞状态可以直接转换为就绪状态",
-          },  
-          "correct_answer": ["A", "B", "C", "D"],  
-          "parsing": "这是常识来着", 
-          "score": 10,  
-          "note": "这是一条备注",  
-          "comments": [  
-            {
-              "user_name": "zarek",  
-              "avatar": "https://wdwd1312.jpg",  
-              "user_id": 1,  
-              "content": "这道题好难啊！！！",
-              "spot_count": 666,  
-              "create_time":  "2020-04-14 19:30",  
-              "reply": [  
-                {
-                  "user_name": "zzl",  
-                  "avatar": "https://wdwd1323412.jpg",  
-                  "user_id": 2,  
-                  "content": "是啊是啊！",  
-                  "spot_count": 111,  
-                  "create_time":  "2020-04-14 19:35"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "TCP和UDP说法错误的是（  ）",  
-          "type": "不定项选",  
-          "mistaked": false,
-          "check": false,
-          "id": 3,
-          "options": {
-            "A": "UDP是面向字节流的协议",
-            "B": "TCP的头部消息较UDP来说更全面",
-            "C": "TCP是端对端的不支持广播、多播",
-            "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-            "E": "UDP不是面向字节流的协议",
-          },  
-          "correct_answer": ["A", "B", "C", "D"],  
-          "parsing": "这是常识来着", 
-          "score": 8,  
-          "note": "这是一条备注",  
-          "comments": [  
-            {
-              "user_name": "zarek",  
-              "avatar": "https://wdwd1312.jpg",  
-              "user_id": 1,  
-              "content": "这道题好难啊！！！",
-              "spot_count": 666,  
-              "create_time":  "2020-04-14 19:30",  
-              "reply": [  
-                {
-                  "user_name": "zzl",  
-                  "avatar": "https://wdwd1323412.jpg",  
-                  "user_id": 2,  
-                  "content": "是啊是啊！",  
-                  "spot_count": 111,  
-                  "create_time":  "2020-04-14 19:35"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "TCP和UDP说法错误的是（  ）",  
-          "type": "判断",  
-          "mistaked": false,
-          "check": false,
-          "id": 4,
-          "options": {
-            "A": "对",
-            "B": "错",
-          },  
-          "correct_answer": ["A"],  
-          "parsing": "这是常识来着", 
-          "score": 8,  
-          "note": "这是一条备注",  
-          "comments": [  
-            {
-              "user_name": "zarek",  
-              "avatar": "https://wdwd1312.jpg",  
-              "user_id": 1,  
-              "content": "这道题好难啊！！！",
-              "spot_count": 666,  
-              "create_time":  "2020-04-14 19:30",  
-              "reply": [  
-                {
-                  "user_name": "zzl",  
-                  "avatar": "https://wdwd1323412.jpg",  
-                  "user_id": 2,  
-                  "content": "是啊是啊！",  
-                  "spot_count": 111,  
-                  "create_time":  "2020-04-14 19:35"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "TCP可以用在 __[填空1]__，UDP可以用在__[填空2]__方面，TCP是端对端的不支持广播、多播。",  
-          "type": "填空", 
-          "mistaked": false,
-          "check": false,
-          "id": 5,
-          "correct_answer": ["远程登录", "语音通话"],  
-          "parsing": "这是常识来着", 
-          "score": 8,  
-          "note": "这是一条备注",  
-          "comments": [  
-            {
-              "user_name": "zarek",  
-              "avatar": "https://wdwd1312.jpg",  
-              "user_id": 1,  
-              "content": "这道题好难啊！！！",
-              "spot_count": 666,  
-              "create_time":  "2020-04-14 19:30",  
-              "reply": [  
-                {
-                  "user_name": "zzl",  
-                  "avatar": "https://wdwd1323412.jpg",  
-                  "user_id": 2,  
-                  "content": "是啊是啊！",  
-                  "spot_count": 111,  
-                  "create_time":  "2020-04-14 19:35"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "下列步骤的正确顺序是 __[填空1]__ 。",  
-          "type": "排序",
-          "mistaked": false,
-          "check": false,
-          "id": 6,  
-          "options": {
-            "A": "UDP是面向字节流的协议",
-            "B": "TCP的头部消息较UDP来说更全面",
-            "C": "TCP是端对端的不支持广播、多播",
-            "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-          },  
-          "correct_answer": ["DBAC"],  
-          "parsing": "这是常识来着", 
-          "score": 8,  
-          "note": "这是一条备注",  
-          "comments": [  
-            {
-              "user_name": "zarek",  
-              "avatar": "https://wdwd1312.jpg",  
-              "user_id": 1,  
-              "content": "这道题好难啊！！！",
-              "spot_count": 666,  
-              "create_time":  "2020-04-14 19:30",  
-              "reply": [  
-                {
-                  "user_name": "zzl",  
-                  "avatar": "https://wdwd1323412.jpg",  
-                  "user_id": 2,  
-                  "content": "是啊是啊！",  
-                  "spot_count": 111,  
-                  "create_time":  "2020-04-14 19:35"
-                }
-              ]
-            }
-          ]
-        },
-      ]
-    }, // 模拟数据
-    class: '',
-    examBank: {},
+    class: '', // 当前是面试还是笔试
+    examBank: {}, // 笔试题中包含当前用户所做的题库，错误集合，选择的集合
+    questionIndex: 0, // 当前题目的序列
+    correct_answer: '', // 正确答案
+    ifViewAllComments: false, // 查看所有评论
+    ifCollect: false, // 是否收藏
 
   },
+  // 处理查看所有评论
+  viewAllComments: function(e) {
+    console.log(e)
+    this.setData({
+      ifViewAllComments: !this.data.ifViewAllComments
+    })
+  },
+  // 处理下一题
+  handleNext: function(e) {
+    let {questionIndex, correct_answer, examBank} = this.data
+    if (questionIndex < examBank.bank.bank.length - 1) {
+      questionIndex++
+      correct_answer = examBank.bank.bank[questionIndex].correct_answer.toString()
+      this.setData({
+        questionIndex,
+        correct_answer
+      })
+    }
+  },
+  // 处理上一题
+  handlePre: function(e) {
+    let {questionIndex, correct_answer, examBank} = this.data
+    if (questionIndex > 0) {
+      questionIndex--
+      correct_answer = examBank.bank.bank[questionIndex].correct_answer.toString()
+      this.setData({
+        questionIndex,
+        correct_answer
+      })
+    }
+  },
+   // 处理收藏(更新用户的题库状态以及题库详情)
+   handleCollection(e) {
+    wx.showLoading()
+    let title = ''
+    let {bank} = this.data.examBank
+    let {ifCollect} = this.data
+    let bankId = bank.parentId
+    let statusObj = {
+      id: bankId
+    }
+    if (ifCollect) {
+      bank.status.collection = false
+      title = '取消收藏成功'
+      this.setData({
+        ifCollect: false
+      })
+    } else {
+      bank.status.collection = true
+      title = '收藏成功'
+      this.setData({
+        ifCollect: true
+      })
+    }
+    statusObj.status = bank.status
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+        let result = statusList.findIndex((value) => {
+          return value.id == bankId
+        })
+        if(result !== -1) {
+          if (!bank.status.collection) {
+            statusList[result].status.collection = false
+          } else {
+            statusList[result].status.collection = true
+          }
+        } else {
+          statusList.push(statusObj)
+        }
+        wx.cloud.callFunction({
+          name: 'updateBankStatus',
+          data: {
+            statusList
+          }
+        }).then(() => {
+          wx.hideLoading()
+          wx.showToast({
+            title: title,
+            icon: 'success'
+          })
+        })
+    })
+    writtenBankForUser.get().then((res) => {
+      let writtenBankList = res.data[0].writtenBankList
+      let result = writtenBankList.findIndex((value) => {
+        return value.parentId == bankId
+      })
+      if(result !== -1) {
+        writtenBankList[result] = bank
+      } else {
+        writtenBankList.push(bank)
+      }
+      wx.cloud.callFunction({
+        name: 'updateWrittenBank',
+        data: {
+          writtenBankList,
+        }
+      }).then(console.log)
+    })
 
+  },
+  // 获取当前题库状态
+  getStatus: function() {
+    let id = this.data.examBank.bank.parentId
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+      let ifCollect
+      let result = statusList.find((value) => {
+        return value.id === id
+      })
+      if(result) {
+        ifCollect = result.status.collection
+      }
+      this.setData({
+        ifCollect
+      })
+
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -251,8 +146,8 @@ Page({
     console.log(app.globalData.examBank)
     this.setData({
       class: options.class,
-      // examBank: app.globalData.examBank
-      examBank: app.globalData.examBank
+      examBank: app.globalData.examBank,
+      correct_answer: app.globalData.examBank.bank.bank[0].correct_answer.toString()
     })
   },
 
@@ -267,7 +162,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getStatus()
   },
 
   /**

@@ -1,80 +1,168 @@
 <!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
-	<view slot="backText">模拟{{class==='面试'?'面试':'笔试'}}</view>
+	<view slot="backText">完整试卷</view>
 </cu-custom>
-<block wx:if="{{class==='面试'}}">
-	<view class="body"></view>
-	<view class="txt1">银行招聘面试真题</view>
-	<view class="txt2">题目数量：5道</view>
-	<view class="line1"></view>
-	<view class="txt3">1.如果你的同事让你帮他完成工作，可是你……，但他……，你会怎么做？</view>
-	<view class="line2"></view>
-	<view class="txt4">题目解读：巴拉巴拉</view>
-	<view class="txt5">参考答案：巴拉巴拉</view>
-	<image class="img1" src="../../../images/icon/mine1.png"></image>
-	<view class="txt6">offer007</view>
-	<image class="img2" src="../../../images/icon/like.png"></image>
-	<view class="txt7">12</view>
-	<view class="txt8">这道题面试官是想考你在工作中能不能做到……，所以你只要答到……就可以了。</view>
-	<view class="txt9">查看全部评论</view>
-	<view class="line3"></view>
-	<input placeholder="发表你对这道题的想法" class="intxt"></input>
-	<view class="txt10">提交</view>
-	<view class="txt11">下一题</view>
-</block>
-<block wx:else>
-<view class="bank-wrap" >
-	<view class="bank-title">
-		<text>{{bank.title}}</text>
-	</view>
-	<view class="score-time">
-		<text class="score" style="padding-right: 44rpx">满分：{{bank.total_points}}分</text>
-		<text class="time">时间：{{bank.limit_time}}分钟</text>
-	</view>
-	<view class="menu">
-	<text class="cuIcon-apps lg text-yellow"></text>
-	</view>
-	<view class="line">
-	</view>
-	<view class="bank"  wx:key="id">
-		<block wx:for="{{bank.bank}}" >
-			<view wx:if="{{item.type === '单选'}}" class="radio-question" >
-				<view class="quetion-title">
-					<text>{{item.id}}. {{item.title}}【单选】（ {{item.score}}分 ）</text>
-				</view>
-				<radio-group data-type="{{item.type}}" id="{{item.id}}" bindchange="radioChange" class="radio-group" >
-				<label wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value"  class="my-choosebox">
-					<radio checked="{{bank.bank[index].checked}}" class="black radio" wx:if="{{value}}" value="{{key}}">
-					</radio>
-					<text>{{value}}</text> 
-				</label>
-				</radio-group>
-				<view class="correct-analyse">
-					<view>正确答案：<text style="color: yellow">A</text></view> <br />
-					<view>解析：{{item.parsing}}</view>
-				</view>
-			</view>
-		
-		</block>
-	</view>
-	<view style="margin-top: 40rpx" class="line"></view>
-	<view class="comments">
-		<view class="comment">
-			<view class="user">
-					<view class="user-info">
-						<image class="mine" src="../../../images/icon/mine1.png"></image>
-						<view class="user-name">offer007</view>
-					</view>
-					<view class="like-dot">
-						<image class="like" src="../../../images/icon/like.png"></image>
-						<view class="dot-num">12</view>
-					</view>
-			</view>
-			<view class="content">选A，tcp才是面向字节流的协议传输控制协议（TCP，Transmission Control Protocol）啊啊啊大萨达assay史蒂夫史蒂夫1是否选A，tcp才是面向字节流的协议传输控制协议（TCP，Transmission Control Protocol）啊啊啊大萨达assay史蒂夫史蒂夫1是否
-			</view>
+ <wxs module="filter">
+    var isChecked = function(key,data){
+			if (data) {
+      	return data.indexOf(key) !=-1 ? true:false;
+			} else {
+				return false;
+			}
+    }
+    module.exports = {
+      isChecked: isChecked
+    }
+  </wxs>
+	<view class="bank-wrap">
+		<view class="bank-title">
+			<text>{{examBank.bank.title}} </text>
+			<text bindtap="handleCollection" class="cuIcon-favorfill lg text-{{ifCollect?'yellow': 'grey'}}"></text>
 		</view>
-			<view class="view-all">查看全部评论</view>
+		<view class="score-time">
+			<text class="time">时间：{{examBank.bank.limit_time}}分钟</text>
+		</view>
+		<view class="menu">
+			<text class="cuIcon-apps lg text-yellow"></text>
+		</view>
+		<view class="line">
+		</view>
+		<view class="bank" wx:key="id">
+			<block wx:if="{{examBank.bank.bank[questionIndex].type === '单选'}}">
+				<view class="radio-question">
+					<view class="quetion-title">
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【单选】</text>
+					</view>
+					<radio-group data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
+						<label wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
+							<radio disabled checked="{{key === examBank.chooseValue[questionIndex]}}" class="{{examBank.bank.bank[questionIndex].mistaked&&key === examBank.chooseValue[questionIndex]?'red':'yellow'}} radio" wx:if="{{value}}" value="{{key}}">
+							</radio>
+							<text>{{value}}</text>
+						</label>
+					</radio-group>
+					<view class="correct-analyse">
+						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+					</view>
+				</view>
+
+			</block>
+			<block wx:if="{{examBank.bank.bank[questionIndex].type === '多选'}}">
+				<view class="checkbox-question">
+					<view class="quetion-title">
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【多选】</text>
+					</view>
+					<checkbox-group data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
+						<label class="my-choosebox" wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+							<checkbox disabled wx:if="{{value}}" class="{{examBank.bank.bank[questionIndex].mistaked?'red':'yellow'}}"  value="{{key}}"  checked="{{filter.isChecked(key,examBank.chooseValue[questionIndex])}}">
+							</checkbox>
+							<text>{{value}}</text>
+						</label>
+					</checkbox-group>
+					<view class="correct-analyse">
+						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{examBank.bank.bank[questionIndex].type === '不定项选'}}">
+				<view class="checkbox-question">
+					<view class="quetion-title">
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【不定项选】</text>
+					</view>
+					<checkbox-group bindchange="checkboxChange" data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" class="checkbox-group">
+						<label class="my-choosebox" wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+							<checkbox disabled wx:if="{{value}}" class="{{examBank.bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,examBank.chooseValue[questionIndex])}}">
+							</checkbox>
+							<text>{{value}}</text>
+						</label>
+					</checkbox-group>
+					<view class="correct-analyse">
+						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+					</view>
+				</view>
+
+			</block>
+			<block wx:if="{{examBank.bank.bank[questionIndex].type === '判断'}}">
+				<view class="radio-question">
+					<view class="quetion-title">
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【单选】</text>
+					</view>
+					<radio-group data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
+						<label wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
+							<radio disabled checked="{{key === examBank.chooseValue[questionIndex]}}" class="radio {{examBank.bank.bank[questionIndex].mistaked&&key === examBank.chooseValue[questionIndex]?'red':'yellow'}}" wx:if="{{value}}" value="{{key}}">
+							</radio>
+							<text>{{value}}</text>
+						</label>
+					</radio-group>
+					<view class="correct-analyse">
+						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+					</view>
+				</view>
+
+			</block>
+			<block wx:if="{{examBank.bank.bank[questionIndex].type === '填空'}}">
+				<view class="blank-question">
+					<view class="quetion-title">
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【填空】</text>
+					</view>
+					
+					<view bindtap="handleTap" data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}">
+						你的答案: <text class="{{examBank.bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}" >{{examBank.chooseValue[questionIndex]}}</text>
+					</view>
+					<view class="correct-analyse">
+						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{examBank.bank.bank[questionIndex].type === '排序'}}">
+				<view class="sort-question">
+					<view class="quetion-title">
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【排序】</text>
+					</view>
+					<view wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+						<block wx:if="{{value != ''}}">
+							<view style="height: 50rpx;">
+								<text>{{key}}. {{value}}</text>
+							</view>
+						</block>
+					</view>
+					<view style="margin-top: 30rpx">
+					你的答案:<text data-type="{{examBank.bank.bank[questionIndex].type}}" class="{{examBank.bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
+						{{examBank.chooseValue[questionIndex]}}
+					</text>
+					</view>
+					<view class="correct-analyse">
+						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<view style="margin-top: 40rpx" class="line"></view>
+		<view class="comments">
+			<view class="comment" wx:for="{{examBank.bank.bank[questionIndex].comments}}" wx:key="user_id">
+				<block wx-if="{{ifViewAllComments||index === 0}}">
+					<view class="user">
+						<view class="user-info">
+							<image class="mine" src="../../../images/icon/mine1.png"></image>
+							<view class="user-name">{{item.user_name}}</view>
+						</view>
+						<view class="like-dot">
+							<image class="like" src="../../../images/icon/like.png"></image>
+							<view class="dot-num">{{item.spot_count}}</view>
+						</view>
+					</view>
+					<view class="content">{{item.content}}
+					</view>
+				</block>
+			</view>
+			<view class="view-all" bindtap="viewAllComments">
+				{{ifViewAllComments?'收起评论':'查看全部评论'}}</view>
 			<view class="publish">
 				<input placeholder="发表你对这道题的想法"></input>
 				<view class="publish-comment">提交</view>
@@ -82,9 +170,7 @@
 		</view>
 	</view>
 	<view class="next-size">
-		<view class="next-question">下一题</view>
-		<view class="page-size">1/34</view>
+		<view wx:if="{{questionIndex < examBank.bank.bank.length - 1}}" class="next-question chekckout-question" bindtap="handleNext">下一题</view>
+		<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
+		<view class="page-size">{{questionIndex + 1}}/{{examBank.bank.bank.length}}</view>
 	</view>
-
-
-</block>

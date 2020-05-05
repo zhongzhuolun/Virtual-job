@@ -24,11 +24,31 @@ App({
       const db = wx.cloud.database()
       const banksList = db.collection('banks-list')
       const bankStatusList = db.collection('bank-status')
+      const writtenBankForUser = db.collection('writtenBankForUser')
+      const interviewBankForUser = db.collection('interviewBankForUser')
       bankStatusList.get().then((res) => {
         if (res.data.length === 0) {
           bankStatusList.add({
             data: {
               statusList: []
+            }
+          }).then(console.log)
+        }
+      })
+      writtenBankForUser.get().then((res) => {
+        if (res.data.length === 0) {
+          writtenBankForUser.add({
+            data: {
+              writtenBankList: []
+            }
+          }).then(console.log)
+        }
+      })
+      interviewBankForUser.get().then((res) => {
+        if (res.data.length === 0) {
+          interviewBankForUser.add({
+            data: {
+              interviewBankList: []
             }
           }).then(console.log)
         }

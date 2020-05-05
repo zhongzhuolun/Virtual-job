@@ -158,9 +158,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/home/enterWritten/enterWritten",
-					"pathName": "pages/home/enterWritten/enterWritten",
-					"query": "id=10",
+					"name": "pages/center/myMsg/myMsg",
+					"pathName": "pages/center/myMsg/myMsg",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/interviewAll/interviewAll",
+					"pathName": "pages/home/interviewAll/interviewAll",
 					"scene": null
 				}
 			]

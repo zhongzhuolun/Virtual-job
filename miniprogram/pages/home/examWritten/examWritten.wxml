@@ -8,7 +8,7 @@
   <text>{{bank.title}}</text>
 </view>
 <view class="score-time">
-  <text class="score" style="padding-right: 44rpx">满分：{{bank.total_points}}分</text>
+
   <text class="time">时间：{{bank.limit_time}}分钟</text>
 </view>
 <view class="line">
@@ -17,11 +17,11 @@
 <block wx:if="{{item.type === '单选'}}">
   <view class="radio-question" >
     <view class="quetion-title">
-      <text>{{item.id}}. {{item.title}}【单选】（ {{item.score}}分 ）</text>
+      <text>{{item.id}}. {{item.title}}【单选】</text>
     </view>
     <radio-group data-type="{{item.type}}" id="{{item.id}}" bindchange="radioChange" class="radio-group" >
      <label wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value"  class="my-choosebox">
-      <radio checked="{{bank.bank[index].checked}}" class="black radio" wx:if="{{value}}" value="{{key}}">
+      <radio class=" black radio" wx:if="{{value}}" value="{{key}}">
       </radio>
       <text>{{value}}</text> 
     </label>
@@ -31,7 +31,7 @@
 <block wx:elif="{{item.type === '多选'}}">
   <view class="checkbox-question" >
     <view class="quetion-title">
-      <text>{{item.id}}. {{item.title}}【多选】（ {{item.score}}分 ）</text>
+      <text>{{item.id}}. {{item.title}}【多选】</text>
     </view>
     <checkbox-group data-type="{{item.type}}" id="{{item.id}}" bindchange="checkboxChange" class="checkbox-group" >
         <label class="my-choosebox" wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value" >
@@ -46,7 +46,7 @@
 <block wx:elif="{{item.type === '不定项选'}}">
   <view class="checkbox-question" >
     <view class="quetion-title">
-      <text>{{item.id}}. {{item.title}}【不定项选】（ {{item.score}}分 ）</text>
+      <text>{{item.id}}. {{item.title}}【不定项选】</text>
     </view>
     <checkbox-group  bindchange="checkboxChange" data-type="{{item.type}}" id="{{item.id}}" class="checkbox-group" >
         <label class="my-choosebox" wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value">
@@ -60,7 +60,7 @@
 <block wx:elif="{{item.type === '判断'}}">
   <view class="radio-question" >
     <view class="quetion-title">
-      <text>{{item.id}}. {{item.title}}【判断】（ {{item.score}}分 ）</text>
+      <text>{{item.id}}. {{item.title}}【判断】</text>
     </view>
     <radio-group class="radio-group" data-type="{{item.type}}" id="{{item.id}}" bindchange="radioChange" >
         <label class="my-choosebox" wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value">
@@ -74,18 +74,17 @@
 <block wx:elif="{{item.type === '填空'}}">
   <view class="blank-question" >
     <view class="quetion-title">
-      <text>{{item.id}}. {{item.title}}【填空】（ {{item.score}}分 ）</text>
+      <text>{{item.id}}. {{item.title}}【填空】</text>
     </view>
     <view bindtap="handleTap" data-type="{{item.type}}" id="{{item.id}}" wx:for="{{item.correct_answer}}" wx:key="key" wx:for-index="key"  wx:for-item="value">
    <input data-index="{{key}}"  bindinput="inputChange" placeholder="[填空{{key + 1}}]"></input>
-   <!-- <input placeholder="[填空2]"></input> -->
    </view>
   </view>
 </block>
 <block wx:elif="{{item.type === '排序'}}">
   <view class="sort-question" >
     <view class="quetion-title">
-      <text>{{item.id}}. {{item.title}}【排序】（ {{item.score}}分 ）</text>
+      <text>{{item.id}}. {{item.title}}【排序】</text>
     </view>
     <view wx:for="{{item.options}}" wx:key="key" wx:for-index="key"  wx:for-item="value">
       <block wx:if="{{value != ''}}">

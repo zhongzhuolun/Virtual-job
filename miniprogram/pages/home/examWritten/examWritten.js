@@ -11,279 +11,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // bank: {
-    //   "id": 10, 
-    //   "industry": "前端", 
-    //   "class": "笔试题",
-    //   "title": "百度2019校招Web前端工程师笔试卷", 
-    //   "limit_time": "60:00",
-    //   "score": "",
-    //   "total_points": "100",
-    //   "status": { 
-    //     "done": false, 
-    //     "doing": true,
-    //     "collection": false, 
-    //     "mistaked": false 
-    //   }, 
-    //   "bank": [ 
-    //     {
-    //       "title": "TCP和UDP说法错误的是（  ）",  
-    //       "type": "单选",  
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 1,
-    //       "options": {
-    //         "A": "UDP是面向字节流的协议",
-    //         "B": "TCP的头部消息较UDP来说更全面",
-    //         "C": "TCP是端对端的不支持广播、多播",
-    //         "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-    //       },  
-    //       "correct_answer": ["A"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 8,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"  
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       "title": "下面关于进程三态模型说法错误的是（  ）",  
-    //       "type": "多选",  
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 2,
-    //       "options": {
-    //         "A": "就绪状态和执行状态可以互相转换",
-    //         "B": "阻塞状态可以直接转换为执行状态",
-    //         "C": "就绪状态转换为执行状态进行了进程调度",
-    //         "D": "阻塞状态可以直接转换为就绪状态",
-    //       },  
-    //       "correct_answer": ["A", "B", "C", "D"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 10,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       "title": "TCP和UDP说法错误的是（  ）",  
-    //       "type": "不定项选",  
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 3,
-    //       "options": {
-    //         "A": "UDP是面向字节流的协议",
-    //         "B": "TCP的头部消息较UDP来说更全面",
-    //         "C": "TCP是端对端的不支持广播、多播",
-    //         "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-    //         "E": "UDP不是面向字节流的协议",
-    //       },  
-    //       "correct_answer": ["A", "B", "C", "D"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 8,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       "title": "TCP和UDP说法错误的是（  ）",  
-    //       "type": "判断",  
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 4,
-    //       "options": {
-    //         "A": "对",
-    //         "B": "错",
-    //       },  
-    //       "correct_answer": ["A"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 8,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       "title": "TCP可以用在 __[填空1]__，UDP可以用在__[填空2]__方面，TCP是端对端的不支持广播、多播。",  
-    //       "type": "填空", 
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 5,
-    //       "correct_answer": ["远程登录", "语音通话"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 8,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       "title": "下列步骤的正确顺序是 __[填空1]__ 。",  
-    //       "type": "排序",
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 6,  
-    //       "options": {
-    //         "A": "UDP是面向字节流的协议",
-    //         "B": "TCP的头部消息较UDP来说更全面",
-    //         "C": "TCP是端对端的不支持广播、多播",
-    //         "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-    //       },  
-    //       "correct_answer": ["DBAC"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 8,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       "title": "TCP和UDP说法错误的是（  ）",  
-    //       "type": "单选",  
-    //       "mistaked": false,
-    //       "check": false,
-    //       "id": 7,
-    //       "options": {
-    //         "A": "UDP是面向字节流的协议",
-    //         "B": "TCP的头部消息较UDP来说更全面",
-    //         "C": "TCP是端对端的不支持广播、多播",
-    //         "D": "TCP可以用在远程登陆方面，UDP可以用在语音通话方面",
-    //       },  
-    //       "correct_answer": ["A"],  
-    //       "parsing": "这是常识来着", 
-    //       "score": 8,  
-    //       "note": "这是一条备注",  
-    //       "comments": [  
-    //         {
-    //           "user_name": "zarek",  
-    //           "avatar": "https://wdwd1312.jpg",  
-    //           "user_id": 1,  
-    //           "content": "这道题好难啊！！！",
-    //           "spot_count": 666,  
-    //           "create_time":  "2020-04-14 19:30",  
-    //           "reply": [  
-    //             {
-    //               "user_name": "zzl",  
-    //               "avatar": "https://wdwd1323412.jpg",  
-    //               "user_id": 2,  
-    //               "content": "是啊是啊！",  
-    //               "spot_count": 111,  
-    //               "create_time":  "2020-04-14 19:35"  
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //   ]
-    // }, // 模拟数据
     bank: {}, // 从数据库中获取的题目
     index: 0,  // 题目序列
     chooseValue: [], // 选择的答案序列
-    totalScore: 100, // 总分
+    // totalScore: 100, // 总分
     wrongList: [], // 错误的题目集合
     blankArry: [], // 专门用于存储填空题答案的数组
     type: '', // 此时题目的类型
@@ -291,7 +22,8 @@ Page({
     ifSubmit: false, // 是否点击了提交
     emptyQuestions: [], // 用于存储未完成的题目序列
     emptyStr: '', // 用于存储未完成的题目序列的字符串
-    score: 0, // 用户答题的总分数
+    // score: 0, // 用户答题的总分数
+    checkClass: '' // 选中后的颜色更改
 
   },
 
@@ -335,16 +67,84 @@ Page({
 
   // 处理题型的正确率 （功能针对所有用户，但获得的正确率只针对该用户）
   handleCorrectRate: function() {
-    let score = this.data.score // 拿到分数
-    console.log(score)
-
+    let bank = this.data.bank.bank
+    var myTypeNum = {
+        danxuan: 0,
+        duoxuan: 0,
+        budingxiang: 0,
+        panduan: 0,
+        tiankong: 0,
+        paixu: 0
+    }
+    var allTypeNum = {
+        allDanxuan: 0,
+        allDuoxuan: 0,
+        allBudingxiang: 0,
+        allPanduan: 0,
+        allTiankong: 0,
+        allPaixu: 0
+    }
+    // 拿到题型的总数
+    // 将用户填写的正确的题型总数处以该题型的总数，得到正确率，保留两位小数
+    bank.forEach((item, idnex) => {
+      switch (item.type) {
+        case '单选':
+          allTypeNum.allDanxuan += 1
+          if (!item.mistaked) {
+            myTypeNum.danxuan += 1
+          }
+          break;
+        case '多选':
+          allTypeNum.allDuoxuan += 1
+          if (!item.mistaked) {
+            myTypeNum.duoxuan += 1
+          }
+          break;
+        case '不定项选':
+          allTypeNum.allBudingxiang += 1
+          if (!item.mistaked) {
+            myTypeNum.budingxiang += 1
+          }
+          break;
+        case '判断':
+          allTypeNum.allPanduan += 1
+          if (!item.mistaked) {
+            myTypeNum.panduan += 1
+          }
+          break;
+        case '填空':
+          allTypeNum.allTiankong += 1
+          if (!item.mistaked) {
+            myTypeNum.tiankong += 1
+          }
+          break;
+        case '排序':
+          allTypeNum.allPaixu += 1
+          if (!item.mistaked) {
+            myTypeNum.paixu += 1
+          }
+          break;
+        default:
+          break;
+      }
+    })
+    console.log(myTypeNum,allTypeNum)
+    myTypeNum.danxuan = (myTypeNum.danxuan/allTypeNum.allDanxuan).toFixed(4)*100
+    myTypeNum.duoxuan = (myTypeNum.duoxuan/allTypeNum.allDuoxuan).toFixed(4)*100
+    myTypeNum.budingxiang = (myTypeNum.budingxiang/allTypeNum.allBudingxiang).toFixed(4)*100
+    myTypeNum.panduan = (myTypeNum.panduan/allTypeNum.allPanduan).toFixed(4)*100
+    myTypeNum.tiankong = (myTypeNum.tiankong/allTypeNum.allTiankong).toFixed(4)*100
+    myTypeNum.paixu = (myTypeNum.paixu/allTypeNum.allPaixu).toFixed(4)*100
+    return {
+      myTypeNum,
+      allTypeNum
+    }
   },
-  // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户）
+  // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户,分数评判暂时不需要）
   handleWrongAndScore: function() {
     let bank = this.data.bank.bank
     let chooseValue = this.data.chooseValue
-    let totalScore = this.data.bank.total_points // 获取到总分
-    
+    // let totalScore = this.data.bank.total_points // 获取到总分
     bank.forEach((value, index) => {
       let correctAnswer = value.correct_answer
       let choose = chooseValue[index]
@@ -361,13 +161,13 @@ Page({
           this.data.wrongList.push(index);
         } 
       } else { // 代表为填空题的时候
-        let blankScore = 0
-        blankScore = value.score // 获取到该填空题的分数
-        let oneBlankScore = Math.floor(blankScore/correctAnswer.length) // 获取该填空题每个空的分数
+        // let blankScore = 0
+        // blankScore = value.score // 获取到该填空题的分数
+        // let oneBlankScore = Math.floor(blankScore/correctAnswer.length) // 获取该填空题每个空的分数
         let chooseArr = []
         let wrongBlankObj = {
           indexArry: [], // 填空题的错误空的序列集合
-          blankScore: 0, // 该填空题获得的分数
+          // blankScore: 0, // 该填空题获得的分数
           index: null
         }
         if (choose) { // 代表用户填了该填空题
@@ -376,7 +176,7 @@ Page({
         correctAnswer.forEach((value, index) => {
           if (!(chooseArr[index] === value)) {
             // 代表该空做错了
-            wrongBlankObj.blankScore += oneBlankScore
+            // wrongBlankObj.blankScore += oneBlankScore
             wrongBlankObj.indexArry.push(index)
           }
         })
@@ -391,18 +191,19 @@ Page({
       this.data.bank.status.mistaked = true
       this.data.wrongList.forEach((value, index) => {
         if (typeof value === 'object') {// 填空题
-          totalScore -= value.blankScore // 题库的总分减去错题的分数
+          // totalScore -= value.blankScore // 题库的总分减去错题的分数
           bank[value.index].mistaked = true
 
         } else { // 非填空题
-          totalScore -= bank[value].score
+          // totalScore -= bank[value].score
           bank[value].mistaked = true
         }
       })
     }
     this.data.bank.status.done = true // 做完了
     this.data.bank.status.doing = false // 结束在做的状态
-    return totalScore // 返回总分
+    // return this.handleCorrectRate() // 返回正确率对象
+    // return totalScore // 返回总分
   },
 
   // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
@@ -412,40 +213,99 @@ Page({
 
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function() {
+    let bank = this.data.bank
+    let bankId = bank.parentId
+    let statusObj = {
+      id: bankId
+    }
+    bank.status.doing = false
+    bank.status.done = true
+    if (this.data.wrongList.length > 0) {
+      bank.status.mistaked = true
+    }
+    statusObj.status = bank.status
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
-      console.log(statusList)
+      let result = statusList.findIndex((value) => {
+        return value.id == bankId
+      })
+      if(result !== -1) {
+        if (this.data.wrongList.length > 0) {
+          console.log('mistaked')
+          statusList[result].status.mistaked = true
+        }
+        statusList[result].status.doing = false
+        statusList[result].status.done = true
+      } else {
+        statusList.push(statusObj)
+      }
+      wx.cloud.callFunction({
+        name: 'updateBankStatus',
+        data: {
+          statusList,
+        }
+      }).then(console.log)
 
     })
   },
 
   // 处理更新题库详情状态 （只更新该用户的数据）
-  handleBankStatusDetail: function() {
-
+  handleBankStatusDetail: function(data) {
+    let typeNum = data // 拿到用户每种题型的正确率和题库中每种题型的数量
+    let bank = this.data.bank
+    let bankId = bank.parentId
+    bank.chooseValue = this.data.chooseValue 
+    bank.wrongList = this.data.wrongList 
+    bank.typeNum = typeNum
+    writtenBankForUser.get().then((res) => {
+      let writtenBankList = res.data[0].writtenBankList
+      let result = writtenBankList.findIndex((value) => {
+        return value.parentId == bankId
+      })
+      if(result !== -1) {
+        writtenBankList[result] = bank
+      } else {
+        writtenBankList.push(bank)
+      }
+      wx.cloud.callFunction({
+        name: 'updateWrittenBank',
+        data: {
+          writtenBankList,
+        }
+      }).then(console.log)
+    })
   },
 
   // 处理确定提交 （此时真正提交）
   handleComplete: function(e) {
-    // 调用处理分数的函数
-    let score = this.handleWrongAndScore()
-    this.data.bank.score = score
-    this.handleBankStatus()
-    // console.log(score)
-    // 调用更新题库简介状态和更新题库详情状态的函数
-
+    // 处理错题和分数评判(分数评判功能可能会取消)
+    this.handleWrongAndScore()
+    let item = this.handleCorrectRate() // 获取题型的正确率
+    this.handleBankStatus() // 更新题库简介状态
+    this.handleBankStatusDetail(item) // 更新题库详情状态
     // 跳转到分数界面，并将数据传送过去，包括分数和比例
-    wx.navigateTo({
-      url: '../score/score?score=' + score,
-    })
     let examBank = {
-      bank: this.data.bank,
-      wrongList: this.data.wrongList,
-      chooseValue: this.data.chooseValue
+      bank: this.data.bank, // 当前题库
+      wrongList: this.data.wrongList, // 错误集合
+      chooseValue: this.data.chooseValue // 用户选择的集合
     }
+    let that = this
     app.globalData.examBank = examBank
-    // this.setData({
-    //   wrongList: []
-    // }) 
+    wx.navigateTo({
+      url: '../score/score',
+      events: {
+      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', item)
+        that.setData({
+          wrongList: []
+        }) 
+      }
+    })
+
+    // 跳转后应该清楚上一次的错题序列
+
 
   },
 
@@ -544,21 +404,6 @@ Page({
                 duration: 2000
               })
               this.handleComplete() // 答题时间结束，自动提交
-              // wx.showModal({
-              //   title: '提示',
-              //   content: '答题时间结束，点击确定后将会自动提交',
-              //   showCancel: false,
-              //   success (res) {
-              //     if (res.confirm) {
-              //       wx.showToast({
-              //         title: '已提交',
-              //       })
-              //       wx.navigateTo({
-              //         url: '../score/score',
-              //       })
-              //     } 
-              //   }
-              // })
             }
           }, 1000)
         })

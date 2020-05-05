@@ -1,9 +1,5 @@
 /* miniprogram/pages/home/score/score.wxss */
 .score1{
-  position: absolute;
-  left: 244rpx;
-  top: 120rpx;
-  width: 262rpx;
   height: 190rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 200rpx;
@@ -33,7 +29,7 @@
   width: 222rpx;
   height: 78rpx;
   line-height: 40rpx;
-  font-size: 32rpx;
+  font-size: 26rpx;
   text-align: center;
   font-family: Microsoft Yahei;
   color: rgba(16, 16, 16, 1);
@@ -70,7 +66,7 @@
   width: 222rpx;
   height: 78rpx;
   line-height: 40rpx;
-  font-size: 32rpx;
+  font-size: 26rpx;
   text-align: center;
   color: rgba(16, 16, 16, 1);
   font-family: Microsoft Yahei;
