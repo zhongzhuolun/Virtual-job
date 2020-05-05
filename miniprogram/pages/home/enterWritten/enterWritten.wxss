@@ -1,0 +1,123 @@
+.written {
+  position: absolute;
+  left: 68rpx;
+  top: 200rpx;
+  width: 616rpx;
+  height: 875rpx;
+  line-height: 40rpx;
+  border-radius: 50rpx;
+  background-color: rgba(255, 255, 255, 0.47);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0px 4px 9px 0px rgba(178, 178, 178, 0.4);
+  font-family: Arial;
+  border: 1rpx solid rgba(255, 255, 255, 0);
+}
+
+
+
+.textCover {
+  position: absolute;
+  left: 46rpx;
+  top: 48rpx;
+  width: 526rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 56rpx;
+  line-height: 65rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+
+.qusetionType,
+.singleChoice,
+.multipleChoice,
+.budingxiang,
+.panduan,
+.tiankong,
+.paixu {
+  position: absolute;
+  left: 62rpx;
+  width: 40%;
+  height: 78rpx;
+  line-height: 40rpx;
+  font-size: 32rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  color: rgba(16, 16, 16, 1);
+  padding: 20rpx;
+  outline-style: solid;
+  outline-width: 2rpx;
+}
+
+.qusetionType,
+.number {
+  top: 268rpx;
+}
+
+.singleChoice,
+.number1 {
+  top: 346rpx;
+}
+
+.multipleChoice,
+.number2 {
+  top: 424rpx;
+}
+
+.budingxiang,
+.number3 {
+  top: 502rpx;
+}
+
+.panduan,
+.number4 {
+  top: 580rpx;
+}
+
+.tiankong,
+.number5 {
+  top: 658rpx;
+}
+
+.paixu,
+.number6 {
+  top: 736rpx;
+}
+
+.number,
+.number1,
+.number2,
+.number3,
+.number4,
+.number5,
+.number6 {
+  position: absolute;
+  left: 308rpx;
+  width: 40%;
+  height: 78rpx;
+  line-height: 40rpx;
+  font-size: 32rpx;
+  color: rgba(16, 16, 16, 1);
+  font-family: Microsoft Yahei;
+  padding: 20rpx;
+  text-align: center;
+  outline-style: solid;
+  outline-width: 2rpx;
+}
+
+.button {
+  top: 1000rpx;
+  width: 264rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 10rpx 0rpx rgba(0, 0, 0, 0.44);
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+  justify-content: center;
+  line-height: 70rpx;
+}

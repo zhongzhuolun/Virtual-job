@@ -3,10 +3,15 @@
 	<view slot="content"></view>
 	<view slot="backText">个人资料</view>
 </cu-custom>
-<text>个人资料</text>
+
 <view class="myCenter1">
 <navigator class="changeTouxiang">更换头像</navigator>
-<image class="touxiang"></image>
+<image class="touxiang" src="../../../images/icon/lightsou.png"></image>
+<view class="line1"></view>
+<view class="nicheng">小黄昵称</view>
+<view class="mingzi">Christine</view>
+<view class="line2"></view>
+<view class="tuichu">退出登录</view>
 </view>
 <view class="blankBox1"></view>
 

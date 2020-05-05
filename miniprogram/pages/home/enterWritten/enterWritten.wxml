@@ -1,9 +1,24 @@
-<!--miniprogram/pages/home/enterWritten/enterWritten.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
 	<view slot="backText">模拟笔试</view>
 </cu-custom>
-<text>笔试进入界面</text>
-<!-- <navigator url="../examWritten/examWritten?id={{bank.id}}"> -->
-  <button bindtap="handleStartExam">开始考试</button>
-<!-- </navigator> -->
+<view class="written">
+	<view class="textCover">
+		<text>2019百度秋招前端工程师笔试题</text>
+	</view>
+	<view class="qusetionType">题型</view>
+	<view class="singleChoice">单选题</view>
+	<view class="multipleChoice">多选题</view>
+	<view class="budingxiang">不定项选择题</view>
+	<view class="panduan">判断题</view>
+	<view class="tiankong">填空题</view>
+	<view class="paixu">排序题</view>
+	<view class="number">数量</view>
+	<view class="number1">23</view>
+	<view class="number2">7</view>
+	<view class="number3">2</view>
+	<view class="number4">5</view>
+	<view class="number5">8</view>
+	<view class="number6">4</view>
+</view>
+<button class="button" bindtap="handleStartExam">开始考试</button>
