@@ -174,6 +174,13 @@
 					"id": -1,
 					"name": "pages/center/replay/replay",
 					"pathName": "pages/center/replay/replay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/endInterview/endInterview",
+					"pathName": "pages/home/endInterview/endInterview",
 					"scene": null
 				}
 			]
