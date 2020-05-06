@@ -1,4 +1,6 @@
-
+scroll-view {
+  background: white;
+}
 .bank-wrap {
   background: white;
   padding-bottom: 200rpx;

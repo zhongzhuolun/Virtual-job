@@ -1,100 +1,70 @@
+
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const interviewQuestions = db.collection('interviewQuestions')
-const app = getApp()
-
-const plugin = requirePlugin("WechatSI")
-const manager = plugin.getRecordRecognitionManager()
+const interviewBankForUser = db.collection('interviewBankForUser')
+const plugin = requirePlugin("WechatSI") // 引入文字转语音的插件
+const manager = plugin.getRecordRecognitionManager() // 获取文字转语音的插件对象
+const recorderManager = wx.getRecorderManager() // 获取录音对象
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //语音
-    recordState: false, //录音状态
-    content: '', //内容
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    type: '',
-    questionObj: {},
-    questions: [],
-    tempFilePaths: [],
-    nowIndex: 0,
-    disabled: false
+    recordState: false, // 录音状态
+    content: '', // 用于转化为语音的问题字符串
+    type: '', // 当前是录音还是录像
+    questionObj: {}, // 整个面试题库的对象
+    questions: [], // 问题得到序列
+    tempFilePaths: [], // 保存录音音频链接的数组
+    nowIndex: 0, // 该项暂时用不到
+    disabled: false, // 控制按钮的显示
+    questionsFileArry: [ // 用于存储整个答题过程中的题目和录音临时链接的数组
+      {
+        tempFilePaths: [], // 用于存储问题和答案的录音链接的数组，0-问题，1-答案
+        title: '' // 用于存储问题字符串
+      }
+    ],
+    btnDisabled: false, // 按钮是否被禁用
+    ifStop: false, // 是否真正结束答题
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     wx.showLoading({
       title: '加载中',
     })
     interviewQuestions.where({
-      parentId: options.id*1
+      parentId: options.id*1 // 根据ID获取面试题库详情
     }).get().then((res) => {
       console.log(res.data)
-      let questions = res.data[0].questions
+      let questions = res.data[0].questions // 获取问题数组
       this.setData({
-        type: options.type,
-        questions,
-        content: questions[0].title,
-        questionObj:res.data[0]
+        type: options.type, // 设置当前用户选择面试的类型
+        questions, // 设置问题数组
+        content: questions[0].title, // 默认以第一题的内容为初始值
+        questionObj: res.data[0] // 设置题库对象
       }, () => {
         wx.hideLoading({})
       })
     })
-    // this.setData({
-    //   type: options.type,
-    //   questions,
-    // })
-    if (options.type === 'audio') {
+    if (options.type === 'audio') { // 如果为录音
       //识别语音
-      this.initRecord();
-   
+      this.initRecord(); // 初始化识别语音（貌似没用到该功能）
     }
 
-   
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse) {
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
   },
     /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     const innerAudioContext = wx.createInnerAudioContext()
-    // this.innerAudioContext = wx.createInnerAudioContext();
     innerAudioContext.onError(function (res) {
-      console.log(res);
       wx.showToast({
         title: '语音播放失败',
         icon: 'none',
@@ -105,7 +75,7 @@ Page({
   },
   // 开始录音
   getlocat: function () {
-    const recorderManager = wx.getRecorderManager()
+
     wx.authorize({
       scope: 'scope.record',
       success() {
@@ -118,10 +88,13 @@ Page({
           format: 'mp3',
           frameSize: 50
         }
+        // 开始录音
         recorderManager.start(options)
+        // 监听录音开始过程
         recorderManager.onStart(() => {
           console.log('recorder start')
         })
+        // 监听录音失败
         recorderManager.onError((res) => {
           console.log(res);
         })
@@ -131,7 +104,10 @@ Page({
   // 停止录音
   stop: function () {
     const recorderManager = wx.getRecorderManager()
-    let {tempFilePaths} = this.data
+    let that = this
+    let {tempFilePaths, questionsFileArry} = this.data
+    let nowIndex = this.pageObj.nowIndex // 获取当前问题的索引
+    let date = new Date()
     recorderManager.stop()
     recorderManager.onStop((res) => {
       console.log('recorder stop', res)
@@ -139,6 +115,19 @@ Page({
         tempFilePath
       } = res
       tempFilePaths.push(tempFilePath)
+      // questionsFileArry[nowIndex].tempFilePaths.push(tempFilePath)
+      wx.cloud.uploadFile({
+        cloudPath:  `${date.getTime()}.mp3`, // 上传至云端的路径
+        filePath: tempFilePath, // 小程序临时文件路径
+        success: res => {
+          // 返回文件 ID
+          questionsFileArry[nowIndex].tempFilePaths.push(res.fileID)
+          if (that.data.ifStop) {
+          
+          }
+        },
+        fail: console.error
+      })
       this.setData({
         tempFilePaths
       })
@@ -192,9 +181,11 @@ Page({
   // 文字转语音
   wordYun: function (e) {
     var that = this;
-    var content = this.data.content;
-    let len = this.data.questions.length
-    let nowIndex = this.pageObj.nowIndex
+    var content = this.data.content; // 获取到当前的问题
+    let len = this.data.questions.length // 获取问题数组的长度
+    let nowIndex = this.pageObj.nowIndex // 获取当前问题的索引
+    let {questionsFileArry} = this.data // 获取存储整个录音过程的集合
+    let date = new Date()
     if (nowIndex === len - 1) { // 代表此时已到最后一题，应该变为结束按钮
       this.setData({
         disabled: true,
@@ -208,6 +199,24 @@ Page({
       success: function (res) {
         console.log(res);
         console.log("succ tts", res.filename);
+        wx.downloadFile({
+          url: res.filename,
+          success (res) {
+            wx.cloud.uploadFile({
+              cloudPath:  `${date.getTime()}.mp3`, // 上传至云端的路径
+              filePath: res.tempFilePath, // 小程序临时文件路径
+              success: res => {
+                // 返回文件 ID
+                let questionsFileObj = {
+                  tempFilePaths: [res.fileID],
+                  title: content
+                }
+                questionsFileArry[nowIndex] = questionsFileObj
+              },
+              fail: console.error
+          })
+          }
+        })
         that.setData({
           src: res.filename // 获取语音链接
         }, () => {
@@ -235,13 +244,15 @@ Page({
         console.log(暂无语音);
         return;
       }
-    // 开启录音
-    this.getlocat() 
+
     innerAudioContext.src = this.data.src //设置音频地址
   }
   innerAudioContext.play(); //播放音频
 
   innerAudioContext.onPlay(() => {
+    this.setData({
+      btnDisabled: true
+    })
     console.log('开始播放',this.pageObj.i)
 
     if (type === 'mine') {
@@ -251,16 +262,21 @@ Page({
   })
   innerAudioContext.onEnded(() => {
     console.log('播放结束',this.pageObj.i)
-
-    if (this.pageObj.i < this.data.tempFilePaths.length && type === 'mine') {
+    this.setData({
+      btnDisabled: false
+    })
+    if (this.pageObj.i < this.data.tempFilePaths.length && type === 'mine'){
       this.yuyinPlay(this.data.tempFilePaths[this.pageObj.i], 'mine')
+    } else {
+      // 开启录音
+      console.log('开启录音')
+      this.getlocat() 
     }
   })
 
   },
   // 结束语音
   end: function (e) {
-    const recorderManager = wx.getRecorderManager()
     const innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.pause(); //暂停音频
   },
@@ -273,8 +289,7 @@ Page({
   handleNext: function(e) {
     let len = this.data.questions.length
     let nowIndex = this.pageObj.nowIndex + 1
-    console.log(nowIndex)
-    let questions = this.data.questions
+    let {questions} = this.data
     this.stop()
     if (nowIndex < len) {
       this.pageObj.nowIndex = nowIndex
@@ -285,22 +300,89 @@ Page({
       })
     } else {
       this.disabled = true
-
     }
   },
   // 答题结束
   handleEnd: function(e) {
-    console.log(e)
+    let {questionObj} = this.data
     this.stop()
+    this.handleBankStatus() // 更新题库简介状态
+    this.handleBankStatusDetail() // 更新题库详情状态
+    app.globalData.writtenBank = questionObj
     wx.navigateTo({
       url: '../endInterview/endInterview',
+      success: (res) => {
+        console.log(questionObj)
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('interviewPageData', questionObj)
+      }
     })
+
   },
   // 再听一次
   handleAgain: function(e) {
-    this.wordYun()
+    let {questionsFileArry} = this.data
+    let nowIndex = this.pageObj.nowIndex
+    questionsFileArry[nowIndex].tempFilePaths.splice(1, 1)
+    this.setData({
+      questionsFileArry
+    }, () => {
+      this.wordYun()
+    })
+  },
+  // 处理更新题库简介状态（只更新该用户的数据）
+  handleBankStatus: function() {
+    let bank = this.data.questionObj
+    let bankId = bank.parentId
+    let statusObj = {
+      id: bankId
+    }
+    bank.status.doing = false
+    bank.status.done = true
+    statusObj.status = bank.status
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+      let result = statusList.findIndex((value) => {
+        return value.id == bankId
+      })
+      if(result !== -1) {
+        statusList[result].status.doing = false
+        statusList[result].status.done = true
+      } else {
+        statusList.push(statusObj)
+      }
+      wx.cloud.callFunction({
+        name: 'updateBankStatus',
+        data: {
+          statusList,
+        }
+      }).then(console.log)
+    })
   },
 
+  // 处理更新题库详情状态 （只更新该用户的数据）
+  handleBankStatusDetail: function() {
+    let bank = this.data.questionObj
+    let bankId = bank.parentId
+    bank.questionsFileArry = this.data.questionsFileArry
+    interviewBankForUser.get().then((res) => {
+      let interviewBankList = res.data[0].interviewBankList
+      let result = interviewBankList.findIndex((value) => {
+        return value.parentId == bankId
+      })
+      if(result !== -1) {
+        interviewBankList[result] = bank
+      } else {
+        interviewBankList.push(bank)
+      }
+      wx.cloud.callFunction({
+        name: 'updateInterviewBank',
+        data: {
+          interviewBankList,
+        }
+      }).then(console.log)
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示

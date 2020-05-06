@@ -20,8 +20,6 @@ Page({
     modalName: null, // 模态框是否显示
     ifViewWrong: false, // 是否只看错题
     wrongIndex: 0, // 错题序列
-    
-
   },
   // 处理查看所有评论
   viewAllComments: function(e) {

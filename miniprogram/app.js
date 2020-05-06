@@ -59,8 +59,9 @@ App({
 
   },
   globalData: {
-    examType: 'written',
-    examBank: {}
+    examType: 'written', // 用户选择考试的类型
+    examBank: {}, // 用户笔试的数据
+    writtenBank: {} // 用户面试的数据
 
   },
   updataType(type) {
