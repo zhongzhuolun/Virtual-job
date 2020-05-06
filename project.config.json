@@ -165,9 +165,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/home/interviewAll/interviewAll",
-					"pathName": "pages/home/interviewAll/interviewAll",
+					"name": "pages/center/myCenter/myCenter",
+					"pathName": "pages/center/myCenter/myCenter",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/replay/replay",
+					"pathName": "pages/center/replay/replay",
 					"scene": null
 				}
 			]
