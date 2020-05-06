@@ -172,7 +172,6 @@ Page({
     })
   },
   onLoad(option) {
-    console.log(option)
     wx.showLoading({
       title: '加载中...',
       mask: true
@@ -185,7 +184,6 @@ Page({
       list[i].name = this.data.industryData.classes[i].posts
       list[i].id = i;
     }
-    console.log(list)
     this.setData({
       list: list,
       listCur: list[0],
@@ -205,15 +203,12 @@ Page({
     wx.hideLoading()
   },
   onChange(event) {
-    console.log(event)
     this.setData({
       activeName: event.detail
     });
   },
 
   tabSelect(e) {
-    console.log(e)
-   
     this.setData({
       ifScroll: true,
     })

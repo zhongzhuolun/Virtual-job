@@ -3,18 +3,29 @@
 	<view slot="content"></view>
 	<view slot="backText">模拟面试</view>
 </cu-custom>
+ <block wx:if="{{type === 'audio'}}">
+
 <view class="body"></view>
-<view class="txt1">银行招聘面试真题</view>
-<view class="txt2">题目数量：5道</view>
+<view class="txt1">{{questionObj.title}}</view>
+<view class="txt2">题目数量：{{questionObj.count}}道</view>
 <view class="line"></view>
 <image src="../../../images/icon/people.png" class="img1"></image>
-<image src="../../../images/icon/lightsou.png" class="img2"></image>
+<image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain"></image>
 <view class="txt3">面试官</view>
 <view class="txt4">若没有听清题目，可点击</view>
 <image src="../../../images/icon/graysou.png" class="img3"></image>
 <view class="txt5">让面试官再讲一遍</view>
-<view class="txt6">下一题</view>
-<view class="txt7">正在录制中......</view>
+<!-- <view class="txt6" hidden="{{src}}" bindtap='wordYun'>下一题</view> -->
+<view class="txt6" hidden="{{src}}" bindtap="handleStart">开始</view>
+<view class="txt6" hidden="{{(!src)&&(!disabled)}}" bindtap="handleNext">下一题</view>
+<view class="txt6" hidden="{{!(src&&disabled)}}" bindtap="handleEnd">结束</view>
+<button bindtap="play" data-type="mine">播放录音</button>
+
+<view class="txt7" hidden="{{!src}}">正在录制中......</view>
+</block>
+<block wx:else>
+<view>录屏</view>
+</block> 
 <!-- 以下代码仅做为测试 -->
 <!-- <block wx:if="{{type === 'audio'}}">
 <block wx:if="{{type === 'audio'}}">
@@ -26,7 +37,6 @@
 </view>
 
 <view class="yuyinWrap">
-  <textarea hidden class='yuyinCon' placeholder='请输入内容' value='{{content}}' bindinput='conInput'></textarea>
   <view class=''>
       <button hidden="{{src}}" class="yuyinBtn start" bindtap='wordYun'>开始</button>
    <button class="yuyinBtn" bindtap='end'>结束</button>
@@ -37,7 +47,5 @@
   </view>
 </view>
 </block>
-<block wx:else>
-<view>录屏</view>
-</block> 
-</block>
+
+</block>-->

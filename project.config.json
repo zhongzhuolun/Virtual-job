@@ -129,10 +129,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 11,
 					"name": "pages/home/examInterview/examInterview",
 					"pathName": "pages/home/examInterview/examInterview",
-					"query": "",
+					"query": "type=audio&id=1",
 					"scene": null
 				},
 				{
@@ -167,6 +167,7 @@
 					"id": -1,
 					"name": "pages/home/interviewAll/interviewAll",
 					"pathName": "pages/home/interviewAll/interviewAll",
+					"query": "",
 					"scene": null
 				}
 			]

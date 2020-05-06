@@ -14,11 +14,11 @@
 	<view class="tiankong">填空题</view>
 	<view class="paixu">排序题</view>
 	<view class="number">数量</view>
-	<view class="number1">23</view>
-	<view class="number2">7</view>
-	<view class="number3">2</view>
-	<view class="number4">5</view>
-	<view class="number5">8</view>
-	<view class="number6">4</view>
+	<view class="number1">{{bank.questionTypeNum.radio}}</view>
+	<view class="number2">{{bank.questionTypeNum.checkbox}}</view>
+	<view class="number3">{{bank.questionTypeNum.unsteady}}</view>
+	<view class="number4">{{bank.questionTypeNum.judge}}</view>
+	<view class="number5">{{bank.questionTypeNum.unsteady}}</view>
+	<view class="number6">{{bank.questionTypeNum.sort}}</view>
 </view>
 <button class="button" bindtap="handleStartExam">开始考试</button>

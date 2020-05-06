@@ -1,20 +1,21 @@
 <!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}">
-	<view slot="content"></view>
-	<view slot="backText">完整试卷</view>
-</cu-custom>
- <wxs module="filter">
-    var isChecked = function(key,data){
+<scroll-view scroll-y="{{modalName==null}}">
+	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
+		<view slot="content"></view>
+		<view slot="backText">完整试卷</view>
+	</cu-custom>
+	<wxs module="filter">
+		var isChecked = function(key, data) {
 			if (data) {
-      	return data.indexOf(key) !=-1 ? true:false;
+				return data.indexOf(key) != -1 ? true : false;
 			} else {
 				return false;
 			}
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
+		}
+		module.exports = {
+			isChecked: isChecked
+		}
+	</wxs>
 	<view class="bank-wrap">
 		<view class="bank-title">
 			<text>{{examBank.bank.title}} </text>
@@ -23,8 +24,33 @@
 		<view class="score-time">
 			<text class="time">时间：{{examBank.bank.limit_time}}分钟</text>
 		</view>
-		<view class="menu">
+		<view class="menu" bindtap="handleMenu" data-target="Modal">
 			<text class="cuIcon-apps lg text-yellow"></text>
+		</view>
+		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
+			<view class="cu-dialog" catchtap>
+				<view class="cu-bar bg-white justify-end">
+					<view class="cu-btn bg-yellow" bindtap="checkType">
+						{{ifViewWrong?'完整试卷':'只看错题'}}
+					</view>
+					<view class="action" bindtap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="question-index-wrap">
+					<block wx:if="{{ifViewWrong}}">
+						<block wx:for="{{examBank.bank.bank}}" wx:key="index">
+							<view wx:if="{{item.mistaked}}" class="question-index {{item.mistaked?'wrong':'correct'}}" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
+						</block>
+					</block>
+					<block wx:else>
+						<block wx:for="{{examBank.bank.bank}}" wx:key="id">
+							<view class="question-index {{item.mistaked?'wrong':'correct'}}" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
+						</block>
+					</block>
+
+				</view>
+			</view>
 		</view>
 		<view class="line">
 		</view>
@@ -55,7 +81,7 @@
 					</view>
 					<checkbox-group data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
 						<label class="my-choosebox" wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled wx:if="{{value}}" class="{{examBank.bank.bank[questionIndex].mistaked?'red':'yellow'}}"  value="{{key}}"  checked="{{filter.isChecked(key,examBank.chooseValue[questionIndex])}}">
+							<checkbox disabled wx:if="{{value}}" class="{{examBank.bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,examBank.chooseValue[questionIndex])}}">
 							</checkbox>
 							<text>{{value}}</text>
 						</label>
@@ -109,7 +135,7 @@
 					<view class="quetion-title">
 						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【填空】</text>
 					</view>
-					
+
 					<view bindtap="handleTap" data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}">
 						你的答案: <text class="{{examBank.bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}" >{{examBank.chooseValue[questionIndex]}}</text>
 					</view>
@@ -132,9 +158,9 @@
 						</block>
 					</view>
 					<view style="margin-top: 30rpx">
-					你的答案:<text data-type="{{examBank.bank.bank[questionIndex].type}}" class="{{examBank.bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
+						你的答案:<text data-type="{{examBank.bank.bank[questionIndex].type}}" class="{{examBank.bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
 						{{examBank.chooseValue[questionIndex]}}
-					</text>
+						</text>
 					</view>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
@@ -170,7 +196,20 @@
 		</view>
 	</view>
 	<view class="next-size">
-		<view wx:if="{{questionIndex < examBank.bank.bank.length - 1}}" class="next-question chekckout-question" bindtap="handleNext">下一题</view>
-		<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-		<view class="page-size">{{questionIndex + 1}}/{{examBank.bank.bank.length}}</view>
+		<block wx:if="{{ifViewWrong}}">
+			<view class="next-question chekckout-question" bindtap="handleNext">
+				{{wrongIndex < examBank.wrongList.length - 1?'下一题':'查看总分'}}</view>
+			<view wx:if="{{wrongIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
+			<view class="page-size">{{wrongIndex + 1}}/{{examBank.wrongList.length}}
+			</view>
+		</block>
+		<block wx:else>
+			<view class="next-question chekckout-question" bindtap="handleNext">
+				{{questionIndex < examBank.bank.bank.length - 1?'下一题':'查看总分'}}</view>
+			<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
+			<view class="page-size">{{questionIndex + 1}}/{{examBank.bank.bank.length}}
+			</view>
+		</block>
 	</view>
+
+</scroll-view>

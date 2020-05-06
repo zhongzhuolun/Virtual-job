@@ -15,7 +15,6 @@ Page({
     //语音
     recordState: false, //录音状态
     content: '', //内容
-    money: "0.00",
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -38,11 +37,13 @@ Page({
     interviewQuestions.where({
       parentId: options.id*1
     }).get().then((res) => {
+      console.log(res.data)
       let questions = res.data[0].questions
       this.setData({
         type: options.type,
         questions,
-        content: questions[0].title
+        content: questions[0].title,
+        questionObj:res.data[0]
       }, () => {
         wx.hideLoading({})
       })
@@ -102,6 +103,7 @@ Page({
 
  
   },
+  // 开始录音
   getlocat: function () {
     const recorderManager = wx.getRecorderManager()
     wx.authorize({
@@ -125,57 +127,33 @@ Page({
         })
       }
     })
-    //  console.log(app)
   },
-
+  // 停止录音
   stop: function () {
     const recorderManager = wx.getRecorderManager()
-const innerAudioContext = wx.createInnerAudioContext()
+    let {tempFilePaths} = this.data
     recorderManager.stop()
     recorderManager.onStop((res) => {
       console.log('recorder stop', res)
       const {
         tempFilePath
       } = res
-      console.log(tempFilePath)
-      // this.tempFilePath = tempFilePath
-      this.data.tempFilePaths.push(tempFilePath)
+      tempFilePaths.push(tempFilePath)
+      this.setData({
+        tempFilePaths
+      })
     })
   },
+  // 播放录音
   play: function() {
-      this.plays(this.data.tempFilePaths[0])
+      this.yuyinPlay(this.data.tempFilePaths[0], 'mine')
   },
-  //播放声音
+  // 将多条语音数据整合在一起
   plays: function (src) {
-    const recorderManager = wx.getRecorderManager()
-    const innerAudioContext = wx.createInnerAudioContext()
-    let i = 0
-    innerAudioContext.autoplay = true
-   
-    // innerAudioContext.src = this.tempFilePath;
-    innerAudioContext.src = src;
-    innerAudioContext.onPlay(() => {
-      i++
-      console.log('开始播放')
-    })
-    innerAudioContext.onEnded(() => {
-      console.log('播放结束')
-      
-      if (i < this.data.tempFilePaths.length) {
-        this.plays(this.data.tempFilePaths[i])
-      }
-    })
-    innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
-
   },
 
    // 识别语音 -- 初始化
   initRecord: function () {
-    const recorderManager = wx.getRecorderManager()
-const innerAudioContext = wx.createInnerAudioContext()
     const that = this;
     // 有新的识别内容返回，则会调用此事件
     manager.onRecognize = function (res) {
@@ -211,23 +189,18 @@ const innerAudioContext = wx.createInnerAudioContext()
       })
     }
   },
-  // 手动输入内容
-  conInput: function (e) {
-    this.setData({
-      content: e.detail.value,
-    })
-  },
   // 文字转语音
   wordYun: function (e) {
     var that = this;
     var content = this.data.content;
     let len = this.data.questions.length
     let nowIndex = this.pageObj.nowIndex
-    if (nowIndex === len - 1) {
+    if (nowIndex === len - 1) { // 代表此时已到最后一题，应该变为结束按钮
       this.setData({
         disabled: true,
       })
     }
+    // 调用文字转语音插件
     plugin.textToSpeech({
       lang: "zh_CN",
       tts: true,
@@ -236,9 +209,10 @@ const innerAudioContext = wx.createInnerAudioContext()
         console.log(res);
         console.log("succ tts", res.filename);
         that.setData({
-          src: res.filename
+          src: res.filename // 获取语音链接
+        }, () => {
+          that.yuyinPlay(); // 播放语音
         })
-        that.yuyinPlay();
 
       },
       fail: function (res) {
@@ -247,26 +221,53 @@ const innerAudioContext = wx.createInnerAudioContext()
     })
   },
 
-  //播放语音
-  yuyinPlay: function (e) {
-    const recorderManager = wx.getRecorderManager()
+  // 播放语音
+  yuyinPlay: function (e, type) {
+    console.log(e, type)
+  
     const innerAudioContext = wx.createInnerAudioContext()
-    this.getlocat()
-    if (this.data.src == '') {
-      console.log(暂无语音);
-      return;
-    }
+    if (type === 'mine') {
+      // 测试能否正常播放多条语音
+      innerAudioContext.autoplay = true
+      innerAudioContext.src = e;
+    } else {
+      if (this.data.src == '') {
+        console.log(暂无语音);
+        return;
+      }
+    // 开启录音
+    this.getlocat() 
     innerAudioContext.src = this.data.src //设置音频地址
-    innerAudioContext.play(); //播放音频
-    innerAudioContext.onEnded(() => {
+  }
+  innerAudioContext.play(); //播放音频
 
-    })
+  innerAudioContext.onPlay(() => {
+    console.log('开始播放',this.pageObj.i)
+
+    if (type === 'mine') {
+      this.pageObj.i++
+      console.log(this.pageObj.i)
+    }
+  })
+  innerAudioContext.onEnded(() => {
+    console.log('播放结束',this.pageObj.i)
+
+    if (this.pageObj.i < this.data.tempFilePaths.length && type === 'mine') {
+      this.yuyinPlay(this.data.tempFilePaths[this.pageObj.i], 'mine')
+    }
+  })
+
   },
   // 结束语音
   end: function (e) {
     const recorderManager = wx.getRecorderManager()
     const innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.pause(); //暂停音频
+  },
+  // 开始答题
+  handleStart: function(e) {
+    // 文字转语音
+    this.wordYun()
   },
   // 下一题
   handleNext: function(e) {
@@ -291,10 +292,13 @@ const innerAudioContext = wx.createInnerAudioContext()
   handleEnd: function(e) {
     console.log(e)
     this.stop()
-
-    // wx.navigateTo({
-    //   url: '../endInterview/endInterview',
-    // })
+    wx.navigateTo({
+      url: '../endInterview/endInterview',
+    })
+  },
+  // 再听一次
+  handleAgain: function(e) {
+    this.wordYun()
   },
 
 
@@ -305,7 +309,8 @@ const innerAudioContext = wx.createInnerAudioContext()
 
   },
   pageObj: {
-    nowIndex: 0
+    nowIndex: 0,
+    i: 0
   },
 
   /**

@@ -217,3 +217,39 @@
 .correct-blank {
   color: yellow;
 }
+.cu-btn {
+  position: relative;
+  left: -24%;
+}
+.question-index-wrap {
+  display: flex;
+  padding: 80rpx;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: white;
+}
+.cu-dialog {
+  border-radius: 11px;
+  box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
+  border: 2px solid rgba(250, 191, 1, 1);
+}
+.question-index-wrap .question-index {
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: -apple-system;
+  border-radius: 50% 50%;
+  margin: 10rpx;
+  border: 2rpx solid black;
+}
+.question-index-wrap .correct {
+  border: 2rpx solid rgba(250, 191, 1, 1);
+  color: rgba(250, 191, 1, 1);
+}
+.question-index-wrap .wrong {
+  border: 2rpx solid red;
+  color: rgb(250, 1, 1);
+}

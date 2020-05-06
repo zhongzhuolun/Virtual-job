@@ -1,7 +1,7 @@
 <!--miniprogram/pages/home/endInterview/endInterview.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}" >
 	<view slot="content"></view>
-	<view slot="backText">面试</view>
+	<view slot="backText">模拟面试</view>
 </cu-custom>
 <view class="blankBox"></view>
 <view class="answer1">面试常见评分标准：

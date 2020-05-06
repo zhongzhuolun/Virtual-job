@@ -1,10 +1,8 @@
 /* miniprogram/pages/home/examInterview/examInterview.wxss */
-.body{
-  position: absolute;
-  width: 750rpx;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 1);
+page {
+  background: white;
 }
+
 .txt1{
   position: absolute;
   left: 34rpx;
@@ -63,11 +61,11 @@
 .txt6{
   position: absolute;
   left: 252rpx;
-  top: 1096rpx;
+  top: 996rpx;
   width: 246rpx;
   height: 72rpx;
   border-radius: 20rpx;
-  line-height: 72rpx;
+  line-height: 69rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);
   font-size: 39rpx;
@@ -78,7 +76,7 @@
 .txt7{
   position: absolute;
   left: 432rpx;
-  top: 1334rpx;
+  top: 1234rpx;
   width: 296rpx;
   height: 70rpx;
   line-height: 52rpx;
