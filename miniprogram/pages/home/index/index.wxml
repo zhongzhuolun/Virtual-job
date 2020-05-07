@@ -5,15 +5,11 @@
   <view class="offer">
   <image src="../../../images/logo/logo.png"></image>
   </view>
-  <navigator url="../IndustryChoose/IndustryChoose?type=笔试">
-    <view class="written">
+    <button bindtap="handleWritten"  class="written">
       <text>笔试</text>
-    </view>
-  </navigator>
-  <navigator url="../IndustryChoose/IndustryChoose?type=面试">
-     <view class="interview">
+    </button>
+     <button bindtap="handleInterview" class="interview">
       <text>面试</text>
-    </view>
-  </navigator>
+    </button>
 </view>
 

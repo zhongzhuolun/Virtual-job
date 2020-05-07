@@ -157,9 +157,13 @@ Page({
         wx.navigateTo({
           url: '../enterInterview/enterInterview?examType=面试题',
         })
-      } else {
+      } else if (examType === '笔试') {
         wx.navigateTo({
           url: '../enterWritten/enterWritten?examType=笔试题',
+        })
+      } else {
+        wx.switchTab({
+          url: '../../questionBank/index/index',
         })
       }
 

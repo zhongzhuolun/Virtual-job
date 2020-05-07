@@ -26,7 +26,6 @@ Page({
     checkClass: '' // 选中后的颜色更改
 
   },
-
   // 处理提交(此时未真正提交)
   handleSubmit: function(e) {
     console.log(this.data.chooseValue)

@@ -1,83 +1,69 @@
-<import src="../template/index.wxml"/>
-<cu-custom bgColor="bg-yellow" >
+<import src="../template/index.wxml" />
+<cu-custom bgColor="bg-yellow">
 	<view slot="content">题库</view>
 </cu-custom>
 <view class="wrap">
-    <view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
-      <text>笔试</text>
-    </view>
-    <view class="interview {{checkoutBank === 'interview'?'active':''}}" bindtap="handleInterview">
-      <text>面试</text>
-    </view>
-  <swiper indicator-dots="{{true}}" autoplay="{{true}}">
-    <swiper-item>
-      <image src="../../../images/icon/home1.png"></image>
-    </swiper-item>
-     <swiper-item>
-      <image src="../../../images/icon/home1.png"></image>
-    </swiper-item>
-  </swiper>
+	<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
+		<text>笔试</text>
+	</view>
+	<view class="interview {{checkoutBank === 'interview'?'active':''}}" bindtap="handleInterview">
+		<text>面试</text>
+	</view>
+	<swiper indicator-dots="{{true}}" autoplay="{{true}}">
+		<swiper-item>
+			<image src="../../../images/icon/home1.png"></image>
+		</swiper-item>
+		<swiper-item>
+			<image src="../../../images/icon/home1.png"></image>
+		</swiper-item>
+	</swiper>
 
-  <view class="title">
-    <view class="linel"></view>
-      <text>在线答题</text>
-    <view class="liner"></view>
-  </view>
-
-  <view class="bank-wrap" >
-  <van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
-  <!-- <van-tab title="精选">
-    <view class="bank">
-    <text class="bank-title">
-    笔试题库的第一份
-    </text>
-    <van-icon class="exam-icon" name="records" color="#ffc200" size="60rpx"/>
-    <text class="exam">
-    考试
-    </text>
-    <view class="start-exam">
-    开始答题
+	<view class="title">
+		<view class="linel"></view>
+		<text>在线答题</text>
+		<view class="liner"></view>
+	</view>
+  <block wx:if="{{loginStatus}}">
+    <view class="bank-wrap">
+      <van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
+        <van-tab title="精选">
+          <block wx:if="{{item.bankList.length > 0}}">
+            <view wx:for="{{item.bankList}}" wx:key="id">
+              <template is="bankItem" data="{{item}}" />
+            </view>
+          </block>
+          <block wx:else>
+            该行业暂时还没有题目哦
+          </block>
+        </van-tab>
+        <van-tab title="收藏">
+          <block wx:if="{{colBankList.length > 0}}">
+            <view wx:for="{{colBankList}}" wx:key="id">
+              <template is="bankItem" data="{{item}}" />
+            </view>
+          </block>
+          <block wx:else>
+            暂时还没有收藏任何题库哦
+          </block>
+        </van-tab>
+        <van-tab title="错题集">
+          <block wx:if="{{errBankList.length > 0}}">
+            <view wx:for="{{errBankList}}" wx:key="id">
+              <template is="bankItem" data="{{item}}" />
+            </view>
+          </block>
+          <block wx:else>
+            暂时还没有做错任何题哦
+          </block>
+        </van-tab>
+      </van-tabs>
     </view>
-    <view class="limit-time">
-      <text>限时</text>
-      <text style="color:#ffc200">50</text>
-      <text>分钟</text>
+  </block>
+  <block wx:else>
+    <view class="bank-wrap">
+      <navigator url="../../authorization/authorization">
+        <button>请登录</button>
+      </navigator>
     </view>
-    </view>
-  </van-tab> -->
-   <van-tab title="精选">
-   <block wx:if="{{item.bankList.length > 0}}">
-    <view   wx:for="{{item.bankList}}" wx:key="id" >
-   <template is="bankItem" data="{{item}}"/>
-   </view>
-   </block>
-   <block wx:else>
-   该行业暂时还没有题目哦
-   </block>
-  
- 
-   
-  </van-tab>
-  <van-tab title="收藏">
-    <block wx:if="{{colBankList.length > 0}}">
-    <view   wx:for="{{colBankList}}" wx:key="id" >
-   <template is="bankItem" data="{{item}}"/>
-   </view>
-   </block>
-   <block wx:else>
-   暂时还没有收藏任何题库哦
-   </block>
-  </van-tab>
-  <van-tab title="错题集">
-      <block wx:if="{{errBankList.length > 0}}">
-    <view   wx:for="{{errBankList}}" wx:key="id" >
-   <template is="bankItem" data="{{item}}"/>
-   </view>
-   </block>
-   <block wx:else>
-   暂时还没有做错任何题哦
-   </block>
-  </van-tab>
-</van-tabs>
-  </view>
+  </block>
 </view>

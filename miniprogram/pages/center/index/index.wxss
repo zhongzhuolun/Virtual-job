@@ -215,7 +215,9 @@ page{
 .txt11{
   position: absolute;
   left: 136rpx;
-  top: 1180rpx;
+  /* top: 1180rpx; */
+  bottom: 0;
+
   width: 112rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
@@ -226,7 +228,9 @@ page{
 .txt12{
   position: absolute;
   left: 248rpx;
-  top: 1180rpx;
+  /* top: 1180rpx; */
+  bottom: 0;
+
   width: 168rpx;
   height: 40rpx;
   color: rgba(239, 184, 6, 1);
@@ -237,7 +241,7 @@ page{
 .txt13{
   position: absolute;
   left: 410rpx;
-  top: 1180rpx;
+  bottom: 0;
   width: 28rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
@@ -248,7 +252,9 @@ page{
 .txt14{
   position: absolute;
   left: 436rpx;
-  top: 1180rpx;
+  /* top: 1180rpx; */
+  bottom: 0;
+
   width: 168rpx;
   height: 40rpx;
   color: rgba(239, 184, 6, 1);

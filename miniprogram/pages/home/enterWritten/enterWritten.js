@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bank: {}
+    bank: {},
+    industry: wx.getStorageSync('industry')
   },
   handleStartExam: function(e) {
     let bank = this.data.bank

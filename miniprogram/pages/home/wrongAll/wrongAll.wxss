@@ -1,8 +1,5 @@
 /* miniprogram/pages/home/wrongAll/wrongAll.wxss */
-.body{
-  position: absolute;
-  width: 750rpx;
-  height: 1624rpx;
+scroll-view{
   background-color: rgba(255, 255, 255, 1);
 }
 .menu {
@@ -45,6 +42,8 @@
 .bank {
   margin-left: 34rpx;
   padding-top: 45rpx;
+  height: 520rpx;
+  overflow: auto;
 }
 .radio-question,
 .checkbox-question,

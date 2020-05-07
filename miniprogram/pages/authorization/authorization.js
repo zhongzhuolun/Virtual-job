@@ -1,4 +1,3 @@
-// miniprogram/pages/home/index/index.js
 const app = getApp()
 Page({
 
@@ -6,29 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    loginStatus: app.globalData.loginStatus
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
-  handleWritten: function(e) {
-    if(this.data.loginStatus) {
-      wx.navigateTo({
-        url: '../IndustryChoose/IndustryChoose?type=笔试',
-      })
-    } else {
-      wx.navigateTo({
-        url: '../../authorization/authorization',
+  handleLogin: function(e) {
+    let userInfo = e.detail.userInfo
+    if (userInfo) {
+      this.setData({
+        userInfo
+      }, () => {
+        app.globalData.userInfo = userInfo
+        app.globalData.loginStatus = true
+        wx.setStorage({
+          data: userInfo,
+          key: 'userInfo',
+        })
+        wx.showToast({
+          title: '登录成功',
+        })
+        wx.navigateBack()
       })
     }
   },
-  handleInterview: function() {
-    if(this.data.loginStatus) {
-      wx.navigateTo({
-        url: '../IndustryChoose/IndustryChoose?type=面试',
-      })
-    } else {
-      wx.navigateTo({
-        url: '../../authorization/authorization',
-      })
-    }
+  handleCancel: function() {
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -48,10 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app.globalData.loginStatus)
-      this.setData({
-        loginStatus: app.globalData.loginStatus
-      })
+
   },
 
   /**

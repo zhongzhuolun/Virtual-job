@@ -5,6 +5,9 @@ const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
+const plugin = requirePlugin("WechatSI") // 引入文字转语音的插件
+const manager = plugin.getRecordRecognitionManager() // 获取文字转语音的插件对象
+const recorderManager = wx.getRecorderManager() // 获取录音对象
 Page({
 
   /**
@@ -29,7 +32,7 @@ Page({
             {
               "user_name": "zzl",  
               "avatar": "https://wdwd1323412.jpg",  
-              "user_id": 2,  
+              "user_id": 3,  
               "content": "是啊是啊！",  
               "spot_count": 111,  
               "create_time":  "2020-04-14 19:35"  
@@ -37,17 +40,17 @@ Page({
           ]
         },
         {
-          "user_name": "zarek",  
+          "user_name": "zarek1",  
           "avatar": "https://wdwd1312.jpg",  
-          "user_id": 1,  
+          "user_id": 2,  
           "content": "这道题好难啊！！！",
           "spot_count": 666,  
           "create_time":  "2020-04-14 19:30",  
           "reply": [  
             {
-              "user_name": "zzl",  
+              "user_name": "zzl1",  
               "avatar": "https://wdwd1323412.jpg",  
-              "user_id": 2,  
+              "user_id": 4,  
               "content": "是啊是啊！",  
               "spot_count": 111,  
               "create_time":  "2020-04-14 19:35"  
@@ -85,6 +88,10 @@ Page({
     ifViewAllComments: false, // 查看所有评论
     ifCollect: false, // 是否收藏
     modalName: null, // 模态框是否显示
+    recordState: false, // 录音状态
+    content: '', // 用于转化为语音的问题字符串
+    type: '', // 当前是录音还是录像
+    tempFilePaths: [], // 用于存储音频的链接
   },
   // 处理查看所有评论
   viewAllComments: function(e) {
@@ -241,26 +248,72 @@ Page({
   },
   // 处理指定题目的语音的播放
   handleAudioPlay: function(e) {
-    console.log(e)
+    wx.showLoading({
+      title: '加载中',
+    })
+    let {questionIndex, writtenBank} = this.data
+    let tempFilePaths = writtenBank.questionsFileArry[questionIndex].tempFilePaths
+    this.setData({
+      tempFilePaths
+    }, () => {
+      wx.hideLoading({
+      })
+      this.yuyinPlay(tempFilePaths[0])
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     // 应该为获取全局的数据为准
-    // let {writtenBank} = app.globalData
-    // this.setData({
-    //   writtenBank
-    // })
+    let {writtenBank} = app.globalData
+    this.setData({
+      writtenBank
+    })
+    this.setData({
+      type: options.type, // 设置当前用户选择面试的类型
+    }, () => {
+      wx.hideLoading({})
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    const innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.onError(function (res) {
+      wx.showToast({
+        title: '语音播放失败',
+        icon: 'none',
+      })
+    }) 
 
   },
-
+  // 播放语音
+  yuyinPlay: function (src) {
+    const innerAudioContext = wx.createInnerAudioContext()
+    let {tempFilePaths} = this.data
+    innerAudioContext.autoplay = true
+    innerAudioContext.src = src;
+    innerAudioContext.onPlay(() => {
+      this.pageObj.i++
+    })
+    innerAudioContext.onEnded(() => {
+      if (this.pageObj.i < tempFilePaths.length){
+        this.yuyinPlay(tempFilePaths[this.pageObj.i])
+      } else {
+        this.pageObj.i = 0
+      }
+    })
+    },
+    pageObj: {
+      i: 0
+    },
   /**
    * 生命周期函数--监听页面显示
    */

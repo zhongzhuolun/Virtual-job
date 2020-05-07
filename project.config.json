@@ -183,6 +183,28 @@
 					"id": -1,
 					"name": "pages/home/endInterview/endInterview",
 					"pathName": "pages/home/endInterview/endInterview",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 19,
+					"name": "pages/home/interviewAll/interviewAll",
+					"pathName": "pages/home/interviewAll/interviewAll",
+					"query": "type=audio",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/authorization/authorization",
+					"pathName": "pages/authorization/authorization",
+					"query": "type=audio",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "pages/questionBank/answerQuestions/answerQuestions",
+					"pathName": "pages/questionBank/answerQuestions/answerQuestions",
+					"query": "id=10",
 					"scene": null
 				}
 			]

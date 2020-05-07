@@ -110,26 +110,23 @@
 </view>
 
 <view class="bg-sbumit {{ifSubmit?'show':'hide'}}">
-    <view class="detail">
-      <block wx:if="{{emptyQuestions.length > 0}}">
-        <text>你还有题目未完成
-        （{{emptyStr}}）
-          是否确认提交？
-        </text>
-      </block>
-      <block wx:else>
-        <text>提交之后无法更改答案是否确认提交</text>
-      </block>
-    
-    </view>
-    <view class="unfinished">
-      <view class="continute my-btn" bindtap="handleContinue">
-        <text>继续答题</text>
-      </view>
-      <view class="complete my-btn" bindtap="handleComplete">
-        <text>确定</text>
-      </view>
-    </view>
-
-
+  <view class="detail">
+    <block wx:if="{{emptyQuestions.length > 0}}">
+      <text>你还有题目未完成
+      （{{emptyStr}}）
+        是否确认提交？
+      </text>
+    </block>
+    <block wx:else>
+      <text>提交之后无法更改答案是否确认提交</text>
+    </block>
   </view>
+  <view class="unfinished">
+    <view class="continute my-btn" bindtap="handleContinue">
+      <text>继续答题</text>
+    </view>
+    <view class="complete my-btn" bindtap="handleComplete">
+      <text>确定</text>
+    </view>
+  </view>
+</view>

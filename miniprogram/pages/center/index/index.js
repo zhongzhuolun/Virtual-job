@@ -2,39 +2,77 @@
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo: {},
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    loginStatus: app.globalData.loginStatus
   },
-  addBank() {
-    wx.cloud.callFunction({
-      name: 'addBank',
-    }).then(console.log)
-    // banksList.field({
-    //   id: true
-    // }).limit(1000).get().then(res => {
-    //   let id = res.data[res.data.length - 1].id
-    //   wx.cloud.callFunction({
-    //     name: 'addBank',
-    //     data: {
-    //       "id": id + 1, 
-    //       "industry": "前端", 
-    //       "class": "笔试题",
-    //       "title": "腾讯前端笔试题库2", 
-    //       "limit_time": "50",
-    //       "status": { 
-    //         "done": false, 
-    //         "doing": false,
-    //         "collection": false,
-    //         "mistaked": false
-    //       }
-    //     }
-    //   }).then(console.log)
-    // })
+  myBanks: function(e) {
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
+  },
+  interviewCurrent: function(e) {
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
+  },
+
+  myMsg: function(e) {
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
+  },
+
+  feedback: function(e) {
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
+  },
+
+
+
+  handleLogin: function(e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    let userInfo = e.detail.userInfo
+    if (userInfo) {
+      this.setData({
+        userInfo
+      }, () => {
+        app.globalData.userInfo = userInfo
+        app.globalData.loginStatus = true
+        wx.setStorage({
+          data: userInfo,
+          key: 'userInfo',
+        })
+        wx.hideLoading()
+        wx.showToast({
+          title: '登录成功',
+        })
+      })
+    } else {
+      wx.hideLoading()
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -54,7 +92,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let userInfo = wx.getStorageSync('userInfo')
+    app.globalData.userInfo = userInfo
+    this.setData({
+      loginStatus: app.globalData.loginStatus,
+      userInfo
+    })
   },
 
   /**

@@ -53,16 +53,22 @@ App({
           }).then(console.log)
         }
       })
+      let userInfo = wx.getStorageSync('userInfo')
+      if (userInfo) {
+        this.globalData.userInfo = userInfo
+        this.globalData.loginStatus = true
+      } 
 
-
+     
     }
 
   },
   globalData: {
     examType: 'written', // 用户选择考试的类型
     examBank: {}, // 用户笔试的数据
-    writtenBank: {} // 用户面试的数据
-
+    writtenBank: {}, // 用户面试的数据
+    userInfo: {}, // 用户信息
+    loginStatus: false
   },
   updataType(type) {
     this.globalData.examType = type

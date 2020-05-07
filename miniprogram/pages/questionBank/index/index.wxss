@@ -9,7 +9,7 @@
   text-align: center;
   border: 2rpx solid rgba(187, 187, 187, 1);
   background: #fff;
-  top: 130rpx;
+  top: 144rpx;
 }
 .written {
   left: 0px;

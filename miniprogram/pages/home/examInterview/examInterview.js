@@ -137,10 +137,6 @@ Page({
   play: function() {
       this.yuyinPlay(this.data.tempFilePaths[0], 'mine')
   },
-  // 将多条语音数据整合在一起
-  plays: function (src) {
-  },
-
    // 识别语音 -- 初始化
   initRecord: function () {
     const that = this;

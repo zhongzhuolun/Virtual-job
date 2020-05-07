@@ -22,9 +22,16 @@ Page({
       statusList: [] // 题库状态数据
     },
     ifPullDown: false, // 是否下拉
+    loginStatus: app.globalData.loginStatus, // 登录状态
   },
   // tabar发生改变的时候重新渲染数据
   onChange(event) {
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
     let item = {...this.data.item}
     this.refleshStatus(item)
   },
@@ -76,6 +83,12 @@ Page({
   },
   // 处理点击笔试按钮的事件
   handleWritten(e) {
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
     let pagesize;
     if (e) {
       this.pageObj.pagesize = 0
@@ -115,7 +128,12 @@ Page({
   },
   // 处理点击面试按钮的事件
   handleInterview(e) {
-
+    if (!this.data.loginStatus) {
+      wx.navigateTo({
+        url: '../../authorization/authorization',
+      })
+      return
+    }
     let pagesize;
     if (e) {
       this.pageObj.pagesize = 0
@@ -153,37 +171,7 @@ Page({
     app.updataType('interview')
 
   },
- // 处理开始考试
-  handleStartExam(e) {
-    let bankId = e.target.id * 1
-    let statusObj = {
-      id: bankId
-    }
-    let result = this.data.item.bankList.find((value) => {
-      return value.id == bankId
-    })
-    result.status.doing = true
-    statusObj.status = result.status
-    bankStatusList.get().then(res => {
-      console.log(res)
-      let statusList = res.data[0].statusList
-      console.log(statusList)
-        let result = statusList.findIndex((value) => {
-          return value.id == bankId
-        })
-        if(result !== -1) {
-          statusList[result].status.doing = true
-        } else {
-          statusList.push(statusObj)
-        }
-        wx.cloud.callFunction({
-          name: 'updateBankStatus',
-          data: {
-            statusList
-          }
-        }).then(console.log)
-    })
-  },
+
   // 处理收藏
   handleCollection(e) {
     let title = ''
@@ -255,17 +243,31 @@ Page({
    */
   onShow: function () {
     let industry =  wx.getStorageSync('industry')
-    let item = {...this.data.item}
-      item.bankList = []
-      this.setData({
-        item: {...item},
-        industry
-      })
-    if(this.data.checkoutBank === 'written') {
-      this.handleWritten()
-    } else {
-      this.handleInterview()
+    this.setData({
+      loginStatus: app.globalData.loginStatus
+    })
+    if (this.data.loginStatus) {
+      if (!industry) {
+        wx.navigateTo({
+          url: '../../home/IndustryChoose/IndustryChoose?type=题库',
+        })
+      } else {
+        let item = {...this.data.item}
+        item.bankList = []
+        this.setData({
+          item: {...item},
+          industry
+        })
+      if(this.data.checkoutBank === 'written') {
+        this.handleWritten()
+      } else {
+        this.handleInterview()
+      }
+      }
     }
+  
+ 
+  
   },
 
   /**

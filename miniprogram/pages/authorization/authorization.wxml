@@ -1,0 +1,17 @@
+<cu-custom bgColor="bg-yellow" >
+	<view slot="content">授权登录</view>
+</cu-custom>
+<view class="bg-sbumit">
+  <view class="detail">
+      <text>登录后，你可以正常使用小黄求职的功能</text>
+  </view>
+  <view class="unfinished">
+    <button class="continute my-btn"  bindtap="handleCancel">
+      <text>取消</text>
+    </button>
+    <button class="complete my-btn" open-type="getUserInfo" bindgetuserinfo="handleLogin">
+      <text>微信登录</text>
+    </button>
+  </view>
+</view>
+

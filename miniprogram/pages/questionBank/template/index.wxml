@@ -27,7 +27,7 @@
     </block>
     <block wx:else>
       <navigator url="../enterWritten/enterWritten?id={{item.id}}">
-        <view class="start-exam" id="{{item.id}}" bindtap="handleStartExam">
+        <view class="start-exam" id="{{item.id}}">
         开始答题
         </view>
       </navigator>
