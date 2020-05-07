@@ -58,8 +58,8 @@
       {
         "pagePath": "pages/questionBank/index/index",
         "text": "题库",
-        "iconPath": "./images/icon/book-closed.png",
-        "selectedIconPath": "./images/icon/book.png",
+        "iconPath": "./images/icon/book0.png",
+        "selectedIconPath": "./images/icon/book1.png",
         "color": "#344256",
         "selectedColor": "#ffc200"
       },
