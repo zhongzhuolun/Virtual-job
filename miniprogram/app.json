@@ -43,6 +43,9 @@
     "van-col": "./miniprogram_npm/vant-weapp/col/index"
   },
   "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#fabf01",
+
     "list": [
       {
         "pagePath": "pages/home/index/index",
@@ -55,8 +58,8 @@
       {
         "pagePath": "pages/questionBank/index/index",
         "text": "题库",
-        "iconPath": "./images/icon/question1.png",
-        "selectedIconPath": "./images/icon/question2.png",
+        "iconPath": "./images/icon/book-closed.png",
+        "selectedIconPath": "./images/icon/book.png",
         "color": "#344256",
         "selectedColor": "#ffc200"
       },
