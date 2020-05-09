@@ -57,8 +57,8 @@
       {
         "pagePath": "pages/questionBank/index/index",
         "text": "题库",
-        "iconPath": "./images/icon/book-closed.png",
-        "selectedIconPath": "./images/icon/Book.png"
+        "iconPath": "./images/icon/book0.png",
+        "selectedIconPath": "./images/icon/book1.png"
       },
       {
         "pagePath": "pages/center/index/index",
