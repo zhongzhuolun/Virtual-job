@@ -15,13 +15,36 @@
 		isChecked: isChecked
 	}
 </wxs>
+		<view class="menu" bindtap="handleMenu" data-target="Modal">
+			<text class="cuIcon-apps lg text-yellow"></text>
+		</view>
+
 <block wx:if="{{examType==='written'}}">
+		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
+			<view class="cu-dialog" catchtap>
+				<view class="cu-bar bg-white justify-end">
+					<view class="cu-btn bg-yellow" bindtap="checkType">
+						{{ifViewWrong?'完整试卷':'只看错题'}}
+					</view>
+					<view class="action" bindtap="hideModal">
+						<text class="cuIcon-close text-red" style="font-size: 48rpx;"></text>
+					</view>
+				</view>
+				<view class="question-index-wrap">
+					<block wx:if="{{ifViewWrong}}">
+						<block wx:for="{{bank.bank}}" wx:key="index">
+							<view wx:if="{{item.mistaked}}" class="question-index {{item.mistaked?'wrong':'correct'}}" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
+						</block>
+					</block>
+					<block wx:else>
+						<block wx:for="{{bank.bank}}" wx:key="id">
+							<view class="question-index {{item.mistaked?'wrong':'correct'}}" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
+						</block>
+					</block>
+				</view>
+			</view>
+		</view>
 	<view class="bank-wrap">
-		<!-- <view class="title">
-			<text>
-			{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}
-			</text>
-		</view> -->
 		<view class="bank" wx:key="id">
 			<block wx:if="{{bank.bank[questionIndex].type === '单选'}}">
 				<view class="quetion-title">
@@ -78,7 +101,10 @@
 							<text>{{value}}</text>
 						</label>
 					</checkbox-group>
-					<view class="correct-analyse">
+					<view class="view-answer" bindtap="viewAnwser">
+						{{ifViewAnwser?'收起答案':'查看答案'}}
+					</view>
+					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
 						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
@@ -97,7 +123,10 @@
 							<text>{{value}}</text>
 						</label>
 					</radio-group>
-					<view class="correct-analyse">
+					<view class="view-answer" bindtap="viewAnwser">
+						{{ifViewAnwser?'收起答案':'查看答案'}}
+					</view>
+					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
 						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
@@ -109,14 +138,17 @@
 					<view class="quetion-title">
 						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【填空】</text>
 					</view>
-					<view hidden="{{!chooseValue[questionIndex]&&!ifSubmitOne}}" bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}">
+					<view  hidden="{{!ifSubmitOne}}" bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" wx:for="{{bank.bank[questionIndex].correct_answer}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+						<input data-index="{{key}}" data-type="{{bank.bank[questionIndex].type}}" bindinput="inputChange" placeholder="[填空{{key + 1}}]"></input>
+					</view>
+					<view hidden="{{ifSubmitOne}}" style="margin-top: 40rpx;font-size: 36rpx;" id="{{bank.bank[questionIndex].id}}">
 						你的答案: <text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}" >{{chooseValue[questionIndex]}}</text>
 					</view>
-					<view hidden="{{chooseValue[questionIndex]&&!ifSubmitOne}}"  bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" wx:for="{{bank.bank[questionIndex].correct_answer}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-						<input data-index="{{key}}" bindinput="inputChange" placeholder="[填空{{key + 1}}]"></input>
+			
+					<view class="view-answer" bindtap="viewAnwser">
+						{{ifViewAnwser?'收起答案':'查看答案'}}
 					</view>
-
-					<view class="correct-analyse">
+					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
 						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
@@ -134,56 +166,58 @@
 							</view>
 						</block>
 					</view>
-
-					<view style="margin-top: 30rpx" wx:if="{{chooseValue[questionIndex]&&!ifSubmitOne}}">
-						你的答案:<text data-type="{{bank.bank[questionIndex].type}}" class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
+					<view hidden="{{!ifSubmitOne}}" style="margin-top: 30rpx">
+						<input data-type="{{bank.bank[questionIndex].type}}" data-index="{{0}}" id="{{bank.bank[questionIndex].id}}" bindinput="inputChange" placeholder="[填空1]"></input>
+					</view>
+					<view  hidden="{{ifSubmitOne}}" style="margin-top: 40rpx;font-size: 36rpx;">
+						你的答案:<text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
 						{{chooseValue[questionIndex]}}
 						</text>
 					</view>
-					<view style="margin-top: 30rpx" wx:else>
-						<input data-type="{{item.type}}" data-index="{{0}}" id="{{item.id}}" bindinput="inputChange" placeholder="[填空1]"></input>
+						<view class="view-answer" bindtap="viewAnwser">
+							{{ifViewAnwser?'收起答案':'查看答案'}}
+						</view>
+						<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+							<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+							<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
 		</view>
 		<view style="margin-top: 40rpx" class="line"></view>
-		<view class="comments">
-			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="user_id">
-				<block wx-if="{{ifViewAllComments||index === 0}}">
-					<view class="user">
-						<view class="user-info">
-							<image class="mine" src="../../../images/icon/mine1.png"></image>
-							<view class="user-name">{{item.user_name}}</view>
-						</view>
-						<view class="like-dot">
-							<image class="like" src="../../../images/icon/like.png"></image>
-							<view class="dot-num">{{item.spot_count}}</view>
-						</view>
-					</view>
-					<view class="content">{{item.content}}
-					</view>
-				</block>
-			</view>
-			<view class="view-all" bindtap="viewAllComments">
-				{{ifViewAllComments?'收起评论':'查看全部评论'}}</view>
-			<view class="publish">
-				<input placeholder="发表你对这道题的想法"></input>
-				<view class="publish-comment">提交</view>
-			</view>
-		</view>
 	</view>
-	<view class="next-size">
 
 		<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
 		<view wx:else class="next-question chekckout-question" bindtap="handleNext">
-			{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}</view>
+			{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
+		</view>
 		<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
+
+	<view class="next-size">
 		<view class="page-size">{{questionIndex + 1}}/{{bank.bank.length}}
 		</view>
 	</view>
-
 </block>
+
+
+
+
+
 <block wx:else>
+		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
+			<view class="cu-dialog" catchtap>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action" bindtap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="question-index-wrap">
+						<block wx:for="{{writtenBank.questions}}" wx:key="id">
+							<view  class="question-index correct" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
+						</block>
+				</view>
+			</view>
+		</view>
 	<text>面试答题界面</text>
 
 </block>

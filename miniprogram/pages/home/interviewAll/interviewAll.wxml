@@ -9,7 +9,7 @@
 	<view class="bank-wrap">
 		<view class="bank-title">
 			<text>{{writtenBank.title}} </text>
-			<text bindtap="handleCollection" class="cuIcon-favorfill lg text-{{ifCollect?'yellow': 'grey'}}"></text>
+			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
 		</view>
 		<view class="score-time">
 			<text class="time">题目数量：{{writtenBank.count}}道</text>
@@ -20,9 +20,9 @@
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
-					<view class="cu-btn bg-yellow">
+					<!-- <view class="cu-btn bg-yellow">
 						题目序列
-					</view>
+					</view> -->
 					<view class="action" bindtap="hideModal">
 						<text class="cuIcon-close text-red"></text>
 					</view>
@@ -39,8 +39,8 @@
 		<view class="bank">
 				<view class="radio-question">
 					<view class="quetion-title">
-						<text>{{writtenBank.questions[questionIndex].id}}. {{writtenBank.questions[questionIndex].title}}</text>
-						<text id="{{writtenBank.questions[questionIndex].id}}" bindtap="handleAudioPlay" class="cuIcon-notificationfill text-yellow"></text>
+						<text style="font-size: 36rpx;" >{{writtenBank.questions[questionIndex].id}}. {{writtenBank.questions[questionIndex].title}}</text>
+						<text id="{{writtenBank.questions[questionIndex].id}}" bindtap="handleAudioPlay" style="font-size: 48rpx;" class="cuIcon-notificationfill text-yellow"></text>
 					</view>
 					<view class="correct-analyse">
 						<view>解析：{{writtenBank.questions[questionIndex].analyse}}</view>

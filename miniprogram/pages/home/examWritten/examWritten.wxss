@@ -122,7 +122,9 @@ scroll-view {
 .detail {
   position: absolute;
   left: 66rpx;
-  top: 314rpx;
+  top: 44%;
+  transform: translateY(-50%);
+  /* top: 314rpx; */
   width: 616rpx;
   height: 430rpx;
   line-height: 52rpx;
@@ -152,7 +154,9 @@ scroll-view {
   position: absolute;
   width: 246rpx;
   height: 94rpx;
-  top: 796rpx;
+  /* top: 796rpx; */
+  bottom: 26%;
+
   line-height: 90rpx;
   border-radius: 20rpx;
   background-color: rgba(250, 191, 1, 1);

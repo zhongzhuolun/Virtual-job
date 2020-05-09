@@ -12,6 +12,6 @@
 <view>⭕面带笑容 </view>
 <view>⭕语言流畅无语病</view>
 </view>
-<navigator url="../interviewAll/interviewAll"> <button class="allExam">查看完整试卷 </button> </navigator>
-<navigator url="../index/index" open-type="switchTab"> <button class="questiobBank">返回首页</button> </navigator>
+<navigator url="../interviewAll/interviewAll"> <button class="allExam">查看试卷 </button> </navigator>
+<navigator url="../index/index" open-type="switchTab"> <button class="questionBank">返回首页</button> </navigator>
 

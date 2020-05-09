@@ -28,14 +28,17 @@
 }
 .frist1{
   position: absolute;
-  left: 154rpx;
+  left: 50%;
   top: 510rpx;
-  width: 448rpx;
+  width: 80%;
+  text-align: center;
+  transform: translateX(-50%);
   height: 80rpx;
   color: rgba(12, 12, 12, 1);
   font-size: 56rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  text-align: center;
 }
 .sentence{
   position: absolute;
@@ -63,4 +66,56 @@
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.4);
   font-family: Microsoft Yahei;
   border: 2rpx solid rgba(12, 12, 12, 1);
+}
+.cu-dialog {
+  width: 680rpx;
+  height: 680rpx;
+  border-radius: 22rpx;
+  box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.26);
+  border: 8rpx solid rgba(250, 191, 1, 1);
+}
+.modal-title {
+  width: 100%;
+  /* height: 25px; */
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: PingFangSC-regular;
+
+}
+.modal-content {
+  padding: 10rpx 25rpx 40rpx;
+  background: white;
+}
+.fighter, .sage {
+  display: flex;
+  line-height: 40rpx;
+  border-radius: 16rpx;
+  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+}
+.sage {
+  margin: 70rpx 0;
+}
+.modal-content image {
+  width: 180rpx;
+  height: 180rpx;
+}
+.content-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 70rpx;
+  padding-top: 26rpx;
+}
+.content-wrap text:nth-child(1) {
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: left;
+  font-family: SourceHanSansSC-bold;
+}
+.content-wrap text:nth-child(2) {
+  color: rgba(163, 163, 163, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: SourceHanSansSC-regular;
 }

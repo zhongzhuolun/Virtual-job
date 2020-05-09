@@ -8,4 +8,35 @@
 <view class="line2"></view>
 <view class="frist1">{{bank.title}}</view>
 <view class="sentence">“每日一套，早日offer”</view>
-<button plain="#000000" class="startAnswer" bindtap="handleStartExam">开始答题 </button>
+
+<button hidden="{{examType==='inerview'}}" plain="#000000" class="startAnswer" data-target="Modal"  bindtap="handleStart">开始答题 </button>
+<button hidden="{{examType==='written'}}" plain="#000000" class="startAnswer"  bindtap="handleStartInterview">开始答题 </button>
+		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
+			<view class="cu-dialog" catchtap>
+				<view class="cu-bar bg-white justify-end" style="padding: 54rpx 0;">
+					<view class="modal-title">
+						请选择刷题模式
+					</view>
+				</view>
+				<view class="modal-content">
+				<view class="fighter" bindtap="handleFighter">
+					<view class="img-wrap">
+						<image src="../../../images/icon/fighter.png"></image>
+					</view>
+					<view class="content-wrap">
+						<text>斗者意境</text>
+						<text>整套试卷做完再查看答案</text>
+					</view>
+				</view>
+				<view class="sage" bindtap="handleSage">
+					<view class="img-wrap">
+						<image src="../../../images/icon/sage.png"></image>
+					</view>
+					<view class="content-wrap">
+						<text>贤者意境</text>
+						<text>每做一道题即可查看一次答案</text>
+					</view>
+				</view>
+				</view>
+			</view>
+		</view>

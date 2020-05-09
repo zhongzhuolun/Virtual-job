@@ -226,12 +226,17 @@ scroll-view{
   flex-wrap: wrap;
   justify-content: space-around;
   background: white;
+  padding-top: 40rpx;
 }
 .cu-dialog {
   border-radius: 11px;
   box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
   border: 2px solid rgba(250, 191, 1, 1);
 }
+.cu-dialog .cubar {
+  padding-top: 30rpx;
+}
+
 .question-index-wrap .question-index {
   width: 72rpx;
   height: 72rpx;

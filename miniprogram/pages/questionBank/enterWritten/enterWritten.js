@@ -11,10 +11,17 @@ Page({
   data: {
     examType: '',
     bank: {},
-    industry: wx.getStorageSync('industry')
+    industry: wx.getStorageSync('industry'),
+    modalName: null
   },
- // 处理开始考试
- handleStartExam: function(e) {
+  // 处理模态框的打开
+  handleStart: function(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+ // 处理开始笔试考试
+ handleStartWrittenExam: function(modal) {
   let bank = this.data.bank
   let bankId = bank.id
   let statusObj = {
@@ -39,10 +46,28 @@ Page({
         }
       }).then(console.log)
       wx.navigateTo({
-        url: `../answerQuestions/answerQuestions?id=${bankId}`
+        url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
       })
 })
 },
+  // 处理模态框的关闭
+  hideModal: function(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  // 处理斗者意境
+  handleFighter: function(e) {
+    this.handleStartWrittenExam('fighter')
+  },
+  // 处理贤者意境
+  handleSage: function(e) {
+    this.handleStartWrittenExam('sage')
+  },
+  // 处理面试考试
+  handleStartInterview: function(e) {
+    this.handleStartWrittenExam()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -62,6 +87,7 @@ Page({
       class: classType, 
       industry: this.data.industry,
       id: options.id*1
+      // id: 10 // 暂时写死
     }).get().then((res) => {
       console.log(res.data)
       this.setData({

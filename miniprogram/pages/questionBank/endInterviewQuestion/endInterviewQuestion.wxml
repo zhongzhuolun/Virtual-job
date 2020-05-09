@@ -9,5 +9,5 @@
 <view>⭕面带笑容 </view>
 <view>⭕语言流畅无语病</view>
 </view>
-<navigator url="../viewQuestions/viewQuestions"> <button class="allExam">查看完整试卷 </button> </navigator>
+<navigator url="../viewQuestions/viewQuestions?class=面试"> <button class="allExam">查看完整试卷 </button> </navigator>
 <navigator url="../index/index" open-type="switchTab"> <button class="questiobBank">返回题库</button> </navigator>

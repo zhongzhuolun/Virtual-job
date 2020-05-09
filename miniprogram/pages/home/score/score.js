@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    score: 0,
     finalCorrectRate: 0, // 最终总正确率
     questionTypesRate: {}, // 每种题型的正确率
     allTypeNum: {}, // 每种题型的数量

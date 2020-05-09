@@ -61,7 +61,7 @@
   text-align: left;
   font-family: PingFangSC-regular;
 }
-.allExam,.questiobBank{
+.allExam,.questionBank{
   position: absolute;
   top: 1096rpx;
   width: 302rpx;
@@ -76,8 +76,9 @@
 
 }
 .allExam{
-  left: 54rpx;
-}
-.questiobBank{
   left: 392rpx;
+
+}
+.questionBank{
+  left: 54rpx;
 }

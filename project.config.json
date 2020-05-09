@@ -206,6 +206,13 @@
 					"pathName": "pages/questionBank/answerQuestions/answerQuestions",
 					"query": "id=10",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/endQuestion/endQuestion",
+					"pathName": "pages/questionBank/endQuestion/endQuestion",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

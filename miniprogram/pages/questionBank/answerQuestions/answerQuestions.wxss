@@ -54,14 +54,23 @@ page {
   border: 4rpx solid #ffc200;
   background: transparent;
 }
-.my-choosebox radio.checked {
-  border: 4rpx solid transparent;
-}
-.my-choosebox checkbox{
+
+.my-choosebox checkbox {
   transform: scale(0.6);
   border: 4rpx solid #ffc200;
   background: transparent;
 }
+/* .my-choosebox radio {
+  transform: scale(0.6);
+  border-radius: 50%;
+  border: 4rpx solid transparent;
+  background: transparent;
+}
+ .my-choosebox checkbox {
+  transform: scale(0.6);
+  border: 4rpx solid transparent;
+  background: transparent;
+} */
 .quetion-title {
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
@@ -213,4 +222,52 @@ page {
   font-family: PingFangSC-regular;
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
   margin-top: 18rpx;
+}
+/* 用于填空题 */
+.wrong-blank {
+  color: red;
+}
+.correct-blank {
+  color: yellow;
+}
+.cu-btn {
+  position: relative;
+  left: -24%;
+}
+.question-index-wrap {
+  display: flex;
+  padding: 80rpx;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: white;
+  padding-top: 40rpx;
+}
+.cu-dialog {
+  border-radius: 11px;
+  box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
+  border: 2px solid rgba(250, 191, 1, 1);
+}
+.cu-dialog .cubar {
+  padding-top: 30rpx;
+}
+
+.question-index-wrap .question-index {
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: -apple-system;
+  border-radius: 50% 50%;
+  margin: 10rpx;
+  border: 2rpx solid black;
+}
+.question-index-wrap .correct {
+  border: 2rpx solid rgba(250, 191, 1, 1);
+  color: rgba(250, 191, 1, 1);
+}
+.question-index-wrap .wrong {
+  border: 2rpx solid red;
+  color: rgb(250, 1, 1);
 }

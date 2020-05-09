@@ -4,7 +4,6 @@ const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const _ = db.command
 const app = getApp()
-
 Page({
 
   /**
@@ -123,7 +122,8 @@ Page({
     this.setData({
       checkoutBank: 'written'
     })
-    app.updataType('written')
+    app.globalData.examType = 'written'
+
    
   },
   // 处理点击面试按钮的事件
@@ -165,10 +165,12 @@ Page({
         this.refleshStatus(item)
       }
     })
+
     this.setData({
-      checkoutBank: 'interview'
+      checkoutBank: 'interview',
+      active: 0
     })
-    app.updataType('interview')
+    app.globalData.examType = 'interview'
 
   },
 
@@ -219,10 +221,15 @@ Page({
        
           this.refleshStatus(item)
           wx.hideLoading()
-          wx.showToast({
-            title: title,
-            icon: 'success'
-          })
+          // wx.showToast({
+          //   title: title,
+          //   icon: 'success'
+          // })
+          Toast.success(title);
+          // Toast.loading({
+          //   mask: true,
+          //   message: '加载中...'
+          // });
           // this.setData({
           //   item: {...item}
           // })

@@ -3,13 +3,17 @@
 	<view slot="content">题库</view>
 </cu-custom>
 <view class="wrap">
-	<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
+  <view style="background: #ffc000">
+  	<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
 		<text>笔试</text>
 	</view>
 	<view class="interview {{checkoutBank === 'interview'?'active':''}}" bindtap="handleInterview">
 		<text>面试</text>
 	</view>
-	<swiper indicator-dots="{{true}}" autoplay="{{true}}">
+  </view>
+
+  <view class="swiper-wrap" >
+  <swiper indicator-dots="{{true}}" autoplay="{{true}}">
 		<swiper-item>
 			<image src="../../../images/icon/home1.png"></image>
 		</swiper-item>
@@ -17,6 +21,8 @@
 			<image src="../../../images/icon/home1.png"></image>
 		</swiper-item>
 	</swiper>
+  </view>
+	
 
 	<view class="title">
 		<view class="linel"></view>
@@ -33,7 +39,9 @@
             </view>
           </block>
           <block wx:else>
-            该行业暂时还没有题目哦
+          <view class="no-bank">
+            很抱歉，该行业暂时没收录题库
+          </view>
           </block>
         </van-tab>
         <van-tab title="收藏">
@@ -43,19 +51,26 @@
             </view>
           </block>
           <block wx:else>
-            暂时还没有收藏任何题库哦
+          <view class="no-bank">
+            暂时没有该行业收藏的试卷哦~
+          </view>
           </block>
         </van-tab>
-        <van-tab title="错题集">
-          <block wx:if="{{errBankList.length > 0}}">
+        <!-- <block wx:if="{{checkoutBank == 'interview'}}"> -->
+        <van-tab  disabled="{{checkoutBank === 'interview'}}" title="错题集">
+          <block  wx:if="{{errBankList.length > 0}}">
             <view wx:for="{{errBankList}}" wx:key="id">
               <template is="bankItem" data="{{item}}" />
             </view>
           </block>
           <block wx:else>
-            暂时还没有做错任何题哦
+          <view class="no-bank">
+            暂时没有出现该行业的错题哦~
+          </view>
           </block>
         </van-tab>
+        <!-- </block> -->
+        
       </van-tabs>
     </view>
   </block>
@@ -63,6 +78,9 @@
     <view class="bank-wrap">
       <navigator url="../../authorization/authorization">
         <button>请登录</button>
+            <view wx:for="{{item.bankList}}" wx:key="id">
+              <template is="bankItem" data="{{item}}" />
+            </view>
       </navigator>
     </view>
   </block>

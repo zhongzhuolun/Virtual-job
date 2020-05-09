@@ -25,7 +25,7 @@
   color: rgba(16, 16, 16, 1);
   font-size: 56rpx;
   line-height: 65rpx;
-  text-align: left;
+  text-align: center;
   font-family: PingFangSC-regular;
 }
 

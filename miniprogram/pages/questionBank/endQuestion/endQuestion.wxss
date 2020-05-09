@@ -1,4 +1,4 @@
-/* miniprogram/pages/questionBank/endQuestion/endQuestion.wxss */
+/* miniprogram/pages/questionBank/endQuestion/endQuestion.wxss
 .title{
   position: absolute;
   left: 230rpx;
@@ -32,29 +32,6 @@
   text-align: left;
   font-family: PingFangSC-regular;
 }
-/* .blankBox{
-  position: absolute;
-  left: 94rpx;
-  top: 420rpx;
-  width: 564rpx;
-  height: 631rpx;
-  line-height: 40rpx;
-  border-radius: 20rpx;
-  text-align: center;
-  background-color: white;
-  border: 2rpx solid rgba(12, 12, 12, 1);
-} */
-/* .summary{
-  position: absolute;
-  left: 156rpx;
-  top: 542rpx;
-  width: 438rpx;
-  height: 368rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 40rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-} */
 
 .blank{
   position: absolute;
@@ -165,4 +142,163 @@
 }
 .seekWrong{
   left: 414rpx;
+} */
+/* miniprogram/pages/home/score/score.wxss */
+.title{
+  position: absolute;
+  left: 230rpx;
+  top: 32rpx;
+  width: 288rpx;
+  height: 102rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 72rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.frist1{
+  margin: 44rpx 50rpx;
+  height: 80rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 48rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  text-align: center;
+}
+.sentence{
+  padding: 60rpx 0;
+  height: 40rpx;
+  color: rgba(12, 12, 12, 1);
+  font-size: 28rpx;
+  text-align: center;
+  font-family: PingFangSC-regular;
+}
+.score1{
+  height: 190rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 200rpx;
+  text-align: center;
+  font-family: "方正汉真广标-标准";
+}
+.blank{
+  position: absolute;
+  left: 66rpx;
+  top: 422rpx;
+  width: 616rpx;
+  height: 680rpx;
+  line-height: 52rpx;
+  border-radius: 50rpx;
+  background-color: rgba(255, 255, 255, 0.47);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0px 4px 9px 0px rgba(178, 178, 178, 0.4);
+  font-family: Arial;
+  border: 1rpx solid rgba(255, 255, 255, 0);
+}
+.qusetionType,.singleChoice,.multipleChoice,.budingxiang,.panduan,
+.tiankong, .paixu{
+  position: absolute;
+  left: 133rpx;
+  width: 222rpx;
+  height: 78rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  color: rgba(16, 16, 16, 1);
+  padding: 20rpx;
+  width: 32%;
+  text-align: center;
+  outline-style:solid;
+	outline-width:2rpx;
+}
+.qusetionType, .accuracy{
+  top: 496rpx;
+}
+.singleChoice, .score2{
+  top: 574rpx;
+}
+.multipleChoice, .score3{
+  top: 652rpx;
+}
+.budingxiang, .score4{
+  top: 730rpx;
+}
+.panduan, .score5{
+  top: 812rpx;
+}
+.tiankong, .score6{
+  top: 890rpx;
+}
+.paixu, .score7{
+  top: 972rpx;
+}
+.accuracy,.score2,.score3,.score4,.score5,.score6,.score7{
+  position: absolute;
+  left: 377rpx;
+  width: 222rpx;
+  height: 78rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  text-align: center;
+  color: rgba(16, 16, 16, 1);
+  font-family: Microsoft Yahei;
+  padding: 20rpx;
+  width: 32%;
+  text-align: center;
+  outline-style:solid;
+	outline-width:2rpx;
+}
+/* .accuracy{
+  top: 556rpx;
+}
+.score2{
+  top: 634rpx;
+}
+.score3{
+  top: 712rpx;
+}
+.score4{
+  top:790rpx;
+}
+.score5{
+  top: 873rpx;
+}
+.score6 {
+  top: 951rpx;
+}
+.score7 {
+  top: 1032rpx;
+} */
+.button1{
+  position: absolute;
+  left: 82rpx;
+  top: 1130rpx;
+  width: 264rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
+  font-family: Microsoft Yahei;
+  border: 2rpx solid rgba(0, 0, 0, 1);
+  line-height: 70rpx;
+}
+.button2{
+  position: absolute;
+  left: 390rpx;
+  top: 1130rpx;
+  width: 264rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
+  font-family: Microsoft Yahei;
+  border: 2rpx solid rgba(0, 0, 0, 1);
+  line-height: 70rpx;
 }

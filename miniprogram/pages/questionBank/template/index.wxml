@@ -9,9 +9,14 @@
     </text>
     <!-- <view  catchtap="{{foo.handleStatus(item.id)}}"></view> -->
     <block wx:if="{{item.status.done}}">
-      <view class="start-exam" style="background: #bbb">
+      <!-- <view class="start-exam" style="background: #bbb">
         已结束
+      </view> -->
+      <navigator url="../enterWritten/enterWritten?id={{item.id}}">
+       <view class="start-exam">
+        再次答题
       </view>
+      </navigator>
       <navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
         <view class="view-result">
         查看结果
@@ -34,13 +39,13 @@
     </block>
     
   
-    <view bindtap="handleCollection" id="{{item.id}}" class="limit-time">
-      <text wx:if="{{item.status.collection}}">
-      取消收藏
-      </text>
-      <text wx:else>
+    <view bindtap="handleCollection" id="{{item.id}}" class="collection">
+      <!-- <text wx:if="{{item.status.collection}}"> -->
+        <text class="cuIcon-favorfill text-yellow lg cuIcon-{{item.status.collection?'favorfill': 'favor'}}"></text>
+      <!-- </text> -->
+      <!-- <text wx:else>
       收藏
-      </text>
+      </text> -->
       <!-- <text>限时</text>
       <text style="color:#ffc200">{{item.limit_time}}</text>
       <text>分钟</text> -->
