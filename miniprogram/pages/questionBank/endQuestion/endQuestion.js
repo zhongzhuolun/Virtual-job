@@ -10,6 +10,7 @@ Page({
     questionTypesRate: {}, // 每种题型的正确率
     questionTypeNum: {}, // 每种题型的数量
     title: '', // 题库的标题
+    id: null, // 题库的id
   },
   // 处理总的正确率
   handleFinalCorrectRate: function(data) {
@@ -53,10 +54,12 @@ Page({
    */
   onShow: function () {
     const eventChannel = this.getOpenerEventChannel()
-    console.log(app.globalData.examBank.bank.title)
+    console.log(app.globalData.examBank)
     let title = app.globalData.examBank.bank.title
+    let id = app.globalData.examBank.bank.parentId
     this.setData({
-      title
+      title,
+      id
     })
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
 

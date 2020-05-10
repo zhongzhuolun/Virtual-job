@@ -1,0 +1,93 @@
+<!--miniprogram/pages/home/interviewAll/interviewAll.wxml-->
+<scroll-view scroll-y="{{modalName==null}}">
+
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
+	<view slot="content"></view>
+	<view slot="backText">完整试卷</view>
+</cu-custom>
+
+	<view class="bank-wrap">
+		<view class="bank-title">
+			<text>{{writtenBank.title}} </text>
+			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
+		</view>
+		<view class="score-time">
+			<text class="time">题目数量：{{writtenBank.count}}道</text>
+		</view>
+		<view class="menu" bindtap="handleMenu" data-target="Modal">
+			<text class="cuIcon-apps lg text-yellow"></text>
+		</view>
+		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
+			<view class="cu-dialog" catchtap>
+				<view class="cu-bar bg-white justify-end">
+					<!-- <view class="cu-btn bg-yellow">
+						题目序列
+					</view> -->
+					<view class="action" bindtap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="question-index-wrap">
+						<block wx:for="{{writtenBank.questions}}" wx:key="id">
+							<view  class="question-index correct" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
+						</block>
+				</view>
+			</view>
+		</view>
+		<view class="line">
+		</view>
+		<view class="bank">
+				<view class="radio-question">
+					<view class="quetion-title">
+						<text style="font-size: 36rpx;" >{{writtenBank.questions[questionIndex].id}}. {{writtenBank.questions[questionIndex].title}}</text>
+						<text wx:if="{{writtenBank.questionsFileArry.length > 0}}" id="{{writtenBank.questions[questionIndex].id}}" bindtap="handleAudioPlay" style="font-size: 48rpx;" class="cuIcon-notificationfill text-yellow"></text>
+					</view>
+					<view class="correct-analyse">
+						<view wx:if="{{writtenBank.questions[questionIndex].analyse}}">解析：{{writtenBank.questions[questionIndex].analyse}}</view>
+						<view>参考答案：<text class="text-yellow">{{writtenBank.questions[questionIndex].refer_answer}}</text></view> <br />
+					</view>
+				</view>
+		</view>
+		<view style="margin-top: 40rpx" class="line"></view>
+		<view class="comments">
+		<block wx:if="{{writtenBank.questions[questionIndex].comments.length > 0}}">
+			<view class="comment" wx:for="{{writtenBank.questions[questionIndex].comments}}" wx:key="user_id">
+				<block wx-if="{{ifViewAllComments||index === 0}}">
+					<view class="user">
+						<view class="user-info">
+							<image class="mine" src="../../../images/icon/mine1.png"></image>
+							<view class="user-name">{{item.user_name}}</view>
+						</view>
+						<view class="like-dot">
+							<image class="like" src="../../../images/icon/like.png"></image>
+							<view class="dot-num">{{item.spot_count}}</view>
+						</view>
+					</view>
+					<view class="content">{{item.content}}
+					</view>
+				</block>
+			</view>
+			<view class="view-all" bindtap="viewAllComments">
+				{{ifViewAllComments?'收起评论':'查看全部评论'}}
+			</view>
+		</block>
+		<block wx:else>
+			<view class="no-comments" style="">
+			暂无评论
+			</view>
+		</block>
+			<view class="publish">
+				<input placeholder="发表你对这道题的想法"></input>
+				<view class="publish-comment">提交</view>
+			</view>
+		</view>
+	</view>
+	<view class="next-size">
+				<view class="next-question chekckout-question" bindtap="handleNext">
+				{{questionIndex < writtenBank.questions.length - 1?'下一题':'查看总结'}}</view>
+			<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
+			<view class="page-size">{{questionIndex + 1}}/{{writtenBank.questions.length}}
+			</view>
+	</view>
+
+</scroll-view>

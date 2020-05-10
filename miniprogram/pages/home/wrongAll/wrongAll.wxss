@@ -44,6 +44,7 @@ scroll-view{
   padding-top: 45rpx;
   height: 520rpx;
   overflow: auto;
+  
 }
 .radio-question,
 .checkbox-question,

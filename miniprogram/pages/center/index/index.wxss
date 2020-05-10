@@ -79,8 +79,8 @@ page{
   position: absolute;
   left: 54rpx;
   top: 464rpx;
-  width: 72rpx;
-  height: 72rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 .txt3{
   position: absolute;
@@ -106,7 +106,7 @@ page{
 }
 .book2{
   position: absolute;
-  left: 50rpx;
+  left: 54rpx;
   top: 610rpx;
   width: 80rpx;
   height: 80rpx;
@@ -138,7 +138,13 @@ page{
   left: 24rpx;
   top: 586rpx;
   width: 698rpx;
-  height: NaNpx;
+  border: 2rpx solid rgba(250, 191, 1, 0.47);
+}
+.line2{
+  position: absolute;
+  left: 24rpx;
+  top: 976rpx;
+  width: 698rpx;
   border: 2rpx solid rgba(250, 191, 1, 0.47);
 }
 
@@ -156,10 +162,10 @@ page{
 }
 .bling{
   position: absolute;
-  left: 50rpx;
+  left: 54rpx;
   top: 834rpx;
-  width: 76rpx;
-  height: 76rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 .txt7{
   position:  absolute;
@@ -185,10 +191,10 @@ page{
 }
 .message{
   position: absolute;
-  left: 58rpx;
+  left: 54rpx;
   top: 998rpx;
-  width: 60rpx;
-  height: 60rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 .txt9{
   position: absolute;

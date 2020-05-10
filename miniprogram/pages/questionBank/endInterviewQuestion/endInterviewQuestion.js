@@ -7,13 +7,20 @@ Page({
   data: {
    
   },
-  
+  viewAll: function(e) {
+    let id = this.data.id
+    wx.navigateTo({
+      url: `../viewInterviewQuestion/viewInterviewQuestion?id=${id}`,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      id: options.id
+    })
   },
 
   /**

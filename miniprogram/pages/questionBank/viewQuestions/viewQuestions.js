@@ -12,7 +12,7 @@ Page({
    */
   data: {
     class: '', // 当前是面试还是笔试
-    examBank: {}, // 笔试题中包含当前用户所做的题库，错误集合，选择的集合
+    // examBank: {}, // 笔试题中包含当前用户所做的题库，错误集合，选择的集合
     questionIndex: 0, // 当前题目的序列
     correct_answer: '', // 正确答案
     ifViewAllComments: false, // 查看所有评论
@@ -20,6 +20,7 @@ Page({
     modalName: null, // 模态框是否显示
     ifViewWrong: false, // 是否只看错题
     wrongIndex: 0, // 错题序列
+    parentId: null, // 题库ID
   },
   // 处理查看所有评论
   viewAllComments: function(e) {
@@ -33,16 +34,17 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let {questionIndex, correct_answer, examBank, ifViewWrong, wrongIndex} = this.data
+    let {questionIndex, correct_answer, wrongList, bank, ifViewWrong, wrongIndex} = this.data
+    let that = this
     if (ifViewWrong) { // 代表是查看错题的状态
-      if (wrongIndex < examBank.wrongList.length - 1) {
+      if (wrongIndex < wrongList.length - 1) {
         wrongIndex++
-        if (typeof examBank.wrongList[wrongIndex] !== 'object') {
-          questionIndex = examBank.wrongList[wrongIndex]
+        if (typeof wrongList[wrongIndex] !== 'object') {
+          questionIndex = wrongList[wrongIndex]
         } else {
-          questionIndex = examBank.wrongList[wrongIndex].index
+          questionIndex = wrongList[wrongIndex].index
         }
-        correct_answer = examBank.bank.bank[questionIndex].correct_answer.toString()
+        correct_answer = bank.bank[questionIndex].correct_answer.toString()
         this.setData({
           questionIndex,
           correct_answer,
@@ -54,12 +56,20 @@ Page({
         })
       } else {
         // 代表查看总结
-        wx.navigateBack()
+        wx.navigateTo({
+          url: '../endQuestion/endQuestion',
+          events: {
+          },
+          success: function(res) {
+            // 通过eventChannel向被打开页面传送数据
+            res.eventChannel.emit('getAccuracy', bank.accuracy)
+          }
+        })
       }
     } else {
-      if (questionIndex < examBank.bank.bank.length - 1) {
+      if (questionIndex < bank.bank.length - 1) {
         questionIndex++
-        correct_answer = examBank.bank.bank[questionIndex].correct_answer.toString()
+        correct_answer = bank.bank[questionIndex].correct_answer.toString()
         this.setData({
           questionIndex,
           correct_answer,
@@ -69,8 +79,16 @@ Page({
           })
         })
       } else {
-        // 代表查看总结
-        wx.navigateBack()
+          // 代表查看总结
+          wx.navigateTo({
+            url: '../endQuestion/endQuestion',
+            events: {
+            },
+            success: function(res) {
+              // 通过eventChannel向被打开页面传送数据
+              res.eventChannel.emit('getAccuracy', bank.accuracy)
+            }
+          })
       }
     }
  
@@ -80,16 +98,16 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let {questionIndex, correct_answer, examBank, ifViewWrong, wrongIndex} = this.data
+    let {questionIndex, correct_answer, bank, wrongList, ifViewWrong, wrongIndex} = this.data
     if (ifViewWrong) { // 代表是查看错题的状态
       if (wrongIndex > 0) {
         wrongIndex--
-        if (typeof examBank.wrongList[wrongIndex] !== 'object') {
-          questionIndex = examBank.wrongList[wrongIndex]
+        if (typeof wrongList[wrongIndex] !== 'object') {
+          questionIndex = wrongList[wrongIndex]
         } else {
-          questionIndex = examBank.wrongList[wrongIndex].index
+          questionIndex = wrongList[wrongIndex].index
         }
-        correct_answer = examBank.bank.bank[questionIndex].correct_answer.toString()
+        correct_answer = bank.bank[questionIndex].correct_answer.toString()
         this.setData({
           questionIndex,
           correct_answer,
@@ -106,7 +124,7 @@ Page({
     } else {
       if (questionIndex > 0) {
         questionIndex--
-        correct_answer = examBank.bank.bank[questionIndex].correct_answer.toString()
+        correct_answer = bank.bank[questionIndex].correct_answer.toString()
         this.setData({
           questionIndex,
           correct_answer
@@ -123,8 +141,7 @@ Page({
    handleCollection(e) {
     wx.showLoading()
     let title = ''
-    let {bank} = this.data.examBank
-    let {ifCollect} = this.data
+    let {bank, ifCollect} = this.data
     let bankId = bank.parentId
     let statusObj = {
       id: bankId
@@ -191,7 +208,7 @@ Page({
   },
   // 获取当前题库状态
   getStatus: function() {
-    let id = this.data.examBank.bank.parentId
+    let id = this.data.bank.parentId
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
       let ifCollect
@@ -222,8 +239,7 @@ Page({
   },
   // 处理切换查看试卷的类型
   checkType: function(e) {
-    console.log(e)
-    let wrongList = this.data.examBank.wrongList
+    let wrongList = this.data.wrongList
     this.setData({
       ifViewWrong: !this.data.ifViewWrong
     }, () => {
@@ -252,23 +268,40 @@ Page({
       questionIndex: id-1
     })
   },
+  // 获取当前笔试题库
+  getCurrentBank: function(bankId) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    let ifCollect = false
+    writtenBankForUser.get().then((res) => {
+      let writtenBankList = res.data[0].writtenBankList
+      let result = writtenBankList.find((value) => {
+        return value.parentId == bankId
+      })
+      if(result) {
+        ifCollect = result.status.collection
+      }
+      this.setData({
+        bank: result,
+        chooseValue: result.chooseValue,
+        status: result.status,
+        wrongList: result.wrongList,
+        ifCollect,
+        correct_answer:result.bank[0].correct_answer.toString()
+      })
+      wx.hideLoading()
+      app.globalData.examBank.bank = result
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.class)
-    console.log(app.globalData.examBank)
-    wx.showLoading({
-      title: '加载中',
-    })
+   
     this.setData({
-      class: options.class,
-      examBank: app.globalData.examBank,
-      correct_answer: app.globalData.examBank.bank.bank[0].correct_answer.toString()
-    }, () => {
-      wx.hideLoading({
-        complete: (res) => {},
-      })
+      class: '笔试',
+      parentId: options.id
     })
   },
 
@@ -283,7 +316,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getStatus()
+    this.getCurrentBank(this.data.parentId)
   },
 
   /**

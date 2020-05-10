@@ -22,7 +22,7 @@ Page({
   },
  // 处理开始笔试考试
  handleStartWrittenExam: function(modal) {
-  let bank = this.data.bank
+  let {bank, examType} = this.data
   let bankId = bank.id
   let statusObj = {
     id: bankId
@@ -45,9 +45,16 @@ Page({
           statusList,
         }
       }).then(console.log)
-      wx.navigateTo({
-        url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
-      })
+      if (examType == 'written') {
+        wx.navigateTo({
+          url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
+        })
+      } else {
+        wx.navigateTo({
+          url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`
+        })
+      }
+    
 })
 },
   // 处理模态框的关闭

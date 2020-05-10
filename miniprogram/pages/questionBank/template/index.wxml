@@ -17,11 +17,20 @@
         再次答题
       </view>
       </navigator>
-      <navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
+      <block wx:if="{{item.class === '面试题'}}">
+       <navigator url="../viewInterviewQuestion/viewInterviewQuestion?id={{item.id}}">
         <view class="view-result">
         查看结果
         </view>
       </navigator>
+      </block>
+      <block wx:else>
+       <navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
+        <view class="view-result">
+        查看结果
+        </view>
+      </navigator>
+      </block>
     </block>
     <block wx:elif="{{item.status.doing}}">
       <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">

@@ -22,9 +22,15 @@ Page({
     },
     ifPullDown: false, // 是否下拉
     loginStatus: app.globalData.loginStatus, // 登录状态
+    searchValue: '', // 搜索的内容
+    isLoading: true, // 是否还在加载中
   },
   // tabar发生改变的时候重新渲染数据
   onChange(event) {
+
+    this.setData({
+      isLoading: true
+    })
     if (!this.data.loginStatus) {
       wx.navigateTo({
         url: '../../authorization/authorization',
@@ -42,6 +48,9 @@ Page({
     })
     let errres = bankList.filter((item) => {
       return item.status.mistaked === true
+    })
+    this.setData({
+      isLoading: false
     })
     this.setData({
       colBankList: colres,
@@ -145,7 +154,8 @@ Page({
     // 处理点击面试按钮的事件
     banksList.where({
       class: '面试题',
-      industry: this.data.industry
+      industry: this.data.industry,
+
     }).skip(pagesize).get().then(res => {
       let item = {...this.data.item}
       if (e) {
@@ -218,21 +228,12 @@ Page({
             statusList
           }
         }).then(() => {
-       
           this.refleshStatus(item)
           wx.hideLoading()
-          // wx.showToast({
-          //   title: title,
-          //   icon: 'success'
-          // })
-          Toast.success(title);
-          // Toast.loading({
-          //   mask: true,
-          //   message: '加载中...'
-          // });
-          // this.setData({
-          //   item: {...item}
-          // })
+          wx.showToast({
+            title: title,
+            icon: 'success'
+          })
         })
     })
   },
@@ -272,8 +273,7 @@ Page({
       }
       }
     }
-  
- 
+
   
   },
 
@@ -282,6 +282,9 @@ Page({
    */
   onHide: function () {
     this.pageObj.pagesize = 0
+    this.setData({
+      isLoading: true
+    })
   },
 
   /**

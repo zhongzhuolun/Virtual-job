@@ -23,11 +23,12 @@ page {
   text-align: left;
   font-family: PingFangSC-bold;
 }
+
 .bank {
   margin-left: 34rpx;
-  padding-top: 45rpx;
-  height: 620rpx;
+  max-height: 620rpx;
   overflow: auto;
+  padding-top: 50rpx;
 }
 .radio-question,
 .checkbox-question,
@@ -230,6 +231,12 @@ page {
 .correct-blank {
   color: yellow;
 }
+.menu {
+  font-size: 62rpx;
+  text-align: right;
+  margin-right: 28rpx;
+  margin-top: 20rpx;
+}
 .cu-btn {
   position: relative;
   left: -24%;
@@ -271,3 +278,5 @@ page {
   border: 2rpx solid red;
   color: rgb(250, 1, 1);
 }
+
+

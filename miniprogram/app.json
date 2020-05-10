@@ -25,7 +25,9 @@
     "pages/center/replay/replay",
     "pages/center/viewReplay/viewReplay",
     "pages/home/interviewAll/interviewAll",
-    "pages/authorization/authorization"
+    "pages/authorization/authorization",
+    "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
+    "pages/questionBank/answerInterviewQuestion/answerInterviewQuestion"
   ],
   "window": {
     "navigationStyle": "custom"
@@ -41,30 +43,30 @@
     "van-collapse-item": "./miniprogram_npm/vant-weapp/collapse-item/index",
     "cu-custom": "/colorui/components/cu-custom",
     "van-row": "./miniprogram_npm/vant-weapp/row/index",
-    "van-col": "./miniprogram_npm/vant-weapp/col/index"
+    "van-col": "./miniprogram_npm/vant-weapp/col/index",
+    "van-search": "./miniprogram_npm/vant-weapp/search/index"
   },
   "tabBar": {
     "color": "#000000",
     "selectedColor": "#fabf01",
-
     "list": [
       {
         "pagePath": "pages/home/index/index",
         "text": "首页",
-        "iconPath": "./images/icon/home1.png",
-        "selectedIconPath": "./images/icon/home2.png"
+        "iconPath": "./images/icon/homeClose.png",
+        "selectedIconPath": "./images/icon/homeOpen.png"
       },
       {
         "pagePath": "pages/questionBank/index/index",
         "text": "题库",
         "iconPath": "./images/icon/book0.png",
-        "selectedIconPath": "./images/icon/book1.png"
+        "selectedIconPath": "./images/icon/openBook.png"
       },
       {
         "pagePath": "pages/center/index/index",
         "text": "我的",
-        "iconPath": "./images/icon/mine1.png",
-        "selectedIconPath": "./images/icon/mine2.png"
+        "iconPath": "./images/icon/peopleClose.png",
+        "selectedIconPath": "./images/icon/peopleOpen.png"
       }
     ]
   },

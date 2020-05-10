@@ -317,7 +317,11 @@ Page({
   },
   // 再听一次
   handleAgain: function(e) {
-    let {questionsFileArry} = this.data
+
+    let {questionsFileArry, btnDisabled} = this.data
+    if (btnDisabled) {
+      return false
+    }
     let nowIndex = this.pageObj.nowIndex
     questionsFileArry[nowIndex].tempFilePaths.splice(1, 1)
     this.setData({
@@ -402,7 +406,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.stop()
   },
 
   /**

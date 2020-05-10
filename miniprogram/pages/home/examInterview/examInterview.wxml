@@ -10,7 +10,7 @@
 <view class="txt2">题目数量：{{questionObj.count}}道</view>
 <view class="line"></view>
 <image src="../../../images/icon/people.png" class="img1"></image>
-<image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain"></image>
+<image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain" disabled="{{btnDisabled}}"></image>
 <view class="txt3">面试官</view>
 <view class="txt4">若没有听清题目，可点击</view>
 <image src="../../../images/icon/graysou.png" class="img3"></image>

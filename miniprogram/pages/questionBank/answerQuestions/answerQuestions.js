@@ -35,79 +35,35 @@ Page({
     wrongIndex: 0, // 错题序列
     ifViewAnwser: false, // 是否查看答案
     ifSubmitOne: true, // 是否是处于单道题目的提交状态
+    writtenBank: {}
   },
-  // 处理单道题目提交
-  handleOneCommit: function(e) {
-    console.log(e)
-    let {chooseValue, questionIndex, bank} = this.data
+  // 处理确定提交 （此时真正提交）
+  handleComplete: function(e) {
+    // 处理错题和分数评判(分数评判功能可能会取消)
+    // this.handleWrongAndScore()
+    let accuracy = this.handleCorrectRate() // 获取题型的正确率
+    this.handleBankStatus() // 更新题库简介状态
+    this.handleBankStatusDetail(accuracy) // 更新题库详情状态
+    // 跳转到分数界面，并将数据传送过去，包括分数和比例
+    let examBank = {
+      bank: this.data.bank, // 当前题库
+      wrongList: this.data.wrongList, // 错误集合
+      chooseValue: this.data.chooseValue // 用户选择的集合
+    }
     let that = this
-    if (!chooseValue[questionIndex]) {
-      wx.showToast({
-        title: '答案不能为空',
-        icon: 'none'
-      })
-    } else {
-      console.log('确定提交？')
-      wx.showModal({
-        title: '确定提交？',
-        success (res) {
-          if (res.confirm) {
-            that.handleWrongAndScore()
-            if (!bank.bank[questionIndex].mistaked) {
-              wx.showToast({
-                title: '(∩_∩)答对啦！',
-              })
-            } else {
-              wx.showToast({
-                title: 'T_T答错了呢！',
-                icon: 'none'
-              })
-            }
-            that.setData({
-              ifSubmitOne: false,
-              ifViewAnwser: true,
-            })
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
-    }
-  },
-  // 处理提交(此时未真正提交)
-  handleSubmit: function(e) {
-    console.log(this.data.chooseValue)
-    // 显示自定义的确认提交模态框
-    this.setData({
-      ifSubmit: true
-    })
-    // 调用处理未完成的函数
-    this.handleUnfinished()
-  },
-  // 处理继续答题（功能针对所有用户）
-  handleContinue: function(e) {
-    // 显示答题界面，同时重置错题集合
-    this.setData({
-      ifSubmit: false,
-      wrongList: []
-    })
-  },
-  // 处理未完成 （功能针对所有用户）
-  handleUnfinished: function() {
-    let len = this.data.bank.bank.length
-    let emptyQuestions = []
-    let emptyStr = ''
-    for(let i = 0; i < len; i++) {
-      if (this.data.chooseValue[i] == undefined || this.data.chooseValue[i].length == 0) {
-        emptyQuestions.push(i+1)
+    app.globalData.examBank = examBank
+    wx.navigateTo({
+      url: '../endQuestion/endQuestion',
+      events: {
+      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('getAccuracy', accuracy)
+        that.setData({
+          wrongList: []
+        }) 
       }
-    }
-    emptyStr = emptyQuestions.toString()
-    this.setData({
-      emptyQuestions,
-      emptyStr
     })
-   
   },
   // 处理题型的正确率 （功能针对所有用户，但获得的正确率只针对该用户）
   handleCorrectRate: function() {
@@ -260,7 +216,6 @@ Page({
   handleStorage: function() {
 
   },
-
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function() {
     let bank = this.data.bank
@@ -298,7 +253,6 @@ Page({
 
     })
   },
-
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function(accuracy) {
     // let typeNum = data // 拿到用户每种题型的正确率和题库中每种题型的数量
@@ -325,36 +279,6 @@ Page({
       }).then(console.log)
     })
   },
-
-  // 处理确定提交 （此时真正提交）
-  handleComplete: function(e) {
-    // 处理错题和分数评判(分数评判功能可能会取消)
-    // this.handleWrongAndScore()
-    let accuracy = this.handleCorrectRate() // 获取题型的正确率
-    this.handleBankStatus() // 更新题库简介状态
-    this.handleBankStatusDetail(accuracy) // 更新题库详情状态
-    // 跳转到分数界面，并将数据传送过去，包括分数和比例
-    let examBank = {
-      bank: this.data.bank, // 当前题库
-      wrongList: this.data.wrongList, // 错误集合
-      chooseValue: this.data.chooseValue // 用户选择的集合
-    }
-    let that = this
-    app.globalData.examBank = examBank
-    wx.navigateTo({
-      url: '../endQuestion/endQuestion',
-      events: {
-      },
-      success: function(res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('getAccuracy', accuracy)
-        that.setData({
-          wrongList: []
-        }) 
-      }
-    })
-  },
-
   // 专门给填空题使用的
   handleTap: function(e) {
     console.log(e.currentTarget.dataset.type)
@@ -426,88 +350,105 @@ Page({
       // this.data.chooseValue[this.data.index] = value
     }
   },
-    // 处理查看所有评论
-    viewAllComments: function(e) {
-      console.log(e)
-      this.setData({
-        ifViewAllComments: !this.data.ifViewAllComments
+  // 处理查看答案
+  viewAnwser: function(e) {
+    this.setData({
+      ifViewAnwser: !this.data.ifViewAnwser
+    })
+  },
+  // 处理单道题目提交
+  handleOneCommit: function(e) {
+    let {chooseValue, questionIndex, bank, questionModal} = this.data
+    let that = this
+    if (!chooseValue[questionIndex]) {
+      wx.showToast({
+        title: '答案不能为空',
+        icon: 'none'
       })
-    },
-    // 处理查看答案
-    viewAnwser: function(e) {
-      this.setData({
-        ifViewAnwser: !this.data.ifViewAnwser
-      })
-    },
-    // 处理下一题
-    handleNext: function(e) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      let {questionIndex, correct_answer, bank, chooseValue, ifSubmitOne, ifViewAnwser} = this.data
-        if (questionIndex < bank.bank.length - 1) {
-          questionIndex++
-          correct_answer = bank.bank[questionIndex].correct_answer.toString()
-          if (!chooseValue[questionIndex]) {
-            console.log(chooseValue[questionIndex], '未作答')
-            ifSubmitOne = true
-            ifViewAnwser = false
-          } else {
-            console.log(chooseValue[questionIndex], '已作答')
-            ifSubmitOne = false
-            ifViewAnwser = true
-          }
-          this.setData({
-            questionIndex,
-            correct_answer,
-            ifSubmitOne,
-            ifViewAnwser
-          }, () => {
-            wx.hideLoading({
-              complete: (res) => {},
-            })
+    } else {
+      if (questionModal === 'fighter') {
+        this.handleWrongAndScore()
+        if (!bank.bank[questionIndex].mistaked) {
+          wx.showToast({
+            title: '(∩_∩)答对啦！',
+            duration: 1000,
+            complete: () => {
+              this.handleNext()
+            }
           })
         } else {
-          // 代表当前已经答完题目
-          this.handleComplete()
-        }
-   
-    },
-    // 处理上一题
-    handlePre: function(e) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      let {questionIndex, correct_answer, bank} = this.data
- 
-        if (questionIndex > 0) {
-          questionIndex--
-          correct_answer = bank.bank[questionIndex].correct_answer.toString()
-          this.setData({
-            questionIndex,
-            correct_answer,
-            ifSubmitOne: false,
-            ifViewAnwser: true
-          }, () => {
-            wx.hideLoading({
-              complete: (res) => {},
-            })
+          wx.showToast({
+            title: 'T_T答错了呢！',
+            icon: 'none',
+            duration: 1000,
+            complete: () => {
+              this.handleNext()
+            }
           })
         }
-    },
-    // 处理菜单的点击
-    handleMenu: function(e) {
-      console.log(e)
+
+      } else {
+        this.handleWrongAndScore()
+        if (!bank.bank[questionIndex].mistaked) {
+          wx.showToast({
+            title: '(∩_∩)答对啦！',
+          })
+        } else {
+          wx.showToast({
+            title: 'T_T答错了呢！',
+            icon: 'none'
+          })
+        }
         this.setData({
-          modalName: e.currentTarget.dataset.target
+          ifSubmitOne: false,
+          ifViewAnwser: true,
         })
-    },
-    // 处理模态框的关闭
-    hideModal: function(e) {
-      this.setData({
-        modalName: null
-      })
-    },
+      }
+
+    }
+  },
+  // 处理下一题
+  handleNext: function(e) {
+  
+    let {questionIndex, correct_answer, bank, chooseValue, ifSubmitOne, ifViewAnwser} = this.data
+      if (questionIndex < bank.bank.length - 1) {
+        questionIndex++
+        correct_answer = bank.bank[questionIndex].correct_answer.toString()
+        if (!chooseValue[questionIndex]) {
+          console.log(chooseValue[questionIndex], '未作答')
+          ifSubmitOne = true
+          ifViewAnwser = false
+        } else {
+          console.log(chooseValue[questionIndex], '已作答')
+          ifSubmitOne = false
+          ifViewAnwser = true
+        }
+        this.setData({
+          questionIndex,
+          correct_answer,
+          ifSubmitOne,
+          ifViewAnwser
+        })
+      } else {
+        // 代表当前已经答完题目
+        this.handleComplete()
+      }
+  
+  },
+  // 处理上一题
+  handlePre: function(e) {
+    let {questionIndex, correct_answer, bank} = this.data
+      if (questionIndex > 0) {
+        questionIndex--
+        correct_answer = bank.bank[questionIndex].correct_answer.toString()
+        this.setData({
+          questionIndex,
+          correct_answer,
+          ifSubmitOne: false,
+          ifViewAnwser: true
+        })
+      }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -540,7 +481,7 @@ Page({
       console.log(res.data)
       let bank = res.data[0]
       this.setData({
-        bank
+        writtenBank: bank
       }, () => {
         wx.hideLoading({})
       })

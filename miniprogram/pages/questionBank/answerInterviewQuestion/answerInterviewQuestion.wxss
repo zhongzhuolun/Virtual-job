@@ -1,19 +1,19 @@
-/* miniprogram/pages/home/wrongAll/wrongAll.wxss */
+
 page {
-  background: white;
-}
-scroll-view{
   background-color: rgba(255, 255, 255, 1);
 }
 .menu {
+  position: relative;
   width: 64rpx;
   height: 64rpx;
   font-size: 62rpx;
-  float: right;
+  left: 668rpx;
+  top: -63rpx;
 }
 .bank-wrap {
   background: white;
   padding-bottom: 150rpx;
+
 }
 .bank-title {
   margin-left: 34rpx;
@@ -26,16 +26,15 @@ scroll-view{
 }
 .score-time {
   margin-left: 34rpx;
-  margin-top: 65rpx;
-  margin-bottom: 30rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  margin-top: 28rpx;
+
 }
 .line {
-  /* position: absolute; */
   width: 750rpx;
   border: 1rpx solid rgba(187, 187, 187, 1);
 }
@@ -44,47 +43,6 @@ scroll-view{
   padding-top: 45rpx;
   height: 520rpx;
   overflow: auto;
-}
-.radio-question,
-.checkbox-question,
-.blank-question,
-.sort-question {
-  display: flex;
-  flex-direction: column;
-  color: rgba(16, 16, 16, 1);
-  font-size: 30rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  margin-bottom: 15rpx;
-}
-
-.my-choosebox {
-  display: block;
-}
-.my-choosebox text {
-  margin-left: 20rpx;
-}
-.my-choosebox radio {
-  transform: scale(0.6);
-  border-radius: 50%;
-  border: 4rpx solid transparent;
-  background: transparent;
-}
- .my-choosebox checkbox {
-  transform: scale(0.6);
-  border: 4rpx solid transparent;
-  background: transparent;
-}
-.blank-question input, .sort-question input {
-  width: 690rpx;
-  height: 72rpx;
-  color: rgba(136, 136, 136, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: -apple-system;
-  border: 1rpx solid rgba(187, 187, 187, 1);
-  padding-left: 1em;
-  margin-top: 10rpx;
 }
 
 .correct-analyse {
@@ -210,12 +168,6 @@ scroll-view{
   padding-top: 100rpx;
 }
 
-.wrong-blank {
-  color: red;
-}
-.correct-blank {
-  color: yellow;
-}
 .cu-btn {
   position: relative;
   left: -24%;
@@ -226,17 +178,12 @@ scroll-view{
   flex-wrap: wrap;
   justify-content: space-around;
   background: white;
-  padding-top: 40rpx;
 }
 .cu-dialog {
   border-radius: 11px;
   box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
   border: 2px solid rgba(250, 191, 1, 1);
 }
-.cu-dialog .cubar {
-  padding-top: 30rpx;
-}
-
 .question-index-wrap .question-index {
   width: 72rpx;
   height: 72rpx;
@@ -253,7 +200,16 @@ scroll-view{
   border: 2rpx solid rgba(250, 191, 1, 1);
   color: rgba(250, 191, 1, 1);
 }
-.question-index-wrap .wrong {
-  border: 2rpx solid red;
-  color: rgb(250, 1, 1);
+.no-comments {
+  text-align: center;
+}
+.view-answer {
+  width: 112rpx;
+  height: 40rpx;
+  color: rgba(139, 137, 129, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  border-bottom: 2rpx solid rgba(187, 187, 187, 1);
+  margin-top: 18rpx;
 }

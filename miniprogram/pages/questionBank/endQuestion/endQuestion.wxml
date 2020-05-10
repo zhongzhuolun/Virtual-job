@@ -46,7 +46,7 @@
 <view class="score6">{{questionTypesRate.blank}}</view>
 <view class="score7">{{questionTypesRate.sort}}</view>
 <navigator url="../index/index" open-type="switchTab"><button  class="button1">返回题库</button></navigator>
-<navigator url="../viewQuestions/viewQuestions?class=笔试"><button class="button2">查看试卷</button></navigator>
+<navigator url="../viewQuestions/viewQuestions?class=笔试&id={{id}}"><button class="button2">查看试卷</button></navigator>
 
 
 
