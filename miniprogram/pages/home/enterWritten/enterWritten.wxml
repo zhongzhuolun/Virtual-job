@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="written">
 	<view class="textCover">
-		<text>2019百度秋招前端工程师笔试题</text>
+		<text>{{bank.title}}</text>
 	</view>
 	<view class="qusetionType">题型</view>
 	<view class="singleChoice">单选题</view>

@@ -25,7 +25,7 @@
 .qusetionType,.singleChoice,.multipleChoice,.budingxiang,.panduan,
 .tiankong, .paixu{
   position: absolute;
-  left: 133rpx;
+  left: 136rpx;
   width: 222rpx;
   height: 78rpx;
   line-height: 40rpx;

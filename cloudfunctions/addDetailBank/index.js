@@ -3,13 +3,13 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 const db = cloud.database()
-const banksList = db.collection('banks-list')
+const interviewQuestions = db.collection('interviewQuestions')
 
 // 云函数入口函数
 exports.main = async (event, context) => {
 
-  return await banksList.add({
-    data: event.bank
+  return await interviewQuestions.add({
+    data: event.detailBank
   })
 
 }

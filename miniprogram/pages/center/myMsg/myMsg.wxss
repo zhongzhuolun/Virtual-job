@@ -11,7 +11,7 @@ page{
   border-radius: 16rpx;
   text-align: center;
   box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
-  border: 1rpx solid rgba(255, 255, 255, 0);
+  border: 2rpx solid rgba(255, 255, 255, 0);
 }
 .line1,.line2{
   position: absolute;
@@ -26,15 +26,15 @@ page{
 }
 .line2{
   position: absolute;
-  top: 139px;
+  top: 302rpx;
 
 }
 .viewReplay1,.viewReplay2,.viewReplay3{
-  position: absolute;
+  position: relative;
   left: 0rpx;
   width: 698rpx;
   height: 141rpx;
-  border: 1rpx solid rgba(250, 191, 1, 0.47);
+  border-bottom: 2rpx solid rgba(250, 191, 1, 0.47);
 }
 .viewReplay1{
   position: absolute;
@@ -47,14 +47,15 @@ page{
 .viewReplay3{
   position: absolute;
   top: 274rpx;
+  border-bottom: none;
 }
 .tupian1,.tupian2,.tupian3{
     position: absolute;
-    left: 66rpx;
-    top: 35rpx;
+    left: 45rpx;
+    top: 45rpx;
     width: 64rpx;
     height: 64rpx;
-    background-color: rgba(250, 191, 1, 1);
+    font-size: 64rpx;
 }
 .wenben1,.wenben2,.wenben3{
   position: absolute;
@@ -69,7 +70,7 @@ page{
 }
 .geshu{
   position: absolute;
-  left: 642rpx;
+  left: 615rpx;
   top: 45rpx;
   width: 48rpx;
   height: 48rpx;
@@ -81,7 +82,7 @@ page{
 }
 .ziti{
   position: absolute;
-  left: 656rpx;
+  left: 630rpx;
   top: 49rpx;
   width: 18rpx;
   height: 32rpx;

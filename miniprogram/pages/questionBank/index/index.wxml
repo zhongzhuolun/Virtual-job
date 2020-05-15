@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="my-search">
 <text class="cuIcon-search"></text>
-  <input type="text" value="{{searchValue}}" placeholder="查找试卷"></input>
+  <input type="text" value="{{searchValue}}"  bindinput="handleSearch" placeholder="查找试卷"></input>
 </view>
 <view class="wrap">
   <view style="background: #ffc000">
@@ -43,12 +43,13 @@
         <view hidden="{{!isLoading}}" class="loading-img">
            <image  src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
         </view>
-   
-        
-          <block wx:if="{{item.bankList.length > 0}}">
+          <block hidden="{{isLoading}}" wx:if="{{item.bankList.length > 0}}">
+          <scroll-view  bindscrolltolower="myReachBottom" scroll-y="true" style="height: 600rpx;">
             <view wx:for="{{item.bankList}}" wx:key="id">
               <template is="bankItem" data="{{item}}" />
             </view>
+          </scroll-view>
+            
           </block>
           <block wx:else>
           <view class="no-bank">
@@ -60,10 +61,16 @@
           <view hidden="{{!isLoading}}" class="loading-img">
             <image  src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
           </view>
-          <block wx:if="{{colBankList.length > 0}}">
+          <block hidden="{{isLoading}}"  wx:if="{{colBankList.length > 0}}">
+            <!-- <view wx:for="{{item.bankList}}" wx:key="id">
+              <template is="bankItem" data="{{item}}" />
+            </view> -->
+          <scroll-view bindscrolltoupper="" bindscrolltolower="{{myReachBottom}}" scroll-y="true" style="height: 600rpx;">
             <view wx:for="{{colBankList}}" wx:key="id">
               <template is="bankItem" data="{{item}}" />
             </view>
+          </scroll-view>
+
           </block>
           <block wx:else>
           <view class="no-bank">
@@ -76,11 +83,15 @@
           <view hidden="{{!isLoading}}" class="loading-img">
             <image  src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
           </view>
-          <block  wx:if="{{errBankList.length > 0}}">
+          <block  hidden="{{isLoading}}" wx:if="{{errBankList.length > 0}}">
+          <scroll-view scroll-y="true" style="height: 600rpx;">
+            
             <view wx:for="{{errBankList}}" wx:key="id">
               <template is="bankItem" data="{{item}}" />
             </view>
+          </scroll-view>
           </block>
+
           <block wx:else>
           <view class="no-bank">
             暂时没有出现该行业的错题哦~

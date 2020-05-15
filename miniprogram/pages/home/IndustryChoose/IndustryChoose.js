@@ -16,133 +16,71 @@ Page({
     industryData: {
       "classes": [
         {
-          "class": "校园",
-          "posts": [
-            {
-              "post": "学生会",
-              "skill": ["学习部", "体育部", "组织部", "主席团"]
-            },
-            {
-              "post": "校团委",
-              "skill": ["主席团",]
-            }
-          ]
-        },
-        {
           "class": "技术",
           "posts": [
             {
-              "post": "后端开发",
-              "skill": ["全栈工程师", "GIS工程师", "Java", "C++"]
-            },
-            {
               "post": "移动开发",
-              "skill": ["HTML5", "JavaScript", "移动web前端", "iOS", "前端"]
+              "skill": ["前端"]
             }
           ]
         },
         {
-          "class": "产品",
+          "class": "医疗健康",
           "posts": [
             {
-              "post": "产品经理",
-              "skill": ["硬件产品经理", "产品经理", "网页产品经理", "移动产品经理"]
-            },
-            {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
-            },
-            {
-              "post": "其他产品职位",
-              "skill": ["其他产品职位"]
+              "post": "护士/护理",
+              "skill": ["护士长", "护士", "导医"]
             }
           ]
         },
         {
-          "class": "经理",
+          "class": "金融",
           "posts": [
             {
-              "post": "产品经理",
-              "skill": ["硬件产品经理"]
+              "post": "税务审计",
+              "skill": ["会计"]
             },
             {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
+              "post": "银行",
+              "skill": ["银行"]
             }
           ]
         },
         {
-          "class": "设计",
+          "class": "销售",
           "posts": [
             {
-              "post": "产品经理",
-              "skill": ["硬件产品经理"]
-            },
-            {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
+              "post": "销售",
+              "skill": ["销售"]
             }
           ]
         },
         {
-          "class": "运营",
+          "class": "通用",
           "posts": [
             {
-              "post": "产品经理",
-              "skill": ["硬件产品经理"]
-            },
-            {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
+              "post": "通用",
+              "skill": ["通用"]
             }
           ]
         },
         {
-          "class": "市场",
+          "class": "外企",
           "posts": [
             {
-              "post": "产品经理",
-              "skill": ["硬件产品经理"]
-            },
-            {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
+              "post": "外企",
+              "skill": ["外企"]
             }
           ]
         },
-        {
-          "class": "人事",
-          "posts": [
-            {
-              "post": "产品经理",
-              "skill": ["硬件产品经理"]
-            },
-            {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
-            }
-          ]
-        },
-        {
-          "class": "高级管理",
-          "posts": [
-            {
-              "post": "产品经理",
-              "skill": ["硬件产品经理"]
-            },
-            {
-              "post": "高端产品职位",
-              "skill": ["产品总监"]
-            }
-          ]
-        }
       ]
     },
     activeName: 0,
-    examType: ''
+    examType: '',
+    center: ''
   },
   handleConfirm() {
-    let {industry, examType} = this.data
+    let {industry, examType, tabbar} = this.data
     if (industry === '') {
       wx.showToast({
         title: '请选择一项职位',
@@ -161,6 +99,8 @@ Page({
         wx.navigateTo({
           url: '../enterWritten/enterWritten?examType=笔试题',
         })
+      } else if (tabbar === 'center') {
+        wx.navigateBack()
       } else {
         wx.switchTab({
           url: '../../questionBank/index/index',
@@ -176,6 +116,9 @@ Page({
     })
   },
   onLoad(option) {
+    this.setData({
+      tabbar: option.tabbar
+    })
     wx.showLoading({
       title: '加载中...',
       mask: true

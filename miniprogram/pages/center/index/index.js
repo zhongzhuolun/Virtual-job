@@ -19,6 +19,10 @@ Page({
         url: '../../authorization/authorization',
       })
       return
+    } else {
+      wx.navigateTo({
+        url: '../myBanks/myBanks',
+      })
     }
   },
   interviewCurrent: function(e) {
@@ -27,6 +31,10 @@ Page({
         url: '../../authorization/authorization',
       })
       return
+    } else {
+      wx.navigateTo({
+        url: '../InterviewScenes/InterviewScenes',
+      })
     }
   },
 
@@ -36,6 +44,10 @@ Page({
         url: '../../authorization/authorization',
       })
       return
+    } else {
+      wx.navigateTo({
+        url: '../myMsg/myMsg',
+      })
     }
   },
 
@@ -45,6 +57,10 @@ Page({
         url: '../../authorization/authorization',
       })
       return
+    } else {
+      // wx.navigateTo({
+      //   url: '../',
+      // })
     }
   },
 

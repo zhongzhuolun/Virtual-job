@@ -47,6 +47,8 @@ Page({
         })
       } else {
         // 代表查看总结
+        this.handleBankStatus() // 更新题库简介状态
+        this.handleBankStatusDetail() // 更新题库详情状态
         wx.navigateTo({
           url: `../endInterviewQuestion/endInterviewQuestion?id=${writtenBank.parentId}`,
         })
@@ -199,6 +201,59 @@ Page({
       ifViewAnwser: !this.data.ifViewAnwser
     })
   },
+    // 处理更新题库简介状态（只更新该用户的数据）
+    handleBankStatus: function() {
+      let bank = this.data.writtenBank
+      let bankId = bank.parentId
+      let statusObj = {
+        id: bankId
+      }
+      bank.status.doing = false
+      bank.status.done = true
+      statusObj.status = bank.status
+      bankStatusList.get().then(res => {
+        let statusList = res.data[0].statusList
+        let result = statusList.findIndex((value) => {
+          return value.id == bankId
+        })
+        if(result !== -1) {
+          statusList[result].status.doing = false
+          statusList[result].status.done = true
+        } else {
+          statusList.push(statusObj)
+        }
+        wx.cloud.callFunction({
+          name: 'updateBankStatus',
+          data: {
+            statusList,
+          }
+        }).then(console.log)
+      })
+    },
+  
+    // 处理更新题库详情状态 （只更新该用户的数据）
+    handleBankStatusDetail: function() {
+      let bank = this.data.writtenBank
+      let bankId = bank.parentId
+      // bank.questionsFileArry = this.data.questionsFileArry
+      interviewBankForUser.get().then((res) => {
+        let interviewBankList = res.data[0].interviewBankList
+        let result = interviewBankList.findIndex((value) => {
+          return value.parentId == bankId
+        })
+        if(result !== -1) {
+          interviewBankList[result] = bank
+        } else {
+          interviewBankList.push(bank)
+        }
+        wx.cloud.callFunction({
+          name: 'updateInterviewBank',
+          data: {
+            interviewBankList,
+          }
+        }).then(console.log)
+      })
+    },
   /**
    * 生命周期函数--监听页面加载
    */

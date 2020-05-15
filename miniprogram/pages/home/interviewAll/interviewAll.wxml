@@ -43,8 +43,8 @@
 						<text id="{{writtenBank.questions[questionIndex].id}}" bindtap="handleAudioPlay" style="font-size: 48rpx;" class="cuIcon-notificationfill text-yellow"></text>
 					</view>
 					<view class="correct-analyse">
-						<view>解析：{{writtenBank.questions[questionIndex].analyse}}</view>
-						<view>参考答案：<text class="text-yellow">{{writtenBank.questions[questionIndex].refer_answer}}</text></view> <br />
+						<view wx:if="{{writtenBank.questions[questionIndex].analyse}}">解析：{{writtenBank.questions[questionIndex].analyse}}</view>
+						<view wx:if="{{writtenBank.questions[questionIndex].refer_answer}}">参考答案：<text class="text-yellow">{{writtenBank.questions[questionIndex].refer_answer}}</text></view> <br />
 					</view>
 				</view>
 		</view>

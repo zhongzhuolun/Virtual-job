@@ -1,17 +1,28 @@
 <!--miniprogram/pages/center/myCenter/myCenter.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
 	<view slot="backText">个人资料</view>
 </cu-custom>
-
-<view class="myCenter1">
-<navigator class="changeTouxiang">更换头像</navigator>
-<image class="touxiang" src="../../../images/icon/lightsou.png"></image>
-<view class="line1"></view>
-<view class="nicheng">小黄昵称</view>
-<view class="mingzi">Christine</view>
-<view class="line2"></view>
-<view class="tuichu">退出登录</view>
+<view class="wrap">
+	<view class="change-avatar">
+		<image src="{{userInfo.avatarUrl}}"></image>
+	</view>
+	<view class="usr-name">
+		<text>小黄昵称</text>
+		<text>{{userInfo.nickName}}</text>
+	</view>
+	<view bindtap="changeIndustry" class="industry">
+		<text>所选行业</text>
+		<text>{{industry}}</text>
+	</view>
 </view>
-<view class="blankBox1"></view>
-
+<!-- <view class="myCenter1">
+	<navigator class="changeTouxiang">更换头像</navigator>
+	<image class="touxiang" src="../../../images/icon/lightsou.png"></image>
+	<view class="line1"></view>
+	<view class="nicheng">小黄昵称</view>
+	<view class="mingzi">Christine</view>
+	<view class="line2"></view>
+	<view class="tuichu">退出登录</view>
+</view>
+<view class="blankBox1"></view> -->

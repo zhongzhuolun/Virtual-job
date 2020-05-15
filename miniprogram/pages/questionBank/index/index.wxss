@@ -225,12 +225,10 @@ image {
 }
 .loading-img {
   position: absolute;
-  height: 400rpx;
+  height: 600rpx;
   width: 100%;
   background: white;
   z-index: 100;
 }
-.loading-img image {
-  height: 100%;
-}
+
 

@@ -45,15 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    banksList.where({
-      class: '笔试题', 
-      industry: this.data.industry,
-      id: 10 // 暂时写死（后期应该为随机，且优先选择用户未曾刷过的题）
-    }).get().then((res) => {
-      this.setData({
-        bank: res.data[0]
-      })
-    })
+
   },
 
   /**
@@ -67,7 +59,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let industry = wx.getStorageSync('industry')
+    this.setData({
+      industry
+    })
+    banksList.where({
+      class: '笔试题', 
+      industry,
+      // id: 10 // 暂时写死（后期应该为随机，且优先选择用户未曾刷过的题）
+    }).get().then((res) => {
+      console.log(res.data)
+      let bankLists = res.data
+      let index = Math.floor(Math.random(0,1)*bankLists.length)
+      // console.log(Math.floor(Math.random(0,1)*bankLists.length))
+      console.log(res)
+      this.setData({
+        bank: res.data[index]
+      })
+    })
   },
 
   /**

@@ -1,0 +1,14 @@
+<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+	<view slot="content"></view>
+	<view slot="backText">面试现场</view>
+</cu-custom>
+<view class="wrap">
+  <view class="item">
+    <text class="title">1.请介绍一下你自己。</text>
+    <view class="video-wrap"></view>
+  </view>
+  <view class="item">
+    <text class="title">2.如果你的同事让你帮他完成工作，可是你……，但他……，你会怎么做？</text>
+    <view class="video-wrap"></view>
+  </view>
+</view>

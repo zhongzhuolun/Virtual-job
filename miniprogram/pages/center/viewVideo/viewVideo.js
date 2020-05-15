@@ -1,18 +1,13 @@
-// miniprogram/pages/center/myCenter/myCenter.js
+// miniprogram/pages/center/viewVideo/viewVideo.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    industry: ''
+
   },
-  changeIndustry: function(e) {
-    wx.navigateTo({
-      url: '../../home/IndustryChoose/IndustryChoose?tabbar=center',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -31,12 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let userInfo = wx.getStorageSync('userInfo')
-    let industry = wx.getStorageSync('industry')
-    this.setData({
-      userInfo,
-      industry
-    })
+
   },
 
   /**

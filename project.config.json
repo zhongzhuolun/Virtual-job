@@ -213,6 +213,40 @@
 					"pathName": "pages/questionBank/endQuestion/endQuestion",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/text",
+					"pathName": "pages/text",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/index/index",
+					"pathName": "pages/center/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/myBanks/myBanks",
+					"pathName": "pages/center/myBanks/myBanks",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/InterviewScenes/InterviewScenes",
+					"pathName": "pages/center/InterviewScenes/InterviewScenes",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/viewReplay/viewReplay",
+					"pathName": "pages/center/viewReplay/viewReplay",
+					"scene": null
 				}
 			]
 		}

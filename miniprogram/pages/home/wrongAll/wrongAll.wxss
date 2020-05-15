@@ -1,4 +1,7 @@
 /* miniprogram/pages/home/wrongAll/wrongAll.wxss */
+page {
+  background-color: rgba(255, 255, 255, 1);
+}
 scroll-view{
   background-color: rgba(255, 255, 255, 1);
 }
@@ -42,7 +45,8 @@ scroll-view{
 .bank {
   margin-left: 34rpx;
   padding-top: 45rpx;
-  height: 520rpx;
+  /* height: 520rpx; */
+  height: 50vh;
   overflow: auto;
   
 }
@@ -71,10 +75,21 @@ scroll-view{
   border: 4rpx solid transparent;
   background: transparent;
 }
+.my-choosebox .no-radio {
+  border: 4rpx solid rgba(250, 191, 1, 1);
+}
  .my-choosebox checkbox {
   transform: scale(0.6);
   border: 4rpx solid transparent;
   background: transparent;
+}
+.my-choosebox .no-checkbox {
+  border: 4rpx solid rgba(250, 191, 1, 1);
+}
+.yourblank {
+  font-size: 36rpx;
+  margin-top: 28rpx;
+  font-family: PingFangSC-regular;
 }
 .blank-question input, .sort-question input {
   width: 690rpx;
@@ -97,6 +112,7 @@ scroll-view{
 }
 .comments {
   padding: 30rpx;
+  height: 203rpx;
 }
 .comment {
   position: relative;
@@ -178,7 +194,7 @@ scroll-view{
 .next-size {
   position: relative;
   background: white;
-  height: 200rpx;
+  height: 130rpx;
 }
 .chekckout-question {
   width: 164rpx;
@@ -201,21 +217,21 @@ scroll-view{
   margin-left: 40rpx;
 }
 .page-size {
-  margin: 0 auto;
-  width: 60rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
-  text-align: left;
   font-family: PingFangSC-regular;
-  padding-top: 100rpx;
+  position: absolute;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .wrong-blank {
   color: red;
 }
 .correct-blank {
-  color: yellow;
+  color: rgba(250, 191, 1, 1);
 }
 .cu-btn {
   position: relative;
@@ -257,4 +273,10 @@ scroll-view{
 .question-index-wrap .wrong {
   border: 2rpx solid red;
   color: rgb(250, 1, 1);
+}
+radio .wx-radio-input.wx-radio-input-disabled {
+  background: white;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-disabled {
+  background: white;
 }

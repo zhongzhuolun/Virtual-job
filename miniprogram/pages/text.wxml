@@ -1,0 +1,17 @@
+<!--miniprogram/pages/text.wxml-->
+<cu-custom bgColor="bg-yellow" >
+	<view slot="content">text</view>
+</cu-custom>
+<button bindtap="getBankList">
+  获取面试题库简介
+</button>
+<button bindtap="addBank">
+  新增面试题库简介
+</button>
+<button bindtap="getInterview">
+  获取面试题库详情
+</button>
+<button bindtap="addInterview">
+  新增面试题库详情
+</button>
+

@@ -20,10 +20,12 @@ Page({
       bankList: [], // 题库简介数据
       statusList: [] // 题库状态数据
     },
-    ifPullDown: false, // 是否下拉
+    ifPullDown: false, // 是否下拉完成
     loginStatus: app.globalData.loginStatus, // 登录状态
     searchValue: '', // 搜索的内容
     isLoading: true, // 是否还在加载中
+    // ifRefresh: false, // 是否下拉刷新
+    searchValue: '', // 搜索内容
   },
   // tabar发生改变的时候重新渲染数据
   onChange(event) {
@@ -39,6 +41,19 @@ Page({
     }
     let item = {...this.data.item}
     this.refleshStatus(item)
+  },
+  // 除了搜索
+  handleSearch: function(e) {
+    let value = e.detail.value
+    this.setData({
+      searchValue: value
+    })
+      if(this.data.checkoutBank === 'written') {
+        this.handleWritten('search')
+      } else {
+        this.handleInterview('search')
+      }
+    
   },
   // 获取收藏和错题集
   getColErrBank() {
@@ -76,6 +91,10 @@ Page({
         item: {...item}
       }, () => {
         this.getColErrBank()
+        // this.setData({
+        //   ifRefresh: false,
+        //   ifPullDown: false
+        // })
         wx.stopPullDownRefresh({
           success: () => {
             this.setData({
@@ -83,6 +102,7 @@ Page({
             })
           }
         }); // 默认停止用户下拉刷新的状态
+        // this.bindrefresherrestore()
         wx.hideLoading()
       })
 
@@ -97,17 +117,23 @@ Page({
       })
       return
     }
-    let pagesize;
+    let {searchValue} = this.data
+    let options = {
+      class: '笔试题',
+      industry: this.data.industry,
+      title: {
+        $regex: ".*" + searchValue + ".*",
+        $options: 'i'
+      }
+    }
+    let pagesize
     if (e) {
       this.pageObj.pagesize = 0
       pagesize = 0
     } else {
       pagesize = this.pageObj.pagesize
     }
-    banksList.where({
-      class: '笔试题',
-      industry: this.data.industry
-    }).skip(pagesize).get().then(res => {
+    banksList.where(options).skip(pagesize).orderBy('id', 'desc').get().then(res => {
       console.log(res.data)
       let item = {...this.data.item}
       if (e) {
@@ -125,6 +151,13 @@ Page({
           item.bankList = item.bankList.concat(res.data)
         }
         this.refleshStatus(item)
+      } else {
+        // 代表没有数据
+        item.bankList = []
+        this.setData({
+          isLoading: false,
+          item       
+        })
       }
 
     })
@@ -143,6 +176,15 @@ Page({
       })
       return
     }
+    let {searchValue} = this.data
+    let options = {
+      class: '面试题',
+      industry: this.data.industry,
+      title: {
+        $regex: ".*" + searchValue + ".*",
+        $options: 'i'
+      }
+    }
     let pagesize;
     if (e) {
       this.pageObj.pagesize = 0
@@ -150,13 +192,7 @@ Page({
     } else {
       pagesize = this.pageObj.pagesize
     }
- 
-    // 处理点击面试按钮的事件
-    banksList.where({
-      class: '面试题',
-      industry: this.data.industry,
-
-    }).skip(pagesize).get().then(res => {
+    banksList.where(options).skip(pagesize).orderBy('id', 'desc').get().then(res => {
       let item = {...this.data.item}
       if (e) {
         item.bankList = []
@@ -173,6 +209,13 @@ Page({
           item.bankList = item.bankList.concat(res.data)
         }
         this.refleshStatus(item)
+      } else {
+        // 代表没有数据
+        item.bankList = []
+        this.setData({
+          isLoading: false,
+          item       
+        })
       }
     })
 
@@ -290,10 +333,37 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
+  // pulling: function() {
+  //   this.setData({
+  //     ifRefresh: true
+  //   })
+  //   console.log('pull')
+  // },
+  // refresh: function() {
+   
+  //   this.myPullDownRefresh()
+
+  //   console.log('refresh')
+  // },
+  // restore: function() {
+  //   // this.myPullDownRefresh()
+  //   console.log('restore')
+  // },
+  // myPullDownRefresh: function(e) {
+  //   this.pageObj.pagesize = 0
+  //   this.setData({
+  //     ifPullDown: true,
+  //     ifRefresh: false
+  //   }, () => {
+  //     if(this.data.checkoutBank === 'written') {
+  //       this.handleWritten()
+  //     } else {
+  //       this.handleInterview()
+  //     }
+  //   })
+  // },
   onPullDownRefresh: function (e) {
-    console.log(e)
     this.pageObj.pagesize = 0
-    console.log(this.pageObj)
     this.setData({
       ifPullDown: true
     }, () => {
@@ -314,7 +384,7 @@ Page({
     /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function (e) {
+  myReachBottom: function(e) {
     this.pageObj.ifBottom = true
     if (this.pageObj.ifAdd) {
       this.pageObj.pagesize += 20
@@ -324,6 +394,17 @@ Page({
         this.handleInterview()
       }
     } 
+  },
+  onReachBottom: function (e) {
+    // this.pageObj.ifBottom = true
+    // if (this.pageObj.ifAdd) {
+    //   this.pageObj.pagesize += 20
+    //   if(this.data.checkoutBank === 'written') {
+    //     this.handleWritten()
+    //   } else {
+    //     this.handleInterview()
+    //   }
+    // } 
   
   },
 

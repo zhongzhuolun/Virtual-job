@@ -1,6 +1,58 @@
 <!--miniprogram/pages/center/viewReplay/viewReplay.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
-	<view slot="backText">收到的赞/回复</view>
+	<block wx:if="{{type === 'replay'}}">
+		<view slot="backText">收到回复</view>
+	</block>
+	<block wx:elif="{{type === 'appre'}}">
+		<view slot="backText">收到的赞</view>
+	</block>
+	<block wx:else>
+		<view slot="backText">系统通知</view>
+	</block>
 </cu-custom>
-<text>查看回复，查看点赞</text>
+<view class="wrap">
+	<block wx:if="{{type === 'replay'}}">
+		<view class="item">
+			<view class="avatar">
+				<image src="../../../images/icon/people.png"></image>
+			</view>
+			<view class="content">
+				<view class="user">
+					<text class="user-name">马克西姆11111111111111</text>
+					<text class="replay">回复了你的评论</text>
+				</view>
+				<view class="time">
+					<text>04-30</text>
+				</view>
+			</view>
+			<view class="dot">
+				<text class="cuIcon-title text-yellow"></text>
+			</view>
+		</view>
+	</block>
+	<block wx:elif="{{type === 'appre'}}">
+		<view class="item">
+			<view class="avatar">
+				<image src="../../../images/icon/people.png"></image>
+			</view>
+			<view class="content">
+				<view class="user">
+					<text class="user-name">马克西姆11111111111111</text>
+					<text class="replay">点赞了你的评论</text>
+				</view>
+				<view class="time">
+					<text>04-30</text>
+				</view>
+			</view>
+			<view class="dot">
+				<text class="cuIcon-title text-yellow"></text>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="item">
+			<text class="info">新增10套前端笔试题</text>
+		</view>
+	</block>
+</view>

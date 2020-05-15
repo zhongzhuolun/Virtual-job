@@ -1,27 +1,24 @@
 <!--miniprogram/pages/center/myMsg/myMsg.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
 	<view slot="backText">我的消息</view>
 </cu-custom>
-<!--主页面-->
 <view class="blankBox">
-<navigator  url="../viewReplay/viewReplay" class="viewReplay1">
-<image src="../../../images/icon/graysou.png" class="tupian1"></image>
-<text class="wenben1">收到回复</text>  
-<view class="geshu"></view><text class="ziti">1</text> 
-</navigator>
-
-<view class="line1"></view>
-<navigator url="../viewReplay/viewReplay" class="viewReplay2">
-<image src="../../../images/icon/graysou.png" class="tupian2"></image>
-<text class="wenben2">收到的赞</text> 
-</navigator>
-
-<view class="line2"></view>
-<navigator url="../viewReplay/viewReplay" class="viewReplay3">
-<image src="../../../images/icon/graysou.png" class="tupian3"></image>
-<text class="wenben3">系统通知</text> 
- </navigator>
-
-
+	<view class="viewReplay1" bindtap="toReplay">
+		<text class="tupian1 cuIcon-messagefill text-yellow"></text>
+		<text class="wenben1">收到回复</text>
+		<view class="geshu"></view><text class="ziti">1</text>
+	</view>
+	<!-- <view class="line1"></view> -->
+	<view class="viewReplay2" bindtap="toAppre">
+		<text class="tupian2 text-yellow cuIcon-appreciatefill"></text>
+		<text class="wenben2">收到的赞</text>
+		<view class="geshu"></view><text class="ziti">1</text>
+	</view>
+	<!-- <view class="line2"></view> -->
+	<view class="viewReplay3" bindtap="toInfo">
+		<text class="tupian3 text-yellow cuIcon-infofill"></text>
+		<text class="wenben3">系统通知</text>
+		<view class="geshu"></view><text class="ziti">1</text>
+	</view>
 </view>

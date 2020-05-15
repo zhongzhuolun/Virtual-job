@@ -2,13 +2,23 @@
 <cu-custom bgColor="bg-yellow">
 	<view slot="content">个人中心</view>
 </cu-custom>
-<!-- <text>个人中心界面</text> -->
-
 <view class="center1"></view>
 <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../../images/icon/headphone.png'}}" class="headphone"></image>
 <view class="yuan"></view>
-<text class="txt1">{{userInfo.nickName?userInfo.nickName:'未登录'}}</text>
-<button wx:if="{{!userInfo.nickName}}" class="txt2" open-type="getUserInfo" bindgetuserinfo="handleLogin">登录</button>
+<text class="txt1">{{userInfo.nickName?userInfo.nickName:'未登录'}}
+行业：前端
+</text>
+<block wx:if="{{!userInfo.nickName}}">
+	<button class="txt2" open-type="getUserInfo" bindgetuserinfo="handleLogin">登录</button>
+</block>
+<block wx:else>
+	<navigator url="../myCenter/myCenter">
+		<view class="to-center">
+			<text class="cuIcon-right text-yellow"></text>
+		</view>
+	</navigator>
+</block>
+
 <view class="center2"></view>
 <view bindtap="myBanks">
 	<image src="../../../images/icon/book1.png" class="book1"></image>

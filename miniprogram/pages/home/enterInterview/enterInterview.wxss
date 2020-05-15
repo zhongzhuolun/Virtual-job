@@ -31,7 +31,6 @@
   position: absolute;
   left: 350rpx;
   top: 200rpx;
-  width: 212rpx;
   height: 46rpx;
   color: rgba(12, 12, 12, 1);
   font-size: 32rpx;

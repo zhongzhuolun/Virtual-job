@@ -7,7 +7,21 @@ Page({
   data: {
 
   },
-
+  toReplay: function(e) {
+    wx.navigateTo({
+      url: '../viewReplay/viewReplay?type=replay',
+    })
+  },
+  toAppre: function(e) {
+    wx.navigateTo({
+      url: '../viewReplay/viewReplay?type=appre',
+    })
+  },
+  toInfo: function(e) {
+    wx.navigateTo({
+      url: '../viewReplay/viewReplay?type=info',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

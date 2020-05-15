@@ -9,7 +9,8 @@ const plugin = requirePlugin("WechatSI")
 const manager = plugin.getRecordRecognitionManager()
 Page({
   data:{
-    bank: {}
+    bank: {},
+    industry: wx.getStorageSync('industry')
   },
   handleStartExam: function(type) {
     let bank = this.data.bank
@@ -45,20 +46,42 @@ Page({
     this.handleStartExam('audio')
   },
   handleVideoStartExam: function(e) {
-    this.handleStartExam('video')
+    wx.showToast({
+      title: '抱歉，该功能尚未支持',
+      icon: 'none'
+    })
+    // this.handleStartExam('video')
   },
   onLoad: function (options) {
+    // banksList.where({
+    //   class: '面试题',
+    //   industry: this.data.industry,
+    // }).get().then((res) => {
+    //   console.log(res.data)
+    //   // let bank = res
+    //   this.setData({
+    //     bank: res.data[0]
+    //   })
+    //   console.log(res.data[0])
+    // })
+  
+  },
+  onShow(e) {
+    let industry = wx.getStorageSync('industry')
+    this.setData({
+      industry
+    })
     banksList.where({
       class: '面试题',
-      industry: this.data.industry,
-      id: 1
+      industry,
     }).get().then((res) => {
+      let bankLists = res.data
+      let index = Math.floor(Math.random(0,1)*bankLists.length)
       this.setData({
-        bank: res.data[0]
+        bank: bankLists[index]
       })
-      console.log(res.data[0])
     })
-  
+   
   },
 
   

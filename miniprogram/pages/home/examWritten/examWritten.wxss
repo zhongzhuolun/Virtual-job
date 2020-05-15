@@ -53,31 +53,35 @@ scroll-view {
 .my-choosebox text {
   margin-left: 20rpx;
 }
-.my-choosebox radio{
+.my-choosebox radio {
   transform: scale(0.6);
   border-radius: 50%;
   border: 4rpx solid #ffc200;
-  /* border: 4rpx solid transparent; */
   background: transparent;
 }
-.my-choosebox radio.checked {
-  border: 4rpx solid transparent;
+
+.my-choosebox radio[checked] {
+  border: 4rpx solid black;
 }
- .my-choosebox checkbox{
+ .my-choosebox checkbox {
   transform: scale(0.6);
   border: 4rpx solid #ffc200;
   background: transparent;
+}
+.my-choosebox checkbox[checked] {
+  border: 4rpx solid black;
 }
 .blank-question input, .sort-question input {
   width: 690rpx;
   height: 72rpx;
-  color: rgba(136, 136, 136, 1);
+  color: black;
   font-size: 28rpx;
   text-align: left;
   font-family: -apple-system;
   border: 1rpx solid rgba(187, 187, 187, 1);
   padding-left: 1em;
   margin-top: 10rpx;
+  font-weight: bold;
 }
 .submit {
   position: relative;
@@ -173,3 +177,4 @@ scroll-view {
 .unfinished .complete {
   left: 408rpx;
 }
+

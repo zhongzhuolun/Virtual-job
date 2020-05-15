@@ -24,28 +24,5 @@
 <view class="txt7" hidden="{{!src}}">正在录制中......</view>
 </block>
 <block wx:else>
-<view>录屏</view>
 </block> 
-<!-- 以下代码仅做为测试 -->
-<!-- <block wx:if="{{type === 'audio'}}">
-<block wx:if="{{type === 'audio'}}">
 
-<view>
-    <button bindtap='getlocat'>开始录音</button>
-     <button bindtap='stop'>停止录音</button>
-     <button bindtap="play" >播放录音</button>
-</view>
-
-<view class="yuyinWrap">
-  <view class=''>
-      <button hidden="{{src}}" class="yuyinBtn start" bindtap='wordYun'>开始</button>
-   <button class="yuyinBtn" bindtap='end'>结束</button>
-  
-          <button  class="yuyinBtn" bindtap='wordYun'>再听一遍</button>
-      <button hidden="{{(!src)&&(!disabled)}}" class="yuyinBtn start" bindtap="handleNext">下一题</button>
-   <button hidden="{{!(src&&disabled)}}" class="yuyinBtn start" bindtap="handleEnd">结束</button>
-  </view>
-</view>
-</block>
-
-</block>-->

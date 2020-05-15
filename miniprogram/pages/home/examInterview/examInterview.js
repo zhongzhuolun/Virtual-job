@@ -7,6 +7,7 @@ const interviewBankForUser = db.collection('interviewBankForUser')
 const plugin = requirePlugin("WechatSI") // 引入文字转语音的插件
 const manager = plugin.getRecordRecognitionManager() // 获取文字转语音的插件对象
 const recorderManager = wx.getRecorderManager() // 获取录音对象
+const cameraContext = wx.createCameraContext()
 let app = getApp()
 Page({
 
@@ -383,7 +384,6 @@ Page({
       }).then(console.log)
     })
   },
-
   /**
    * 生命周期函数--监听页面显示
    */

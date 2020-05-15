@@ -18,11 +18,11 @@
       </view>
       </navigator>
       <block wx:if="{{item.class === '面试题'}}">
-       <navigator url="../viewInterviewQuestion/viewInterviewQuestion?id={{item.id}}">
-        <view class="view-result">
-        查看结果
-        </view>
-      </navigator>
+        <navigator url="../viewInterviewQuestion/viewInterviewQuestion?id={{item.id}}">
+          <view class="view-result">
+          查看结果
+          </view>
+        </navigator>
       </block>
       <block wx:else>
        <navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
@@ -33,13 +33,24 @@
       </block>
     </block>
     <block wx:elif="{{item.status.doing}}">
-      <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
-        <view class="start-exam" id="{{item.id}}">
-        继续答题
-        </view>
-      </navigator>
+      <block wx:if="{{item.class === '面试题'}}">
+      <navigator url="../answerInterviewQuestion/answerInterviewQuestion?id={{item.id}}">
+          <view class="start-exam" id="{{item.id}}">
+          继续答题
+          </view>
+        </navigator>
+      </block>
+      <block wx:else>
+        <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
+          <view class="start-exam" id="{{item.id}}">
+          继续答题
+          </view>
+        </navigator>
+      </block>
+      
     </block>
     <block wx:else>
+
       <navigator url="../enterWritten/enterWritten?id={{item.id}}">
         <view class="start-exam" id="{{item.id}}">
         开始答题
