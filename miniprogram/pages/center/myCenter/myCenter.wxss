@@ -114,7 +114,9 @@ page{
   font-size: 36rpx;
   line-height: 171rpx;
   padding: 10rpx 40rpx 10rpx;
-
+}
+.industry {
+  border-bottom: none;
 }
 image {
   width: 146rpx;

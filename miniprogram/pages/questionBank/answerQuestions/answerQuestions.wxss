@@ -55,23 +55,37 @@ page {
   border: 4rpx solid #ffc200;
   background: transparent;
 }
-
+.my-choosebox radio[checked] {
+  border: 4rpx solid black;
+}
 .my-choosebox checkbox {
   transform: scale(0.6);
   border: 4rpx solid #ffc200;
   background: transparent;
 }
-/* .my-choosebox radio {
-  transform: scale(0.6);
-  border-radius: 50%;
-  border: 4rpx solid transparent;
-  background: transparent;
+radio .wx-radio-input.wx-radio-input-disabled {
+  background: white;
 }
- .my-choosebox checkbox {
-  transform: scale(0.6);
-  border: 4rpx solid transparent;
-  background: transparent;
-} */
+checkbox .wx-checkbox-input.wx-checkbox-input-disabled {
+  background: white;
+}
+.my-choosebox checkbox[checked] {
+  border: 4rpx solid black;
+}
+radio.mychecked {
+  border: 4rpx solid rgba(250, 191, 1, 1) !important;
+}
+
+checkbox.mychecked {
+  border: 4rpx solid rgba(250, 191, 1, 1) !important;
+}
+radio.red {
+  border: 4rpx solid red !important;
+}
+checkbox.red {
+  border: 4rpx solid red !important;
+}
+
 .quetion-title {
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
@@ -224,12 +238,13 @@ page {
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
   margin-top: 18rpx;
 }
+
 /* 用于填空题 */
 .wrong-blank {
   color: red;
 }
 .correct-blank {
-  color: yellow;
+  color: rgba(250, 191, 1, 1);
 }
 .menu {
   font-size: 62rpx;

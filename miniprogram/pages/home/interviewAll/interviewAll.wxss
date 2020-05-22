@@ -12,15 +12,13 @@ page {
 }
 .bank-wrap {
   background: white;
-  padding-bottom: 150rpx;
-
+  padding-bottom: 5vh;
 }
 .bank-title {
   margin-left: 34rpx;
   padding-top: 42rpx;
-  width: 676rpx;
   color: rgba(16, 16, 16, 1);
-  font-size: 56rpx;
+  font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
 }
@@ -32,7 +30,6 @@ page {
   text-align: left;
   font-family: PingFangSC-regular;
   margin-top: 28rpx;
-
 }
 .line {
   width: 750rpx;
@@ -41,7 +38,7 @@ page {
 .bank {
   margin-left: 34rpx;
   padding-top: 45rpx;
-  height: 520rpx;
+  height: 50vh;
   overflow: auto;
 }
 

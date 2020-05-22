@@ -1,8 +1,8 @@
 <!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
 <scroll-view scroll-y="{{modalName==null}}">
 	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
-		<view slot="content"></view>
-		<view slot="backText">完整试卷</view>
+		<view slot="content">{{examBank.bank.title}}</view>
+		<view slot="backText">正确率</view>
 	</cu-custom>
 	<wxs module="filter">
 		var isChecked = function(key, data, correct_data) {
@@ -32,7 +32,7 @@
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
-					<view class="cu-btn bg-yellow" bindtap="checkType">
+					<view wx:if="{{examBank.wrongList.length > 0}}" class="cu-btn bg-yellow" bindtap="checkType">
 						{{ifViewWrong?'完整试卷':'只看错题'}}
 					</view>
 					<view class="action" bindtap="hideModal">
@@ -64,14 +64,16 @@
 					</view>
 					<radio-group data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 						<label wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled checked="{{key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0]}}" class="{{examBank.bank.bank[questionIndex].mistaked&&(key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0])?'red radio':'yellow radio'}} no-radio" wx:if="{{value}}" value="{{key}}">
+							<!-- key === examBank.chooseValue[questionIndex]：如果用户所选的答案跟当前的的选择题选项匹配，则代表用户做出了自己的选择；key === examBank.bank.bank[questionIndex].correct_answer[0]：如果当前选择题的选项跟正确答案匹配，则代表此时用户 -->
+							<!-- <radio disabled checked="{{key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0]}}" class="{{examBank.bank.bank[questionIndex].mistaked&&(key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0])?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}"> -->
+							<radio disabled checked="{{key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0]}}" class="{{examBank.bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
 							</radio>
 							<text>{{value}}</text>
 						</label>
 					</radio-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{examBank.bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 
@@ -90,7 +92,7 @@
 					</checkbox-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{examBank.bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
@@ -108,7 +110,7 @@
 					</checkbox-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{examBank.bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 
@@ -116,18 +118,18 @@
 			<block wx:if="{{examBank.bank.bank[questionIndex].type === '判断'}}">
 				<view class="radio-question">
 					<view class="quetion-title">
-						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【单选】</text>
+						<text>{{examBank.bank.bank[questionIndex].id}}. {{examBank.bank.bank[questionIndex].title}}【判断】</text>
 					</view>
 					<radio-group data-type="{{examBank.bank.bank[questionIndex].type}}" id="{{examBank.bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 						<label wx:for="{{examBank.bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled checked="{{key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0]}}" class="{{examBank.bank.bank[questionIndex].mistaked&&(key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0])?'red radio':'yellow radio'}} no-radio" wx:if="{{value}}" value="{{key}}">
+							<radio disabled checked="{{key === examBank.chooseValue[questionIndex] || key === examBank.bank.bank[questionIndex].correct_answer[0]}}" class="{{examBank.bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
 							</radio>
 							<text>{{value}}</text>
 						</label>
 					</radio-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{examBank.bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 
@@ -143,7 +145,7 @@
 					</view>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{examBank.bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
@@ -164,9 +166,9 @@
 						{{examBank.chooseValue[questionIndex]}}
 						</text>
 					</view>
-					<view class="correct-analyse" >
+					<view class="correct-analyse">
 						<view>正确答案：<text  class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{examBank.bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
@@ -213,5 +215,4 @@
 			</view>
 		</block>
 	</view>
-
 </scroll-view>

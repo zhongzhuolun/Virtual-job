@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
-	<view slot="content"></view>
-	<view slot="backText">模拟笔试</view>
+	<view slot="content">{{bank.title}}</view>
+	<view slot="backText">行业选择</view>
 </cu-custom>
 <view class="written">
 	<view class="textCover">
@@ -18,7 +18,7 @@
 	<view class="number2">{{bank.questionTypeNum.checkbox}}</view>
 	<view class="number3">{{bank.questionTypeNum.unsteady}}</view>
 	<view class="number4">{{bank.questionTypeNum.judge}}</view>
-	<view class="number5">{{bank.questionTypeNum.unsteady}}</view>
+	<view class="number5">{{bank.questionTypeNum.blank}}</view>
 	<view class="number6">{{bank.questionTypeNum.sort}}</view>
 </view>
 <button class="button" bindtap="handleStartExam">开始考试</button>

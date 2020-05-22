@@ -8,11 +8,11 @@ const innerAudioContext = wx.createInnerAudioContext()
 const plugin = requirePlugin("WechatSI")
 const manager = plugin.getRecordRecognitionManager()
 Page({
-  data:{
+  data: {
     bank: {},
     industry: wx.getStorageSync('industry')
   },
-  handleStartExam: function(type) {
+  handleStartExam: function (type) {
     let bank = this.data.bank
     let bankId = bank.id
     let statusObj = {
@@ -22,30 +22,40 @@ Page({
     statusObj.status = bank.status
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
-        let result = statusList.findIndex((value) => {
-          return value.id == bankId
-        })
-        if(result !== -1) {
-          statusList[result].status.doing = true
-        } else {
-          statusList.push(statusObj)
+      let result = statusList.findIndex((value) => {
+        return value.id == bankId
+      })
+      if (result !== -1) {
+        statusList[result].status.doing = true
+      } else {
+        statusList.push(statusObj)
+      }
+      wx.cloud.callFunction({
+        name: 'updateBankStatus',
+        data: {
+          statusList,
         }
-        wx.cloud.callFunction({
-          name: 'updateBankStatus',
-          data: {
-            statusList,
-          }
-        }).then(console.log)
-        wx.navigateTo({
-          url: `../examInterview/examInterview?type=${type}&id=${bankId}`
-        })
-  })
+      }).then(console.log)
+      wx.navigateTo({
+        url: `../examInterview/examInterview?type=${type}&id=${bankId}`
+      })
+    })
 
   },
-  handleAudioStartExam: function(e) {
-    this.handleStartExam('audio')
+  handleAudioStartExam: function (e) {
+    wx.showModal({
+      title: '考试须知',
+      content: '面试考试过程中，如果中途退出答题，将视为提交试卷',
+      confirmText: '我知道了',
+      cancelText: '暂不考试',
+      success: (res) => {
+        if (res.confirm) {
+          this.handleStartExam('audio')
+        }
+      }
+    })
   },
-  handleVideoStartExam: function(e) {
+  handleVideoStartExam: function (e) {
     wx.showToast({
       title: '抱歉，该功能尚未支持',
       icon: 'none'
@@ -53,18 +63,6 @@ Page({
     // this.handleStartExam('video')
   },
   onLoad: function (options) {
-    // banksList.where({
-    //   class: '面试题',
-    //   industry: this.data.industry,
-    // }).get().then((res) => {
-    //   console.log(res.data)
-    //   // let bank = res
-    //   this.setData({
-    //     bank: res.data[0]
-    //   })
-    //   console.log(res.data[0])
-    // })
-  
   },
   onShow(e) {
     let industry = wx.getStorageSync('industry')
@@ -76,15 +74,30 @@ Page({
       industry,
     }).get().then((res) => {
       let bankLists = res.data
-      let index = Math.floor(Math.random(0,1)*bankLists.length)
-      this.setData({
-        bank: bankLists[index]
-      })
+      let index = Math.floor(Math.random(0, 1) * bankLists.length)
+      if (bankLists.length === 0) {
+        wx.showModal({
+          title: '提示',
+          content: '很抱歉，该行业暂时没有面试题，点击确定返回首页',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            }
+          }
+        })
+      } else {
+        this.setData({
+          bank: bankLists[index]
+        })
+      }
     })
-   
+
   },
 
-  
+
   onReady(e) {
 
   },

@@ -366,6 +366,8 @@ Page({
     let bank = this.data.questionObj
     let bankId = bank.parentId
     bank.questionsFileArry = this.data.questionsFileArry
+    bank.status.done = true
+    bank.status.doing = false
     interviewBankForUser.get().then((res) => {
       let interviewBankList = res.data[0].interviewBankList
       let result = interviewBankList.findIndex((value) => {
@@ -399,14 +401,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.handleEnd()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.stop()
+    this.handleEnd()
   },
 
   /**

@@ -7,25 +7,25 @@
     <text class="exam">
     考试
     </text>
-    <!-- <view  catchtap="{{foo.handleStatus(item.id)}}"></view> -->
     <block wx:if="{{item.status.done}}">
       <!-- <view class="start-exam" style="background: #bbb">
         已结束
       </view> -->
-      <navigator url="../enterWritten/enterWritten?id={{item.id}}">
+      <navigator url="../enterWritten/enterWritten?id={{item.id}}&type=again">
        <view class="start-exam">
         再次答题
       </view>
       </navigator>
       <block wx:if="{{item.class === '面试题'}}">
-        <navigator url="../viewInterviewQuestion/viewInterviewQuestion?id={{item.id}}">
+        <navigator url="../viewInterviewQuestion/viewInterviewQuestion?id={{item.id}}&type=result">
           <view class="view-result">
           查看结果
           </view>
         </navigator>
       </block>
       <block wx:else>
-       <navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
+       <!-- <navigator url="../viewQuestions/viewQuestions?id={{item.id}}"> -->
+       <navigator url="../viewQuestions/viewQuestions?id={{item.id}}&type=result">
         <view class="view-result">
         查看结果
         </view>
@@ -34,14 +34,14 @@
     </block>
     <block wx:elif="{{item.status.doing}}">
       <block wx:if="{{item.class === '面试题'}}">
-      <navigator url="../answerInterviewQuestion/answerInterviewQuestion?id={{item.id}}">
+      <navigator url="../answerInterviewQuestion/answerInterviewQuestion?id={{item.id}}&type=continue">
           <view class="start-exam" id="{{item.id}}">
           继续答题
           </view>
         </navigator>
       </block>
       <block wx:else>
-        <navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
+        <navigator url="../answerQuestions/answerQuestions?id={{item.id}}&type=continue">
           <view class="start-exam" id="{{item.id}}">
           继续答题
           </view>
@@ -51,7 +51,7 @@
     </block>
     <block wx:else>
 
-      <navigator url="../enterWritten/enterWritten?id={{item.id}}">
+      <navigator url="../enterWritten/enterWritten?id={{item.id}}&type=start">
         <view class="start-exam" id="{{item.id}}">
         开始答题
         </view>

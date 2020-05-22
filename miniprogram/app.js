@@ -25,6 +25,7 @@ App({
       const bankStatusList = db.collection('bank-status')
       const writtenBankForUser = db.collection('writtenBankForUser')
       const interviewBankForUser = db.collection('interviewBankForUser')
+      const commentsForUser = db.collection('commentsForUser')
       bankStatusList.get().then((res) => {
         if (res.data.length === 0) {
           bankStatusList.add({
@@ -48,6 +49,15 @@ App({
           interviewBankForUser.add({
             data: {
               interviewBankList: []
+            }
+          }).then(console.log)
+        }
+      })
+      commentsForUser.get().then((res) => {
+        if (res.data.length === 0) {
+          commentsForUser.add({
+            data: {
+              commentList: []
             }
           }).then(console.log)
         }

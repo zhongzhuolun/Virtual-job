@@ -11,7 +11,8 @@ Page({
   data: {
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    loginStatus: app.globalData.loginStatus
+    loginStatus: app.globalData.loginStatus,
+    industry: ''
   },
   myBanks: function(e) {
     if (!this.data.loginStatus) {
@@ -77,6 +78,9 @@ Page({
       }, () => {
         app.globalData.userInfo = userInfo
         app.globalData.loginStatus = true
+        this.setData({
+          loginStatus: true
+        })
         wx.setStorage({
           data: userInfo,
           key: 'userInfo',
@@ -109,10 +113,14 @@ Page({
    */
   onShow: function () {
     let userInfo = wx.getStorageSync('userInfo')
+    let industry = wx.getStorageSync('industry')
     app.globalData.userInfo = userInfo
+    let loginStatus = app.globalData.loginStatus
+    console.log(app.globalData)
     this.setData({
-      loginStatus: app.globalData.loginStatus,
-      userInfo
+      loginStatus,
+      userInfo,
+      industry
     })
   },
 

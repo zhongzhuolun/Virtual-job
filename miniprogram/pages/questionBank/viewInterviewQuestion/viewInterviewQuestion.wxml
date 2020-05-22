@@ -40,7 +40,7 @@
 				<view class="radio-question">
 					<view class="quetion-title">
 						<text style="font-size: 36rpx;" >{{writtenBank.questions[questionIndex].id}}. {{writtenBank.questions[questionIndex].title}}</text>
-						<text wx:if="{{writtenBank.questionsFileArry.length > 0}}" id="{{writtenBank.questions[questionIndex].id}}" bindtap="handleAudioPlay" style="font-size: 48rpx;" class="cuIcon-notificationfill text-yellow"></text>
+						<text wx:if="{{writtenBank.questionsFileArry[0].tempFilePaths.length > 0}}" id="{{writtenBank.questions[questionIndex].id}}" bindtap="handleAudioPlay" style="font-size: 48rpx;" class="cuIcon-notificationfill text-yellow"></text>
 					</view>
 					<view class="correct-analyse">
 						<view wx:if="{{writtenBank.questions[questionIndex].analyse}}">解析：{{writtenBank.questions[questionIndex].analyse}}</view>

@@ -8,18 +8,15 @@ scroll-view {
 .bank-title {
   margin-left: 34rpx;
   padding-top: 42rpx;
-  width: 676rpx;
-  height: 160rpx;
   color: rgba(16, 16, 16, 1);
-  font-size: 56rpx;
+  font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
 }
 .score-time {
   margin-left: 34rpx;
-  margin-top: 65rpx;
+  margin-top: 1vh;
   margin-bottom: 30rpx;
-  height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
   text-align: left;

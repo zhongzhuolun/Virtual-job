@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-yellow" isBack="{{true}}" >
-	<view slot="content"></view>
-	<view slot="backText">行业选择</view>
+	<view slot="content">行业选择</view>
+	<view slot="backText"></view>
 </cu-custom>
 <view class="checked-industry">
 <text>您当前选择的行业是：{{industry?industry:'xx'}}</text>

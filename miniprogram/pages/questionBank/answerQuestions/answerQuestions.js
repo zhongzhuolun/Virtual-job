@@ -115,13 +115,19 @@ Page({
       }
     })
     console.log(accuracy,questionTypeNum)
-    accuracy.radio = (accuracy.radio/questionTypeNum.radio).toFixed(4)*100
-    accuracy.checkbox = (accuracy.checkbox/questionTypeNum.checkbox).toFixed(4)*100
-    accuracy.unsteady = (accuracy.unsteady/questionTypeNum.unsteady).toFixed(4)*100
-    accuracy.judge = (accuracy.judge/questionTypeNum.judge).toFixed(4)*100
-    accuracy.blank = (accuracy.blank/questionTypeNum.blank).toFixed(4)*100
-    accuracy.sort = (accuracy.sort/questionTypeNum.sort).toFixed(4)*100
-    console.log(accuracy)
+    accuracy.radio = (accuracy.radio/(questionTypeNum.radio === 0 ? 1: questionTypeNum.radio)).toFixed(4)*100
+    accuracy.checkbox = (accuracy.checkbox/(questionTypeNum.checkbox === 0 ? 1: questionTypeNum.checkbox)).toFixed(4)*100
+    accuracy.unsteady = (accuracy.unsteady/(questionTypeNum.unsteady === 0 ? 1: questionTypeNum.unsteady)).toFixed(4)*100
+    accuracy.judge = (accuracy.judge/(questionTypeNum.judge === 0 ? 1: questionTypeNum.judge)).toFixed(4)*100
+    accuracy.blank = (accuracy.blank/(questionTypeNum.blank === 0 ? 1: questionTypeNum.blank)).toFixed(4)*100
+    accuracy.sort = (accuracy.sort/(questionTypeNum.sort === 0 ? 1: questionTypeNum.sort)).toFixed(4)*100
+
+    // accuracy.radio = (accuracy.radio/questionTypeNum.radio).toFixed(4)*100
+    // accuracy.checkbox = (accuracy.checkbox/questionTypeNum.checkbox).toFixed(4)*100
+    // accuracy.unsteady = (accuracy.unsteady/questionTypeNum.unsteady).toFixed(4)*100
+    // accuracy.judge = (accuracy.judge/questionTypeNum.judge).toFixed(4)*100
+    // accuracy.blank = (accuracy.blank/questionTypeNum.blank).toFixed(4)*100
+    // accuracy.sort = (accuracy.sort/questionTypeNum.sort).toFixed(4)*100
 
     return {accuracy, questionTypeNum}
   },
@@ -161,39 +167,7 @@ Page({
         wrongList.push(wrongBlankObj); // 代表填空题至少有一个空出错了
       }
     }    
-    // bank.forEach((value, index) => {
-
-    //   if (choose) { // 用户填的题目不为空的时候
-    //     choose = choose.toString()
-    //   }
-    //   if (value.type !== '填空') { // 代表不为填空题的时候
-    //     correctAnswer = correctAnswer.toString()
-    //     if(choose !== correctAnswer) { // 代表做错了
-    //       this.data.wrongList.push(index);
-    //     } 
-    //   } else { // 代表为填空题的时候
-    //     let chooseArr = []
-    //     let wrongBlankObj = {
-    //       indexArry: [], // 填空题的错误空的序列集合
-    //       // blankScore: 0, // 该填空题获得的分数
-    //       index: null
-    //     }
-    //     if (choose) { // 代表用户填了该填空题
-    //       chooseArr = choose.split(',')
-    //     }
-    //     correctAnswer.forEach((value, index) => {
-    //       if (!(chooseArr[index] === value)) {
-    //         // 代表该空做错了
-    //         wrongBlankObj.indexArry.push(index)
-    //       }
-    //     })
-    //     if (wrongBlankObj.indexArry.length > 0) {
-    //       wrongBlankObj.index = index
-    //       this.data.wrongList.push(wrongBlankObj); // 代表填空题至少有一个空出错了
-    //     }
-    //   }    
-    // })
-    if (wrongList.length > 0) { // 代表除去填空题以外 
+    if (wrongList.length > 0) { 
       // 代表有错题
       bank.status.mistaked = true
       wrongList.forEach((value, index) => {
@@ -205,12 +179,12 @@ Page({
           bank.bank[value].mistaked = true
         }
       })
+    } else {
+      this.data.bank.status.mistaked = false
     }
     this.setData({
       bank
     })
-    // this.data.bank.status.done = true // 做完了
-    // this.data.bank.status.doing = false // 结束在做的状态
   },
   // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
   handleStorage: function() {
@@ -260,7 +234,9 @@ Page({
     let bankId = bank.parentId
     bank.chooseValue = this.data.chooseValue 
     bank.wrongList = this.data.wrongList 
-    bank.accuracy = accuracy
+    if (accuracy) {
+      bank.accuracy = accuracy
+    }
     writtenBankForUser.get().then((res) => {
       let writtenBankList = res.data[0].writtenBankList
       let result = writtenBankList.findIndex((value) => {
@@ -368,24 +344,25 @@ Page({
     } else {
       if (questionModal === 'fighter') {
         this.handleWrongAndScore()
-        if (!bank.bank[questionIndex].mistaked) {
-          wx.showToast({
-            title: '(∩_∩)答对啦！',
-            duration: 1000,
-            complete: () => {
-              this.handleNext()
-            }
-          })
-        } else {
-          wx.showToast({
-            title: 'T_T答错了呢！',
-            icon: 'none',
-            duration: 1000,
-            complete: () => {
-              this.handleNext()
-            }
-          })
-        }
+        this.handleNext()
+
+        // if (!bank.bank[questionIndex].mistaked) {
+        //   wx.showToast({
+        //     title: '(∩_∩)答对啦！',
+        //     duration: 1000,
+        //     complete: () => {
+        //     }
+        //   })
+        // } else {
+        //   wx.showToast({
+        //     title: 'T_T答错了呢！',
+        //     icon: 'none',
+        //     duration: 1000,
+        //     complete: () => {
+        //       this.handleNext()
+        //     }
+        //   })
+        // }
 
       } else {
         this.handleWrongAndScore()
@@ -404,7 +381,7 @@ Page({
           ifViewAnwser: true,
         })
       }
-
+      this.handleBankStatusDetail()
     }
   },
   // 处理下一题
@@ -453,14 +430,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options.modal)
+    console.log(options.type)
+    let type = options.type
     wx.showLoading({
       title: '加载中',
     })
-    if (app.globalData.examType === 'written') {
     this.setData({
-      questionModal: options.modal
+      questionModal: options.modal || 'fighter'
     })
+    if (type === 'continue') {
+      writtenBankForUser.get().then((res) => {
+        let writtenBankList = res.data[0].writtenBankList
+        let bank = writtenBankList.find((value) => {
+          return value.parentId == options.id*1
+        })
+        let correct_answer = bank.bank[0].correct_answer.toString()
+        let chooseValue = bank.chooseValue
+        let wrongList = bank.wrongList
+        this.setData({
+          bank,
+          correct_answer,
+          chooseValue,
+          wrongList,
+          questionIndex: chooseValue.length
+        }, () => {
+          wx.hideLoading()
+        })
+        // app.globalData.examBank.bank = result
+      })
+  } else {
     writtenQuestions.where({
       parentId: options.id*1
     }).get().then((res) => {
@@ -474,19 +472,8 @@ Page({
         wx.hideLoading({})
       })
     })
-  } else {
-    interviewQuestions.where({
-      parentId: options.id*1
-    }).get().then((res) => {
-      console.log(res.data)
-      let bank = res.data[0]
-      this.setData({
-        writtenBank: bank
-      }, () => {
-        wx.hideLoading({})
-      })
-    })
   }
+
 
   },
 

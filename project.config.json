@@ -52,27 +52,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
 					"pathName": "pages/databaseGuide/databaseGuide",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "pages/addTodo/addTodo",
-					"pathName": "pages/addTodo/addTodo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "pages/todoInfo/todoInfo",
-					"pathName": "pages/todoInfo/todoInfo",
-					"query": "id=42c9a7b15e93d22b008539bd27505124",
-					"scene": null
 				},
 				{
 					"id": -1,
@@ -246,6 +232,14 @@
 					"id": -1,
 					"name": "pages/center/viewReplay/viewReplay",
 					"pathName": "pages/center/viewReplay/viewReplay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/viewQuestions/viewQuestions",
+					"pathName": "pages/questionBank/viewQuestions/viewQuestions",
+					"query": "id=20&type=result",
 					"scene": null
 				}
 			]

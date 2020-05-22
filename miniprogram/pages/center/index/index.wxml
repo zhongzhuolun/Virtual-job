@@ -2,11 +2,11 @@
 <cu-custom bgColor="bg-yellow">
 	<view slot="content">个人中心</view>
 </cu-custom>
-<view class="center1"></view>
+<!-- <view class="center1">
+</view>
 <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../../images/icon/headphone.png'}}" class="headphone"></image>
-<view class="yuan"></view>
 <text class="txt1">{{userInfo.nickName?userInfo.nickName:'未登录'}}
-行业：前端
+行业：{{industry}}
 </text>
 <block wx:if="{{!userInfo.nickName}}">
 	<button class="txt2" open-type="getUserInfo" bindgetuserinfo="handleLogin">登录</button>
@@ -46,4 +46,89 @@
 <text class="txt11">点击查看</text>
 <text class="txt12" bindtap="userAgreement">《用户协议》</text>
 <text class="txt13">和</text>
-<text class="txt14" bindtap="privacyPolicy">《隐私政策》</text>
+<text class="txt14" bindtap="privacyPolicy">《隐私政策》</text> -->
+<view class="wrap">
+	<block wx:if="{{userInfo.nickName}}">
+		<navigator url="../myCenter/myCenter">
+			<view class="center">
+				<view class="img-wrap">
+					<image src="{{userInfo.avatarUrl}}" class="headphone"></image>
+				</view>
+				<view class="content">
+					<text>{{userInfo.nickName}}
+					</text>
+					<text>行业：{{industry || '未选择'}}</text>
+				</view>
+				<view class="to-center">
+					<text class="cuIcon-right text-yellow"></text>
+				</view>
+			</view>
+		</navigator>
+	</block>
+	<block wx:else>
+		<view class="center">
+			<view class="img-wrap">
+				<image src="../../../images/icon/headphone.png" class="headphone"></image>
+			</view>
+			<view style="width: 279rpx;"> 
+				<text class="no-login">未登录</text>
+			</view>
+			<view class="login-btn">
+				<button class="login" open-type="getUserInfo" bindgetuserinfo="handleLogin">登录</button>
+			</view>
+		</view>
+	</block>
+
+
+
+
+	<view class="my-bank">
+		<view class="banks" bindtap="myBanks">
+			<view class="img-wrap">
+				<image src="../../../images/icon/book1.png"></image>
+			</view>
+			<view class="content">
+				<text>我的题库</text>
+				<text>进行中或已完成的练习和试卷</text>
+			</view>
+		</view>
+		<view class="interview-current" bindtap="interviewCurrent">
+			<view class="img-wrap">
+				<image src="../../../images/icon/book2.png"></image>
+			</view>
+			<view class="content">
+				<text>面试现场</text>
+				<text>模拟面试保存的音频和视频</text>
+			</view>
+		</view>
+	</view>
+
+
+	<view class="my-message">
+		<view class="msg" bindtap="myMsg">
+			<view class="img-wrap">
+				<image src="../../../images/icon/bling.png"></image>
+			</view>
+			<view class="content">
+				<text>我的消息</text>
+				<text>收到的回复、赞、系统通知</text>
+			</view>
+
+		</view>
+		<view class="feedback" bindtap="feedback">
+			<view class="img-wrap">
+				<image src="../../../images/icon/message.png" class="message"></image>
+			</view>
+			<view class="content">
+				<text>意见反馈</text>
+				<text>期待收到您的意见和建议</text>
+			</view>
+		</view>
+	</view>
+	<view class="agree-policy">
+		<text>点击查看</text>
+		<text bindtap="userAgreement">《用户协议》</text>
+		<text>和</text>
+		<text bindtap="privacyPolicy">《隐私政策》</text>
+	</view>
+</view>

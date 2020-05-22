@@ -23,6 +23,7 @@ Page({
     content: '', // 用于转化为语音的问题字符串
     type: '', // 当前是录音还是录像
     tempFilePaths: [], // 用于存储音频的链接
+    parentId: null,
   },
   // 处理查看所有评论
   viewAllComments: function(e) {
@@ -36,7 +37,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let {questionIndex, writtenBank} = this.data
+    let {questionIndex, writtenBank, parentId} = this.data
       if (questionIndex < writtenBank.questions.length - 1) {
         questionIndex++
         this.setData({
@@ -48,7 +49,10 @@ Page({
         })
       } else {
         // 代表查看总结
-        wx.navigateBack()
+        wx.navigateTo({
+          url: '../endInterviewQuestion/endInterviewQuestion?id='+ parentId,
+        })
+        // wx.navigateBack()
       }
   },
   // 处理上一题
@@ -194,6 +198,7 @@ Page({
   },
   // 获取当前面试题库
   getCurrentBank: function(bankId) {
+    console.log(bankId)
     wx.showLoading({
       title: '加载中',
     })
@@ -264,6 +269,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     this.getCurrentBank(this.data.parentId)
 
   },

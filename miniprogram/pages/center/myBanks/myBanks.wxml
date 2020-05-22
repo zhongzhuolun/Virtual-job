@@ -12,52 +12,66 @@
 			<text>面试题库</text>
 		</view>
 	</view>
-	<view class="bank-wrap" >
-		<view class="bank" wx:for="[1,2,3,4]">
-			<text class="bank-title">
-			{{item.title}}
+	<block wx:if="{{banksList.length > 0}}">
+		<view class="bank-wrap">
+			<view class="bank" wx:for="{{banksList}}" wx:key="parentId">
+				<text class="bank-title">
+				{{item.title}}
+				</text>
+				<van-icon class="exam-icon" name="records" color="#ffc200" size="60rpx" />
+				<text class="exam">
+			考试
 			</text>
-			<van-icon class="exam-icon" name="records" color="#ffc200" size="60rpx" />
-			<text class="exam">
-    考试
-    </text>
-			<block wx:if="{{item.status.done}}">
-				<navigator url="../enterWritten/enterWritten?id={{item.id}}">
-					<view class="start-exam">
-						再次答题
-					</view>
-				</navigator>
-				<block wx:if="{{item.class === '面试题'}}">
-					<navigator url="../viewInterviewQuestion/viewInterviewQuestion?id={{item.id}}">
-						<view class="view-result">
-							查看结果
+				<block wx:if="{{item.status.done}}">
+					<navigator url="../../questionBank/enterWritten/enterWritten?id={{item.parentId}}">
+						<view class="start-exam">
+							再次答题
 						</view>
 					</navigator>
+					<block wx:if="{{item.class === '面试题'}}">
+						<navigator url="../../questionBank/viewInterviewQuestion/viewInterviewQuestion?id={{item.parentId}}">
+							<view class="view-result">
+								查看结果
+							</view>
+						</navigator>
+					</block>
+					<block wx:else>
+						<navigator url="../../questionBank/viewQuestions/viewQuestions?id={{item.parentId}}">
+							<view class="view-result">
+								查看结果
+							</view>
+						</navigator>
+					</block>
 				</block>
-				<block wx:else>
-					<navigator url="../viewQuestions/viewQuestions?id={{item.id}}">
-						<view class="view-result">
-							查看结果
-						</view>
-					</navigator>
+				<block wx:elif="{{item.status.doing}}">
+					<block wx:if="{{item.class === '面试题'}}">
+						<navigator url="../../questionBank/answerInterviewQuestion/answerInterviewQuestion?id={{item.parentId}}">
+							<view class="start-exam" id="{{item.parentId}}">
+								继续答题
+							</view>
+						</navigator>
+					</block>
+					<block wx:else>
+						<navigator url="../../questionBank/answerQuestions/answerQuestions?id={{item.parentId}}">
+							<view class="start-exam" id="{{item.parentId}}">
+								继续答题
+							</view>
+						</navigator>
+					</block>
 				</block>
-			</block>
-			<block wx:elif="{{item.status.doing}}">
-				<block wx:if="{{item.class === '面试题'}}">
-					<navigator url="../answerInterviewQuestion/answerInterviewQuestion?id={{item.id}}">
-						<view class="start-exam" id="{{item.id}}">
-							继续答题
-						</view>
-					</navigator>
-				</block>
-				<block wx:else>
-					<navigator url="../answerQuestions/answerQuestions?id={{item.id}}">
-						<view class="start-exam" id="{{item.id}}">
-							继续答题
-						</view>
-					</navigator>
-				</block>
-			</block>
+			</view>
 		</view>
-	</view>
+	</block>
+	<block wx:else>
+			<view class="bank-wrap">
+				<view class="bank" style="padding: 40rpx;">
+					<view>
+					<text class="text-yellow">暂无题库</text>
+					</view>
+					<view>
+					<text class="text-yellow">（tips：只会显示当前行业做过或者进行中的题库哦）</text>
+					</view>
+				</view>
+		</view>
+	</block>
 </view>

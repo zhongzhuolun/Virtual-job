@@ -1,18 +1,47 @@
-// miniprogram/pages/center/viewVideo/viewVideo.js
+const app = getApp()
+const db = wx.cloud.database()
+const interviewQuestions = db.collection('interviewQuestions')
+const interviewBankForUser = db.collection('interviewBankForUser')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    id: null,
+    questions: []
   },
+  getData: function(id) {
+    console.log(id)
 
+    wx.showLoading({
+      title: '加载中',
+    })
+    let {questions} = this.data
+      interviewBankForUser.get().then((res) => {
+        let banksList = res.data[0].interviewBankList
+        console.log(banksList)
+
+        questions = banksList.find((value, index) => {
+          return value.parentId === id
+        })
+        console.log(questions)
+
+        this.setData({
+          questions
+        }, () => {
+          wx.hideLoading()
+        })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.id)
+    this.setData({
+      id: options.id*1
+    })
   },
 
   /**
@@ -26,7 +55,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let {id} = this.data
+    this.setData({
+      industry: wx.getStorageSync('industry')
+    }, () => {
+      this.getData(id)
+    })
   },
 
   /**

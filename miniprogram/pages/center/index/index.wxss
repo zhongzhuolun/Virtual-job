@@ -3,7 +3,7 @@ page{
   background-color: white;
 }
 
-.center1{
+/* .center1{
   position: absolute;
   left: 26rpx;
   top: 162rpx;
@@ -18,12 +18,12 @@ page{
 
 .headphone{
   position: absolute;
-  left: 88rpx;
-  top: 206rpx;
-  width: 120rpx;
-  height: 120rpx;
   background-color: rgba(250, 191, 1, 1);
   border-radius: 50%;
+  left: 61rpx;
+  top: 14vh;
+  width: 179rpx;
+  height: 179rpx;
 }
 .yuan{
   position: absolute;
@@ -221,9 +221,7 @@ page{
 .txt11{
   position: absolute;
   left: 136rpx;
-  /* top: 1180rpx; */
   bottom: 30rpx;
-
   width: 112rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
@@ -234,7 +232,6 @@ page{
 .txt12{
   position: absolute;
   left: 248rpx;
-  /* top: 1180rpx; */
   bottom: 30rpx;
 
   width: 168rpx;
@@ -258,7 +255,6 @@ page{
 .txt14{
   position: absolute;
   left: 436rpx;
-  /* top: 1180rpx; */
   bottom: 30rpx;
 
   width: 168rpx;
@@ -267,12 +263,126 @@ page{
   font-size: 28rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+} */
+.wrap {
+  padding: 40rpx;
+}
+image {
+  width: 100%;
+  height: 100%;
+}
+
+.center {
+  display: flex;
+  border-radius: 16rpx;
+  height: 200rpx;
+  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+}
+.center .img-wrap {
+  width: 180rpx;
+  height: 180rpx;
+  padding: 30rpx;
+  border: 2rpx solid rgba(187, 187, 187, 1);
+  border-radius: 100%;
+  margin-top: 10rpx;
+  margin-left: 30rpx;
+}
+
+.headphone {
+  border-radius: 100%;
+}
+.no-login {
+  color: rgba(163, 163, 163, 1);
+  font-size: 28rpx;
+  font-family: PingFangSC-regular;
+  line-height: 180rpx;
+  margin-left: 30rpx;
+}
+.login-btn {
+  padding-top: 63rpx;
+}
+.login {
+  width: 160rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-family: PingFang SC;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+}
+
+.center .content {
+  color: rgba(0, 0, 0, 1);
+  font-size: 36rpx;
+  text-align: left;
+  line-height: 69rpx;
+  font-family: SourceHanSansSC-regular;
+  padding: 20rpx;
+  width: 400rpx;
 }
 .to-center {
-  position: absolute;
-  left: 659rpx;
-  top: 224rpx;
   width: 70rpx;
   height: 70rpx;
   font-size: 65rpx;
+  line-height: 200rpx;
+}
+.my-message,  .my-bank {
+  height: 300rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  margin: 60rpx 0;
+}
+.my-bank .img-wrap, .my-message .img-wrap {
+  width: 100rpx;
+  height: 100rpx;
+}
+.banks, .interview-current, .msg, .feedback {
+  display: flex;
+  height: 150rpx;
+  padding: 26rpx;
+}
+.banks, .msg {
+  border-bottom: 2rpx solid rgba(250, 191, 1, 0.47);
+}
+.banks .content,
+.interview-current .content,
+.msg .content,
+.feedback .content
+{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 13rpx;
+}
+.my-bank .content text:nth-child(1),
+.my-message .content text:nth-child(1) {
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  font-family: PingFangSC-regular;
+}
+.my-bank .content text:nth-child(2),
+.my-message .content text:nth-child(2) {
+  color: rgba(163, 163, 163, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: SourceHanSansSC-regular;
+}
+
+
+
+.agree-policy {
+  position: absolute;
+  bottom: 2vh;
+  left: 132rpx;
+}
+.agree-policy text:nth-child(2), 
+.agree-policy text:nth-child(4) {
+  color: #ffc200;
+  font-family: PingFangSC-regular;
 }

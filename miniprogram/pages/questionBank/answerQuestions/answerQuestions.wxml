@@ -1,13 +1,14 @@
 <!--miniprogram/pages/questionBank/answerQuestions/answerQuestions.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
-	<view slot="content"></view>
+	<view slot="content">{{bank.title}}</view>
 	<view slot="backText">笔试</view>
 </cu-custom>
 <wxs module="filter">
-	var isChecked = function(key, data) {
+	var isChecked = function(key, data, correct_data) {
 		if (data) {
 			return data.indexOf(key) != -1 ? true : false;
-		} else {
+		} 
+		else {
 			return false;
 		}
 	}
@@ -15,171 +16,165 @@
 		isChecked: isChecked
 	}
 </wxs>
-	
-	<view class="bank-wrap">
-		<view class="bank" wx:key="id">
-			<block wx:if="{{bank.bank[questionIndex].type === '单选'}}">
+<view class="bank-wrap">
+	<view class="bank" wx:key="id">
+		<block wx:if="{{bank.bank[questionIndex].type === '单选'}}">
+			<view class="quetion-title">
+				<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【单选】</text>
+			</view>
+			<view class="radio-question">
+				<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
+					<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
+						<!-- <radio disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked&&key === chooseValue[questionIndex]?'red':'yellow'}}{{key === chooseValue[questionIndex]&&!ifSubmitOne? ' mychecked': ' black'}}  radio" wx:if="{{value}}" value="{{key}}">
+							</radio> -->
+						<radio disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}{{key === chooseValue[questionIndex]&&!ifSubmitOne? ' mychecked': ' black'}}  radio" wx:if="{{value}}" value="{{key}}">
+						</radio>
+						<text>{{value}}</text>
+					</label>
+				</radio-group>
+				<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
+				</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+					<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
+				</view>
+			</view>
+
+		</block>
+		<block wx:if="{{bank.bank[questionIndex].type === '多选'}}">
+			<view class="checkbox-question">
 				<view class="quetion-title">
-					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【单选】</text>
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【多选】</text>
 				</view>
-				<view class="radio-question">
-					<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
-						<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked&&key === chooseValue[questionIndex]?'red':'yellow'}} radio" wx:if="{{value}}" value="{{key}}">
-							</radio>
-							<text>{{value}}</text>
-						</label>
-					</radio-group>
-					<view wx:if="{{questionModal !== 'fighter'}}"  class="view-answer" bindtap="viewAnwser">
-						{{ifViewAnwser?'收起答案':'查看答案'}}
-					</view>
-					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
-						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
-					</view>
+				<checkbox-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
+					<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+						<checkbox disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}{{chooseValue[questionIndex]&&!ifSubmitOne? ' mychecked': ' black'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}">
+						</checkbox>
+						<text>{{value}}</text>
+					</label>
+				</checkbox-group>
+				<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
+				</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+					<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
+				</view>
+			</view>
+		</block>
+		<block wx:if="{{bank.bank[questionIndex].type === '不定项选'}}">
+			<view class="checkbox-question">
+				<view class="quetion-title">
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【不定项选】</text>
+				</view>
+				<checkbox-group bindchange="checkboxChange" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" class="checkbox-group">
+					<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+						<checkbox disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}" wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}{{chooseValue[questionIndex]&&!ifSubmitOne? ' mychecked': ' black'}}" value="{{key}}">
+						</checkbox>
+						<text>{{value}}</text>
+					</label>
+				</checkbox-group>
+				<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
+				</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+					<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
+				</view>
+			</view>
+
+		</block>
+		<block wx:if="{{bank.bank[questionIndex].type === '判断'}}">
+			<view class="radio-question">
+				<view class="quetion-title">
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【判断】</text>
+				</view>
+				<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
+					<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
+						<radio disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}{{key === chooseValue[questionIndex]&&!ifSubmitOne? ' mychecked': ' black'}}  radio" wx:if="{{value}}" value="{{key}}">
+						</radio>
+						<text>{{value}}</text>
+					</label>
+				</radio-group>
+				<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
+				</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+					<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
+				</view>
+			</view>
+
+		</block>
+		<block wx:if="{{bank.bank[questionIndex].type === '填空'}}">
+			<view class="blank-question">
+				<view class="quetion-title">
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【填空】</text>
+				</view>
+				<view hidden="{{!ifSubmitOne}}" bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" wx:for="{{bank.bank[questionIndex].correct_answer}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+					<input data-index="{{key}}" data-type="{{bank.bank[questionIndex].type}}" bindinput="inputChange" placeholder="[填空{{key + 1}}]"></input>
+				</view>
+				<view hidden="{{ifSubmitOne}}" style="margin-top: 40rpx;font-size: 36rpx;" id="{{bank.bank[questionIndex].id}}">
+					你的答案: <text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}" >{{chooseValue[questionIndex]}}</text>
 				</view>
 
-			</block>
-			<block wx:if="{{bank.bank[questionIndex].type === '多选'}}">
-				<view class="checkbox-question">
-					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【多选】</text>
-					</view>
-					<checkbox-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
-						<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex])}}">
-							</checkbox>
-							<text>{{value}}</text>
-						</label>
-					</checkbox-group>
-					<view wx:if="{{questionModal !== 'fighter'}}"  class="view-answer" bindtap="viewAnwser">
-						{{ifViewAnwser?'收起答案':'查看答案'}}
-					</view>
-					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
-						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
-					</view>
+				<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
 				</view>
-			</block>
-			<block wx:if="{{bank.bank[questionIndex].type === '不定项选'}}">
-				<view class="checkbox-question">
-					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【不定项选】</text>
-					</view>
-					<checkbox-group bindchange="checkboxChange" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" class="checkbox-group">
-						<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" checked="{{filter.isChecked(key,chooseValue[questionIndex])}}" wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}">
-							</checkbox>
-							<text>{{value}}</text>
-						</label>
-					</checkbox-group>
-					<view wx:if="{{questionModal !== 'fighter'}}"  class="view-answer" bindtap="viewAnwser">
-						{{ifViewAnwser?'收起答案':'查看答案'}}
-					</view>
-					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
-						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
-					</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+					<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 				</view>
-
-			</block>
-			<block wx:if="{{bank.bank[questionIndex].type === '判断'}}">
-				<view class="radio-question">
-					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【判断】</text>
-					</view>
-					<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
-						<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled="{{chooseValue[questionIndex]&&!ifSubmitOne}}" class="radio {{bank.bank[questionIndex].mistaked&&key === chooseValue[questionIndex]?'red':'yellow'}}" checked="{{key === chooseValue[questionIndex]}}" wx:if="{{value}}" value="{{key}}">
-							</radio>
-							<text>{{value}}</text>
-						</label>
-					</radio-group>
-					<view wx:if="{{questionModal !== 'fighter'}}"  class="view-answer" bindtap="viewAnwser">
-						{{ifViewAnwser?'收起答案':'查看答案'}}
-					</view>
-					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
-						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
-					</view>
+			</view>
+		</block>
+		<block wx:if="{{bank.bank[questionIndex].type === '排序'}}">
+			<view class="sort-question">
+				<view class="quetion-title">
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【排序】</text>
 				</view>
-
-			</block>
-			<block wx:if="{{bank.bank[questionIndex].type === '填空'}}">
-				<view class="blank-question">
-					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【填空】</text>
-					</view>
-					<view  hidden="{{!ifSubmitOne}}" bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" wx:for="{{bank.bank[questionIndex].correct_answer}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-						<input data-index="{{key}}" data-type="{{bank.bank[questionIndex].type}}" bindinput="inputChange" placeholder="[填空{{key + 1}}]"></input>
-					</view>
-					<view hidden="{{ifSubmitOne}}" style="margin-top: 40rpx;font-size: 36rpx;" id="{{bank.bank[questionIndex].id}}">
-						你的答案: <text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}" >{{chooseValue[questionIndex]}}</text>
-					</view>
-			
-					<view wx:if="{{questionModal !== 'fighter'}}"  class="view-answer" bindtap="viewAnwser">
-						{{ifViewAnwser?'收起答案':'查看答案'}}
-					</view>
-					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
-						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
-					</view>
-				</view>
-			</block>
-			<block wx:if="{{bank.bank[questionIndex].type === '排序'}}">
-				<view class="sort-question">
-					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【排序】</text>
-					</view>
-					<view wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-						<block wx:if="{{value != ''}}">
-							<view style="height: 50rpx;">
-								<text>{{key}}. {{value}}</text>
-							</view>
-						</block>
-					</view>
-					<view hidden="{{!ifSubmitOne}}" style="margin-top: 30rpx">
-						<input data-type="{{bank.bank[questionIndex].type}}" data-index="{{0}}" id="{{bank.bank[questionIndex].id}}" bindinput="inputChange" placeholder="[填空1]"></input>
-					</view>
-					<view  hidden="{{ifSubmitOne}}" style="margin-top: 40rpx;font-size: 36rpx;">
-						你的答案:<text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
-						{{chooseValue[questionIndex]}}
-						</text>
-					</view>
-						<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
-							{{ifViewAnwser?'收起答案':'查看答案'}}
+				<view wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+					<block wx:if="{{value != ''}}">
+						<view style="height: 50rpx;">
+							<text>{{key}}. {{value}}</text>
 						</view>
-						<view hidden="{{!ifViewAnwser}}"  class="correct-analyse">
-							<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-							<view>解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
-					</view>
+					</block>
 				</view>
-			</block>
-		</view>
-		<view style="margin-top: 40rpx" class="line"></view>
+				<view hidden="{{!ifSubmitOne}}" style="margin-top: 30rpx">
+					<input data-type="{{bank.bank[questionIndex].type}}" data-index="{{0}}" id="{{bank.bank[questionIndex].id}}" bindinput="inputChange" placeholder="[填空1]"></input>
+				</view>
+				<view hidden="{{ifSubmitOne}}" style="margin-top: 40rpx;font-size: 36rpx;">
+					你的答案:<text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
+					{{chooseValue[questionIndex]}}
+					</text>
+				</view>
+				<view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
+				</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
+					<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{examBank.bank.bank[questionIndex].parsing}}</view>
+				</view>
+			</view>
+		</block>
 	</view>
-	<block wx:if="{{questionModal === 'fighter'}}">
-			<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
-		<view wx:else class="next-question chekckout-question" bindtap="handleNext">
-			{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
-		</view>
-		<!-- <view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view> -->
-	</block>
-	<block wx:else>
-			<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
-		<view wx:else class="next-question chekckout-question" bindtap="handleNext">
-			{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
-		</view>
-		<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-	</block>
-
-
-	<view class="next-size">
-		<view class="page-size">{{questionIndex + 1}}/{{bank.bank.length}}
-		</view>
+	<view style="margin-top: 40rpx" class="line"></view>
+</view>
+<block wx:if="{{questionModal === 'fighter'}}">
+	<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
+	<view wx:else class="next-question chekckout-question" bindtap="handleNext">
+		{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
 	</view>
-
-
-
-
-
+	<!-- <view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view> -->
+</block>
+<block wx:else>
+	<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
+	<view wx:else class="next-question chekckout-question" bindtap="handleNext">
+		{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
+	</view>
+	<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
+</block>
+<view class="next-size">
+	<view class="page-size">{{questionIndex + 1}}/{{bank.bank.length}}
+	</view>
+</view>

@@ -20,7 +20,42 @@ Page({
           "posts": [
             {
               "post": "移动开发",
-              "skill": ["前端"]
+              "skill": ["HTML5", "JavaScript", "移动web前端"]
+            },
+            {
+              "post": "后端开发",
+              "skill": ["C/C++", "Java", "Python", "PHP"]
+            },
+            {
+              "post": "人工智能",
+              "skill": ["算法工程师"]
+            }
+          ]
+        },
+        {
+          "class": "高管",
+          "posts": [
+            {
+              "post": "高级管理职位",
+              "skill": ["高级管理职位"]
+            }
+          ]
+        },
+        {
+          "class": "教育培训",
+          "posts": [
+            {
+              "post": "教师",
+              "skill": ["英语教师"]
+            }
+          ]
+        },
+        {
+          "class": "教育培训",
+          "posts": [
+            {
+              "post": "教师",
+              "skill": ["英语教师"]
             }
           ]
         },
@@ -91,17 +126,27 @@ Page({
         data: industry,
         key: 'industry',
       })
+
       if (examType === '面试') {
+        wx.showToast({
+          title: '可以去个人中心修改行业哦',
+        })
         wx.navigateTo({
           url: '../enterInterview/enterInterview?examType=面试题',
         })
       } else if (examType === '笔试') {
+        wx.showToast({
+          title: '可以去个人中心修改行业哦',
+        })
         wx.navigateTo({
           url: '../enterWritten/enterWritten?examType=笔试题',
         })
       } else if (tabbar === 'center') {
         wx.navigateBack()
       } else {
+        wx.showToast({
+          title: '可以去个人中心修改行业哦',
+        })
         wx.switchTab({
           url: '../../questionBank/index/index',
         })

@@ -23,8 +23,7 @@ Page({
     emptyQuestions: [], // 用于存储未完成的题目序列
     emptyStr: '', // 用于存储未完成的题目序列的字符串
     // score: 0, // 用户答题的总分数
-    checkClass: '' // 选中后的颜色更改
-
+    checkClass: '', // 选中后的颜色更改
   },
   // 处理提交(此时未真正提交)
   handleSubmit: function(e) {
@@ -63,82 +62,67 @@ Page({
     })
    
   },
-
   // 处理题型的正确率 （功能针对所有用户，但获得的正确率只针对该用户）
   handleCorrectRate: function() {
-    let bank = this.data.bank.bank
-    var myTypeNum = {
-        danxuan: 0,
-        duoxuan: 0,
-        budingxiang: 0,
-        panduan: 0,
-        tiankong: 0,
-        paixu: 0
-    }
-    var allTypeNum = {
-        allDanxuan: 0,
-        allDuoxuan: 0,
-        allBudingxiang: 0,
-        allPanduan: 0,
-        allTiankong: 0,
-        allPaixu: 0
+    let {bank, questionTypeNum, accuracy} = this.data.bank
+    accuracy = {
+      radio: 0,
+      checkbox: 0,
+      unsteady: 0,
+      judge: 0,
+      blank: 0,
+      sort: 0
     }
     // 拿到题型的总数
     // 将用户填写的正确的题型总数处以该题型的总数，得到正确率，保留两位小数
     bank.forEach((item, idnex) => {
       switch (item.type) {
         case '单选':
-          allTypeNum.allDanxuan += 1
           if (!item.mistaked) {
-            myTypeNum.danxuan += 1
+            accuracy.radio += 1
           }
           break;
         case '多选':
-          allTypeNum.allDuoxuan += 1
           if (!item.mistaked) {
-            myTypeNum.duoxuan += 1
+            accuracy.checkbox += 1
           }
           break;
         case '不定项选':
-          allTypeNum.allBudingxiang += 1
           if (!item.mistaked) {
-            myTypeNum.budingxiang += 1
+            accuracy.unsteady += 1
           }
           break;
         case '判断':
-          allTypeNum.allPanduan += 1
           if (!item.mistaked) {
-            myTypeNum.panduan += 1
+            accuracy.judge += 1
           }
           break;
         case '填空':
-          allTypeNum.allTiankong += 1
           if (!item.mistaked) {
-            myTypeNum.tiankong += 1
+            accuracy.blank += 1
           }
           break;
         case '排序':
-          allTypeNum.allPaixu += 1
           if (!item.mistaked) {
-            myTypeNum.paixu += 1
+            accuracy.sort += 1
           }
           break;
         default:
           break;
       }
     })
-    console.log(myTypeNum,allTypeNum)
-    myTypeNum.danxuan = (myTypeNum.danxuan/allTypeNum.allDanxuan).toFixed(4)*100
-    myTypeNum.duoxuan = (myTypeNum.duoxuan/allTypeNum.allDuoxuan).toFixed(4)*100
-    myTypeNum.budingxiang = (myTypeNum.budingxiang/allTypeNum.allBudingxiang).toFixed(4)*100
-    myTypeNum.panduan = (myTypeNum.panduan/allTypeNum.allPanduan).toFixed(4)*100
-    myTypeNum.tiankong = (myTypeNum.tiankong/allTypeNum.allTiankong).toFixed(4)*100
-    myTypeNum.paixu = (myTypeNum.paixu/allTypeNum.allPaixu).toFixed(4)*100
-    return {
-      myTypeNum,
-      allTypeNum
-    }
+    console.log(accuracy,questionTypeNum)
+    accuracy.radio = (accuracy.radio/(questionTypeNum.radio === 0 ? 1: questionTypeNum.radio)).toFixed(4)*100
+    accuracy.checkbox = (accuracy.checkbox/(questionTypeNum.checkbox === 0 ? 1: questionTypeNum.checkbox)).toFixed(4)*100
+    accuracy.unsteady = (accuracy.unsteady/(questionTypeNum.unsteady === 0 ? 1: questionTypeNum.unsteady)).toFixed(4)*100
+    accuracy.judge = (accuracy.judge/(questionTypeNum.judge === 0 ? 1: questionTypeNum.judge)).toFixed(4)*100
+    accuracy.blank = (accuracy.blank/(questionTypeNum.blank === 0 ? 1: questionTypeNum.blank)).toFixed(4)*100
+    accuracy.sort = (accuracy.sort/(questionTypeNum.sort === 0 ? 1: questionTypeNum.sort)).toFixed(4)*100
+    console.log(accuracy)
+
+    return {accuracy, questionTypeNum}
   },
+
   // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户,分数评判暂时不需要）
   handleWrongAndScore: function() {
     let bank = this.data.bank.bank
@@ -148,61 +132,59 @@ Page({
       let correctAnswer = value.correct_answer
       let choose = chooseValue[index]
       if (choose) { // 用户填的题目不为空的时候
-        choose = choose.toString()
+        choose = choose.toString().toLowerCase()
       }
       if (value.type !== '填空') { // 代表不为填空题的时候
-        correctAnswer = correctAnswer.toString()
+        correctAnswer = correctAnswer.toString().trim().toLowerCase()
         if(choose !== correctAnswer) { // 代表做错了
           // if (choose !== undefined) {
           //   console.log(correctAnswer,correctAnswer.replace(',','').indexOf(choose.replace(',', '')) != -1,choose ) // true代表该题目半对，false代表该题目全错（只针对多选题和不定项选择题）
           // }
-         
           this.data.wrongList.push(index);
-        } 
+        } else {
+          value.mistaked = false
+        }
       } else { // 代表为填空题的时候
-        // let blankScore = 0
-        // blankScore = value.score // 获取到该填空题的分数
-        // let oneBlankScore = Math.floor(blankScore/correctAnswer.length) // 获取该填空题每个空的分数
         let chooseArr = []
         let wrongBlankObj = {
           indexArry: [], // 填空题的错误空的序列集合
-          // blankScore: 0, // 该填空题获得的分数
-          index: null
+          index: null // 代表题目序号
         }
         if (choose) { // 代表用户填了该填空题
           chooseArr = choose.split(',')
         }
         correctAnswer.forEach((value, index) => {
-          if (!(chooseArr[index] === value)) {
+          if (chooseArr[index]) {
+            chooseArr[index] = chooseArr[index].toLowerCase()
+          }
+          if (!(chooseArr[index] === value.trim().toLowerCase())) {
             // 代表该空做错了
-            // wrongBlankObj.blankScore += oneBlankScore
             wrongBlankObj.indexArry.push(index)
           }
         })
         if (wrongBlankObj.indexArry.length > 0) {
           wrongBlankObj.index = index
           this.data.wrongList.push(wrongBlankObj); // 代表填空题至少有一个空出错了
+        } else {
+          value.mistaked = false
         }
       }    
     })
-    if (this.data.wrongList.length > 0) { // 代表除去填空题以外 
+    if (this.data.wrongList.length > 0) { 
       // 代表有错题
       this.data.bank.status.mistaked = true
       this.data.wrongList.forEach((value, index) => {
         if (typeof value === 'object') {// 填空题
-          // totalScore -= value.blankScore // 题库的总分减去错题的分数
           bank[value.index].mistaked = true
-
         } else { // 非填空题
-          // totalScore -= bank[value].score
           bank[value].mistaked = true
         }
       })
+    } else {
+      this.data.bank.status.mistaked = false
     }
     this.data.bank.status.done = true // 做完了
     this.data.bank.status.doing = false // 结束在做的状态
-    // return this.handleCorrectRate() // 返回正确率对象
-    // return totalScore // 返回总分
   },
 
   // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
@@ -248,14 +230,15 @@ Page({
     })
   },
 
-  // 处理更新题库详情状态 （只更新该用户的数据）
-  handleBankStatusDetail: function(data) {
-    let typeNum = data // 拿到用户每种题型的正确率和题库中每种题型的数量
+  // 处理最终更新题库详情状态 （只更新该用户的数据）
+  handleBankStatusDetail: function(accuracy) {
     let bank = this.data.bank
     let bankId = bank.parentId
     bank.chooseValue = this.data.chooseValue 
-    bank.wrongList = this.data.wrongList 
-    bank.typeNum = typeNum
+    if (accuracy) {
+      bank.accuracy = accuracy
+      bank.wrongList = this.data.wrongList 
+    }
     writtenBankForUser.get().then((res) => {
       let writtenBankList = res.data[0].writtenBankList
       let result = writtenBankList.findIndex((value) => {
@@ -279,9 +262,12 @@ Page({
   handleComplete: function(e) {
     // 处理错题和分数评判(分数评判功能可能会取消)
     this.handleWrongAndScore()
-    let item = this.handleCorrectRate() // 获取题型的正确率
+    // let item = this.handleCorrectRate() // 获取题型的正确率
+    let accuracy = this.handleCorrectRate() // 获取题型的正确率
+
     this.handleBankStatus() // 更新题库简介状态
-    this.handleBankStatusDetail(item) // 更新题库详情状态
+    // this.handleBankStatusDetail(item) // 更新题库详情状态
+    this.handleBankStatusDetail(accuracy) // 更新题库详情状态
     // 跳转到分数界面，并将数据传送过去，包括分数和比例
     let examBank = {
       bank: this.data.bank, // 当前题库
@@ -290,13 +276,15 @@ Page({
     }
     let that = this
     app.globalData.examBank = examBank
+    clearInterval(this.pageObj.timer)
+    this.pageObj.timer = null
     wx.navigateTo({
       url: '../score/score',
       events: {
       },
       success: function(res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', item)
+        res.eventChannel.emit('acceptDataFromOpenerPage', accuracy)
         that.setData({
           wrongList: []
         }) 
@@ -317,6 +305,7 @@ Page({
       index,
       type
     })
+
   },
 
   // 处理单选，判断
@@ -328,6 +317,8 @@ Page({
       type
     })
     this.data.chooseValue[this.data.index] = e.detail.value;
+    // this.handleBankStatusDetail()
+
   },
 
   // 处理多选，不定项选
@@ -338,14 +329,17 @@ Page({
       index,
       type
     })
-    this.data.chooseValue[this.data.index] = e.detail.value.sort();
+    this.data.chooseValue[this.data.index] = e.detail.value.sort()
+    // this.handleBankStatusDetail()
+
   },
 
   // 处理填空，排序
   inputChange: function(e) {
     let type = e.currentTarget.dataset.type
     let index = e.currentTarget.id*1 - 1
-    let value = e.detail.value.trim().toUpperCase()
+    // let value = e.detail.value.trim().toUpperCase()
+    let value = e.detail.value.trim().toLowerCase()
     let index1 = e.target.dataset.index
     let blankArry = this.data.blankArry
     if (type && index) {
@@ -364,14 +358,17 @@ Page({
     } else {
       this.data.chooseValue[this.data.index] = value
     }
-  },
+    // this.handleBankStatusDetail()
 
+  },
+  pageObj: {
+    timer: null
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
-    // wx.setNavigationBarTitle({ title: this.data.bank.title }) // 动态设置导航条标题
     wx.showLoading({
       title: '加载中',
     })
@@ -383,12 +380,30 @@ Page({
       this.setData({
         bank,
       }, () => {
-        wx.hideLoading({})
-        let timer = null;
+        wx.hideLoading()
+        writtenBankForUser.get().then((res) => {
+          let writtenBankList = res.data[0].writtenBankList
+          bank.status.doing = true
+          bank.status.done = false
+          let result = writtenBankList.findIndex((value) => {
+            return value.parentId == bank.parentId
+          })
+          if(result !== -1) {
+            writtenBankList[result] = bank
+          } else {
+            writtenBankList.push(bank)
+          }
+          wx.cloud.callFunction({
+            name: 'updateWrittenBank',
+            data: {
+              writtenBankList,
+            }
+          }).then(console.log)
+        })
         this.setData({
-          time: this.data.bank.limit_time
+          time: this.data.bank.limit_time,
         }, () => {
-          timer = setInterval(() => {
+          this.pageObj.timer = setInterval(() => {
             let time = this.data.time
             time = this.format(time, false) // 转化为秒
             if (time > 0) { // 答题时间还未结束
@@ -397,7 +412,8 @@ Page({
                 time: this.format(time, true) // 转化为
               })
             } else { // 答题时间结束
-              clearInterval(timer)
+              clearInterval(this.pageObj.timer)
+              this.pageObj.timer = null
               wx.showToast({
                 title: '答题结束',
                 duration: 2000
@@ -449,14 +465,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(this.pageObj.timer)
+    this.pageObj.timer = null
+    // this.handleBankStatusDetail()
   },
 
   /**

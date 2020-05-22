@@ -3,8 +3,11 @@
 	<view slot="content">text</view>
 </cu-custom>
 <button bindtap="getBankList">
-  获取面试题库简介
+  获取题库简介
 </button>
+<text>
+面试
+</text>
 <button bindtap="addBank">
   新增面试题库简介
 </button>
@@ -13,5 +16,15 @@
 </button>
 <button bindtap="addInterview">
   新增面试题库详情
+</button>
+<text>笔试</text>
+<button bindtap="addBank1">
+  新增笔试题库简介
+</button>
+<button bindtap="getWritten">
+  获取笔试题库详情
+</button>
+<button bindtap="addWritten">
+  新增笔试题库详情
 </button>
 

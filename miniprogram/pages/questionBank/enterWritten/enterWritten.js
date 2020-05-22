@@ -3,6 +3,10 @@ const app = getApp()
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
+const writtenQuestions = db.collection('writtenQuestions')
+const writtenBankForUser = db.collection('writtenBankForUser')
+const interviewQuestions = db.collection('interviewQuestions')
+const interviewBankForUser = db.collection('interviewBankForUser')
 Page({
 
   /**
@@ -11,7 +15,7 @@ Page({
   data: {
     examType: '',
     bank: {},
-    industry: wx.getStorageSync('industry'),
+    industry: '',
     modalName: null
   },
   // 处理模态框的打开
@@ -28,6 +32,7 @@ Page({
     id: bankId
   }
   bank.status.doing = true
+  bank.status.done = false
   statusObj.status = bank.status
   bankStatusList.get().then(res => {
     let statusList = res.data[0].statusList
@@ -36,6 +41,7 @@ Page({
       })
       if(result !== -1) {
         statusList[result].status.doing = true
+        statusList[result].status.done = false
       } else {
         statusList.push(statusObj)
       }
@@ -46,6 +52,7 @@ Page({
         }
       }).then(console.log)
       if (examType == 'written') {
+        this.handleBankStatusDetail()
         wx.navigateTo({
           url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
         })
@@ -75,10 +82,59 @@ Page({
   handleStartInterview: function(e) {
     this.handleStartWrittenExam()
   },
+  // 处理更新题库详情状态 （只更新该用户的数据）
+  handleBankStatusDetail: function(accuracy) {
+    // let typeNum = data // 拿到用户每种题型的正确率和题库中每种题型的数量
+    writtenQuestions.where({
+      parentId: this.data.bank.id
+    }).get().then((res) => {
+      let bank = res.data[0]
+      let bankId = bank.parentId
+      bank.status.doing = true
+      bank.status.done = false
+      writtenBankForUser.get().then((res) => {
+        let writtenBankList = res.data[0].writtenBankList
+        let result = writtenBankList.findIndex((value) => {
+          return value.parentId == bankId
+        })
+        if(result !== -1) {
+          writtenBankList[result] = bank
+        } else {
+          writtenBankList.push(bank)
+        }
+        wx.cloud.callFunction({
+          name: 'updateWrittenBank',
+          data: {
+            writtenBankList,
+          }
+        }).then(console.log)
+      })
+    })
+    
+   
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      id: options.id*1
+    })
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    let industry = wx.getStorageSync('industry')
     wx.showLoading({
       title: '加载中',
     })
@@ -89,39 +145,25 @@ Page({
     } else {
       classType = '面试题'
     }
-    console.log(classType, this.data.industry, options.id )
+    console.log(classType, industry,  this.data.id )
     banksList.where({
       class: classType, 
-      industry: this.data.industry,
-      id: options.id*1
+      industry,
+      id: this.data.id
       // id: 10 // 暂时写死
     }).get().then((res) => {
       console.log(res.data)
       this.setData({
         bank: res.data[0],
-        examType
+        examType,
+        industry
       }, () => {
         wx.hideLoading()
       })
     })
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    let industry = wx.getStorageSync('industry')
-    this.setData({
-      industry
-    })
+    // this.setData({
+    //   industry
+    // })
   },
 
   /**

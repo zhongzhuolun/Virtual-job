@@ -13,14 +13,15 @@ scroll-view{
 }
 .bank-wrap {
   background: white;
-  padding-bottom: 150rpx;
+  padding-bottom: 10vh;
 }
 .bank-title {
   margin-left: 34rpx;
   padding-top: 42rpx;
   width: 676rpx;
+  height: 14vh;
   color: rgba(16, 16, 16, 1);
-  font-size: 56rpx;
+  font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
 }
@@ -42,8 +43,8 @@ scroll-view{
 .bank {
   margin-left: 34rpx;
   padding-top: 45rpx;
-  height: 520rpx;
   overflow: auto;
+  height: 50vh;
 }
 .radio-question,
 .checkbox-question,
@@ -64,16 +65,41 @@ scroll-view{
 .my-choosebox text {
   margin-left: 20rpx;
 }
+
 .my-choosebox radio {
   transform: scale(0.6);
   border-radius: 50%;
   border: 4rpx solid transparent;
   background: transparent;
 }
+.my-choosebox .no-radio {
+  border: 4rpx solid rgba(250, 191, 1, 1);
+}
  .my-choosebox checkbox {
   transform: scale(0.6);
-  border: 4rpx solid transparent;
+  /* border: 4rpx solid transparent; */
+  border: 4rpx solid rgba(250, 191, 1, 1);
   background: transparent;
+}
+.my-choosebox .no-checkbox {
+  border: 4rpx solid rgba(250, 191, 1, 1);
+}
+radio .wx-radio-input.wx-radio-input-disabled {
+  background: white;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-disabled {
+  background: white;
+}
+radio.red {
+  border: 4rpx solid red !important;
+}
+checkbox.red {
+  border: 4rpx solid red !important;
+}
+.yourblank {
+  font-size: 36rpx;
+  margin-top: 28rpx;
+  font-family: PingFangSC-regular;
 }
 .blank-question input, .sort-question input {
   width: 690rpx;
@@ -96,6 +122,7 @@ scroll-view{
 }
 .comments {
   padding: 30rpx;
+  padding-bottom: 0;
 }
 .comment {
   position: relative;
@@ -108,33 +135,55 @@ scroll-view{
   display: flex;
 }
 .user-info .user-name {
-  margin-left: 10rpx;
+  margin-left: 26rpx;
+  line-height: 60rpx;
 }
 .like-dot {
   margin-right: 20rpx;
 }
+.like-dot .dot-num {
+  line-height: 55rpx;
+}
 
 .comment .mine {
-  width: 40rpx;
-  height: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
 }
 .comment .like {
-  width: 40rpx;
-  height: 40rpx;
+  font-size: 43rpx;
+  padding-right: 10rpx;
 }
 .comment .content {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   padding: 20rpx;
   text-overflow: ellipsis;
-  height: 100rpx;
   overflow: hidden;
   color: rgba(16, 16, 16, 1);
   font-size: 32rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  word-break: break-all;
+  color: #aaa;
+  padding-left: 83rpx;
+  padding-top: 0;
 }
+.comment .createtime {
+  padding-left: 83rpx;
+  color: #ccc;
+}
+
+.replay .replay-info {
+  padding-left: 20rpx;
+  padding-top: 30rpx;
+  font-size: 25rpx;
+}
+.replay .replay-info .replay-name {
+  color: rgba(16, 16, 16, 1);
+  font-family: SourceHanSansSC-regular;
+}
+
 .view-all {
   height: 60rpx;
   color: rgba(163, 163, 163, 1);
@@ -150,9 +199,9 @@ scroll-view{
 .publish input {
   position: absolute;
   left: 19rpx;
-  padding-right: 177rpx;
+  padding-right: 193rpx;
   padding-left: 1em;
-  width: 658rpx;
+  width: 688rpx;
   height: 76rpx;
   color: rgba(136, 136, 136, 1);
   font-size: 28rpx;
@@ -162,7 +211,7 @@ scroll-view{
 }
 .publish .publish-comment {
   position: absolute;
-  left: 517rpx;
+  left: 530rpx;
   top: 6rpx;
   width: 150rpx;
   height: 62rpx;
@@ -177,7 +226,7 @@ scroll-view{
 .next-size {
   position: relative;
   background: white;
-  height: 200rpx;
+  height: 11vh
 }
 .chekckout-question {
   width: 164rpx;

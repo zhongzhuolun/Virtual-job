@@ -10,30 +10,53 @@ Page({
     allTypeNum: {}, // 每种题型的数量
   },
   // 处理总的正确率
-  handleFinalCorrectRate: function(data) {
-    let {myTypeNum, allTypeNum} = data
-    let finalCorrectRate = 0
-    let score = {sum: 0, allRate: 0}
-    // let sum = 0 // 总的题目数量
-    // let allRate = 0 // 总的正确率
-    for (const key in allTypeNum) {
-      if (allTypeNum[key] !== 0) {
-        // 代表题库中有该题型的题
-        score.sum += 1
-      }
-    }
-    for (const key in myTypeNum) {
-        // 代表每钟题型的正确率相加
-        score.allRate += myTypeNum[key]
-    }
-    finalCorrectRate = Math.floor(score.allRate/score.sum)
-    this.setData({
-      finalCorrectRate,
-      questionTypesRate: myTypeNum,
-      allTypeNum,
-    })
+  // handleFinalCorrectRate: function(data) {
+  //   let {myTypeNum, allTypeNum} = data
+  //   let finalCorrectRate = 0
+  //   let score = {sum: 0, allRate: 0}
+  //   // let sum = 0 // 总的题目数量
+  //   // let allRate = 0 // 总的正确率
+  //   for (const key in allTypeNum) {
+  //     if (allTypeNum[key] !== 0) {
+  //       // 代表题库中有该题型的题
+  //       score.sum += 1
+  //     }
+  //   }
+  //   for (const key in myTypeNum) {
+  //       // 代表每钟题型的正确率相加
+  //       score.allRate += myTypeNum[key]
+  //   }
+  //   finalCorrectRate = Math.floor(score.allRate/score.sum)
+  //   this.setData({
+  //     finalCorrectRate,
+  //     questionTypesRate: myTypeNum,
+  //     allTypeNum,
+  //   })
     
-  },
+  // },
+    // 处理总的正确率
+    handleFinalCorrectRate: function(data) {
+      let {accuracy, questionTypeNum} = data
+      let finalCorrectRate = 0
+      let score = {sum: 0, allRate: 0}
+      for (const key in questionTypeNum) {
+        if (questionTypeNum[key] !== 0) {
+          // 代表题库中有该题型的题
+          score.sum += 1
+        }
+      }
+      for (const key in accuracy) {
+          // 代表每钟题型的正确率相加
+          score.allRate += accuracy[key]
+      }
+      finalCorrectRate = Math.floor(score.allRate/score.sum)
+      this.setData({
+        finalCorrectRate,
+        questionTypesRate: accuracy,
+        questionTypeNum,
+      })
+      
+    },
   /**
    * 生命周期函数--监听页面加载
    */

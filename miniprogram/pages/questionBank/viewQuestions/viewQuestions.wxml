@@ -1,19 +1,32 @@
 <!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
 <scroll-view scroll-y="{{modalName==null}}">
 	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
-		<view slot="content"></view>
-		<view slot="backText">完整试卷</view>
+		<view slot="content">{{bank.title}}</view>
+		<view slot="backText">题库</view>
 	</cu-custom>
 	<wxs module="filter">
-		var isChecked = function(key, data) {
+		var isChecked = function(key, data, correct_data) {
 			if (data) {
 				return data.indexOf(key) != -1 ? true : false;
+			} else if (correct_data) {
+				return correct_data.indexOf(key) != -1 ? true : false;
 			} else {
 				return false;
 			}
 		}
+		var isLike = function(id, arr) {
+			if (id) {
+				return arr.indexOf(function(value, index) {
+					return value.user_id === id
+				}) != -1 ? true : false;
+			} else {
+
+				return false;
+			}
+		}
 		module.exports = {
-			isChecked: isChecked
+			isChecked: isChecked,
+			isLike: isLike
 		}
 	</wxs>
 	<view class="bank-wrap">
@@ -21,17 +34,17 @@
 			<text>{{bank.title}} </text>
 			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
 			<view class="menu" bindtap="handleMenu" data-target="Modal">
-			<text class="cuIcon-apps lg text-yellow"></text>
-		</view>
+				<text class="cuIcon-apps lg text-yellow"></text>
+			</view>
 		</view>
 		<!-- <view class="score-time">
 			<text class="time">时间：{{bank.limit_time}}分钟</text>
 		</view> -->
-		
+
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
-					<view class="cu-btn bg-yellow" bindtap="checkType">
+					<view wx:if="{{bank.wrongList.length > 0}}" class="cu-btn bg-yellow" bindtap="checkType">
 						{{ifViewWrong?'完整试卷':'只看错题'}}
 					</view>
 					<view class="action" bindtap="hideModal">
@@ -63,14 +76,15 @@
 					</view>
 					<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 						<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked&&key === chooseValue[questionIndex]?'red':'yellow'}} radio" wx:if="{{value}}" value="{{key}}">
+							<!-- <radio disabled checked="{{key === chooseValue[questionIndex]|| key === bank.bank[questionIndex].correct_answer[0]}}" class="{{bank.bank[questionIndex].mistaked&&(key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0])?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}"> -->
+							<radio disabled checked="{{key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
 							</radio>
 							<text>{{value}}</text>
 						</label>
 					</radio-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 
@@ -82,14 +96,14 @@
 					</view>
 					<checkbox-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
 						<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex])}}">
+							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}">
 							</checkbox>
 							<text>{{value}}</text>
 						</label>
 					</checkbox-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
@@ -100,14 +114,14 @@
 					</view>
 					<checkbox-group bindchange="checkboxChange" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" class="checkbox-group">
 						<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex])}}">
+							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}">
 							</checkbox>
 							<text>{{value}}</text>
 						</label>
 					</checkbox-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 
@@ -115,18 +129,18 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '判断'}}">
 				<view class="radio-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【单选】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【判断】</text>
 					</view>
 					<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 						<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled checked="{{key === chooseValue[questionIndex]}}" class="radio {{bank.bank[questionIndex].mistaked&&key === chooseValue[questionIndex]?'red':'yellow'}}" wx:if="{{value}}" value="{{key}}">
+							<radio disabled checked="{{key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
 							</radio>
 							<text>{{value}}</text>
 						</label>
 					</radio-group>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 
@@ -137,12 +151,12 @@
 						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【填空】</text>
 					</view>
 
-					<view bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}">
+					<view bindtap="handleTap" class="yourblank" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}">
 						你的答案: <text class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}" >{{chooseValue[questionIndex]}}</text>
 					</view>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
@@ -158,41 +172,51 @@
 							</view>
 						</block>
 					</view>
-					<view style="margin-top: 30rpx">
+					<view class="yourblank">
 						你的答案:<text data-type="{{bank.bank[questionIndex].type}}" class="{{bank.bank[questionIndex].mistaked?'wrong-blank':'correct-blank'}}">
 						{{chooseValue[questionIndex]}}
 						</text>
 					</view>
 					<view class="correct-analyse">
 						<view>正确答案：<text class="text-yellow">{{correct_answer}}</text></view> <br />
-						<view>解析：{{bank.bank[questionIndex].parsing}}</view>
+						<view wx:if="{{bank.bank[questionIndex].parsing}}">解析：{{bank.bank[questionIndex].parsing}}</view>
 					</view>
 				</view>
 			</block>
 		</view>
 		<view style="margin-top: 40rpx" class="line"></view>
 		<view class="comments">
-			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="user_id">
+			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="index">
 				<block wx-if="{{ifViewAllComments||index === 0}}">
 					<view class="user">
-						<view class="user-info">
-							<image class="mine" src="../../../images/icon/mine1.png"></image>
-							<view class="user-name">{{item.user_name}}</view>
+						<view class="user-info" id="{{item.user_id}}" bindtap="handleReplay" data-index="{{index}}" data-name="{{item.user_name}}">
+							<image class="mine" src="{{item.avatar}}"></image>
+							<view class="user-name">{{item.user_name}} </view>
 						</view>
-						<view class="like-dot">
-							<image class="like" src="../../../images/icon/like.png"></image>
-							<view class="dot-num">{{item.spot_count}}</view>
+						<view class="like-dot" id="{{item.user_id}}" data-index="{{index}}" bindtap="handleLike">
+								<text class="like cuIcon-appreciatefill {{filter.isLike(userId,item.spot_count)? 'text-yellow' : 'text-yellow'}}"></text>
+							<view class="dot-num">{{item.spot_count.length}}</view>
 						</view>
 					</view>
 					<view class="content">{{item.content}}
+						<view class="replay" data-index="{{index}}" bindtap="handleReplay" >
+							<block wx:for="{{item.reply}}" wx:key="index">
+							<view class="replay-info" >
+								<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-name">{{item.user_name}}: </text>
+								<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-content">{{item.content}} </text>
+							</view>
+							</block>
+						</view>
+					</view>
+					<view class="createtime">{{item.create_time}}
 					</view>
 				</block>
 			</view>
 			<view class="view-all" bindtap="viewAllComments">
 				{{ifViewAllComments?'收起评论':'查看全部评论'}}</view>
 			<view class="publish">
-				<input placeholder="发表你对这道题的想法"></input>
-				<view class="publish-comment">提交</view>
+				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
+				<view bindtap="handlePublish" class="publish-comment">提交</view>
 			</view>
 		</view>
 	</view>
@@ -212,6 +236,4 @@
 			</view>
 		</block>
 	</view>
-
 </scroll-view>
-
