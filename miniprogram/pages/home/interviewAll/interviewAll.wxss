@@ -2,14 +2,6 @@
 page {
   background-color: rgba(255, 255, 255, 1);
 }
-.menu {
-  position: relative;
-  width: 64rpx;
-  height: 64rpx;
-  font-size: 62rpx;
-  left: 668rpx;
-  top: -63rpx;
-}
 .bank-wrap {
   background: white;
   padding-bottom: 5vh;
@@ -21,15 +13,10 @@ page {
   font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
-}
-.score-time {
-  margin-left: 34rpx;
-  height: 40rpx;
-  color: rgba(16, 16, 16, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  margin-top: 28rpx;
+  width: 80vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .line {
   width: 750rpx;
@@ -38,192 +25,9 @@ page {
 .bank {
   margin-left: 34rpx;
   padding-top: 45rpx;
-  height: 50vh;
+  height: 57vh;
   overflow: auto;
 }
-
-.correct-analyse {
-  margin-top: 30rpx;
-  color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-}
-
-.comments {
-  padding: 30rpx;
-  padding-bottom: 0;
-}
-.comment {
-  position: relative;
-}
-.comment .user {
-  display: flex;
-  justify-content: space-between;
-}
-.like-dot, .user-info {
-  display: flex;
-}
-.user-info .user-name {
-  margin-left: 26rpx;
-  line-height: 60rpx;
-}
-.like-dot {
-  margin-right: 20rpx;
-}
-.like-dot .dot-num {
-  line-height: 55rpx;
-}
-
-.comment .mine {
-  width: 60rpx;
-  height: 60rpx;
-  border-radius: 100%;
-}
-.comment .like {
-  font-size: 43rpx;
-  padding-right: 10rpx;
-}
-.comment .content {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  padding: 20rpx;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: rgba(16, 16, 16, 1);
-  font-size: 32rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  word-break: break-all;
-  color: #aaa;
-  padding-left: 83rpx;
-  padding-top: 0;
-}
-.comment .createtime {
-  padding-left: 83rpx;
-  color: #ccc;
-}
-
-.replay .replay-info {
-  padding-left: 20rpx;
-  padding-top: 30rpx;
-  font-size: 25rpx;
-}
-.replay .replay-info .replay-name {
-  color: rgba(16, 16, 16, 1);
-  font-family: SourceHanSansSC-regular;
-}
-
-.view-all {
-  height: 60rpx;
-  color: rgba(163, 163, 163, 1);
-  font-size: 28rpx;
-  text-align: center;
-  font-family: PingFangSC-regular;
-  text-decoration: underline;
-  margin-top: 10rpx;
-}
-.publish {
-  position: relative;
-}
-.publish input {
-  position: absolute;
-  left: 19rpx;
-  padding-right: 193rpx;
-  padding-left: 1em;
-  width: 688rpx;
-  height: 76rpx;
-  color: rgba(136, 136, 136, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: PingFang SC;
-  border: 2rpx solid rgba(187, 187, 187, 1);
-}
-.publish .publish-comment {
-  position: absolute;
-  left: 530rpx;
-  top: 6rpx;
-  width: 150rpx;
-  height: 62rpx;
-  border-radius: 10rpx;
-  background-color: rgba(255, 255, 255, 1);
-  color: rgba(163, 163, 163, 1);
-  font-size: 36rpx;
-  text-align: center;
-  font-family: PingFang SC;
-  border: 4rpx solid rgba(163, 163, 163, 1);
-}
 .next-size {
-  /* position: relative;
-  background: white;
-  height: 200rpx; */
-  position: relative;
-  background: white;
-  margin-top: 24rpx;
-}
-.chekckout-question {
-  width: 164rpx;
-  height: 72rpx;
-  border-radius: 20rpx;
-  background-color: rgba(250, 191, 1, 1);
-  color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: center;
-  font-family: PingFang SC;
-  border: 4rpx solid rgba(0, 0, 0, 1);
-  line-height: 72rpx;
-}
-.next-question {
-  float: right;
-  margin-right: 40rpx;
-}
-.pre-question {
-  float: left;
-  margin-left: 40rpx;
-}
-.page-size {
-  margin: 0 auto;
-  width: 60rpx;
-  height: 40rpx;
-  color: rgba(16, 16, 16, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  padding-top: 100rpx;
-}
-
-.cu-btn {
-  position: relative;
-  left: -24%;
-}
-.question-index-wrap {
-  display: flex;
-  padding: 80rpx;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background: white;
-}
-.cu-dialog {
-  border-radius: 11px;
-  box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
-  border: 2px solid rgba(250, 191, 1, 1);
-}
-.question-index-wrap .question-index {
-  width: 72rpx;
-  height: 72rpx;
-  line-height: 72rpx;
-  background-color: rgba(255, 255, 255, 0);
-  font-size: 36rpx;
-  text-align: center;
-  font-family: -apple-system;
-  border-radius: 50% 50%;
-  margin: 10rpx;
-  border: 2rpx solid black;
-}
-.question-index-wrap .correct {
-  border: 2rpx solid rgba(250, 191, 1, 1);
-  color: rgba(250, 191, 1, 1);
-}
-.no-comments {
-  text-align: center;
+  padding-top: 20rpx;
 }

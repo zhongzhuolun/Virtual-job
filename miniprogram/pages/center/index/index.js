@@ -69,11 +69,13 @@ Page({
   },
   getMsg: function() {
     let {commentList, allMsgNum} = this.data
+
     commentsForUser.get().then((res) => {
       commentList = res.data[0].commentList
       this.setData({
         commentList
       })
+      allMsgNum = 0
       commentList.forEach((value, index) => {
         value.spot_count.forEach((value, index) => {
           if (!value.ifView) {

@@ -52,7 +52,7 @@ page{
 .tupian1,.tupian2,.tupian3{
     position: absolute;
     left: 45rpx;
-    top: 45rpx;
+    top: 50rpx;
     width: 64rpx;
     height: 64rpx;
     font-size: 64rpx;
@@ -60,7 +60,7 @@ page{
 .wenben1,.wenben2,.wenben3{
   position: absolute;
   left: 152rpx;
-  top: 45rpx;
+  top: 50rpx;
   width: 146rpx;
   height: 54rpx;
   color: rgba(16, 16, 16, 1);
@@ -82,7 +82,7 @@ page{
 }
 .ziti{
   position: absolute;
-  left: 630rpx;
+  left: 629rpx;
   top: 49rpx;
   width: 18rpx;
   height: 32rpx;

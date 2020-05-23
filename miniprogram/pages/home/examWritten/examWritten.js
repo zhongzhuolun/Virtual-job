@@ -194,15 +194,17 @@ Page({
 
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function() {
-    let bank = this.data.bank
+    let {bank, wrongList} = this.data
     let bankId = bank.parentId
     let statusObj = {
       id: bankId
     }
     bank.status.doing = false
     bank.status.done = true
-    if (this.data.wrongList.length > 0) {
+    if (wrongList.length > 0) {
       bank.status.mistaked = true
+    } else {
+      bank.status.mistaked = false
     }
     statusObj.status = bank.status
     bankStatusList.get().then(res => {
@@ -211,15 +213,18 @@ Page({
         return value.id == bankId
       })
       if(result !== -1) {
-        if (this.data.wrongList.length > 0) {
+        if (wrongList.length > 0) {
           console.log('mistaked')
           statusList[result].status.mistaked = true
+        } else {
+          statusList[result].status.mistaked = false
         }
         statusList[result].status.doing = false
         statusList[result].status.done = true
       } else {
         statusList.push(statusObj)
       }
+      console.log(statusList)
       wx.cloud.callFunction({
         name: 'updateBankStatus',
         data: {
@@ -338,7 +343,6 @@ Page({
   inputChange: function(e) {
     let type = e.currentTarget.dataset.type
     let index = e.currentTarget.id*1 - 1
-    // let value = e.detail.value.trim().toUpperCase()
     let value = e.detail.value.trim().toLowerCase()
     let index1 = e.target.dataset.index
     let blankArry = this.data.blankArry
@@ -358,8 +362,6 @@ Page({
     } else {
       this.data.chooseValue[this.data.index] = value
     }
-    // this.handleBankStatusDetail()
-
   },
   pageObj: {
     timer: null

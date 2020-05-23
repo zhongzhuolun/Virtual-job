@@ -20,7 +20,7 @@
 	<view class="bank" wx:key="id">
 		<block wx:if="{{bank.bank[questionIndex].type === '单选'}}">
 			<view class="quetion-title">
-				<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【单选】</text>
+				<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【单选】</text></text>
 			</view>
 			<view class="radio-question">
 				<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
@@ -45,7 +45,7 @@
 		<block wx:if="{{bank.bank[questionIndex].type === '多选'}}">
 			<view class="checkbox-question">
 				<view class="quetion-title">
-					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【多选】</text>
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【多选】</text></text>
 				</view>
 				<checkbox-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
 					<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
@@ -66,7 +66,7 @@
 		<block wx:if="{{bank.bank[questionIndex].type === '不定项选'}}">
 			<view class="checkbox-question">
 				<view class="quetion-title">
-					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【不定项选】</text>
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【不定项选】</text></text>
 				</view>
 				<checkbox-group bindchange="checkboxChange" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" class="checkbox-group">
 					<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
@@ -88,7 +88,7 @@
 		<block wx:if="{{bank.bank[questionIndex].type === '判断'}}">
 			<view class="radio-question">
 				<view class="quetion-title">
-					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【判断】</text>
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【判断】</text></text>
 				</view>
 				<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 					<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
@@ -110,7 +110,7 @@
 		<block wx:if="{{bank.bank[questionIndex].type === '填空'}}">
 			<view class="blank-question">
 				<view class="quetion-title">
-					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【填空】</text>
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【填空】</text></text>
 				</view>
 				<view hidden="{{!ifSubmitOne}}" bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" wx:for="{{bank.bank[questionIndex].correct_answer}}" wx:key="key" wx:for-index="key" wx:for-item="value">
 					<input data-index="{{key}}" data-type="{{bank.bank[questionIndex].type}}" bindinput="inputChange" placeholder="[填空{{key + 1}}]"></input>
@@ -131,7 +131,7 @@
 		<block wx:if="{{bank.bank[questionIndex].type === '排序'}}">
 			<view class="sort-question">
 				<view class="quetion-title">
-					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【排序】</text>
+					<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【排序】</text></text>
 				</view>
 				<view wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
 					<block wx:if="{{value != ''}}">

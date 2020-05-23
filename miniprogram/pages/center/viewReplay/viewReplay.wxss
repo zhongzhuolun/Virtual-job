@@ -33,6 +33,7 @@ image {
 .content {
   width: 500rpx;
   padding: 26rpx;
+  padding-right: 0;
 }
 .content .user {
   margin-bottom: 35rpx;
@@ -76,4 +77,9 @@ image {
   font-family: SourceHanSansSC-regular;
   line-height: 168rpx;
   text-indent: 30rpx;
+}
+.no-msg {
+  width: 100%;
+  font-size: 36rpx;
+  line-height: 166rpx;
 }

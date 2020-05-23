@@ -1,3 +1,4 @@
+@import "../../../style/bankComment.wxss";
 scroll-view {
   background: white;
 }
@@ -12,6 +13,10 @@ scroll-view {
   font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  width: 80vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .score-time {
   margin-left: 34rpx;
@@ -23,7 +28,6 @@ scroll-view {
   font-family: PingFangSC-regular;
 }
 .line {
-  /* position: absolute; */
   width: 750rpx;
   border: 1rpx solid rgba(187, 187, 187, 1);
 }
@@ -31,62 +35,17 @@ scroll-view {
   margin-left: 34rpx;
   padding-top: 45rpx;
 }
-.radio-question,
-.checkbox-question,
-.blank-question,
-.sort-question {
-  display: flex;
-  flex-direction: column;
-  color: rgba(16, 16, 16, 1);
-  font-size: 30rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  margin-bottom: 15rpx;
-}
-
-.my-choosebox {
-  display: block;
-}
-.my-choosebox text {
-  margin-left: 20rpx;
-}
 .my-choosebox radio {
-  transform: scale(0.6);
-  border-radius: 50%;
   border: 4rpx solid #ffc200;
-  background: transparent;
 }
-
 .my-choosebox radio[checked] {
   border: 4rpx solid black;
-}
- .my-choosebox checkbox {
-  transform: scale(0.6);
-  border: 4rpx solid #ffc200;
-  background: transparent;
 }
 .my-choosebox checkbox[checked] {
   border: 4rpx solid black;
   background: black;
 }
-checkbox .wx-checkbox-input {
-  border: none;
-}
-radio .wx-radio-input {
-  border: none;
-}
-.blank-question input, .sort-question input {
-  width: 690rpx;
-  height: 72rpx;
-  color: black;
-  font-size: 28rpx;
-  text-align: left;
-  font-family: -apple-system;
-  border: 1rpx solid rgba(187, 187, 187, 1);
-  padding-left: 1em;
-  margin-top: 10rpx;
-  font-weight: bold;
-}
+
 .submit {
   position: relative;
   left: 254rpx;

@@ -269,6 +269,27 @@
 					"pathName": "pages/home/interviewAll/interviewAll",
 					"query": "id=10",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/examInterview/examInterview",
+					"pathName": "pages/home/examInterview/examInterview",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/viewReplay/viewReplay",
+					"pathName": "pages/center/viewReplay/viewReplay",
+					"query": "type=reply",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
+					"pathName": "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
+					"query": "id=10&type=result",
+					"scene": null
 				}
 			]
 		}

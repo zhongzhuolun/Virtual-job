@@ -21,7 +21,7 @@ Page({
     }
     wx.showModal({
       title: '考试须知',
-      content: '考试过程中，如果中途退出，则答题内容作废，但可以在个人中心找到该试卷',
+      content: '考试过程中，如果中途退出，则答题内容作废，但可以在个人中心找到该试卷。',
       confirmText: '我知道了',
       cancelText: '暂不考试',
       success: (res) => {

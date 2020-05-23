@@ -4,21 +4,21 @@
 	<view slot="backText">我的消息</view>
 </cu-custom>
 <view class="blankBox">
-	<view class="viewReplay1" bindtap="toReplay">
+	<view class="viewReplay1" bindtap="toReply">
 		<text class="tupian1 cuIcon-messagefill text-yellow"></text>
 		<text class="wenben1">收到回复</text>
-		<view class="geshu"></view><text class="ziti">1</text>
+		<view wx:if="{{replyNum > 0}}" class="geshu"></view><text class="ziti">{{replyNum}}</text>
 	</view>
 	<!-- <view class="line1"></view> -->
 	<view class="viewReplay2" bindtap="toAppre">
 		<text class="tupian2 text-yellow cuIcon-appreciatefill"></text>
 		<text class="wenben2">收到的赞</text>
-		<view class="geshu"></view><text class="ziti">1</text>
+		<view wx:if="{{doyNum > 0}}" class="geshu"></view><text class="ziti">{{doyNum}}</text>
 	</view>
 	<!-- <view class="line2"></view> -->
 	<view class="viewReplay3" bindtap="toInfo">
 		<text class="tupian3 text-yellow cuIcon-infofill"></text>
 		<text class="wenben3">系统通知</text>
-		<view class="geshu"></view><text class="ziti">1</text>
+		<view wx:if="{{systemNum > 0}}" class="geshu"></view><text class="ziti">{{systemNum}}</text>
 	</view>
 </view>

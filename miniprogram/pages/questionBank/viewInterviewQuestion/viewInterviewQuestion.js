@@ -38,13 +38,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    this.updateMsg() // 更新评论
     let {
       questionIndex,
       bank,
       parentId
     } = this.data
     if (questionIndex < bank.questions.length - 1) {
-      this.updateMsg() // 更新评论
       questionIndex++
       this.setData({
         questionIndex,
@@ -73,8 +73,8 @@ Page({
     let {
       questionIndex
     } = this.data
+    this.updateMsg() // 更新评论
     if (questionIndex > 0) {
-      this.updateMsg() // 更新评论
       questionIndex--
       this.setData({
         questionIndex
@@ -274,8 +274,10 @@ Page({
         return value.parentId == bankId
       })
       bank.questions[questionIndex].comments = result.questions[questionIndex].comments
+      console.log(bank)
+      console.log(result)
       this.setData({
-        bank
+        bank: bank
       }, () => {
         this.handleBankForUser()
       })
@@ -426,9 +428,14 @@ Page({
       commentContent,
       userInfo,
       bank,
-      questionIndex
+      questionIndex,
+      parentId
     } = this.data
     let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
+    let length = bank.questions[questionIndex].comments.length
+    let commentId = id + parentId + questionIndex + length
+    console.log(commentId)
+
     let comment = {
       user_id: id, // 用户的ID 
       create_time: date, // 评论创建的时间
@@ -439,7 +446,7 @@ Page({
       reply: [], // 回复，默认为空数组
       bankId: bank.parentId, // 代表是哪个题库的评论
       questionIndex, // 代表是第几题的评论
-      commentId: bank.questions[questionIndex].comments.length
+      commentId
     }
     this.setData({
       commentContent: '',
@@ -455,6 +462,7 @@ Page({
       bank,
       questionIndex
     } = this.data
+    let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
 
     let reply = {
       user_id: id, // 用户的ID 
@@ -463,6 +471,7 @@ Page({
       content: commentContent, // 评论的内容
       bankId: bank.parentId, // 代表是哪个题库的回复
       questionIndex, // 代表是第几题的回复
+      create_time: date
     }
     this.setData({
       commentContent: '',
@@ -475,8 +484,9 @@ Page({
     let {
       bank,
       questionIndex,
-      userId
+      userId,
     } = this.data
+    console.log(this.commentId)
     commentsForUser.get().then((res) => {
       let commentList = res.data[0].commentList
       let myComment = {
@@ -521,7 +531,8 @@ Page({
             dotUserId,
             type,
             myComment,
-            ifLike
+            ifLike,
+            commentId: this.commentId
           }
         }).then(console.log)
       }
@@ -574,8 +585,11 @@ Page({
   handleLike: function (e) {
     console.log(e)
     let index = e.currentTarget.dataset.index
+    let commentId = e.currentTarget.dataset.commentid
+    this.commentId = commentId // 
     this.index = index // 代表当前所点击评论的序列号
     let id = e.currentTarget.id // 获取到被点赞的用户的ID
+    this.id = id
     wx.showLoading({
       title: '加载中',
     })
@@ -583,10 +597,12 @@ Page({
       userId,
       userInfo
     } = this.data
+    let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
     let dot = {
       userId,
       useName: userInfo.nickName,
-      avatar: userInfo.avatarUrl
+      avatar: userInfo.avatarUrl,
+      create_time: date
     }
     // 更新题库
     this.handleBankStatusDetail(dot, 'dot')
@@ -637,7 +653,8 @@ Page({
     })
     this.setData({
       class: '面试',
-      parentId: options.id
+      parentId: options.id * 1,
+      questionIndex: options.questionIndex * 1 || 0
     })
 
   },

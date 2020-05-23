@@ -22,7 +22,6 @@
     "pages/center/myBanks/myBanks",
     "pages/center/myMsg/myMsg",
     "pages/center/feedback/feedback",
-    "pages/center/replay/replay",
     "pages/center/viewReplay/viewReplay",
     "pages/home/interviewAll/interviewAll",
     "pages/authorization/authorization",

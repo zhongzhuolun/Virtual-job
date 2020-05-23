@@ -35,14 +35,18 @@
 	<view class="bank-wrap">
 		<view class="bank-title">
 			<text>{{bank.title}} </text>
-			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
+		
 		</view>
 		<view class="score-time">
 			<text class="time">时间：{{bank.limit_time}}分钟</text>
 		</view>
-		<view class="menu" bindtap="handleMenu" data-target="Modal">
-			<text class="cuIcon-apps lg text-yellow"></text>
+		<view class="type-btns">
+			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
+			<view class="menu" bindtap="handleMenu" data-target="Modal">
+				<text class="cuIcon-apps lg text-yellow"></text>
+			</view>
 		</view>
+		
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
@@ -74,13 +78,13 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '单选'}}">
 				<view class="radio-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【单选】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【单选】</text> </text>
 					</view>
 					<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 						<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
 							<!-- key === chooseValue[questionIndex]：如果用户所选的答案跟当前的的选择题选项匹配，则代表用户做出了自己的选择；key === bank.bank[questionIndex].correct_answer[0]：如果当前选择题的选项跟正确答案匹配，则代表此时用户 -->
 							<!-- <radio disabled checked="{{key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0]}}" class="{{bank.bank[questionIndex].mistaked&&(key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0])?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}"> -->
-							<radio disabled checked="{{key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
+							<radio disabled checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
 							</radio>
 							<text>{{value}}</text>
 						</label>
@@ -95,11 +99,13 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '多选'}}">
 				<view class="checkbox-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【多选】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【多选】</text></text>
 					</view>
 					<checkbox-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="checkboxChange" class="checkbox-group">
 						<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} no-checkbox" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}">
+							<!-- <checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} no-checkbox" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}">
+							</checkbox> -->
+								<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} no-checkbox" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex])}}">
 							</checkbox>
 							<text>{{value}}</text>
 						</label>
@@ -113,11 +119,11 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '不定项选'}}">
 				<view class="checkbox-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【不定项选】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【不定项选】</text></text>
 					</view>
 					<checkbox-group bindchange="checkboxChange" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" class="checkbox-group">
 						<label class="my-choosebox" wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
-							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex],bank.bank[questionIndex].correct_answer)}}">
+							<checkbox disabled wx:if="{{value}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}}" value="{{key}}" checked="{{filter.isChecked(key,chooseValue[questionIndex])}}">
 							</checkbox>
 							<text>{{value}}</text>
 						</label>
@@ -132,11 +138,11 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '判断'}}">
 				<view class="radio-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【判断】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【判断】</text></text>
 					</view>
 					<radio-group data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}" bindchange="radioChange" class="radio-group">
 						<label wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="my-choosebox">
-							<radio disabled checked="{{key === chooseValue[questionIndex] || key === bank.bank[questionIndex].correct_answer[0]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
+							<radio disabled checked="{{key === chooseValue[questionIndex]}}" class="{{bank.bank[questionIndex].mistaked?'red':'yellow'}} radio no-radio" wx:if="{{value}}" value="{{key}}">
 							</radio>
 							<text>{{value}}</text>
 						</label>
@@ -151,7 +157,7 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '填空'}}">
 				<view class="blank-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【填空】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【填空】</text></text>
 					</view>
 
 					<view class="yourblank" bindtap="handleTap" data-type="{{bank.bank[questionIndex].type}}" id="{{bank.bank[questionIndex].id}}">
@@ -166,7 +172,7 @@
 			<block wx:if="{{bank.bank[questionIndex].type === '排序'}}">
 				<view class="sort-question">
 					<view class="quetion-title">
-						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}【排序】</text>
+						<text>{{bank.bank[questionIndex].id}}. {{bank.bank[questionIndex].title}}<text class="text-yellow">【排序】</text></text>
 					</view>
 					<view wx:for="{{bank.bank[questionIndex].options}}" wx:key="key" wx:for-index="key" wx:for-item="value">
 						<block wx:if="{{value != ''}}">
@@ -188,30 +194,6 @@
 			</block>
 		</view>
 		<view style="margin-top: 40rpx" class="line"></view>
-		<!-- <view class="comments">
-			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="user_id">
-				<block wx-if="{{ifViewAllComments||index === 0}}">
-					<view class="user">
-						<view class="user-info">
-							<image class="mine" src="../../../images/icon/mine1.png"></image>
-							<view class="user-name">{{item.user_name}}</view>
-						</view>
-						<view class="like-dot">
-							<image class="like" src="../../../images/icon/like.png"></image>
-							<view class="dot-num">{{item.spot_count}}</view>
-						</view>
-					</view>
-					<view class="content">{{item.content}}
-					</view>
-				</block>
-			</view>
-			<view class="view-all" bindtap="viewAllComments">
-				{{ifViewAllComments?'收起评论':'查看全部评论'}}</view>
-			<view class="publish">
-				<input placeholder="发表你对这道题的想法"></input>
-				<view class="publish-comment">提交</view>
-			</view>
-		</view> -->
 		<view class="comments">
 			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="index">
 				<block wx-if="{{ifViewAllComments||index === 0}}">
@@ -220,7 +202,7 @@
 							<image class="mine" src="{{item.avatar}}"></image>
 							<view class="user-name">{{item.user_name}} </view>
 						</view>
-						<view class="like-dot" id="{{item.user_id}}" data-index="{{index}}" bindtap="handleLike">
+						<view class="like-dot" id="{{item.user_id}}" data-commentid="{{item.commentId}}" data-index="{{index}}" bindtap="handleLike">
 								<text class="like cuIcon-appreciatefill {{filter.isLike(item.user_id,item.spot_count)? 'text-yellow' : 'text-grey'}}"></text>
 							<view class="dot-num">{{item.spot_count.length}}</view>
 						</view>
@@ -229,6 +211,7 @@
 						<view class="replay" data-index="{{index}}" data-commentid="{{item.commentId}}" bindtap="handleReplay" >
 							<block wx:for="{{item.reply}}" wx:key="index">
 							<view class="replay-info" data-name="{{item.user_name}}" id="{{item.user_id}}">
+								<image src="{{item.avatar}}"></image>
 								<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-name">{{item.user_name}}: </text>
 								<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-content">{{item.content}} </text>
 							</view>

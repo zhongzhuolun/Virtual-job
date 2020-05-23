@@ -26,14 +26,20 @@
 	<view class="bank-wrap">
 		<view class="bank-title">
 			<text>{{bank.title}} </text>
-			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
+			<!-- <text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text> -->
 		</view>
 		<view class="score-time">
 			<text class="time">题目数量：{{bank.count}}道</text>
 		</view>
-		<view class="menu" bindtap="handleMenu" data-target="Modal">
-			<text class="cuIcon-apps lg text-yellow"></text>
+				<view class="type-btns">
+			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
+			<view class="menu" bindtap="handleMenu" data-target="Modal">
+				<text class="cuIcon-apps lg text-yellow"></text>
+			</view>
 		</view>
+		<!-- <view class="menu" bindtap="handleMenu" data-target="Modal">
+			<text class="cuIcon-apps lg text-yellow"></text>
+		</view> -->
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
@@ -71,7 +77,7 @@
 							<image class="mine" src="{{item.avatar}}"></image>
 							<view class="user-name">{{item.user_name}} </view>
 						</view>
-						<view class="like-dot" id="{{item.user_id}}" data-index="{{index}}" bindtap="handleLike">
+						<view class="like-dot" id="{{item.user_id}}" data-index="{{index}}" bindtap="handleLike" data-commentid="{{item.commentId}}">
 							<text class="like cuIcon-appreciatefill {{filter.isLike(item.user_id,item.spot_count)? 'text-yellow' : 'text-grey'}}"></text>
 							<view class="dot-num">{{item.spot_count.length}}</view>
 						</view>
@@ -80,6 +86,7 @@
 						<view class="replay" data-index="{{index}}" data-commentid="{{item.commentId}}" bindtap="handleReplay">
 							<block wx:for="{{item.reply}}" wx:key="index">
 								<view class="replay-info" data-name="{{item.user_name}}" id="{{item.user_id}}">
+									<image src="{{item.avatar}}"></image>
 									<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-name">{{item.user_name}}: </text>
 									<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-content">{{item.content}} </text>
 								</view>

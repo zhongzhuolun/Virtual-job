@@ -21,7 +21,7 @@
 <button class="txt6" disabled="{{btnDisabled}}" hidden="{{!(src&&disabled)}}" bindtap="handleEnd">结束</button>
 <!-- <button bindtap="play" data-type="mine">播放录音</button> -->
 
-<view class="txt7" hidden="{{!src}}">正在录制中......</view>
+<view class="txt7" hidden="{{!src}}">{{recordState?'正在录制中......':''}}</view>
 </block>
 <block wx:else>
 </block> 

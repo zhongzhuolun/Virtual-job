@@ -528,9 +528,12 @@ Page({
       commentContent,
       userInfo,
       bank,
-      questionIndex
+      questionIndex,
+      parentId
     } = this.data
     let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
+    let length = bank.bank[questionIndex].comments.length
+    let commentId = id + parentId + questionIndex + length
     let comment = {
       user_id: id, // 用户的ID 
       create_time: date, // 评论创建的时间
@@ -541,7 +544,7 @@ Page({
       reply: [], // 回复，默认为空数组
       bankId: bank.parentId, // 代表是哪个题库的评论
       questionIndex, // 代表是第几题的评论
-      commentId: bank.bank[questionIndex].comments.length
+      commentId
     }
     // console.log(bank.bank[questionIndex].comments.length)
     this.setData({
@@ -558,6 +561,7 @@ Page({
       bank,
       questionIndex
     } = this.data
+    let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
 
     let reply = {
       user_id: id, // 用户的ID 
@@ -566,6 +570,7 @@ Page({
       content: commentContent, // 评论的内容
       bankId: bank.parentId, // 代表是哪个题库的回复
       questionIndex, // 代表是第几题的回复
+      create_time: date,
     }
     this.setData({
       commentContent: '',
@@ -624,20 +629,10 @@ Page({
             dotUserId,
             type,
             myComment,
-            ifLike
+            ifLike,
+            commentId: this.commentId
           }
         }).then(console.log)
-        // if (ifLike !== -1) {
-        //   // 代表用户点赞过了，此时应该是取消点赞
-        //   result.bank[questionIndex].comments[this.index].spot_count.splice(ifLike, 1)
-        //   bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
-        //   // spotCount.splice(ifLike, 1)
-        // } else {
-        //   // 代表用户没有点赞过，此时应该为点赞
-        //   // spotCount.push(obj)
-        //   result.bank[questionIndex].comments[this.index].spot_count.push(obj)
-        //   bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
-        // }
       }
 
 
@@ -689,10 +684,13 @@ Page({
     console.log(e)
     let index = e.currentTarget.dataset.index
     this.index = index // 代表当前所点击评论的序列号
+    let commentId = e.currentTarget.dataset.commentid
+    this.commentId = commentId // 
     let id = e.currentTarget.id // 获取到被点赞的用户的ID
     wx.showLoading({
       title: '加载中',
     })
+    let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
     let {
       userId,
       userInfo
@@ -700,7 +698,8 @@ Page({
     let dot = {
       userId,
       useName: userInfo.nickName,
-      avatar: userInfo.avatarUrl
+      avatar: userInfo.avatarUrl,
+      create_time: date
     }
     // 更新题库
     this.handleBankStatusDetail(dot, 'dot')
@@ -730,7 +729,8 @@ Page({
     })
     this.setData({
       class: '笔试',
-      parentId: options.id
+      parentId: options.id*1,
+      questionIndex: options.questionIndex * 1 || 0
     })
 
   },

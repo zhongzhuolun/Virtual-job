@@ -511,9 +511,12 @@ Page({
       commentContent,
       userInfo,
       bank,
-      questionIndex
+      questionIndex,
+      parentId
     } = this.data
     let date = moment().format('YYYY-MM-DD HH:mm') // 获取当前时间
+    let length = bank.bank[questionIndex].comments.length
+    let commentId = id + parentId + questionIndex + length
     let comment = {
       user_id: id, // 用户的ID 
       create_time: date, // 评论创建的时间
@@ -524,7 +527,7 @@ Page({
       reply: [], // 回复，默认为空数组
       bankId: bank.parentId, // 代表是哪个题库的评论
       questionIndex, // 代表是第几题的评论
-      commentId: bank.bank[questionIndex].comments.length
+      commentId
     }
     // console.log(bank.bank[questionIndex].comments.length)
     this.setData({
@@ -607,7 +610,8 @@ Page({
             dotUserId,
             type,
             myComment,
-            ifLike
+            ifLike,
+            commentId: this.commentId
           }
         }).then(console.log)
       }
@@ -662,6 +666,8 @@ Page({
     let index = e.currentTarget.dataset.index
     this.index = index // 代表当前所点击评论的序列号
     let id = e.currentTarget.id // 获取到被点赞的用户的ID
+    let commentId = e.currentTarget.dataset.commentid
+    this.commentId = commentId // 
     wx.showLoading({
       title: '加载中',
     })

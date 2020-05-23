@@ -40,7 +40,7 @@ exports.main = async (event, context) => {
     }).get().then((res) => {
       let commentList = res.data[0].commentList
       let result = commentList.findIndex((value, index) => {
-        return value.user_id === event.dotUserId
+        return value.commentId === event.commentId
       })
       if (event.ifLike !== -1) {
         // 代表用户点赞过了，此时应该是取消点赞
@@ -57,7 +57,7 @@ exports.main = async (event, context) => {
         }
       })
     })
-  }
+  } 
 
 
 }

@@ -42,15 +42,27 @@ Page({
     })
 
   },
+   // 开始录音
+   getlocat: function () {
+
+  
+  },
   handleAudioStartExam: function (e) {
+    let that = this
     wx.showModal({
       title: '考试须知',
-      content: '面试考试过程中，如果中途退出答题，将视为提交试卷',
+      content: '面试考试前需要您授权录音功能，面试考试过程中，如果中途退出答题，将视为提交试卷。',
       confirmText: '我知道了',
       cancelText: '暂不考试',
       success: (res) => {
         if (res.confirm) {
-          this.handleStartExam('audio')
+          wx.authorize({
+            scope: 'scope.record',
+            success() {
+              // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+              that.handleStartExam('audio')
+            }
+          })
         }
       }
     })

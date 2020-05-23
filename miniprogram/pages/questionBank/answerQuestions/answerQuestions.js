@@ -132,10 +132,10 @@ Page({
     let correctAnswer = bank.bank[questionIndex].correct_answer
 
     if (choose) { // 用户填的题目不为空的时候
-      choose = choose.toString()
+      choose = choose.toString().toLowerCase()
     }
     if (type !== '填空') { // 代表不为填空题的时候
-      correctAnswer = correctAnswer.toString()
+      correctAnswer = correctAnswer.toString().trim().toLowerCase()
       if(choose !== correctAnswer) { // 代表做错了
         wrongList.push(questionIndex);
       } 
@@ -150,7 +150,10 @@ Page({
         chooseArr = choose.split(',')
       }
       correctAnswer.forEach((value, index) => {
-        if (!(chooseArr[index] === value)) {
+        if (chooseArr[index]) {
+          chooseArr[index] = chooseArr[index].toLowerCase()
+        }
+        if (!(chooseArr[index] === value.trim().toLowerCase())) {
           // 代表该空做错了
           wrongBlankObj.indexArry.push(index)
         }
@@ -185,15 +188,17 @@ Page({
   },
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function() {
-    let bank = this.data.bank
+    let {bank, wrongList} = this.data
     let bankId = bank.parentId
     let statusObj = {
       id: bankId
     }
     bank.status.doing = false
     bank.status.done = true
-    if (this.data.wrongList.length > 0) {
+    if (wrongList.length > 0) {
       bank.status.mistaked = true
+    } else {
+      bank.status.mistaked = false
     }
     statusObj.status = bank.status
     bankStatusList.get().then(res => {
@@ -202,9 +207,11 @@ Page({
         return value.id == bankId
       })
       if(result !== -1) {
-        if (this.data.wrongList.length > 0) {
+        if (wrongList.length > 0) {
           console.log('mistaked')
           statusList[result].status.mistaked = true
+        } else {
+          statusList[result].status.mistaked = false
         }
         statusList[result].status.doing = false
         statusList[result].status.done = true

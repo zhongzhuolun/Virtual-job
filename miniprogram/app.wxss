@@ -4,6 +4,7 @@
 /* @import "app.css"; 你的项目css */
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
+@import "./style/bankComment.wxss";
 page {
   height: 100%;
   background-color: #FABF01;

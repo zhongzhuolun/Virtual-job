@@ -11,8 +11,10 @@
 		<view class="score-time">
 			<text class="time">题目数量：{{writtenBank.count}}道</text>
 		</view>
-		<view class="menu" bindtap="handleMenu" data-target="Modal">
-			<text class="cuIcon-apps lg text-yellow"></text>
+		<view class="type-btns">
+			<view class="menu" bindtap="handleMenu" data-target="Modal">
+				<text class="cuIcon-apps lg text-yellow"></text>
+			</view>
 		</view>
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>

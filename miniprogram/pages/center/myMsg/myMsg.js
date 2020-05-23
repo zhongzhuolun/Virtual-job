@@ -1,15 +1,19 @@
-// miniprogram/pages/center/myMsg/myMsg.js
+const db = wx.cloud.database()
+const commentsForUser = db.collection('commentsForUser')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    replyNum: 0, // 评论未读数
+    doyNum: 0, // 点赞未读数
+    systemNum: 0, // 系统消息未读数
+    commentList: [], // 评论数组
   },
-  toReplay: function(e) {
+  toReply: function(e) {
     wx.navigateTo({
-      url: '../viewReplay/viewReplay?type=replay',
+      url: '../viewReplay/viewReplay?type=reply',
     })
   },
   toAppre: function(e) {
@@ -20,6 +24,34 @@ Page({
   toInfo: function(e) {
     wx.navigateTo({
       url: '../viewReplay/viewReplay?type=info',
+    })
+  },
+  // 获取未读消息
+  getMsg: function() {
+    let {commentList, replyNum, doyNum} = this.data
+    commentsForUser.get().then((res) => {
+      commentList = res.data[0].commentList
+      this.setData({
+        commentList
+      })
+      doyNum = 0
+      replyNum = 0
+      commentList.forEach((value, index) => {
+        value.spot_count.forEach((value, index) => {
+          if (!value.ifView) {
+            doyNum++
+          }
+        })
+        value.reply.forEach((value, index) => {
+          if (!value.ifView) {
+            replyNum++
+          }
+        })
+      })
+      this.setData({
+        doyNum,
+        replyNum
+      })
     })
   },
   /**
@@ -40,7 +72,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getMsg()
   },
 
   /**
