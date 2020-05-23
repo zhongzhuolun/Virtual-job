@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
-	<view slot="content">{{bank.title}}</view>
-	<view slot="backText">行业选择</view>
+	<view slot="content">模拟笔试</view>
+	<view slot="backText"></view>
 </cu-custom>
 <view class="written">
 	<view class="textCover">

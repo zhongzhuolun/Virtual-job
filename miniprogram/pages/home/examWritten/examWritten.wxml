@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-yellow" isBack="{{!ifSubmit?true:false}}" >
 	<view slot="content">{{bank.title}}</view>
-	<view wx:if="{{!ifSubmit}}" slot="backText">模拟笔试</view>
+	<view wx:if="{{!ifSubmit}}" slot="backText"></view>
 </cu-custom>
 
 <view class="bank-wrap {{ifSubmit?'hide':'show'}}" >

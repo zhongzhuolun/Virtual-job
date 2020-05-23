@@ -1,35 +1,9 @@
-<!-- 
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
-	<view slot="content"></view>
-	<view slot="backText">笔试</view>
+
+<cu-custom bgColor="bg-yellow"> 
+	<view slot="content">答题结果</view>
 </cu-custom>
-<view class="title">笔试题目</view>
-<view class="frist1">笔试题库的第一份</view>
-<view class="sentence">“每日一套，早日offer”</view>
-<view class="blank"></view>
-<view class="qusetionType">题型</view>
-<view class="singleChoice">单选题</view>
-<view class="multipleChoice">不定项选择题</view>
-<view class="bianchengti">编程题</view>
-<view class="wendati">问答题</view>
-<view class="accuracy">正确率/%</view>
-<view class="score2">90</view>
-<view class="score3">80</view>
-<view class="score4">90</view>
-<view class="score5">60</view>
-<navigator url="../../questionBank/index/index"><button class="backBank">返回题库</button> </navigator>
-<navigator url="../viewQuestions/viewQuestions"><button class="seekWrong">查找错题</button> </navigator> -->
-<!--miniprogram/pages/home/score/score.wxml-->
-<!-- 导航条不应该有返回的 -->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" > 
-	<!-- <view slot="content">正确率</view> -->
-	<view slot="backText">笔试</view>
-</cu-custom>
-<!-- <view class="title">笔试题目</view> -->
 <view class="frist1">{{title}}</view>
-<!-- <view class="frist1">百度2019校招Web前端工程师笔试卷</view> -->
 <view class="sentence">“每日一套，早日offer”</view>
-<!-- <view class="score1">{{finalCorrectRate}}</view> -->
 <view class="blank"></view>
 <view class="qusetionType">题型</view>
 <view class="singleChoice">单选题({{questionTypeNum.radio}}道)</view>

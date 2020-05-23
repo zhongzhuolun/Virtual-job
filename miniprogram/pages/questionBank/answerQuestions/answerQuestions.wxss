@@ -26,7 +26,8 @@ page {
 
 .bank {
   margin-left: 34rpx;
-  max-height: 620rpx;
+  max-height: 70vh;
+  min-height: 70vh;
   overflow: auto;
   padding-top: 50rpx;
 }
@@ -62,6 +63,7 @@ page {
   transform: scale(0.6);
   border: 4rpx solid #ffc200;
   background: transparent;
+  border-radius: 10rpx 10rpx
 }
 radio .wx-radio-input.wx-radio-input-disabled {
   background: white;
@@ -71,6 +73,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-disabled {
 }
 .my-choosebox checkbox[checked] {
   border: 4rpx solid black;
+  background: black;
 }
 radio.mychecked {
   border: 4rpx solid rgba(250, 191, 1, 1) !important;
@@ -84,6 +87,15 @@ radio.red {
 }
 checkbox.red {
   border: 4rpx solid red !important;
+}
+/* checkbox.black {
+  background: black;
+} */
+checkbox .wx-checkbox-input {
+  border: none;
+}
+radio .wx-radio-input {
+  border: none;
 }
 
 .quetion-title {
@@ -191,13 +203,7 @@ checkbox.red {
   font-family: PingFang SC;
   border: 4rpx solid rgba(163, 163, 163, 1);
 }
-.next-size {
-  position: absolute;
-  background: white;
-  bottom: 0;
-  height: 200rpx;
-  width: 100%;
-}
+
 .chekckout-question {
   width: 164rpx;
   height: 72rpx;
@@ -209,6 +215,13 @@ checkbox.red {
   font-family: PingFang SC;
   border: 4rpx solid rgba(0, 0, 0, 1);
   line-height: 72rpx;
+}
+.next-size {
+  position: absolute;
+  background: white;
+  bottom: 4vh;
+  width: 100%;
+  z-index: -1;
 }
 .next-question {
   float: right;

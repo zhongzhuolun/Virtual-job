@@ -10,22 +10,22 @@ scroll-view{
   height: 64rpx;
   font-size: 62rpx;
   float: right;
+  line-height: 62rpx;
 }
 .bank-wrap {
   background: white;
-  padding-bottom: 10vh;
+  padding-bottom: 8vh;
 }
 .bank-title {
   margin-left: 34rpx;
-  padding-top: 42rpx;
-  width: 676rpx;
-  height: 14vh;
+  height: 10vh;
   color: rgba(16, 16, 16, 1);
   font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
 }
 .score-time {
+  display: inline-block;
   margin-left: 34rpx;
   margin-top: 65rpx;
   margin-bottom: 30rpx;
@@ -77,7 +77,6 @@ scroll-view{
 }
  .my-choosebox checkbox {
   transform: scale(0.6);
-  /* border: 4rpx solid transparent; */
   border: 4rpx solid rgba(250, 191, 1, 1);
   background: transparent;
 }

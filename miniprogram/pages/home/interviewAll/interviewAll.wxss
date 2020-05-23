@@ -49,8 +49,10 @@ page {
   text-align: left;
   font-family: PingFangSC-regular;
 }
+
 .comments {
   padding: 30rpx;
+  padding-bottom: 0;
 }
 .comment {
   position: relative;
@@ -63,33 +65,55 @@ page {
   display: flex;
 }
 .user-info .user-name {
-  margin-left: 10rpx;
+  margin-left: 26rpx;
+  line-height: 60rpx;
 }
 .like-dot {
   margin-right: 20rpx;
 }
+.like-dot .dot-num {
+  line-height: 55rpx;
+}
 
 .comment .mine {
-  width: 40rpx;
-  height: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
 }
 .comment .like {
-  width: 40rpx;
-  height: 40rpx;
+  font-size: 43rpx;
+  padding-right: 10rpx;
 }
 .comment .content {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   padding: 20rpx;
   text-overflow: ellipsis;
-  height: 100rpx;
   overflow: hidden;
   color: rgba(16, 16, 16, 1);
   font-size: 32rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  word-break: break-all;
+  color: #aaa;
+  padding-left: 83rpx;
+  padding-top: 0;
 }
+.comment .createtime {
+  padding-left: 83rpx;
+  color: #ccc;
+}
+
+.replay .replay-info {
+  padding-left: 20rpx;
+  padding-top: 30rpx;
+  font-size: 25rpx;
+}
+.replay .replay-info .replay-name {
+  color: rgba(16, 16, 16, 1);
+  font-family: SourceHanSansSC-regular;
+}
+
 .view-all {
   height: 60rpx;
   color: rgba(163, 163, 163, 1);
@@ -105,9 +129,9 @@ page {
 .publish input {
   position: absolute;
   left: 19rpx;
-  padding-right: 177rpx;
+  padding-right: 193rpx;
   padding-left: 1em;
-  width: 658rpx;
+  width: 688rpx;
   height: 76rpx;
   color: rgba(136, 136, 136, 1);
   font-size: 28rpx;
@@ -117,7 +141,7 @@ page {
 }
 .publish .publish-comment {
   position: absolute;
-  left: 517rpx;
+  left: 530rpx;
   top: 6rpx;
   width: 150rpx;
   height: 62rpx;
@@ -130,9 +154,12 @@ page {
   border: 4rpx solid rgba(163, 163, 163, 1);
 }
 .next-size {
+  /* position: relative;
+  background: white;
+  height: 200rpx; */
   position: relative;
   background: white;
-  height: 200rpx;
+  margin-top: 24rpx;
 }
 .chekckout-question {
   width: 164rpx;

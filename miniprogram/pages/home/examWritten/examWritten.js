@@ -279,7 +279,7 @@ Page({
     clearInterval(this.pageObj.timer)
     this.pageObj.timer = null
     wx.navigateTo({
-      url: '../score/score',
+      url: '../score/score?id=' + this.data.bank.parentId ,
       events: {
       },
       success: function(res) {

@@ -2,7 +2,7 @@
 <scroll-view scroll-y="{{modalName==null}}">
 	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 		<view slot="content">{{bank.title}}</view>
-		<view slot="backText">题库</view>
+		<view slot="backText"></view>
 	</cu-custom>
 	<wxs module="filter">
 		var isChecked = function(key, data, correct_data) {
@@ -15,12 +15,15 @@
 			}
 		}
 		var isLike = function(id, arr) {
-			if (id) {
-				return arr.indexOf(function(value, index) {
-					return value.user_id === id
-				}) != -1 ? true : false;
+			var like = false
+			if (arr.length > 0) {
+				for(var i = 0; i < arr.length; i++) {
+					if (id == arr[i].userId) {
+						like = true
+					}
+				}
+				return like
 			} else {
-
 				return false;
 			}
 		}
@@ -189,19 +192,19 @@
 			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="index">
 				<block wx-if="{{ifViewAllComments||index === 0}}">
 					<view class="user">
-						<view class="user-info" id="{{item.user_id}}" bindtap="handleReplay" data-index="{{index}}" data-name="{{item.user_name}}">
+						<view class="user-info" id="{{item.user_id}}" bindtap="handleReplay" data-commentid="{{item.commentId}}" data-index="{{index}}" data-name="{{item.user_name}}">
 							<image class="mine" src="{{item.avatar}}"></image>
 							<view class="user-name">{{item.user_name}} </view>
 						</view>
 						<view class="like-dot" id="{{item.user_id}}" data-index="{{index}}" bindtap="handleLike">
-								<text class="like cuIcon-appreciatefill {{filter.isLike(userId,item.spot_count)? 'text-yellow' : 'text-yellow'}}"></text>
+								<text class="like cuIcon-appreciatefill {{filter.isLike(item.user_id,item.spot_count)? 'text-yellow' : 'text-grey'}}"></text>
 							<view class="dot-num">{{item.spot_count.length}}</view>
 						</view>
 					</view>
 					<view class="content">{{item.content}}
-						<view class="replay" data-index="{{index}}" bindtap="handleReplay" >
+						<view class="replay" data-index="{{index}}" data-commentid="{{item.commentId}}" bindtap="handleReplay" >
 							<block wx:for="{{item.reply}}" wx:key="index">
-							<view class="replay-info" >
+							<view class="replay-info" data-name="{{item.user_name}}" id="{{item.user_id}}">
 								<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-name">{{item.user_name}}: </text>
 								<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-content">{{item.content}} </text>
 							</view>

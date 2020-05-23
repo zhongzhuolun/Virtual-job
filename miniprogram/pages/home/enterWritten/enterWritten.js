@@ -21,7 +21,7 @@ Page({
     }
     wx.showModal({
       title: '考试须知',
-      content: '笔试考试过程中，如果中途退出答题，将不会自动保存进度，可以去个人中心的我的题库中寻找该题库继续答题',
+      content: '考试过程中，如果中途退出，则答题内容作废，但可以在个人中心找到该试卷',
       confirmText: '我知道了',
       cancelText: '暂不考试',
       success: (res) => {

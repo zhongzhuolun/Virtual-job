@@ -1,5 +1,5 @@
 <cu-custom bgColor="bg-yellow">
-	<view slot="content">offer</view>
+	<view slot="content">小黄求职</view>
 </cu-custom>
 <view class="wrap">
   <view class="offer">

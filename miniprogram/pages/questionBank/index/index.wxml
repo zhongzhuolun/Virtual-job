@@ -106,7 +106,7 @@
   <block wx:else>
     <view class="bank-wrap">
       <navigator url="../../authorization/authorization">
-        <button>请登录</button>
+        <view class="confirm">登陆</view>
             <view wx:for="{{item.bankList}}" wx:key="id">
               <template is="bankItem" data="{{item}}" />
             </view>

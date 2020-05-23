@@ -3,34 +3,33 @@ page {
   background-color: rgba(255, 255, 255, 1);
 }
 .menu {
-  position: relative;
   width: 64rpx;
   height: 64rpx;
   font-size: 62rpx;
-  left: 668rpx;
-  top: -63rpx;
+  float: right;
+  line-height: 62rpx;
 }
 .bank-wrap {
   background: white;
-  padding-bottom: 5vh;
 }
 .bank-title {
   margin-left: 34rpx;
   padding-top: 42rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 50rpx;
+  height: 10vh;
   text-align: left;
   font-family: PingFangSC-regular;
 }
 .score-time {
+  display: inline-block;
   margin-left: 34rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
   text-align: left;
   font-family: PingFangSC-regular;
-  margin-top: 28rpx;
-
+  margin-bottom: 30rpx;
 }
 .line {
   width: 750rpx;
@@ -39,7 +38,8 @@ page {
 .bank {
   margin-left: 34rpx;
   padding-top: 45rpx;
-  height: 50vh;
+  min-height: 61vh;
+  max-height: 61vh;
   overflow: auto;
 }
 .correct-analyse {
@@ -129,11 +129,20 @@ page {
   font-family: PingFang SC;
   border: 4rpx solid rgba(163, 163, 163, 1);
 }
-.next-size {
-  position: relative;
-  background: white;
-  height: 200rpx;
-}
+
+
+/* .chekckout-question {
+  width: 164rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: PingFang SC;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+  line-height: 72rpx;
+} */
 .chekckout-question {
   width: 164rpx;
   height: 72rpx;
@@ -145,6 +154,50 @@ page {
   font-family: PingFang SC;
   border: 4rpx solid rgba(0, 0, 0, 1);
   line-height: 72rpx;
+}
+.next-size {
+  position: absolute;
+  background: white;
+  bottom: 0;
+  bottom: 4vh;
+  width: 100%;
+  z-index: -1;
+}
+.next-question {
+  float: right;
+  margin-right: 40rpx;
+  margin-top: 20rpx;
+}
+.pre-question {
+  float: left;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+}
+.page-size {
+  margin: 0 auto;
+  width: 60rpx;
+  height: 40rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  padding-top: 100rpx;
+}
+.view-answer {
+  width: 112rpx;
+  height: 40rpx;
+  color: rgba(139, 137, 129, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  border-bottom: 2rpx solid rgba(187, 187, 187, 1);
+  margin-top: 18rpx;
+}
+
+/* .next-size {
+  position: relative;
+  background: white;
+  height: 200rpx;
 }
 .next-question {
   float: right;
@@ -163,7 +216,7 @@ page {
   text-align: left;
   font-family: PingFangSC-regular;
   padding-top: 100rpx;
-}
+} */
 
 .cu-btn {
   position: relative;
@@ -200,7 +253,7 @@ page {
 .no-comments {
   text-align: center;
 }
-.view-answer {
+/* .view-answer {
   width: 112rpx;
   height: 40rpx;
   color: rgba(139, 137, 129, 1);
@@ -209,4 +262,4 @@ page {
   font-family: PingFangSC-regular;
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
   margin-top: 18rpx;
-}
+} */

@@ -1,7 +1,7 @@
 <!--miniprogram/pages/home/examInterview/examInterview.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}" >
-	<view slot="content"></view>
-	<view slot="backText">模拟面试</view>
+	<view slot="content">{{questionObj.title}}</view>
+	<view slot="backText"></view>
 </cu-custom>
  <block wx:if="{{type === 'audio'}}">
 

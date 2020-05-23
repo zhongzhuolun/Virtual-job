@@ -1,6 +1,7 @@
 // miniprogram/pages/center/index/index.js
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
+const commentsForUser = db.collection('commentsForUser')
 const bankStatusList = db.collection('bank-status')
 const app = getApp()
 Page({
@@ -12,7 +13,9 @@ Page({
     userInfo: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     loginStatus: app.globalData.loginStatus,
-    industry: ''
+    industry: '',
+    commentList: [],
+    allMsgNum: 0
   },
   myBanks: function(e) {
     if (!this.data.loginStatus) {
@@ -64,7 +67,30 @@ Page({
       // })
     }
   },
-
+  getMsg: function() {
+    let {commentList, allMsgNum} = this.data
+    commentsForUser.get().then((res) => {
+      commentList = res.data[0].commentList
+      this.setData({
+        commentList
+      })
+      commentList.forEach((value, index) => {
+        value.spot_count.forEach((value, index) => {
+          if (!value.ifView) {
+            allMsgNum++
+          }
+        })
+        value.reply.forEach((value, index) => {
+          if (!value.ifView) {
+            allMsgNum++
+          }
+        })
+      })
+      this.setData({
+        allMsgNum
+      })
+    })
+  },
 
 
   handleLogin: function(e) {
@@ -117,6 +143,7 @@ Page({
     app.globalData.userInfo = userInfo
     let loginStatus = app.globalData.loginStatus
     console.log(app.globalData)
+    this.getMsg()
     this.setData({
       loginStatus,
       userInfo,

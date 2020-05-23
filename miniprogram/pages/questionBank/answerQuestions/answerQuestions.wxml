@@ -1,7 +1,7 @@
 <!--miniprogram/pages/questionBank/answerQuestions/answerQuestions.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content">{{bank.title}}</view>
-	<view slot="backText">笔试</view>
+	<view slot="backText"></view>
 </cu-custom>
 <wxs module="filter">
 	var isChecked = function(key, data, correct_data) {

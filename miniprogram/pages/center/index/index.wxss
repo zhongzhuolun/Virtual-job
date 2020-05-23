@@ -282,7 +282,7 @@ image {
 .center .img-wrap {
   width: 180rpx;
   height: 180rpx;
-  padding: 30rpx;
+  /* padding: 30rpx; */
   border: 2rpx solid rgba(187, 187, 187, 1);
   border-radius: 100%;
   margin-top: 10rpx;
@@ -359,6 +359,7 @@ image {
   flex-direction: column;
   text-align: left;
   padding: 13rpx;
+  width: 493rpx;
 }
 .my-bank .content text:nth-child(1),
 .my-message .content text:nth-child(1) {
@@ -373,13 +374,21 @@ image {
   text-align: left;
   font-family: SourceHanSansSC-regular;
 }
+.my-bank .content {
+  width: 500rpx;
+}
 
+.dot {
+  font-size: 39rpx;
+}
 
 
 .agree-policy {
   position: absolute;
-  bottom: 2vh;
-  left: 132rpx;
+  bottom: 1vh;
+  text-align: center;
+  width: 100%;
+  left: 0;
 }
 .agree-policy text:nth-child(2), 
 .agree-policy text:nth-child(4) {

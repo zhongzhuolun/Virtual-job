@@ -1,7 +1,6 @@
 // miniprogram/pages/home/wrongAll/wrongAll.js
 const app = getApp()
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
@@ -31,14 +30,7 @@ Page({
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
   },
-  // 处理查看所有评论
-  viewAllComments: function (e) {
-    console.log(e)
-    this.setData({
-      ifViewAllComments: !this.data.ifViewAllComments
-    })
-    this.updateMsg() // 更新评论
-  },
+
   // 处理下一题
   handleNext: function (e) {
     wx.showLoading({
@@ -108,7 +100,10 @@ Page({
         })
       }
     }
-
+    this.setData({
+      commentContent: '',
+      commentStatus: 0,
+    })
   },
   // 处理上一题
   handlePre: function (e) {
@@ -161,7 +156,10 @@ Page({
         })
       }
     }
-
+    this.setData({
+      commentContent: '',
+      commentStatus: 0,
+    })
   },
   // 处理收藏(更新用户的题库状态以及题库详情)
   handleCollection(e) {
@@ -235,28 +233,9 @@ Page({
     })
 
   },
-  // 获取当前题库状态
-  getStatus: function () {
-    let id = this.data.bank.parentId
-    bankStatusList.get().then(res => {
-      let statusList = res.data[0].statusList
-      console.log(statusList)
-      let ifCollect = false
-      let result = statusList.find((value) => {
-        return value.id === id
-      })
-      if (result) {
-        ifCollect = result.status.collection
-      }
-      this.setData({
-        ifCollect
-      })
 
-    })
-  },
   // 处理菜单的点击
   handleMenu: function (e) {
-    console.log(e)
     this.setData({
       modalName: e.currentTarget.dataset.target
     })
@@ -270,13 +249,17 @@ Page({
   // 处理切换查看试卷的类型
   checkType: function (e) {
     let wrongList = this.data.wrongList
+    let {
+      bank,
+      questionIndex
+    } = this.data
     this.setData({
       ifViewWrong: !this.data.ifViewWrong
     }, () => {
       if (this.data.ifViewWrong) {
         if (typeof wrongList[0] !== 'object') {
           this.setData({
-            questionIndex: wrongList[0]
+            questionIndex: wrongList[0],
           })
         } else {
           this.setData({
@@ -289,14 +272,50 @@ Page({
         })
       }
     })
+    this.setData({
+      commentContent: '',
+      commentStatus: 0,
+      correct_answer: bank.bank[questionIndex].correct_answer.toString()
+    })
   },
   // 根据指定序号跳转题目
   skipQuestion: function (e) {
     let id = e.target.id * 1
+    // let
     this.hideModal()
-    this.setData({
-      questionIndex: id - 1
+    let {
+      questionIndex,
+      bank,
+      wrongIndex,
+      wrongList
+    } = this.data
+    questionIndex = id - 1
+    wrongIndex =  wrongList.findIndex((value, index) => {
+      if (value.index) { // 代表为填空题
+        return value.index === questionIndex
+      } else {
+        return value === questionIndex
+      }
     })
+    this.setData({
+      questionIndex,
+      wrongIndex,
+      correct_answer: bank.bank[questionIndex].correct_answer.toString(),
+      commentContent: '',
+      commentStatus: 0,
+    })
+
+  },
+
+
+
+  // 处理查看所有评论
+  viewAllComments: function (e) {
+    // console.log(e)
+    this.setData({
+      ifViewAllComments: !this.data.ifViewAllComments
+    })
+    this.updateMsg() // 更新评论
   },
   // 获取当前用户笔试题库
   getCurrentBank: function (bankId) {
@@ -312,7 +331,7 @@ Page({
       if (result) {
         ifCollect = result.status.collection
       }
-      console.log(result)
+      // console.log(result)
       this.setData({
         bank: result,
         chooseValue: result.chooseValue,
@@ -322,13 +341,33 @@ Page({
         correct_answer: result.bank[0].correct_answer.toString()
       }, () => {
         this.getStatus()
+        this.updateMsg()
       })
       wx.hideLoading()
       app.globalData.examBank.bank = result
     })
   },
+  // 获取当前题库状态
+  getStatus: function () {
+    let id = this.data.bank.parentId
+    bankStatusList.get().then(res => {
+      let statusList = res.data[0].statusList
+      let ifCollect = false
+      let result = statusList.find((value) => {
+        return value.id === id
+      })
+      if (result) {
+        ifCollect = result.status.collection
+      }
+      this.setData({
+        ifCollect
+      })
+
+    })
+  },
+  
   // 更新评论点赞回复
-  updateMsg: function() {
+  updateMsg: function () {
     let bankId = this.data.parentId
     let {
       bank,
@@ -336,7 +375,6 @@ Page({
     } = this.data
     writtenQuestions.get().then((res) => {
       let writtenBankList = res.data
-      console.log(writtenBankList)
       let result = writtenBankList.find((value) => {
         return value.parentId == bankId
       })
@@ -354,9 +392,12 @@ Page({
       }).then(console.log)
     })
   },
-  handleInput: function(e) {
-    console.log(e)
-    let {placeHolderValue} = this.data
+  // 处理评论输入框的输入状态
+  handleInput: function (e) {
+    // console.log(e)
+    let {
+      placeHolderValue
+    } = this.data
     if (placeHolderValue === '发表你对这道题的想法') {
       this.setData({
         commentStatus: 0
@@ -370,8 +411,6 @@ Page({
   },
   // 实时获取当前评论框的内容
   handleComment: function (e) {
-    console.log(e.detail.value)
-    console.log(e)
     let commentContent = e.detail.value
     this.setData({
       commentContent,
@@ -389,7 +428,6 @@ Page({
 
     writtenQuestions.get().then((res) => {
       let writtenBankList = res.data
-      console.log(writtenBankList)
       let result = writtenBankList.find((value) => {
         return value.parentId == bankId
       })
@@ -415,7 +453,6 @@ Page({
           result.bank[questionIndex].comments[this.index].spot_count.push(obj)
           bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
         }
-        // bank.bank[questionIndex].comments = result.bank[questionIndex].comments
       }
 
       this.setData({
@@ -443,7 +480,7 @@ Page({
       let result = writtenBankList.findIndex((value) => {
         return value.parentId == bankId
       })
-      console.log(result)
+      // console.log(result)
       if (result !== -1) {
         writtenBankList[result] = bank
       } else {
@@ -464,6 +501,12 @@ Page({
     this.index = index
     let id = e.currentTarget.id || e.target.id // 获取到被回复的用户的ID
     let name = e.currentTarget.dataset.name || e.target.dataset.name //获取被回复用户的昵称
+    let commentId = e.target.dataset.commentid
+    if (commentId === undefined) {
+      commentId = e.currentTarget.dataset.commentid
+    }
+    this.commentId = commentId // 
+    console.log(commentId)
     this.setData({
       commentStatus: 1,
       placeHolderValue: '回复' + name,
@@ -473,7 +516,7 @@ Page({
   },
   // 处理失去焦点
   handleBlur: function (e) {
-    console.log(e)
+    // console.log(e)
     this.setData({
       // commentStatus: 0,
       placeHolderValue: '发表你对这道题的想法'
@@ -498,7 +541,9 @@ Page({
       reply: [], // 回复，默认为空数组
       bankId: bank.parentId, // 代表是哪个题库的评论
       questionIndex, // 代表是第几题的评论
+      commentId: bank.bank[questionIndex].comments.length
     }
+    // console.log(bank.bank[questionIndex].comments.length)
     this.setData({
       commentContent: '',
       commentStatus: 0,
@@ -528,9 +573,79 @@ Page({
     })
     return reply
   },
+  // 更新用户评论数据库
+  updateComment: function (comment, type) {
+    let {
+      bank,
+      questionIndex,
+      userId
+    } = this.data
+    commentsForUser.get().then((res) => {
+      let commentList = res.data[0].commentList
+      let myComment = {
+        ...comment
+      }
+      if (type === 'comment') {
+        commentList.unshift(myComment)
+        wx.cloud.callFunction({
+          name: 'updateCmoment',
+          data: {
+            commentList,
+            type
+          }
+        }).then(console.log)
+      } else if (type === 'reply') {
+        console.log(myComment) // 此时为回复
+        myComment.ifView = false // 默认为没有查看
+        let result = bank.bank[questionIndex].comments.find((value, index) => {
+          return value.commentId === this.commentId
+        })
+        userId = result.user_id
+        wx.cloud.callFunction({
+          name: 'updateCmoment',
+          data: {
+            userId,
+            type,
+            myComment,
+            commentId: this.commentId
+          }
+        }).then(console.log)
+        console.log(result)
+      } else {
+        myComment.ifView = false // 点赞
+        let spotCount = bank.bank[questionIndex].comments[this.index].spot_count
+        let ifLike = spotCount.findIndex((value, index) => {
+          return value.userId === userId
+        }) // 代表该用户是否点赞了，-1代表没有，其他代表有，且为对应的索引值
+        let dotUserId = bank.bank[questionIndex].comments[this.index].user_id // 被点赞用户的ID
+        wx.cloud.callFunction({
+          name: 'updateCmoment',
+          data: {
+            dotUserId,
+            type,
+            myComment,
+            ifLike
+          }
+        }).then(console.log)
+        // if (ifLike !== -1) {
+        //   // 代表用户点赞过了，此时应该是取消点赞
+        //   result.bank[questionIndex].comments[this.index].spot_count.splice(ifLike, 1)
+        //   bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
+        //   // spotCount.splice(ifLike, 1)
+        // } else {
+        //   // 代表用户没有点赞过，此时应该为点赞
+        //   // spotCount.push(obj)
+        //   result.bank[questionIndex].comments[this.index].spot_count.push(obj)
+        //   bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
+        // }
+      }
+
+
+    })
+  },
   // 发表评论
   handlePublish: function (e) {
-    console.log(e)
+    // console.log(e)
     wx.showLoading({
       title: '加载中',
     })
@@ -539,7 +654,7 @@ Page({
       commentStatus,
       userId
     } = this.data
-    console.log(commentStatus)
+    // console.log(commentStatus)
     if (!commentContent) {
       wx.showToast({
         title: '内容不能为空',
@@ -550,12 +665,17 @@ Page({
     if (commentStatus === 0) {
       // 拿到评论
       let comment = this.createComment(userId)
+      console.log(comment)
       // 更新公用题库详情
       this.handleBankStatusDetail(comment, 'comment')
+      // 更新用户评论数据库
+      this.updateComment(comment, 'comment')
     } else {
       // 拿到回复
       let reply = this.createReplay(userId)
       this.handleBankStatusDetail(reply, 'replay')
+      this.updateComment(reply, 'reply')
+
     }
     this.setData({
       commentStatus: 0,
@@ -563,11 +683,6 @@ Page({
     }, () => {
       wx.hideLoading()
     })
-    // wx.cloud.callFunction({
-    //   name: 'login',
-    // }).then((res) => {
-    //   // 拿到用户的ID
-    // })
   },
   // 处理点赞
   handleLike: function (e) {
@@ -590,24 +705,17 @@ Page({
     // 更新题库
     this.handleBankStatusDetail(dot, 'dot')
     // 告知被点赞用户
-
-    // this.setData({
-    //   commentStatus: 0
-    // }, () => {
+    this.updateComment(dot, 'dot')
     wx.hideLoading()
-    // })
-    // wx.cloud.callFunction({
-    //   name: 'login',
-    // }).then((res) => {
-    //   // 拿到用户的ID
-    //   let id = res.result.openid
-    // })
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.id)
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.callFunction({
       name: 'login',
     }).then((res) => {
@@ -626,20 +734,15 @@ Page({
     })
 
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
-
+  onReady: function () {},
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     this.getCurrentBank(this.data.parentId)
-    // this.getStatus()
   },
 
   /**

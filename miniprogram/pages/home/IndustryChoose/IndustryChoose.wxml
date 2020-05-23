@@ -4,7 +4,7 @@
 </cu-custom>
 <view class="checked-industry">
 <text>您当前选择的行业是：{{industry?industry:'xx'}}</text>
-<button bindtap="handleConfirm">确定</button>
+<view class="confirm" bindtap="handleConfirm">确定</view>
 </view>
 <view class="VerticalBox">
   <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 130rpx)">

@@ -307,12 +307,12 @@ Page({
     this.handleBankStatusDetail() // 更新题库详情状态
     app.globalData.writtenBank = questionObj
     wx.navigateTo({
-      url: '../endInterview/endInterview',
-      success: (res) => {
-        console.log(questionObj)
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('interviewPageData', questionObj)
-      }
+      url: '../endInterview/endInterview?id=' + questionObj.parentId,
+      // success: (res) => {
+      //   console.log(questionObj)
+      //   // 通过eventChannel向被打开页面传送数据
+      //   res.eventChannel.emit('interviewPageData', questionObj.parentId)
+      // }
     })
 
   },
@@ -408,7 +408,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.handleEnd()
   },
 
   /**

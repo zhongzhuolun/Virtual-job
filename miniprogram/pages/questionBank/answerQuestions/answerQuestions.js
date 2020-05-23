@@ -122,13 +122,6 @@ Page({
     accuracy.blank = (accuracy.blank/(questionTypeNum.blank === 0 ? 1: questionTypeNum.blank)).toFixed(4)*100
     accuracy.sort = (accuracy.sort/(questionTypeNum.sort === 0 ? 1: questionTypeNum.sort)).toFixed(4)*100
 
-    // accuracy.radio = (accuracy.radio/questionTypeNum.radio).toFixed(4)*100
-    // accuracy.checkbox = (accuracy.checkbox/questionTypeNum.checkbox).toFixed(4)*100
-    // accuracy.unsteady = (accuracy.unsteady/questionTypeNum.unsteady).toFixed(4)*100
-    // accuracy.judge = (accuracy.judge/questionTypeNum.judge).toFixed(4)*100
-    // accuracy.blank = (accuracy.blank/questionTypeNum.blank).toFixed(4)*100
-    // accuracy.sort = (accuracy.sort/questionTypeNum.sort).toFixed(4)*100
-
     return {accuracy, questionTypeNum}
   },
   // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户,分数评判暂时不需要）

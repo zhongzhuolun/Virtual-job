@@ -4,7 +4,7 @@ page {
 }
 .written, .interview{
   display: inline-block;
-  height: 104rpx;
+  /* height: 104rpx; */
   width: 366rpx;
   opacity: 0.8;
   line-height: 104rpx;
@@ -229,6 +229,20 @@ image {
   width: 100%;
   background: white;
   z-index: 100;
+}
+.confirm {
+  position: fixed;
+  top: 77vh;
+  left: 37vw;
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 8rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: PingFang SC;
 }
 
 

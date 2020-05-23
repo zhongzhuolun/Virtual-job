@@ -1,9 +1,8 @@
 <!--miniprogram/pages/home/endInterview/endInterview.wxml-->
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
-	<view slot="content"></view>
-	<view slot="backText">模拟面试</view>
+<cu-custom bgColor="bg-yellow">
+	<view slot="content">答题结果</view>
 </cu-custom>
-<view class="video1">(音频/视频)</view>
+<view class="video1">音频</view>
 <view class="line1"></view>
 <view class="jindu"></view>
 <view class="blankBox"></view>
@@ -12,6 +11,6 @@
 <view>⭕面带笑容 </view>
 <view>⭕语言流畅无语病</view>
 </view>
-<navigator url="../interviewAll/interviewAll"> <button class="allExam">查看试卷 </button> </navigator>
+<navigator url="../interviewAll/interviewAll?id={{id}}"> <button class="allExam">查看试卷 </button> </navigator>
 <navigator url="../index/index" open-type="switchTab"> <button class="questionBank">返回首页</button> </navigator>
 

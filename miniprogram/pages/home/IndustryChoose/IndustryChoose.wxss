@@ -52,8 +52,10 @@
   font-size: 30rpx;
   text-align: left;
   font-family: PingFangSC-regular;
+  display: inline-block;
+  width: 76vw;
 }
-.checked-industry button {
+.checked-industry .confirm {
   width: 160rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -63,7 +65,6 @@
   font-size: 36rpx;
   text-align: center;
   font-family: PingFang SC;
-  border: 1rpx solid rgba(187, 187, 187, 1);
 }
 .title {
   color: rgba(250, 191, 1, 1);

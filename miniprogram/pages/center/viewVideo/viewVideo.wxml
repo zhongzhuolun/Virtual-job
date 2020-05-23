@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-yellow" isBack="{{true}}" >
-	<view slot="content"></view>
-	<view slot="backText">面试现场</view>
+	<view slot="content">{{questions.title}}</view>
+	<view slot="backText"></view>
 </cu-custom>
 <view class="wrap">
 <block wx:for="{{questions.questionsFileArry}}" wx:key="index">

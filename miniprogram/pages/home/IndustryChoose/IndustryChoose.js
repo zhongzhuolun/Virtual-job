@@ -128,25 +128,25 @@ Page({
       })
 
       if (examType === '面试') {
-        wx.showToast({
-          title: '可以去个人中心修改行业哦',
-        })
+        // wx.showToast({
+        //   title: '可以去个人中心修改行业哦',
+        // })
         wx.navigateTo({
           url: '../enterInterview/enterInterview?examType=面试题',
         })
       } else if (examType === '笔试') {
-        wx.showToast({
-          title: '可以去个人中心修改行业哦',
-        })
+        // wx.showToast({
+        //   title: '可以去个人中心修改行业哦',
+        // })
         wx.navigateTo({
           url: '../enterWritten/enterWritten?examType=笔试题',
         })
       } else if (tabbar === 'center') {
         wx.navigateBack()
       } else {
-        wx.showToast({
-          title: '可以去个人中心修改行业哦',
-        })
+        // wx.showToast({
+        //   title: '可以去个人中心修改行业哦',
+        // })
         wx.switchTab({
           url: '../../questionBank/index/index',
         })

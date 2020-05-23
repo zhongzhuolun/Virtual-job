@@ -67,6 +67,13 @@ scroll-view {
 }
 .my-choosebox checkbox[checked] {
   border: 4rpx solid black;
+  background: black;
+}
+checkbox .wx-checkbox-input {
+  border: none;
+}
+radio .wx-radio-input {
+  border: none;
 }
 .blank-question input, .sort-question input {
   width: 690rpx;
