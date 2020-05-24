@@ -9,11 +9,14 @@ Page({
    */
   data: {
     id: null,
-    questions: []
-  },
-  getData: function(id) {
-    console.log(id)
+    questions: [],
+    audioPlay: 'init', // 录音播放状态
+    audioPlayAll: false, // 所有录音播放的状态
+    tempFilePaths: [], // 用于存储音频的链接
 
+  },
+  getCurrentBank: function(id) {
+    console.log(id)
     wx.showLoading({
       title: '加载中',
     })
@@ -21,18 +24,85 @@ Page({
       interviewBankForUser.get().then((res) => {
         let banksList = res.data[0].interviewBankList
         console.log(banksList)
-
         questions = banksList.find((value, index) => {
           return value.parentId === id
         })
-        console.log(questions)
-
+        questions.questionsFileArry.forEach((value, index) => {
+          value.audioPlay = 'init'
+        })
         this.setData({
-          questions
+          questions,
+          questionsFileArry: questions.questionsFileArry
         }, () => {
           wx.hideLoading()
+          this.mergeAudio()
         })
     })
+  },
+   // 整合音频
+   mergeAudio: function () {
+    let {
+      questionsFileArry,
+      tempFilePaths
+    } = this.data
+    tempFilePaths = []
+    questionsFileArry.forEach((value, index) => {
+      tempFilePaths = tempFilePaths.concat(value.tempFilePaths)
+    })
+    this.setData({
+      tempFilePaths
+    })
+  },
+  // 播放语音
+  yuyinPlayAll: function (src) {
+    this.innerAudioContext = wx.createInnerAudioContext()
+    console.log(src)
+    this.innerAudioContext.src = src;
+    this.innerAudioContext.play(); //播放音频
+    this.innerAudioContext.onPlay(() => {
+      console.log('开始播放', this.pageObj.i)
+    })
+    this.innerAudioContext.onEnded(() => {
+      this.pageObj.i++
+      console.log('播放结束', this.pageObj.i)
+      if (this.pageObj.i < this.data.tempFilePaths.length && this.data.audioPlayAll) {
+        this.yuyinPlayAll(this.data.tempFilePaths[this.pageObj.i])
+      } else {
+        this.pageObj.i = 0
+        this.setData({
+          audioPlayAll: false
+        })
+      }
+    })
+  },
+  // 播放录音
+  playAll: function () {
+    let ifPlay = true
+    let {questionsFileArry} = this.data
+    questionsFileArry.forEach((value, index) => {
+      if (value.audioPlay === 'play') {
+        ifPlay = false
+      }
+    })
+    if (ifPlay) {
+      this.setData({
+        audioPlayAll: true
+      }, () => {
+        this.yuyinPlayAll(this.data.tempFilePaths[this.pageObj.i])
+      })
+    }
+    
+  },
+  // 暂停播放
+  stopAll: function (e) {
+    this.setData({
+      audioPlayAll: false
+    }, () => {
+      this.innerAudioContext.stop()
+    })
+  },
+  pageObj: {
+    i: 0, // 用于遍历每个问题的音频
   },
   /**
    * 生命周期函数--监听页面加载
@@ -50,7 +120,79 @@ Page({
   onReady: function () {
 
   },
+   // 控制播放录音
+  play: function (e) {
+    let questionIndex = e.currentTarget.id * 1
+    let {questionsFileArry, audioPlayAll} = this.data
+    let ifPlay = true
+    questionsFileArry.forEach((value, index) => {
+      if (value.audioPlay === 'play') {
+        ifPlay = false
+      }
+    })
+    if (audioPlayAll) {
+      ifPlay = false
+    }
+    if (ifPlay) {
+    this.questionIndex = questionIndex
+    let audioPlay = questionsFileArry[questionIndex].audioPlay
+      if (audioPlay === 'init') {
+        this.yuyinPlay(questionsFileArry[questionIndex].tempFilePaths[1])
+      } else {
+        this.innerAudioContext.play()
+      }
+      questionsFileArry[questionIndex].audioPlay = 'play'
+      this.setData({
+        questionsFileArry
+      })
+    } else {
+      wx.showToast({
+        title: '不允许同时播放两个音频',
+        icon: 'none'
+      })
+    }
+    
+  },
+  // 暂停播放
+  stop: function (e) {
+    console.log(e)
+    let {questionsFileArry} = this.data
+    let questionIndex = e.currentTarget.id * 1
+    this.questionIndex = questionIndex
+    questionsFileArry[questionIndex].audioPlay = 'pause'
 
+    this.setData({
+      questionsFileArry
+    }, () => {
+      if (this.innerAudioContext) {
+        this.innerAudioContext.pause()
+      }
+    })
+  },
+  // 真正播放语音
+  yuyinPlay: function (src) {
+    console.log(src)
+    let {questionsFileArry} = this.data
+    this.innerAudioContext = wx.createInnerAudioContext()
+    this.innerAudioContext.src = src
+    if (src) {
+      this.innerAudioContext.autoplay = true
+    } else {
+      wx.showToast({
+        title: '音频失效了',
+        icon: 'none'
+      })
+    }
+    this.innerAudioContext.onEnded(() => {
+      console.log('播放结束')
+      if (this.questionIndex) {
+        questionsFileArry[this.questionIndex].audioPlay = 'init'
+      }
+      this.setData({
+        questionsFileArry
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -59,15 +201,16 @@ Page({
     this.setData({
       industry: wx.getStorageSync('industry')
     }, () => {
-      this.getData(id)
+      this.getCurrentBank(id)
     })
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.innerAudioContext.stop()
   },
 
   /**

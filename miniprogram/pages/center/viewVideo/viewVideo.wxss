@@ -4,9 +4,38 @@ page {
 .wrap {
   margin: 20rpx auto;
 }
+.video1 {
+  margin: 30rpx auto;
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  font-family: Arial;
+  width: 616rpx;
+  height: 162rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(169, 169, 169, 0.4);
+  border: 2rpx solid rgba(250, 191, 1, 1);
+  padding: 26rpx;
+
+}
+.audio-status {
+  margin-top: 20rpx;
+}
+.audio-status text {
+  border: 7rpx solid;
+  border-radius: 100%;
+  padding: 9rpx;
+  padding-left: 10rpx;
+}
 .item {
   width: 680rpx;
+  font-size: 36rpx;
   margin: 50rpx auto;
+}
+.item .audio-status {
+  text-align: center;
+  line-height: 134rpx;
 }
 .item .title {
   height: 48rpx;

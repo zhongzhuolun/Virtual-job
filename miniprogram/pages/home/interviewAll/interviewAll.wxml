@@ -26,20 +26,16 @@
 	<view class="bank-wrap">
 		<view class="bank-title">
 			<text>{{bank.title}} </text>
-			<!-- <text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text> -->
 		</view>
 		<view class="score-time">
 			<text class="time">题目数量：{{bank.count}}道</text>
 		</view>
-				<view class="type-btns">
+		<view class="type-btns">
 			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
 			<view class="menu" bindtap="handleMenu" data-target="Modal">
 				<text class="cuIcon-apps lg text-yellow"></text>
 			</view>
 		</view>
-		<!-- <view class="menu" bindtap="handleMenu" data-target="Modal">
-			<text class="cuIcon-apps lg text-yellow"></text>
-		</view> -->
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
@@ -60,7 +56,25 @@
 			<view class="radio-question">
 				<view class="quetion-title">
 					<text style="font-size: 36rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
-					<text id="{{bank.questions[questionIndex].id}}" bindtap="handleAudioPlay" style="font-size: 48rpx;" class="cuIcon-notificationfill text-yellow"></text>
+					<view wx:if="{{questionsFileArry.length > 0}}"  class="audio-play">
+						<view wx:if="{{audioPlay === 'init'}}" bindtap="play" >
+							<text class="cuIcon-notificationfill text-yellow">
+							</text>
+						</view>
+						<view wx:if="{{audioPlay === 'play'}}" bindtap="stop">
+							<text class="cuIcon-notificationfill text-yellow">
+							</text>
+							<text class="cuIcon-stop text-yellow">
+							</text>
+						</view>
+						<view wx:if="{{audioPlay === 'pause'}}" bindtap="play" >
+							<text class="cuIcon-notificationfill text-yellow">
+							</text>
+							<text class="cuIcon-playfill text-yellow">
+							</text>
+						</view>
+					</view>
+
 				</view>
 				<view class="correct-analyse">
 					<view wx:if="{{bank.questions[questionIndex].analyse}}">解析：\n{{bank.questions[questionIndex].analyse}}</view>
@@ -106,6 +120,7 @@
 		</view>
 	</view>
 	<view class="next-size">
+
 		<view class="next-question chekckout-question" bindtap="handleNext">
 			{{questionIndex < bank.questions.length - 1?'下一题':'查看总结'}}</view>
 		<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>

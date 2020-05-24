@@ -1,18 +1,29 @@
 /* miniprogram/pages/home/endInterview/endInterview.wxss */
-.video1{
+/* .video1 {
+
   position: absolute;
   left: 70rpx;
   top: 175rpx;
-  width: 616rpx;
-  height: 300rpx;
-  border-radius: 20rpx;
   background-color: rgba(255, 255, 255, 1);
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
-  text-align: center;
   font-family: Arial;
-  border: 4rpx solid rgba(0, 0, 0, 1);
+  width: 616rpx;
+  height: 162rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(169, 169, 169, 0.4);
+  border: 2rpx solid rgba(250, 191, 1, 1);
+  padding: 26rpx;
 
+}
+.video1 .audio-status {
+  margin-top: 20rpx;
+}
+.video1 .audio-status text {
+  border: 7rpx solid;
+  border-radius: 100%;
+  padding: 9rpx;
 }
 .line1{
   position: absolute;
@@ -81,4 +92,71 @@
 }
 .questionBank{
   left: 54rpx;
+} */
+.hide {
+  visibility: hidden;
+}
+.video1 {
+  margin: 30rpx auto;
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  font-family: Arial;
+  width: 616rpx;
+  height: 162rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(169, 169, 169, 0.4);
+  border: 2rpx solid rgba(250, 191, 1, 1);
+  padding: 26rpx;
+
+}
+.video1 .audio-status {
+  margin-top: 20rpx;
+}
+.video1 .audio-status text {
+  border: 7rpx solid;
+  border-radius: 100%;
+  padding: 9rpx;
+}
+
+
+.blankBox{
+  margin: 0 auto;
+  width: 616rpx;
+  min-height: 550rpx;
+  overflow: auto;
+  line-height: 52rpx;
+  border-radius: 50rpx;
+  background-color: rgba(255, 255, 255, 0.47);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: left;
+  padding: 26rpx;
+  box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
+  font-family: Arial;
+  border: 2rpx solid rgba(255, 255, 255, 0);
+}
+.answer1{
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+}
+.allExam,.questiobBank{
+  width: 302rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 30rpx;
+  text-align: center;
+  font-family: Microsoft Yahei;
+  border: 4rpx solid rgba(0, 0, 0, 1);  
+}
+.allExam{
+  float: left;
+}
+.btns {
+  padding: 58rpx;
 }

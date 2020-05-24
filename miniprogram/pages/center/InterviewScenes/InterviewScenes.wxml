@@ -5,13 +5,15 @@
 </cu-custom>
 <view class="wrap">
 	<block wx:if="{{banksList.length > 0}}">
-		<block wx:for="{{banksList}}" wx:key="parentId">
-			<navigator url="../viewVideo/viewVideo?id={{item.parentId}}">
-				<view class="item">
-					<text class="title">{{item.title}}</text>
-					<text class="cuIcon-playfill text-yellow"></text>
-				</view>
-			</navigator>
+		<block wx:if="{{item.questionsFileArry.length > 0}}">
+			<block wx:for="{{banksList}}" wx:key="parentId">
+				<navigator url="../viewVideo/viewVideo?id={{item.parentId}}">
+					<view class="item">
+						<text class="title">{{item.title}}</text>
+						<text class="cuIcon-playfill text-yellow"></text>
+					</view>
+				</navigator>
+			</block>
 		</block>
 	</block>
 	<block wx:else>

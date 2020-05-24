@@ -4,11 +4,20 @@
 	<view slot="backText"></view>
 </cu-custom>
  <block wx:if="{{type === 'audio'}}">
-
-<view class="body"></view>
-<view class="txt1">{{questionObj.title}}</view>
-<view class="txt2">题目数量：{{questionObj.count}}道</view>
-<view class="line"></view>
+<view class="bank-wrap">
+	<view class="bank-title">
+		<text>{{questionObj.title}}</text>
+	</view>
+	<view class="score-time">
+		<text class="time">题目数量：{{questionObj.count}}道</text>
+	</view>
+		<view class="line">
+	</view>
+</view>
+<!-- <view class="body"></view> -->
+<!-- <view class="txt1">{{questionObj.title}}</view> -->
+<!-- <view class="txt2">题目数量：{{questionObj.count}}道</view> -->
+<!-- <view class="line"></view> -->
 <image src="../../../images/icon/people.png" class="img1"></image>
 <image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain" disabled="{{btnDisabled}}"></image>
 <view class="txt3">面试官</view>

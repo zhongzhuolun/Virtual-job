@@ -96,10 +96,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
 					"pathName": "pages/questionBank/endInterviewQuestion/endInterviewQuestion",
-					"query": "",
+					"query": "id=10",
 					"scene": null
 				},
 				{
@@ -166,10 +166,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 16,
 					"name": "pages/home/endInterview/endInterview",
 					"pathName": "pages/home/endInterview/endInterview",
-					"query": "",
+					"query": "id=10",
 					"scene": null
 				},
 				{
@@ -264,7 +264,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 30,
 					"name": "pages/home/interviewAll/interviewAll",
 					"pathName": "pages/home/interviewAll/interviewAll",
 					"query": "id=10",
@@ -289,6 +289,13 @@
 					"name": "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
 					"pathName": "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
 					"query": "id=10&type=result",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/center/viewVideo/viewVideo",
+					"pathName": "pages/center/viewVideo/viewVideo",
+					"query": "id=10",
 					"scene": null
 				}
 			]

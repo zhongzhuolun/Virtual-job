@@ -1,13 +1,9 @@
 // miniprogram/pages/home/interviewAll/interviewAll.js
 const app = getApp()
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
-const plugin = requirePlugin("WechatSI") // 引入文字转语音的插件
-const manager = plugin.getRecordRecognitionManager() // 获取文字转语音的插件对象
-const recorderManager = wx.getRecorderManager() // 获取录音对象
 const commentsForUser = db.collection('commentsForUser')
 const moment = require('../../../utils/moment')
 Page({
@@ -33,6 +29,8 @@ Page({
     userId: '', // 用户的ID
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
+    audioPlay: 'init', // 录音播放状态
+
   },
 
   // 处理下一题
@@ -40,6 +38,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    this.stop()
     let {
       questionIndex,
       bank,
@@ -65,6 +64,7 @@ Page({
     this.setData({
       commentContent: '',
       commentStatus: 0,
+      audioPlay: 'init',
     })
   },
   // 处理上一题
@@ -72,6 +72,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    this.stop()
     let {
       questionIndex
     } = this.data
@@ -90,6 +91,7 @@ Page({
     this.setData({
       commentContent: '',
       commentStatus: 0,
+      audioPlay: 'init',
     })
   },
   // 处理收藏(更新用户的题库状态以及题库详情)
@@ -184,27 +186,16 @@ Page({
   skipQuestion: function (e) {
     let id = e.target.id * 1
     this.hideModal()
+    this.stop()
     this.setData({
-      questionIndex: id - 1
+      questionIndex: id - 1,
+      commentContent: '',
+      commentStatus: 0,
+      audioPlay: 'init',
     })
+    
   },
-  // 处理指定题目的语音的播放
-  handleAudioPlay: function (e) {
-    wx.showLoading({
-      title: '加载中',
-    })
-    let {
-      questionIndex,
-      bank
-    } = this.data
-    let tempFilePaths = bank.questionsFileArry[questionIndex].tempFilePaths
-    this.setData({
-      tempFilePaths
-    }, () => {
-      wx.hideLoading({})
-      this.yuyinPlay(tempFilePaths[0])
-    })
-  },
+
   // 处理查看所有评论
   viewAllComments: function (e) {
     console.log(e)
@@ -234,6 +225,7 @@ Page({
         bank: result,
         status: result.status,
         ifCollect,
+        questionsFileArry: result.questionsFileArry
       }, () => {
         this.updateMsg()
         this.getStatus()
@@ -635,42 +627,56 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const innerAudioContext = wx.createInnerAudioContext()
-    innerAudioContext.onError(function (res) {
-      wx.showToast({
-        title: '语音播放失败',
-        icon: 'none',
-      })
-    })
-
   },
-  // 播放语音
-  yuyinPlay: function (src) {
-    const innerAudioContext = wx.createInnerAudioContext()
-    let {
-      tempFilePaths
-    } = this.data
-    innerAudioContext.autoplay = true
-    innerAudioContext.src = src;
-    innerAudioContext.onPlay(() => {
-      this.pageObj.i++
+   // 处理指定题目的语音的播放
+
+  // 控制播放录音
+  play: function () {
+    let {questionsFileArry, questionIndex, audioPlay} = this.data
+    if (audioPlay === 'init') {
+      this.yuyinPlay(questionsFileArry[questionIndex].tempFilePaths[1])
+    } else {
+      this.innerAudioContext.play()
+    }
+    this.setData({
+      audioPlay: 'play'
     })
-    innerAudioContext.onEnded(() => {
-      if (this.pageObj.i < tempFilePaths.length) {
-        this.yuyinPlay(tempFilePaths[this.pageObj.i])
-      } else {
-        this.pageObj.i = 0
+  },
+  // 暂停播放
+  stop: function (e) {
+    this.setData({
+      audioPlay: 'pause'
+    }, () => {
+      if (this.innerAudioContext) {
+        this.innerAudioContext.pause()
       }
     })
   },
-  pageObj: {
-    i: 0
+  // 真正播放语音
+  yuyinPlay: function (src) {
+    console.log(src)
+    this.innerAudioContext = wx.createInnerAudioContext()
+    this.innerAudioContext.src = src
+    if (src) {
+      this.innerAudioContext.autoplay = true
+    } else {
+      wx.showToast({
+        title: '音频失效了',
+        icon: 'none'
+      })
+    }
+
+    this.innerAudioContext.onEnded(() => {
+      console.log('播放结束')
+      this.setData({
+        audioPlay: 'init'
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.getStatus()
     this.getCurrentBank(this.data.parentId)
   },
 
@@ -678,7 +684,10 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.stop()
+    this.setData({
+      audioPlay: 'init'
+    })
   },
 
   /**

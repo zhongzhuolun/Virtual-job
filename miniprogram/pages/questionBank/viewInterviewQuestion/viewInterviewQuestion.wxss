@@ -28,4 +28,30 @@ page {
   overflow: hidden;
   white-space: nowrap;
 }
+.next-question, .pre-question {
+  margin-top: 20rpx;
+}
+.next-size {
+  padding-top: 20rpx;
+}
+.audio-play {
+  width: 120rpx;
+  height: 60rpx;
+  border: 2rpx solid #FABF01;
+  border-radius: 20rpx 20rpx;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.audio-play .cuIcon-notificationfill  {
+  margin-left: 2rpx;
+}
+.audio-play .cuIcon-playfill, .audio-play .cuIcon-stop{
+  font-size: 40rpx;
+  border-radius: 50% 50%;
+  border: 1rpx solid;
+  padding-left: 3rpx;
+}
+
+
 

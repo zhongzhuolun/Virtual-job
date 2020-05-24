@@ -1,14 +1,37 @@
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content">{{questions.title}}</view>
 	<view slot="backText"></view>
 </cu-custom>
 <view class="wrap">
-<block wx:for="{{questions.questionsFileArry}}" wx:key="index">
-  <view class="item">
-      <text class="title">{{index + 1}}.{{item.title}}</text>
-      <view class="video-wrap"></view>
-  </view>
-</block>
-  
- 
+	<!-- <view class="video-all"> -->
+	<view wx:if="{{!audioPlayAll}}" class="video1" bindtap="playAll">
+		<text>回放完整过程</text>
+		<view class="audio-status">
+			<text  class="text-yellow cuIcon-playfill"></text>
+		</view>
+	</view>
+	<view wx:else class="video1" bindtap="stopAll">
+		<text>正在播放录音</text>
+		<view class="audio-status">
+			<text class="text-yellow cuIcon-stop"></text>
+		</view>
+	</view>
+	<!-- </view> -->
+	<block wx:for="{{questionsFileArry}}" wx:key="index">
+		<view class="item">
+			<text class="title">{{index + 1}}.{{item.title}}</text>
+			<view class="video-wrap">
+			
+        <view wx:if="{{item.audioPlay === 'play'}}" class="audio-status" bindtap="stop" id="{{index}}">
+					<text class="text-yellow cuIcon-stop"></text>
+				</view>
+        <view wx:else class="audio-status" bindtap="play" id="{{index}}">
+					<text class="text-yellow cuIcon-playfill"></text>
+				</view>
+				
+			</view>
+		</view>
+	</block>
+
+
 </view>

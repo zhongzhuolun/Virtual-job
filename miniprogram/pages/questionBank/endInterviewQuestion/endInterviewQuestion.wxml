@@ -2,11 +2,31 @@
 <cu-custom bgColor="bg-yellow">
 	<view slot="content">答题结果</view>
 </cu-custom>
-<view class="blankBox"></view>
-<view class="answer1">面试常见评分标准：
-<view> ⭕衣着整洁整齐 </view> 
-<view>⭕面带笑容 </view>
-<view>⭕语言流畅无语病</view>
+<view class="{{questionsFileArry.length === 0? 'hide': ''}}" >
+	<view wx:if="{{!audioPlay}}" class="video1" bindtap="play">
+		<text>回放完整过程</text>
+		<view class="audio-status">
+			<text  class="text-yellow cuIcon-playfill"></text>
+		</view>
+	</view>
+	<view wx:else class="video1" bindtap="stop">
+		<text>正在播放录音</text>
+		<view class="audio-status">
+			<text class="text-yellow cuIcon-stop"></text>
+		</view>
+	</view>
 </view>
-<navigator url="../viewInterviewQuestion/viewInterviewQuestion?class=面试&id={{id}}"> <button class="allExam">查看完整试卷 </button> </navigator>
-<navigator url="../index/index" open-type="switchTab"> <button class="questiobBank">返回题库</button> </navigator>
+
+<view class="blankBox">
+	<view class="answer1">面试常见评分标准：
+		<view> ⭕衣着整洁整齐 </view> 
+		<view>⭕面带笑容 </view>
+		<view>⭕语言流畅无语病</view>
+	</view>
+</view>
+<view class="btns">
+	<button class="allExam" bindtap="viewAll">查看完整试卷 </button>
+	<button class="questiobBank" bindtap="toIndex">返回题库</button>
+</view>
+<!-- <navigator url="../viewInterviewQuestion/viewInterviewQuestion?class=面试&id={{id}}"> <button class="allExam">查看完整试卷 </button> </navigator>
+<navigator url="../index/index" open-type="switchTab"> <button class="questiobBank">返回题库</button> </navigator> -->

@@ -29,10 +29,7 @@ page {
 .type-btns {
   top: 8vh;
 }
-.score-time {
-  margin-bottom: 30rpx;
-  margin-top: 0;
-}
+
 .next-question, .pre-question {
   margin-top: 20rpx;
 }

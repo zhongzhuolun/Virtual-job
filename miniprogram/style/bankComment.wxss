@@ -135,10 +135,6 @@
   border: 4rpx solid rgba(163, 163, 163, 1);
 }
 
-.next-size {
-  position: relative;
-  z-index: 0;
-}
 .chekckout-question {
   width: 164rpx;
   height: 72rpx;

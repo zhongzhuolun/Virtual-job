@@ -24,7 +24,8 @@ scroll-view{
   font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
-  width: 80vw;
+  height: 15vh;
+  width: 83vw;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -43,95 +44,3 @@ scroll-view{
   z-index: 0;
 }
   
-
-/* .correct-analyse {
-  margin-top: 30rpx;
-  color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-} */
-
-/* .next-size {
-  position: relative;
-  background: white;
-  height: 11vh
-}
-.chekckout-question {
-  width: 164rpx;
-  height: 72rpx;
-  border-radius: 20rpx;
-  background-color: rgba(250, 191, 1, 1);
-  color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: center;
-  font-family: PingFang SC;
-  border: 4rpx solid rgba(0, 0, 0, 1);
-  line-height: 72rpx;
-}
-.next-question {
-  float: right;
-  margin-right: 40rpx;
-}
-.pre-question {
-  float: left;
-  margin-left: 40rpx;
-}
-.page-size {
-  margin: 0 auto;
-  width: 60rpx;
-  height: 40rpx;
-  color: rgba(16, 16, 16, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  padding-top: 100rpx;
-} */
-
-/* .wrong-blank {
-  color: red;
-}
-.correct-blank {
-  color: yellow;
-} */
-/* .cu-btn {
-  position: relative;
-  left: -24%;
-}
-.question-index-wrap {
-  display: flex;
-  padding: 80rpx;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background: white;
-  padding-top: 40rpx;
-}
-.cu-dialog {
-  border-radius: 11px;
-  box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
-  border: 2px solid rgba(250, 191, 1, 1);
-}
-.cu-dialog .cubar {
-  padding-top: 30rpx;
-}
-
-.question-index-wrap .question-index {
-  width: 72rpx;
-  height: 72rpx;
-  line-height: 72rpx;
-  background-color: rgba(255, 255, 255, 0);
-  font-size: 36rpx;
-  text-align: center;
-  font-family: -apple-system;
-  border-radius: 50% 50%;
-  margin: 10rpx;
-  border: 2rpx solid black;
-}
-.question-index-wrap .correct {
-  border: 2rpx solid rgba(250, 191, 1, 1);
-  color: rgba(250, 191, 1, 1);
-}
-.question-index-wrap .wrong {
-  border: 2rpx solid red;
-  color: rgb(250, 1, 1);
-} */

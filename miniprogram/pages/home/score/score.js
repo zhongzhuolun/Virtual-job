@@ -8,6 +8,7 @@ Page({
     finalCorrectRate: 0, // 最终总正确率
     questionTypesRate: {}, // 每种题型的正确率
     allTypeNum: {}, // 每种题型的数量
+    id: null,
   },
     // 处理总的正确率
     handleFinalCorrectRate: function(data) {
@@ -36,8 +37,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.setData({
-      id: options.id
+      id: options.id*1
     })
 
   },

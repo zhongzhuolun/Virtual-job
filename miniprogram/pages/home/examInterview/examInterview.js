@@ -23,12 +23,13 @@ Page({
     ifEnd: false,
     nowIndex: 0, // 该项暂时用不到
     disabled: false, // 控制按钮的显示
-    questionsFileArry: [ // 用于存储整个答题过程中的题目和录音临时链接的数组
-      {
-        tempFilePaths: [], // 用于存储问题和答案的录音链接的数组，0-问题，1-答案
-        title: '' // 用于存储问题字符串
-      }
-    ],
+    // questionsFileArry: [ // 用于存储整个答题过程中的题目和录音临时链接的数组
+    //   {
+    //     tempFilePaths: [], // 用于存储问题和答案的录音链接的数组，0-问题，1-答案
+    //     title: '' // 用于存储问题字符串
+    //   }
+    // ],
+    questionsFileArry: [],
     btnDisabled: false, // 按钮是否被禁用
     ifStop: false, // 是否真正结束答题
   },
@@ -112,7 +113,8 @@ Page({
     let that = this
     let {
       tempFilePaths,
-      questionsFileArry
+      questionsFileArry,
+      questionObj
     } = this.data
     let nowIndex = this.pageObj.nowIndex // 获取当前问题的索引
     let date = new Date()
@@ -134,9 +136,22 @@ Page({
         success: res => {
           // 返回文件 ID
           questionsFileArry[nowIndex].tempFilePaths.push(res.fileID)
-          if (that.data.ifStop) {
-
-          }
+          this.setData({
+            questionsFileArry
+          }, () => {
+            console.log(questionsFileArry)
+            this.handleBankStatusDetail()
+            if (this.data.ifEnd) {
+              wx.navigateTo({
+                url: '../endInterview/endInterview?id=' + questionObj.parentId,
+                success: function(res) {
+                  // 通过eventChannel向被打开页面传送数据
+                  res.eventChannel.emit('questionsFileArry', { questionsFileArry })
+                }
+              })
+            }
+          })
+        
         },
         fail: console.error
       })
@@ -188,6 +203,9 @@ Page({
   },
   // 文字转语音
   wordYun: function (e) {
+    wx.showLoading({
+      title: '正在组织语言',
+    })
     var that = this;
     var content = this.data.content; // 获取到当前的问题
     let len = this.data.questions.length // 获取问题数组的长度
@@ -230,6 +248,7 @@ Page({
         that.setData({
           src: res.filename // 获取语音链接
         }, () => {
+          wx.hideLoading()
           that.yuyinPlay(); // 播放语音
         })
 
@@ -296,7 +315,7 @@ Page({
     // 文字转语音
     wx.showModal({
       title: '提示',
-      content: '当面试官问完问题时，即可开始回答，小黄求职将为您全程录音',
+      content: '当面试官问完问题时，即可开始回答，小黄求职将为您全程录音。',
       success(res) {
         if (res.confirm) {
           that.wordYun()
@@ -335,15 +354,16 @@ Page({
     }, () => {
       this.stop()
       this.handleBankStatus() // 更新题库简介状态
-      this.handleBankStatusDetail() // 更新题库详情状态
+      // this.handleBankStatusDetail() // 更新题库详情状态
       app.globalData.writtenBank = questionObj
-      wx.navigateTo({
-        url: '../endInterview/endInterview?id=' + questionObj.parentId,
-      })
+      // wx.navigateTo({
+      //   url: '../endInterview/endInterview?id=' + questionObj.parentId,
+      // })
     })
   },
   // 再听一次
   handleAgain: function (e) {
+    this.stop()
     let {
       questionsFileArry,
       btnDisabled
@@ -352,7 +372,7 @@ Page({
       return false
     }
     let nowIndex = this.pageObj.nowIndex
-    questionsFileArry[nowIndex].tempFilePaths.splice(1, 1)
+    questionsFileArry.splice(nowIndex, 1)
     this.setData({
       questionsFileArry
     }, () => {
@@ -390,9 +410,11 @@ Page({
   },
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function () {
+    let {questionsFileArry} = this.data
+    console.log(questionsFileArry)
     let bank = this.data.questionObj
     let bankId = bank.parentId
-    bank.questionsFileArry = this.data.questionsFileArry
+    bank.questionsFileArry = questionsFileArry
     bank.status.done = true
     bank.status.doing = false
     interviewBankForUser.get().then((res) => {
@@ -427,22 +449,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    // let {
-    //   questionObj,ifEnd
-    // } = this.data
-    // if (!ifEnd) {
-    //   this.stop()
-    //   this.handleBankStatus() // 更新题库简介状态
-    //   this.handleBankStatusDetail() // 更新题库详情状态
-    //   app.globalData.writtenBank = questionObj
-    //   this.setData({
-    //     ifEnd: false
-    //   }, () => {
-    //     wx.navigateTo({
-    //       url: '../endInterview/endInterview?id=' + questionObj.parentId,
-    //     })
-    //   })
-    // }
+  
   },
 
   /**
