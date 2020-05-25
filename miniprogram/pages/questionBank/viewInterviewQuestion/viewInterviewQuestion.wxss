@@ -9,6 +9,9 @@ page {
   width: 750rpx;
   border: 1rpx solid rgba(187, 187, 187, 1);
 }
+.score-time {
+  margin-bottom: 25rpx;
+}
 .bank {
   margin-left: 34rpx;
   overflow: auto;

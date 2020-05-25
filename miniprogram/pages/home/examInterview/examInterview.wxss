@@ -112,11 +112,10 @@ page {
   height: 172rpx;
 }
 .img2{
-  position: absolute;
-  left: 654rpx;
-  top: 356rpx;
   width: 70rpx;
   height: 60rpx;
+  float: right;
+  margin: 30rpx;
 }
 .img3{
   position: absolute;

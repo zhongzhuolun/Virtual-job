@@ -68,6 +68,9 @@ page{
   text-align: left;
   font-family: SourceHanSansSC-regular;
 }
+.tupian3, .wenben3 {
+  top: 55rpx;
+}
 .geshu{
   position: absolute;
   left: 615rpx;

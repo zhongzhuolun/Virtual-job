@@ -59,20 +59,20 @@
 			<view class="radio-question">
 				<view class="quetion-title">
 					<text style="font-size: 36rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
-										<view wx:if="{{questionsFileArry.length > 0}}"  class="audio-play">
+						<view wx:if="{{questionsFileArry.length > 0}}"  class="audio-play">
 						<view wx:if="{{audioPlay === 'init'}}" bindtap="play" >
 							<text class="cuIcon-notificationfill text-yellow">
 							</text>
 						</view>
 						<view wx:if="{{audioPlay === 'play'}}" bindtap="stop">
-							<text class="cuIcon-notificationfill text-yellow">
-							</text>
+							<!-- <text class="cuIcon-notificationfill text-yellow">
+							</text> -->
 							<text class="cuIcon-stop text-yellow">
 							</text>
 						</view>
 						<view wx:if="{{audioPlay === 'pause'}}" bindtap="play" >
-							<text class="cuIcon-notificationfill text-yellow">
-							</text>
+							<!-- <text class="cuIcon-notificationfill text-yellow">
+							</text> -->
 							<text class="cuIcon-playfill text-yellow">
 							</text>
 						</view>

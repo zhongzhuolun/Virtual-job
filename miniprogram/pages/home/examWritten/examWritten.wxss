@@ -13,10 +13,10 @@ scroll-view {
   font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
-  width: 80vw;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  /* width: 80vw; */
+  /* text-overflow: ellipsis; */
+  /* overflow: hidden; */
+  /* white-space: nowrap; */
 }
 .score-time {
   margin-left: 34rpx;

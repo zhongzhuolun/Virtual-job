@@ -123,7 +123,7 @@ Page({
           })
         } else {
           wx.navigateTo({
-            url: '../../questionBank/viewQuestions/viewQuestions' + bank.id,
+            url: '../../questionBank/viewQuestions/viewQuestions?id=' + bank.id,
           })
         }
       })
