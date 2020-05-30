@@ -89,10 +89,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "pages/home/score/score",
 					"pathName": "pages/home/score/score",
-					"query": "",
+					"query": "id=20",
 					"scene": null
 				},
 				{
@@ -194,10 +194,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 20,
 					"name": "pages/questionBank/endQuestion/endQuestion",
 					"pathName": "pages/questionBank/endQuestion/endQuestion",
-					"query": "",
+					"query": "id=20",
 					"scene": null
 				},
 				{
@@ -296,6 +296,13 @@
 					"name": "pages/center/viewVideo/viewVideo",
 					"pathName": "pages/center/viewVideo/viewVideo",
 					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/enterWritten/enterWritten",
+					"pathName": "pages/home/enterWritten/enterWritten",
+					"query": "",
 					"scene": null
 				}
 			]

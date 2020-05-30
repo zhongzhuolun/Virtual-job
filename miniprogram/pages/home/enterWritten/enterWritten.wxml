@@ -2,23 +2,76 @@
 	<view slot="content">模拟笔试</view>
 	<view slot="backText"></view>
 </cu-custom>
-<view class="written">
-	<view class="textCover">
-		<text>{{bank.title}}</text>
+
+<view class="wrap">
+	<view class="title">
+		{{bank.title}}
 	</view>
-	<view class="qusetionType">题型</view>
-	<view class="singleChoice">单选题</view>
-	<view class="multipleChoice">多选题</view>
-	<view class="budingxiang">不定项选择题</view>
-	<view class="panduan">判断题</view>
-	<view class="tiankong">填空题</view>
-	<view class="paixu">排序题</view>
-	<view class="number">数量</view>
-	<view class="number1">{{bank.questionTypeNum.radio}}</view>
-	<view class="number2">{{bank.questionTypeNum.checkbox}}</view>
-	<view class="number3">{{bank.questionTypeNum.unsteady}}</view>
-	<view class="number4">{{bank.questionTypeNum.judge}}</view>
-	<view class="number5">{{bank.questionTypeNum.blank}}</view>
-	<view class="number6">{{bank.questionTypeNum.sort}}</view>
+	<view class="data">
+		<view class="row">
+			<view class="column">
+				<text>题型</text>
+			</view>
+			<view class="column">
+				<text>数量</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.radio}}" class="row">
+			<view class="column">
+				<text>单选题</text>
+			</view>
+			<view class="column">
+				<text>{{bank.questionTypeNum.radio}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.checkbox}}" class="row">
+			<view class="column">
+				<text>多选题</text>
+			</view>
+			<view class="column">
+				<text>{{bank.questionTypeNum.checkbox}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.judge}}" class="row">
+			<view class="column">
+				<text>判断题</text>
+			</view>
+			<view class="column">
+				<text>{{bank.questionTypeNum.judge}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.blank}}" class="row">
+			<view class="column">
+				<text>填空题</text>
+			</view>
+			<view class="column">
+				<text>{{bank.questionTypeNum.blank}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.sort}}" class="row">
+			<view class="column">
+				<text>排序题</text>
+			</view>
+			<view class="column">
+				<text>{{bank.questionTypeNum.sort}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.unsteady}}" class="row">
+			<view class="column">
+				<text>不定项选择题</text>
+			</view>
+			<view class="column">
+				<text>{{bank.questionTypeNum.unsteady}}</text>
+			</view>
+		</view>
+
+
+
+
+	</view>
+	<view class="time">
+	考试时间：{{bank.limit_time}}分钟
+	</view>
 </view>
+
 <button class="button" bindtap="handleStartExam">开始考试</button>

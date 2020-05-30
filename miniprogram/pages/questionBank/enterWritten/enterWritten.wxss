@@ -1,4 +1,3 @@
-/* miniprogram/pages/questionBank/enterWritten/enterWritten.wxss */
 .enterWritten{
   position: absolute;
   left: 238rpx;

@@ -1,4 +1,4 @@
-let detail1 = [
+export let detailBanks = [
   {
   "parentId": 1,
   "industry": "外企",

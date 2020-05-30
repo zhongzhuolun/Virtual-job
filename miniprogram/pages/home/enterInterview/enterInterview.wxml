@@ -11,30 +11,13 @@
 <view class="type">
   <text>请选择录制方式</text>
 </view>
-<!-- <navigator url="../examInterview/examInterview?type=audio&id={{bank.id}}"> -->
   <view bindtap="handleAudioStartExam" class="audio">
     <text>音频</text>
   </view>
-<!-- </navigator> -->
-<!-- <navigator url="../examInterview/examInterview?type=video&id={{bank.id}}"> -->
   <view bindtap="handleVideoStartExam" class="video">
     <text>视频</text>
   </view>
-<!-- </navigator> -->
 
-<!-- <view class="yuyinWrap">
-  <textarea class='yuyinCon' placeholder='请输入内容' value='{{content}}'></textarea>
-  <view class=''>
-    <button class="yuyinBtn {{recordState == true ? 'yuyinBtnBg':''}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
-      <text wx:if="{{recordState == false}}">按住 说话</text>
-      <text wx:else>松开 结束</text>
-    </button>
-  </view>-->
-  <!-- 开始语音 弹出语音图标表示正在录音 -->
- <!-- <cover-view class="startYuyinImage" wx:if="{{recordState == true}}">
-    <cover-view>开始语音</cover-view>
-  </cover-view>
-</view> -->
-<!-- 以上代码仅做为测试 -->
+
 
 

@@ -1,114 +1,19 @@
 
-/* miniprogram/pages/center/myCenter/myCenter.wxss */
 page{
   background-color: white;
 }
-.myCenter1{
-  position: absolute;
-  left: 26rpx;
-  top: 342rpx;
-  width: 698rpx;
-  height: 544rpx;
-  line-height: 40rpx;
-  border-radius: 16rpx;
-  text-align: center;
-  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
-  border: 1rpx solid rgba(255, 255, 255, 0);
-}
-.line1{
-  position: absolute;
-  left: 0rpx;
-  top: 200rpx;
-  width: 698rpx;
-  height: NaNpx;
-  border: 1rpx solid rgba(250, 191, 1, 0.47);
-}
-.line2{
-  position: absolute;
-  left: 0rpx;
-  top: 376rpx;
-  width: 698rpx;
-  height: NaNpx;
-  border: 1rpx solid rgba(250, 191, 1, 0.47);
-}
-.changeTouxiang{
-  position: absolute;
-  left: 500rpx;
-  top: 69rpx;
-  width: 146rpx;
-  height: 54rpx;
-  color: rgba(154, 152, 152, 1);
-  font-size: 36rpx;
-  text-align: center;
-  font-family: SourceHanSansSC-regular;
-  }
-  .touxiang{
-    position: absolute;
-    left: 54rpx;
-    top: 12rpx;
-    width: 188rpx;
-    height: 174rpx;
-    line-height: 40rpx;
-    background-color: rgba(255, 255, 255, 1);
-    text-align: center;
-    border: 1rpx solid rgba(187, 187, 187, 1);
-  }
-  .denglu{
-    position: absolute;
-    left: 129px;
-    top: 123px;
-    width: 43px;
-    height: 20px;
-    color: rgba(163, 163, 163, 1);
-    font-size: 14px;
-    text-align: left;
-    font-family: PingFangSC-regular;
-  }
-  .nicheng{
-    position: absolute;
-    left: 66rpx;
-    top: 270rpx;
-    width: 146rpx;
-    height: 54rpx;
-    color: rgba(16, 16, 16, 1);
-    font-size: 36rpx;
-    text-align: left;
-    font-family: SourceHanSansSC-regular;
-  }
-  .mingzi{
-    position: absolute;
-    left: 508rpx;
-    top: 270rpx;
-    width: 154rpx;
-    height: 54rpx;
-    color: rgba(154, 152, 152, 1);
-    font-size: 36rpx;
-    text-align: left;
-    font-family: SourceHanSansSC-regular;
-  }
-  .tuichu{
-    position: absolute;
-    left: 66rpx;
-    top: 450rpx;
-    width: 156rpx;
-    height: 54rpx;
-    color: rgba(205, 30, 30, 1);
-    font-size: 36rpx;
-    text-align: left;
-    font-family: SourceHanSansSC-regular;
-  }
+
 .wrap {
   display: flex;
   flex-direction: column;
   width: 700rpx;
-  /* height: 710rpx; */
   line-height: 40rpx;
   border-radius: 16rpx;
   box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
   border: 2rpx solid rgba(255, 255, 255, 0);
   margin: 190rpx auto 0;
 }
-.change-avatar, .usr-name, .industry {
+.change-avatar, .user-name, .industry {
   border-bottom: 2rpx solid rgba(250, 191, 1, 0.47);
   height: 180rpx;
   font-size: 36rpx;
@@ -125,12 +30,12 @@ image {
   background-color: rgba(127, 159, 206, 1);
   border: 2rpx solid rgba(187, 187, 187, 1);
 }
-.usr-name text:nth-child(1), .industry text:nth-child(1) {
+.user-name text:nth-child(1), .industry text:nth-child(1) {
   color: rgba(16, 16, 16, 1);
   text-align: left;
   font-family: SourceHanSansSC-regular;
 }
-.usr-name text:nth-child(2), .industry text:nth-child(2) {
+.user-name text:nth-child(2), .industry text:nth-child(2) {
   color: rgba(154, 152, 152, 1);
   text-align: right;
   font-family: SourceHanSansSC-regular;

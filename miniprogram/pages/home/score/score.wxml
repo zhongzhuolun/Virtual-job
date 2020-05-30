@@ -1,28 +1,77 @@
-<!--miniprogram/pages/home/score/score.wxml-->
-<!-- 导航条不应该有返回的 -->
+
 <cu-custom bgColor="bg-yellow"> 
 	<view slot="content">答题结果</view>
 </cu-custom>
-<view class="score1">{{finalCorrectRate}}</view>
-<view class="blank"></view>
-<view class="qusetionType">题型</view>
-<view class="singleChoice">单选题({{questionTypeNum.radio}}道)</view>
-<view class="multipleChoice">多项选择题({{questionTypeNum.checkbox}}道)</view>
-<view class="budingxiang">不定项选题({{questionTypeNum.unsteady}}道)</view>
-<view class="panduan">判断题({{questionTypeNum.judge}}道)</view>
-<view class="tiankong">填空题({{questionTypeNum.blank}}道)</view>
-<view class="paixu">排序题({{questionTypeNum.sort}}道)</view>
-<view class="accuracy">正确率/%</view>
-<view class="score2">{{questionTypesRate.radio}}</view>
-<view class="score3">{{questionTypesRate.checkbox}}</view>
-<view class="score4">{{questionTypesRate.unsteady}}</view>
-<view class="score5">{{questionTypesRate.judge}}</view>
-<view class="score6">{{questionTypesRate.blank}}</view>
-<view class="score7">{{questionTypesRate.sort}}</view>
+
+<view class="score">{{finalCorrectRate}}</view>
+
+<view class="wrap">
+	<view class="data">
+		<view class="row">
+			<view class="column">
+				<text>题型</text>
+			</view>
+			<view class="column">
+				<text>正确率/%</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.radio}}" class="row">
+			<view class="column">
+				<text>单选题({{questionTypeNum.radio}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypesRate.radio}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.checkbox}}" class="row">
+			<view class="column">
+				<text>多选题({{questionTypeNum.checkbox}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypesRate.checkbox}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.judge}}" class="row">
+			<view class="column">
+				<text>判断题({{questionTypeNum.judge}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypesRate.judge}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.blank}}" class="row">
+			<view class="column">
+				<text>填空题({{questionTypeNum.blank}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypesRate.blank}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.sort}}" class="row">
+			<view class="column">
+				<text>排序题({{questionTypeNum.sort}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypesRate.sort}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.unsteady}}" class="row">
+			<view class="column">
+				<!-- <text>不定项选题\n({{questionTypeNum.unsteady}}道)</text> -->
+        <text>不定项选题</text>
+				<text>({{questionTypeNum.unsteady}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypesRate.unsteady}}</text>
+			</view>
+		</view>
+
+	</view>
+</view>
+<view class="btn-wrap">
 <navigator url="../index/index" open-type="switchTab"><button  class="button1">返回首页</button></navigator>
 <navigator url="../wrongAll/wrongAll?class=笔试&id={{id}}"><button class="button2">查看试卷</button></navigator>
-<!-- <van-row>
-  <van-col span="8" offset="4">span: 8</van-col>
-  <van-col span="8" offset="13">span: 8</van-col>
-</van-row> -->
+</view>
+
+
 

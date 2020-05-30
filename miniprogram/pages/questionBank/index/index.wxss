@@ -1,10 +1,8 @@
-/* miniprogram/pages/questionBank/index/index.wxss */
 page {
   background: white;
 }
 .written, .interview{
   display: inline-block;
-  /* height: 104rpx; */
   width: 366rpx;
   opacity: 0.8;
   line-height: 104rpx;
@@ -59,9 +57,7 @@ image {
   height: 132rpx;
   line-height: 132rpx;
   text-align: center;
-  /* border: 2rpx solid rgba(187, 187, 187, 1); */
   background: white;
-  /* margin-top: 50rpx; */
 }
 .title text {
   color: rgba(16, 16, 16, 1);
@@ -87,7 +83,6 @@ image {
   line-height: 40rpx;
   border-radius: 0rpx;
   text-align: center;
-  /* border: 1rpx solid rgba(187, 187, 187, 1); */
   background-color: white;
 }
 .tab-active-class {
@@ -108,7 +103,6 @@ image {
 .bank-title {
   position: absolute;
   left: 40rpx;
-  /* top: 509px; */
   width: 240rpx;
   height: 84rpx;
   color: rgba(16, 16, 16, 1);

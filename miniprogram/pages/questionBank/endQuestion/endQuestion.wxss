@@ -1,304 +1,95 @@
-/* miniprogram/pages/questionBank/endQuestion/endQuestion.wxss
-.title{
-  position: absolute;
-  left: 230rpx;
-  top: 32rpx;
-  width: 288rpx;
-  height: 102rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 72rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-}
-.frist1{
-  position: absolute;
-  left: 154rpx;
-  top: 160rpx;
-  width: 448rpx;
-  height: 80rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 56rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-}
-.sentence{
-  position: absolute;
-  left: 232rpx;
-  top: 266rpx;
-  width: 335rpx;
-  height: 40rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-}
 
-.blank{
-  position: absolute;
-  left: 66rpx;
-  top: 362rpx;
-  width: 616rpx;
-  height: 550rpx;
-  line-height: 52rpx;
-  border-radius: 50rpx;
-  background-color: rgba(255, 255, 255, 0.47);
+
+.btn-wrap {
+  margin: 0 auto;
+  overflow: hidden;
+  width: 80vw;
+  padding: 20rpx;
+}
+.btn-wrap button {
+  width: 264rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
   text-align: center;
-  box-shadow: 0px 4px 9px 0px rgba(178, 178, 178, 0.4);
-  font-family: Arial;
-  border: 1rpx solid rgba(255, 255, 255, 0);
-}
-.qusetionType,.singleChoice,.multipleChoice,.bianchengti,.wendati{
-  position: absolute;
-  left: 133rpx;
-  width: 222rpx;
-  height: 78rpx;
-  line-height: 40rpx;
-  color: rgba(91, 107, 115, 1);
-  font-size: 32rpx;
-  text-align: center;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
   font-family: Microsoft Yahei;
-  padding: 20rpx;
-  width: 32%;
-  text-align: center;
-  border:1px solid black;
-  outline-style:solid;
-	outline-width:2rpx;
+  border: 2rpx solid rgba(0, 0, 0, 1);
+  line-height: 70rpx;
+  float: left;
+
 }
-.qusetionType{
-  position: absolute;
-  top: 436rpx;
+.button1 {
+  margin: 0 14rpx;
 }
-.singleChoice{
-  position: absolute;
-  top: 514rpx;
-}
-.multipleChoice{
-  position: absolute;
-  top:592rpx;
-}
-.bianchengti{
-  position: absolute;
-  top: 670rpx;
-}
-.wendati{
-  position: absolute;
-  top: 748rpx;
-}
-.accuracy,.score2,.score3,.score4,.score5{
-  position: absolute;
-  left: 377rpx;
-  width: 222rpx;
-  height: 78rpx;
-  line-height: 40rpx;
-  color: rgba(91, 107, 115, 1);
-  font-size: 32rpx;
-  text-align: center;
-  font-family: Microsoft Yahei;
-  padding: 20rpx;
-  width: 32%;
-  text-align: center;
-  border:1px solid black;
-  outline-style:solid;
-	outline-width:2rpx;
-}
-.accuracy{
-  position: absolute;
-  top: 436rpx;
-}
-.score2{
-  position: absolute;
-  top: 514rpx;
-}
-.score3{
-  position: absolute;
-  top: 592rpx;
-}
-.score4{
-  position: absolute;
-  top:670rpx;
-}
-.score5{
-  position: absolute;
-  top: 748rpx;
-}
-.backBank,.seekWrong{
-  position: absolute;
-  top: 980rpx;
-  width: 268rpx;
-  height: 118rpx;
-  border-radius: 40rpx;
-  background-color: rgba(250, 191, 1, 1);
-  color: rgba(16, 16, 16, 1);
-  font-size: 44rpx;
-  text-align: center;
-  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.4);
-  font-family: Microsoft Yahei;
-  border: 1rpx solid rgba(12, 12, 12, 1);
-}
-.backBank{
-  left: 86rpx;
-}
-.seekWrong{
-  left: 414rpx;
-} */
-/* miniprogram/pages/home/score/score.wxss */
-.title{
-  position: absolute;
-  left: 230rpx;
-  top: 32rpx;
-  width: 288rpx;
-  height: 102rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 72rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-}
-.frist1{
-  margin: 44rpx 50rpx;
-  height: 80rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 48rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  text-align: center;
-}
-.sentence{
-  padding: 60rpx 0;
-  height: 40rpx;
-  color: rgba(12, 12, 12, 1);
-  font-size: 28rpx;
-  text-align: center;
-  font-family: PingFangSC-regular;
-}
-.score1{
+
+.score {
   height: 190rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 200rpx;
   text-align: center;
   font-family: "方正汉真广标-标准";
 }
-.blank{
-  position: absolute;
-  left: 66rpx;
-  top: 422rpx;
+.wrap {
+
+  position: relative;
   width: 616rpx;
-  height: 680rpx;
-  line-height: 52rpx;
+  line-height: 40rpx;
   border-radius: 50rpx;
-  background-color: rgba(255, 255, 255, 0.47);
+  background-color: rgba(255, 255, 255, 0.51);
+  text-align: center;
+  box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  margin: 100rpx auto;
+  padding: 40rpx;
+
+}
+.title {
   color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: center;
-  box-shadow: 0px 4px 9px 0px rgba(178, 178, 178, 0.4);
-  font-family: Arial;
-  border: 1rpx solid rgba(255, 255, 255, 0);
-}
-.qusetionType,.singleChoice,.multipleChoice,.budingxiang,.panduan,
-.tiankong, .paixu{
-  position: absolute;
-  left: 133rpx;
-  width: 222rpx;
-  height: 78rpx;
-  line-height: 40rpx;
-  font-size: 26rpx;
-  text-align: center;
-  font-family: Microsoft Yahei;
-  color: rgba(16, 16, 16, 1);
-  padding: 20rpx;
-  width: 32%;
-  text-align: center;
-  outline-style:solid;
-	outline-width:2rpx;
-}
-.qusetionType, .accuracy{
-  top: 496rpx;
-}
-.singleChoice, .score2{
-  top: 574rpx;
-}
-.multipleChoice, .score3{
-  top: 652rpx;
-}
-.budingxiang, .score4{
-  top: 730rpx;
-}
-.panduan, .score5{
-  top: 812rpx;
-}
-.tiankong, .score6{
-  top: 890rpx;
-}
-.paixu, .score7{
-  top: 972rpx;
-}
-.accuracy,.score2,.score3,.score4,.score5,.score6,.score7{
-  position: absolute;
-  left: 377rpx;
-  width: 222rpx;
-  height: 78rpx;
-  line-height: 40rpx;
-  font-size: 26rpx;
-  text-align: center;
-  color: rgba(16, 16, 16, 1);
-  font-family: Microsoft Yahei;
-  padding: 20rpx;
-  width: 32%;
-  text-align: center;
-  outline-style:solid;
-	outline-width:2rpx;
-}
-/* .accuracy{
-  top: 556rpx;
-}
-.score2{
-  top: 634rpx;
-}
-.score3{
-  top: 712rpx;
-}
-.score4{
-  top:790rpx;
-}
-.score5{
-  top: 873rpx;
-}
-.score6 {
-  top: 951rpx;
-}
-.score7 {
-  top: 1032rpx;
-} */
-.button1{
-  position: absolute;
-  left: 82rpx;
-  top: 1130rpx;
-  width: 264rpx;
-  height: 76rpx;
-  border-radius: 20rpx;
-  background-color: rgba(250, 191, 1, 1);
-  color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: center;
-  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
-  font-family: Microsoft Yahei;
-  border: 2rpx solid rgba(0, 0, 0, 1);
+  font-size: 56rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
   line-height: 70rpx;
+  word-break: break-all;
+  width: 448rpx;
+  margin: 0 auto;
 }
-.button2{
-  position: absolute;
-  left: 390rpx;
-  top: 1130rpx;
-  width: 264rpx;
-  height: 76rpx;
-  border-radius: 20rpx;
-  background-color: rgba(250, 191, 1, 1);
+.data {
+  width: 89%;
+	margin: 40rpx auto;
+	border: 4rpx solid black;
   color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
+  font-size: 32rpx;
   text-align: center;
-  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
-  font-family: Microsoft Yahei;
-  border: 2rpx solid rgba(0, 0, 0, 1);
-  line-height: 70rpx;
+  font-family: PingFang SC;
+  line-height: 78rpx;
+}
+.data text {
+	font-size: 36rpx;
+}
+.data .row {
+	border-top: 4rpx solid black;
+}
+.data .row:nth-child(1) {
+	border-top: none;
+}
+.data .column {
+	display: inline-block;
+	width: 50%;
+}
+.data .column:nth-child(1) {
+	border-right: 4rpx solid black;
+}
+.data .column text:nth-child(2) {
+  text-align: center;
+  display: inline-block;
+}
+.motto {
+  text-align: center;
+  color: rgba(12, 12, 12, 1);
+  font-size: 28rpx;
+  font-family: PingFangSC-regular;
+  margin-top: 60rpx;
 }

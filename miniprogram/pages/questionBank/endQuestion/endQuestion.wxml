@@ -2,25 +2,78 @@
 <cu-custom bgColor="bg-yellow"> 
 	<view slot="content">答题结果</view>
 </cu-custom>
-<view class="frist1">{{title}}</view>
-<view class="sentence">“每日一套，早日offer”</view>
-<view class="blank"></view>
-<view class="qusetionType">题型</view>
-<view class="singleChoice">单选题({{questionTypeNum.radio}}道)</view>
-<view class="multipleChoice">多项选择题({{questionTypeNum.checkbox}}道)</view>
-<view class="budingxiang">不定项选题({{questionTypeNum.unsteady}}道)</view>
-<view class="panduan">判断题({{questionTypeNum.judge}}道)</view>
-<view class="tiankong">填空题({{questionTypeNum.blank}}道)</view>
-<view class="paixu">排序题({{questionTypeNum.sort}}道)</view>
-<view class="accuracy">正确率/%</view>
-<view class="score2">{{questionTypesRate.radio}}</view>
-<view class="score3">{{questionTypesRate.checkbox}}</view>
-<view class="score4">{{questionTypesRate.unsteady}}</view>
-<view class="score5">{{questionTypesRate.judge}}</view>
-<view class="score6">{{questionTypesRate.blank}}</view>
-<view class="score7">{{questionTypesRate.sort}}</view>
+
+<view class="wrap">
+	<view class="title">
+		{{title}}
+	</view>
+	<view class="motto">
+	“每日一套，早日offer”
+	</view>
+	<view class="data">
+		<view class="row">
+			<view class="column">
+				<text>题型</text>
+			</view>
+			<view class="column">
+				<text>数量</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.radio}}" class="row">
+			<view class="column">
+				<text>单选题</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypeNum.radio}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.checkbox}}" class="row">
+			<view class="column">
+				<text>多选题</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypeNum.checkbox}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.judge}}" class="row">
+			<view class="column">
+				<text>判断题</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypeNum.judge}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.blank}}" class="row">
+			<view class="column">
+				<text>填空题</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypeNum.blank}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.sort}}" class="row">
+			<view class="column">
+				<text>排序题</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypeNum.sort}}</text>
+			</view>
+		</view>
+		<view wx:if="{{questionTypeNum.unsteady}}" class="row">
+			<view class="column">
+				<text>不定项选题</text>
+			</view>
+			<view class="column">
+				<text>{{questionTypeNum.unsteady}}</text>
+			</view>
+		</view>
+
+	</view>
+</view>
+<view class="btn-wrap">
 <navigator url="../index/index" open-type="switchTab"><button  class="button1">返回题库</button></navigator>
 <navigator url="../viewQuestions/viewQuestions?class=笔试&id={{id}}"><button class="button2">查看试卷</button></navigator>
+</view>
 
 
 

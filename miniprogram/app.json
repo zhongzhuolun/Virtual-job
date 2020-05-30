@@ -4,7 +4,6 @@
     "pages/home/IndustryChoose/IndustryChoose",
     "pages/home/enterWritten/enterWritten",
     "pages/home/examWritten/examWritten",
-    "pages/home/confirmSubmit/confirmSubmit",
     "pages/home/score/score",
     "pages/home/wrongAll/wrongAll",
     "pages/home/enterInterview/enterInterview",

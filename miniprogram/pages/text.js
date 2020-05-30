@@ -4,18 +4,23 @@ const bankStatusList = db.collection('bank-status')
 const interviewQuestions = db.collection('interviewQuestions')
 const writtenQuestions = db.collection('writtenQuestions')
 const _ = db.command
+import {banks} from '../data/interviewBank'
+import {detailBanks} from '../data/interviewDetail'
+
+import {banks1} from '../data/writtenBank'
+import {detailBanks1} from '../data/writtenDetail'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    banks: [], // 面试题库简介
     bankIndex: 0, // 
-    id: 12, // 题库的ID
-    detailBanks: [], // 面试题库详情
-    banks1: [], // 笔试题库简介
-    detailBanks1: [], // 笔试题库详情
+    id: 75, // 题库的ID
+    banks, // 面试题库简介
+    detailBanks, // 面试题库详情
+    banks1, // 笔试题库简介
+    detailBanks1, // 笔试题库详情
   },
   // 获取题库简介
   getBankList: function (e) {
@@ -122,6 +127,7 @@ Page({
       bankIndex,
       banks1
     } = this.data
+    console.log(banks1)
     wx.showModal({
       title: '提示',
       content: '你重新获取ID了吗？',
@@ -140,6 +146,13 @@ Page({
       id
     } = this.data
     value.id = id
+    value.status = { // 题库初始状态对象，默认都为false
+      "done": false, // 做完了
+      "doing": false, // 正在做
+      "collection": false, // 收藏
+      "mistaked": false // 错误
+    }
+    value.class = '笔试题'
     this.setData({
       id: id + 1
     }, () => {
@@ -189,6 +202,23 @@ Page({
       id
     } = this.data
     value.parentId = id
+    value.chooseValue = []
+    value.wrongList = []
+    value.class = "笔试题", // 题库类型
+    value.status = { // 题库初始状态对象，默认都为false
+      "done": false, // 做完了
+      "doing": false, // 正在做
+      "collection": false, // 收藏
+      "mistaked": false // 错误
+    }
+    value.accuracy = { 
+      "radio": 0, // 单选题题
+      "checkbox": 0, // 多选题
+      "blank": 0, // 填空题
+      "sort": 0, // 排序题
+      "judge": 0, // 判断题
+      "unsteady": 0 // 不定项选择题
+    },
     this.setData({
       id: id + 1
     }, () => {

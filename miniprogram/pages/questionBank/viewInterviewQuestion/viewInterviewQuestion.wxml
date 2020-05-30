@@ -26,7 +26,6 @@
 	<view class="bank-wrap">
 		<view class="bank-title">
 			<text>{{bank.title}} </text>
-			<!-- <text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text> -->
 		</view>
 		<view class="score-time">
 			<text class="time">题目数量：{{bank.count}}道</text>
@@ -65,14 +64,12 @@
 							</text>
 						</view>
 						<view wx:if="{{audioPlay === 'play'}}" bindtap="stop">
-							<!-- <text class="cuIcon-notificationfill text-yellow">
-							</text> -->
+						
 							<text class="cuIcon-stop text-yellow">
 							</text>
 						</view>
 						<view wx:if="{{audioPlay === 'pause'}}" bindtap="play" >
-							<!-- <text class="cuIcon-notificationfill text-yellow">
-							</text> -->
+						
 							<text class="cuIcon-playfill text-yellow">
 							</text>
 						</view>

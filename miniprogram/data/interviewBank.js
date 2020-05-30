@@ -1,4 +1,4 @@
-let bank1 = [{
+export let banks = [{
   "id": 1,
   "industry": "外企",
   "count": 14,

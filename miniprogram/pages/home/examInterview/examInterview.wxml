@@ -14,23 +14,18 @@
 		<view class="line">
 	</view>
 </view>
-<!-- <view class="body"></view> -->
-<!-- <view class="txt1">{{questionObj.title}}</view> -->
-<!-- <view class="txt2">题目数量：{{questionObj.count}}道</view> -->
-<!-- <view class="line"></view> -->
+
 <image src="../../../images/icon/people.png" class="img1"></image>
 <image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain" disabled="{{btnDisabled}}"></image>
 <view class="txt3">面试官</view>
 <view class="txt4">若没有听清题目，可点击</view>
 <image src="../../../images/icon/graysou.png" class="img3"></image>
 <view class="txt5">让面试官再讲一遍</view>
-<!-- <view class="txt6" hidden="{{src}}" bindtap='wordYun'>下一题</view> -->
 <button class="txt6" disabled="{{btnDisabled}}" hidden="{{src}}" bindtap="handleStart">开始</button>
 <button class="txt6" disabled="{{btnDisabled}}" hidden="{{(!src)&&(!disabled)}}" bindtap="handleNext">下一题</button>
 <button class="txt6" disabled="{{btnDisabled}}" hidden="{{!(src&&disabled)}}" bindtap="handleEnd">结束</button>
-<!-- <button bindtap="play" data-type="mine">播放录音</button> -->
 
-<view class="txt7" hidden="{{!src}}">{{recordState?'正在录制中......':''}}</view>
+<image class="txt7" hidden="{{!recordState}}"  src="../../../images/icon/luzhi....gif"></image>
 </block>
 <block wx:else>
 </block> 

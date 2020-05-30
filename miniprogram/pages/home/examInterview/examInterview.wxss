@@ -94,15 +94,9 @@ page {
 .txt7{
   position: absolute;
   left: 432rpx;
-  top: 1234rpx;
-  width: 296rpx;
-  height: 70rpx;
-  line-height: 52rpx;
-  border-radius: 52rpx;
-  color: rgba(250, 191, 1, 1);
-  font-size: 39rpx;
-  text-align: center;
-  font-family: Arial;
+  top: 79vh;
+  width: 300rpx;
+  height: 300rpx;
 }
 .img1{
   position: absolute;

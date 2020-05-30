@@ -1,48 +1,36 @@
-/* miniprogram/pages/home/enterInterview/enterInterview.wxss */
-
 
 .bank {
-  position: absolute;
-  left: 66rpx;
-  top: 280rpx;
   width: 616rpx;
-  height: 282rpx;
   line-height: 40rpx;
   border-radius: 50rpx;
   background-color: rgba(255, 255, 255, 0.47);
-  text-align: center;
   box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
-  border: 1rpx solid rgba(255, 255, 255, 0);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  margin: 13vh auto;
+  padding: 50rpx;
+
 }
 .title {
-  position: absolute;
-  left: 50rpx;
-  top: 70rpx;
   width: 520rpx;
-  height: 80rpx;
   color: rgba(12, 12, 12, 1);
   font-size: 56rpx;
   text-align: left;
   font-family: PingFangSC-regular;
-  line-height: 63rpx;
-
+  line-height: 72rpx;
+  word-break: break-all;
 }
 .num {
-  position: absolute;
-  left: 350rpx;
-  top: 200rpx;
-  height: 46rpx;
+  display: block;
   color: rgba(12, 12, 12, 1);
   font-size: 32rpx;
-  text-align: left;
+  text-align: right;
   font-family: PingFangSC-regular;
+  padding-right: 20rpx;
+  margin-top: 30rpx;
+  
 }
 .type {
-  position: absolute;
-  left: 244rpx;
-  top: 800rpx;
-  width: 260rpx;
-  height: 50rpx;
+  width: 100%;
   color: rgba(12, 12, 12, 1);
   font-size: 36rpx;
   text-align: center;
@@ -50,7 +38,7 @@
 }
 .audio, .video {
   position: absolute;
-  top: 950rpx;
+  margin-top: 10vh;
   width: 220rpx;
   height: 104rpx;
   line-height: 104rpx;

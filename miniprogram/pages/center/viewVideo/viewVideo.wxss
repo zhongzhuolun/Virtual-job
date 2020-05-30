@@ -44,16 +44,7 @@ page {
   text-align: left;
   font-family: SourceHanSansSC-regular;
 }
-/* .item .cuIcon-playfill {
-  float: right;
-  border: 4rpx solid #FABF01;
-  border-radius: 100% 100%;
-  margin-top: 24rpx;
-  width: 40rpx;
-  height: 56rpx;
-  line-height: 56rpx;
-  padding: 0 0 0 20rpx;
-} */
+
 .video-wrap {
   width: 680rpx;
   height: 170rpx;

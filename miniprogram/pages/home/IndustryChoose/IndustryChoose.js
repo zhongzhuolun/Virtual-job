@@ -1,4 +1,6 @@
-// miniprogram/pages/home/IndustryChoose/IndustryChoose.js
+// import {industryData} from '../../../data/industryData'
+const db = wx.cloud.database()
+const industryData = db.collection('industryData')
 Page({
 
   /**
@@ -13,94 +15,7 @@ Page({
     load: true,
     industry: '',
     ifScroll: false,
-    industryData: {
-      "classes": [
-        {
-          "class": "技术",
-          "posts": [
-            {
-              "post": "移动开发",
-              "skill": ["HTML5", "JavaScript", "移动web前端"]
-            },
-            {
-              "post": "后端开发",
-              "skill": ["C/C++", "Java", "Python", "PHP"]
-            },
-            {
-              "post": "人工智能",
-              "skill": ["算法工程师"]
-            }
-          ]
-        },
-        {
-          "class": "高管",
-          "posts": [
-            {
-              "post": "高级管理职位",
-              "skill": ["高级管理职位"]
-            }
-          ]
-        },
-        {
-          "class": "教育培训",
-          "posts": [
-            {
-              "post": "教师",
-              "skill": ["英语教师"]
-            }
-          ]
-        },
-        {
-          "class": "医疗健康",
-          "posts": [
-            {
-              "post": "护士/护理",
-              "skill": ["护士长", "护士", "导医"]
-            }
-          ]
-        },
-        {
-          "class": "金融",
-          "posts": [
-            {
-              "post": "税务审计",
-              "skill": ["会计"]
-            },
-            {
-              "post": "银行",
-              "skill": ["银行"]
-            }
-          ]
-        },
-        {
-          "class": "销售",
-          "posts": [
-            {
-              "post": "销售",
-              "skill": ["销售"]
-            }
-          ]
-        },
-        {
-          "class": "通用",
-          "posts": [
-            {
-              "post": "通用",
-              "skill": ["通用"]
-            }
-          ]
-        },
-        {
-          "class": "外企",
-          "posts": [
-            {
-              "post": "外企",
-              "skill": ["外企"]
-            }
-          ]
-        },
-      ]
-    },
+    industryData: [],
     activeName: 0,
     examType: '',
     center: ''
@@ -159,19 +74,27 @@ Page({
       title: '加载中...',
       mask: true
     });
-    let list = [{}];
-    let length = this.data.industryData.classes.length
-    for (let i = 0; i < length; i++) {
-      list[i] = {};
-      // list[i].name = String.fromCharCode(65 + i);
-      list[i].name = this.data.industryData.classes[i].posts
-      list[i].id = i;
-    }
-    this.setData({
-      list: list,
-      listCur: list[0],
-      examType: option.type
+    industryData.get().then((res) => {
+      console.log(res.data[0])
+      let industryData = res.data[0]
+      this.setData({
+        industryData
+      }, () => {
+        let list = [{}];
+        let length = this.data.industryData.classes.length
+        for (let i = 0; i < length; i++) {
+          list[i] = {};
+          list[i].name = this.data.industryData.classes[i].posts
+          list[i].id = i;
+        }
+        this.setData({
+          list: list,
+          listCur: list[0],
+          examType: option.type
+        })
+      })
     })
+   
     let that = this
     wx.getStorage({
       key: 'industry',

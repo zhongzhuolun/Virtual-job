@@ -73,7 +73,7 @@ Page({
     this.innerAudioContext.onEnded(() => {
       this.pageObj.i++
       console.log('播放结束', this.pageObj.i)
-      if (this.pageObj.i < this.data.tempFilePaths.length && this.data.audioPlay) {
+      if (this.pageObj.i < this.data.tempFilePaths.length) {
         this.yuyinPlay(this.data.tempFilePaths[this.pageObj.i])
       } else {
         this.pageObj.i = 0
@@ -165,38 +165,6 @@ Page({
     }
     this.pageObj.i = 0
   },
-  // 播放语音
-  //  yuyinPlay: function (src) {
-  //   console.log(src)
-  //   const innerAudioContext = wx.createInnerAudioContext()
-  //   innerAudioContext.autoplay = true
-  //   innerAudioContext.src = src;
-  //   innerAudioContext.play(); //播放音频
-  //   innerAudioContext.onPlay(() => {
-  //     this.setData({
-  //       btnDisabled: true
-  //     })
-  //       this.pageObj.i++
-  //       console.log(this.pageObj.i)
-  //   })
-  //   innerAudioContext.onEnded(() => {
-  //     console.log('播放结束', this.pageObj.i)
-  //     let {tempFilePaths, questionsFileArry} = this.data
-  //     this.setData({
-  //       btnDisabled: false
-  //     })
-  //     if (this.pageObj.i < tempFilePaths.length && this.pageObj.nowIndex < questionsFileArry.length - 1) {
-  //       this.yuyinPlay(tempFilePaths[this.pageObj.i])
-  //     } else {
-  //       this.pageObj.i = 0
-  //       if (this.pageObj.nowIndex < questionsFileArry.length - 1) {
-  //         this.pageObj.nowIndex++
-  //         tempFilePaths = questionsFileArry[this.pageObj.nowIndex].tempFilePaths
-  //         this.yuyinPlay(tempFilePaths[this.pageObj.i])
-  //       }
-  //     }
-  //   })
-  // },
   /**
    * 生命周期函数--监听页面卸载
    */
