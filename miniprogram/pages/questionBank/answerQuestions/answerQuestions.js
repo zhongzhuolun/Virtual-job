@@ -15,7 +15,7 @@ Page({
   data: {
     examType: app.globalData.examType,
     bank: {}, // 从数据库中获取的题目
-    index: 0,  // 专门给填空题使用的
+    index: 0, // 专门给填空题使用的
     myIndex: 0, //
     chooseValue: [], // 选择的答案序列
     wrongList: [], // 错误的题目集合
@@ -38,11 +38,11 @@ Page({
     writtenBank: {}
   },
   // 处理确定提交 （此时真正提交）
-  handleComplete: function(e) {
+  handleComplete: function (e) {
     // 处理错题和分数评判(分数评判功能可能会取消)
     // this.handleWrongAndScore()
     let accuracy = this.handleCorrectRate() // 获取题型的正确率
-    this.handleBankStatus() // 更新题库简介状态
+    this.handleBankStatus(accuracy) // 更新题库简介状态
     this.handleBankStatusDetail(accuracy) // 更新题库详情状态
     // 跳转到分数界面，并将数据传送过去，包括分数和比例
     let examBank = {
@@ -50,24 +50,15 @@ Page({
       wrongList: this.data.wrongList, // 错误集合
       chooseValue: this.data.chooseValue // 用户选择的集合
     }
-    let that = this
     app.globalData.examBank = examBank
-    wx.navigateTo({
-      url: '../endQuestion/endQuestion',
-      events: {
-      },
-      success: function(res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('getAccuracy', accuracy)
-        that.setData({
-          wrongList: []
-        }) 
-      }
-    })
   },
   // 处理题型的正确率 （功能针对所有用户，但获得的正确率只针对该用户）
-  handleCorrectRate: function() {
-    let {bank, questionTypeNum, accuracy} = this.data.bank
+  handleCorrectRate: function () {
+    let {
+      bank,
+      questionTypeNum,
+      accuracy
+    } = this.data.bank
     accuracy = {
       radio: 0,
       checkbox: 0,
@@ -114,19 +105,26 @@ Page({
           break;
       }
     })
-    console.log(accuracy,questionTypeNum)
-    accuracy.radio = (accuracy.radio/(questionTypeNum.radio === 0 ? 1: questionTypeNum.radio)).toFixed(4)*100
-    accuracy.checkbox = (accuracy.checkbox/(questionTypeNum.checkbox === 0 ? 1: questionTypeNum.checkbox)).toFixed(4)*100
-    accuracy.unsteady = (accuracy.unsteady/(questionTypeNum.unsteady === 0 ? 1: questionTypeNum.unsteady)).toFixed(4)*100
-    accuracy.judge = (accuracy.judge/(questionTypeNum.judge === 0 ? 1: questionTypeNum.judge)).toFixed(4)*100
-    accuracy.blank = (accuracy.blank/(questionTypeNum.blank === 0 ? 1: questionTypeNum.blank)).toFixed(4)*100
-    accuracy.sort = (accuracy.sort/(questionTypeNum.sort === 0 ? 1: questionTypeNum.sort)).toFixed(4)*100
+    accuracy.radio = (accuracy.radio / (questionTypeNum.radio === 0 ? 1 : questionTypeNum.radio)).toFixed(4) * 100
+    accuracy.checkbox = (accuracy.checkbox / (questionTypeNum.checkbox === 0 ? 1 : questionTypeNum.checkbox)).toFixed(4) * 100
+    accuracy.unsteady = (accuracy.unsteady / (questionTypeNum.unsteady === 0 ? 1 : questionTypeNum.unsteady)).toFixed(4) * 100
+    accuracy.judge = (accuracy.judge / (questionTypeNum.judge === 0 ? 1 : questionTypeNum.judge)).toFixed(4) * 100
+    accuracy.blank = (accuracy.blank / (questionTypeNum.blank === 0 ? 1 : questionTypeNum.blank)).toFixed(4) * 100
+    accuracy.sort = (accuracy.sort / (questionTypeNum.sort === 0 ? 1 : questionTypeNum.sort)).toFixed(4) * 100
+    console.log(accuracy, questionTypeNum)
 
-    return {accuracy, questionTypeNum}
+    // return {accuracy, questionTypeNum}
+    return accuracy
   },
   // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户,分数评判暂时不需要）
-  handleWrongAndScore: function() {
-    let {chooseValue, wrongList, type, questionIndex, bank} = this.data
+  handleWrongAndScore: function () {
+    let {
+      chooseValue,
+      wrongList,
+      type,
+      questionIndex,
+      bank
+    } = this.data
     let choose = chooseValue[questionIndex]
     // let bank = bank.bank
     let correctAnswer = bank.bank[questionIndex].correct_answer
@@ -136,9 +134,9 @@ Page({
     }
     if (type !== '填空') { // 代表不为填空题的时候
       correctAnswer = correctAnswer.toString().trim().toLowerCase()
-      if(choose !== correctAnswer) { // 代表做错了
+      if (choose !== correctAnswer) { // 代表做错了
         wrongList.push(questionIndex);
-      } 
+      }
     } else { // 代表为填空题的时候
       let chooseArr = []
       let wrongBlankObj = {
@@ -162,12 +160,12 @@ Page({
         wrongBlankObj.index = questionIndex
         wrongList.push(wrongBlankObj); // 代表填空题至少有一个空出错了
       }
-    }    
-    if (wrongList.length > 0) { 
+    }
+    if (wrongList.length > 0) {
       // 代表有错题
       bank.status.mistaked = true
       wrongList.forEach((value, index) => {
-        if (typeof value === 'object') {// 填空题
+        if (typeof value === 'object') { // 填空题
           // totalScore -= value.blankScore // 题库的总分减去错题的分数
           bank.bank[value.index].mistaked = true
 
@@ -183,38 +181,57 @@ Page({
     })
   },
   // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
-  handleStorage: function() {
+  handleStorage: function () {
 
   },
   // 处理更新题库简介状态（只更新该用户的数据）
-  handleBankStatus: function() {
-    let {bank, wrongList} = this.data
+  handleBankStatus: function (accuracy) {
+    let {
+      bank,
+      wrongList
+    } = this.data
     let bankId = bank.parentId
     let statusObj = {
       id: bankId
     }
-    bank.status.doing = false
-    bank.status.done = true
-    if (wrongList.length > 0) {
-      bank.status.mistaked = true
+    if (accuracy) {
+      bank.status.doing = false
+      bank.status.done = true
+      if (wrongList.length > 0) {
+        bank.status.mistaked = true
+      } else {
+        bank.status.mistaked = false
+      }
     } else {
-      bank.status.mistaked = false
+      bank.status.doing = true
+      bank.status.done = false
     }
+    
     statusObj.status = bank.status
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
       let result = statusList.findIndex((value) => {
         return value.id == bankId
       })
-      if(result !== -1) {
-        if (wrongList.length > 0) {
-          console.log('mistaked')
-          statusList[result].status.mistaked = true
+      if (result !== -1) {
+        console.log(accuracy)
+        if (accuracy) {
+          console.log(accuracy)
+          statusList[result].status.doing = false
+          statusList[result].status.done = true
+          if (wrongList.length > 0) {
+            console.log('mistaked')
+            statusList[result].status.mistaked = true
+          } else {
+            statusList[result].status.mistaked = false
+          }
         } else {
-          statusList[result].status.mistaked = false
+          statusList[result].status.doing = true
+          statusList[result].status.done = false
         }
-        statusList[result].status.doing = false
-        statusList[result].status.done = true
+       
+        // statusList[result].status.doing = false
+        // statusList[result].status.done = true
       } else {
         statusList.push(statusObj)
       }
@@ -228,12 +245,13 @@ Page({
     })
   },
   // 处理更新题库详情状态 （只更新该用户的数据）
-  handleBankStatusDetail: function(accuracy) {
+  handleBankStatusDetail: function (accuracy) {
     // let typeNum = data // 拿到用户每种题型的正确率和题库中每种题型的数量
     let bank = this.data.bank
     let bankId = bank.parentId
-    bank.chooseValue = this.data.chooseValue 
-    bank.wrongList = this.data.wrongList 
+    let that = this
+    bank.chooseValue = this.data.chooseValue
+    bank.wrongList = this.data.wrongList
     if (accuracy) {
       bank.accuracy = accuracy
     }
@@ -242,7 +260,7 @@ Page({
       let result = writtenBankList.findIndex((value) => {
         return value.parentId == bankId
       })
-      if(result !== -1) {
+      if (result !== -1) {
         writtenBankList[result] = bank
       } else {
         writtenBankList.push(bank)
@@ -252,24 +270,38 @@ Page({
         data: {
           writtenBankList,
         }
-      }).then(console.log)
+      }).then(() => {
+        if (accuracy) {
+          wx.navigateTo({
+            url: `../endQuestion/endQuestion?id=${bank.parentId}`,
+            events: {},
+            success: function (res) {
+              that.setData({
+                wrongList: []
+              })
+            }
+          })
+        }
+      })
     })
   },
   // 专门给填空题使用的
-  handleTap: function(e) {
+  handleTap: function (e) {
     console.log(e.currentTarget.dataset.type)
     let type = e.currentTarget.dataset.type
-    let index = e.currentTarget.id*1 - 1
+    let index = e.currentTarget.id * 1 - 1
     this.setData({
       index,
       type
     })
   },
   // 处理单选，判断
-  radioChange: function(e) {
-    let index = e.currentTarget.id*1 - 1
+  radioChange: function (e) {
+    let index = e.currentTarget.id * 1 - 1
     let type = e.currentTarget.dataset.type
-    let {chooseValue} = this.data
+    let {
+      chooseValue
+    } = this.data
     chooseValue[index] = e.detail.value;
     this.setData({
       index,
@@ -279,10 +311,12 @@ Page({
     // this.data.chooseValue[this.data.index] = e.detail.value;
   },
   // 处理多选，不定项选
-  checkboxChange: function(e) {
-    let index = e.currentTarget.id*1 - 1
+  checkboxChange: function (e) {
+    let index = e.currentTarget.id * 1 - 1
     let type = e.currentTarget.dataset.type
-    let {chooseValue} = this.data
+    let {
+      chooseValue
+    } = this.data
     chooseValue[index] = e.detail.value.sort();
 
     this.setData({
@@ -293,12 +327,16 @@ Page({
     // this.data.chooseValue[this.data.index] = e.detail.value.sort();
   },
   // 处理填空，排序
-  inputChange: function(e) {
-    let index = e.currentTarget.id*1 - 1
+  inputChange: function (e) {
+    let index = e.currentTarget.id * 1 - 1
     let value = e.detail.value.trim().toUpperCase()
     let index1 = e.target.dataset.index
     let type = e.currentTarget.dataset.type
-    let {chooseValue, blankArry, questionIndex} = this.data
+    let {
+      chooseValue,
+      blankArry,
+      questionIndex
+    } = this.data
     if (type && index) {
       this.setData({
         index,
@@ -316,7 +354,7 @@ Page({
           chooseValue
         })
       })
-     
+
     } else {
       chooseValue[questionIndex] = value
       this.setData({
@@ -327,16 +365,20 @@ Page({
     }
   },
   // 处理查看答案
-  viewAnwser: function(e) {
+  viewAnwser: function (e) {
     this.setData({
       ifViewAnwser: !this.data.ifViewAnwser
     })
   },
   // 处理单道题目提交
-  handleOneCommit: function(e) {
-    let {chooseValue, questionIndex, bank, questionModal} = this.data
-    let that = this
-    if (!chooseValue[questionIndex]) {
+  handleOneCommit: function (e) {
+    let {
+      chooseValue,
+      questionIndex,
+      bank,
+      questionModal
+    } = this.data
+    if (!chooseValue[questionIndex] && bank.bank[questionIndex].type !== '填空') {
       wx.showToast({
         title: '答案不能为空',
         icon: 'none'
@@ -345,25 +387,6 @@ Page({
       if (questionModal === 'fighter') {
         this.handleWrongAndScore()
         this.handleNext()
-
-        // if (!bank.bank[questionIndex].mistaked) {
-        //   wx.showToast({
-        //     title: '(∩_∩)答对啦！',
-        //     duration: 1000,
-        //     complete: () => {
-        //     }
-        //   })
-        // } else {
-        //   wx.showToast({
-        //     title: 'T_T答错了呢！',
-        //     icon: 'none',
-        //     duration: 1000,
-        //     complete: () => {
-        //       this.handleNext()
-        //     }
-        //   })
-        // }
-
       } else {
         this.handleWrongAndScore()
         if (!bank.bank[questionIndex].mistaked) {
@@ -381,50 +404,61 @@ Page({
           ifViewAnwser: true,
         })
       }
+      this.handleBankStatus() // 更新题库简介状态
       this.handleBankStatusDetail()
     }
   },
   // 处理下一题
-  handleNext: function(e) {
-  
-    let {questionIndex, correct_answer, bank, chooseValue, ifSubmitOne, ifViewAnwser} = this.data
-      if (questionIndex < bank.bank.length - 1) {
-        questionIndex++
-        correct_answer = bank.bank[questionIndex].correct_answer.toString()
-        if (!chooseValue[questionIndex]) {
-          console.log(chooseValue[questionIndex], '未作答')
-          ifSubmitOne = true
-          ifViewAnwser = false
-        } else {
-          console.log(chooseValue[questionIndex], '已作答')
-          ifSubmitOne = false
-          ifViewAnwser = true
-        }
-        this.setData({
-          questionIndex,
-          correct_answer,
-          ifSubmitOne,
-          ifViewAnwser
-        })
+  handleNext: function (e) {
+    let {
+      questionIndex,
+      correct_answer,
+      bank,
+      chooseValue,
+      ifSubmitOne,
+      ifViewAnwser
+    } = this.data
+    if (questionIndex < bank.bank.length - 1) {
+      questionIndex++
+      correct_answer = bank.bank[questionIndex].correct_answer.toString()
+      if (!chooseValue[questionIndex]) {
+        console.log(chooseValue[questionIndex], '未作答')
+        ifSubmitOne = true
+        ifViewAnwser = false
       } else {
-        // 代表当前已经答完题目
-        this.handleComplete()
+        console.log(chooseValue[questionIndex], '已作答')
+        ifSubmitOne = false
+        ifViewAnwser = true
       }
-  
+      this.setData({
+        questionIndex,
+        correct_answer,
+        ifSubmitOne,
+        ifViewAnwser
+      })
+    } else {
+      // 代表当前已经答完题目
+      this.handleComplete()
+    }
+
   },
   // 处理上一题
-  handlePre: function(e) {
-    let {questionIndex, correct_answer, bank} = this.data
-      if (questionIndex > 0) {
-        questionIndex--
-        correct_answer = bank.bank[questionIndex].correct_answer.toString()
-        this.setData({
-          questionIndex,
-          correct_answer,
-          ifSubmitOne: false,
-          ifViewAnwser: true
-        })
-      }
+  handlePre: function (e) {
+    let {
+      questionIndex,
+      correct_answer,
+      bank
+    } = this.data
+    if (questionIndex > 0) {
+      questionIndex--
+      correct_answer = bank.bank[questionIndex].correct_answer.toString()
+      this.setData({
+        questionIndex,
+        correct_answer,
+        ifSubmitOne: false,
+        ifViewAnwser: true
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -442,7 +476,7 @@ Page({
       writtenBankForUser.get().then((res) => {
         let writtenBankList = res.data[0].writtenBankList
         let bank = writtenBankList.find((value) => {
-          return value.parentId == options.id*1
+          return value.parentId == options.id * 1
         })
         let correct_answer = bank.bank[0].correct_answer.toString()
         let chooseValue = bank.chooseValue
@@ -458,21 +492,21 @@ Page({
         })
         // app.globalData.examBank.bank = result
       })
-  } else {
-    writtenQuestions.where({
-      parentId: options.id*1
-    }).get().then((res) => {
-      console.log(res.data)
-      let bank = res.data[0]
-      let correct_answer = bank.bank[0].correct_answer.toString()
-      this.setData({
-        bank,
-        correct_answer
-      }, () => {
-        wx.hideLoading({})
+    } else {
+      writtenQuestions.where({
+        parentId: options.id * 1
+      }).get().then((res) => {
+        console.log(res.data)
+        let bank = res.data[0]
+        let correct_answer = bank.bank[0].correct_answer.toString()
+        this.setData({
+          bank,
+          correct_answer
+        }, () => {
+          wx.hideLoading({})
+        })
       })
-    })
-  }
+    }
 
 
   },
@@ -498,7 +532,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**

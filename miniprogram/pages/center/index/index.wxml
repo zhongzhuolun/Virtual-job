@@ -74,7 +74,8 @@
 			</view>
 
 		</view>
-		<view class="feedback" bindtap="feedback">
+		
+		<button class="feedback" open-type="feedback">
 			<view class="img-wrap">
 				<image src="../../../images/icon/message.png" class="message"></image>
 			</view>
@@ -82,7 +83,8 @@
 				<text>意见反馈</text>
 				<text>期待收到您的意见和建议</text>
 			</view>
-		</view>
+		</button>
+
 	</view>
 	<view class="agree-policy">
 		<text>点击查看</text>

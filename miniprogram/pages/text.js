@@ -16,17 +16,17 @@ Page({
    */
   data: {
     bankIndex: 0, // 
-    id: 75, // 题库的ID
+    id: 102, // 题库的ID
     banks, // 面试题库简介
     detailBanks, // 面试题库详情
     banks1, // 笔试题库简介
     detailBanks1, // 笔试题库详情
   },
-  // 获取题库简介
+  // 获取题库简介ID
   getBankList: function (e) {
     banksList.orderBy('id', 'desc').get().then(res => {
-      console.log(res.data.length)
-      let id = res.data.length + 1
+      console.log(res.data[0].id)
+      let id = res.data[0].id + 1
       this.setData({
         id
       })
@@ -55,22 +55,35 @@ Page({
   addDetail: function (value) {
     let {
       bankIndex,
-      detailBanks
+      detailBanks,
+      id
     } = this.data
+    value.questionsFileArry = []
+    value.status = {
+      "collection": false,
+      "doing": false,
+      "done": false
+    }
+    value.class = '面试题'
+    value.parentId = id
+    value.questions.forEach((v, i) => {
+      v.id = i + 1
+      v.comments = []
+    })
+    console.log(value)
     wx.cloud.callFunction({
       name: 'addDetailBank',
       data: {
         detailBank: value
       },
     }).then((res) => {
-      console.log(res)
+      console.log('增加')
       if (bankIndex < detailBanks.length - 1) {
         bankIndex++
         this.setData({
           bankIndex,
         }, () => {
           this.addDetail(detailBanks[bankIndex])
-          console.log('增加')
         })
       }
     })
@@ -96,21 +109,29 @@ Page({
   add: function (value) {
     let {
       bankIndex,
-      banks
+      banks,
+      id
     } = this.data
+    value.id = id
+    value.status = { // 题库初始状态对象，默认都为false
+      "done": false, // 做完了
+      "doing": false, // 正在做
+      "collection": false // 收藏
+    }
+    value.class = '面试题'
     wx.cloud.callFunction({
       name: 'addBank',
       data: {
         bank: value
       },
     }).then((res) => {
+      console.log('增加')
       if (bankIndex < banks.length - 1) {
         bankIndex++
         this.setData({
           bankIndex,
         }, () => {
           this.add(banks[bankIndex])
-          console.log('增加')
         })
       }
     })
@@ -145,6 +166,7 @@ Page({
       banks1,
       id
     } = this.data
+    console.log(value)
     value.id = id
     value.status = { // 题库初始状态对象，默认都为false
       "done": false, // 做完了
@@ -162,13 +184,13 @@ Page({
           bank: value
         },
       }).then((res) => {
+        console.log('增加')
         if (bankIndex < banks1.length - 1) {
           bankIndex++
           this.setData({
             bankIndex,
           }, () => {
             this.add1(banks1[bankIndex])
-            console.log('增加')
           })
         }
       })
@@ -176,7 +198,7 @@ Page({
   
 
   },
-  // 是否新增面试题库详情
+  // 是否新增笔试题库详情
   addWritten: function (e) {
     wx.showModal({
       title: '提示',
@@ -219,6 +241,13 @@ Page({
       "judge": 0, // 判断题
       "unsteady": 0 // 不定项选择题
     },
+    value.bank.forEach((v, i) => {
+      v.id = i + 1
+      v.mistaked = false
+      v.check = false
+      v.comments = []
+    })
+    console.log(value)
     this.setData({
       id: id + 1
     }, () => {
@@ -228,14 +257,13 @@ Page({
           detailBank: value
         },
       }).then((res) => {
-        console.log(res)
+        console.log('增加')
         if (bankIndex < detailBanks1.length - 1) {
           bankIndex++
           this.setData({
             bankIndex,
           }, () => {
             this.addDetail1(detailBanks1[bankIndex])
-            console.log('增加')
           })
         }
       })

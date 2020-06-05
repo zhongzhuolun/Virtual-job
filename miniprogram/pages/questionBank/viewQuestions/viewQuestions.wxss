@@ -1,30 +1,21 @@
 page {
   background: white;
 }
-scroll-view{
-  background-color: rgba(255, 255, 255, 1);
-}
-
 
 .bank-wrap {
   background: white;
   padding-bottom: 8vh;
 }
-.bank {
-  margin-left: 34rpx;
-  padding-top: 45rpx;
-  overflow: auto;
-  min-height: 50vh;
-  max-height: 60vh;
+.bank-head {
+  display: flex;
+  border-bottom: 2rpx solid rgba(187, 187, 187, 1);
+  padding: 26rpx;
 }
-.bank-title {
-  margin-left: 34rpx;
-  padding-top: 42rpx;
+.bank-head .bank-title {
   color: rgba(16, 16, 16, 1);
   font-size: 50rpx;
   text-align: left;
   font-family: PingFangSC-regular;
-  height: 15vh;
   width: 83vw;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -32,12 +23,15 @@ scroll-view{
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+/* .type-btns {
+  font-size: 64rpx;
+} */
 
-.line {
-  /* position: absolute; */
-  width: 750rpx;
-  border: 1rpx solid rgba(187, 187, 187, 1);
+.bank {
+  padding: 34rpx;
+  border-bottom: 2rpx solid rgba(187, 187, 187, 1);
 }
+
 .my-choosebox checkbox[checked] {
   border: 4rpx solid transparent;
   background: white;
@@ -45,4 +39,60 @@ scroll-view{
 .next-size {
   z-index: 0;
 }
+checkbox.yellow {
+  border: 4rpx solid #ffc200 !important;
+}
+
+/* .next-publish {
+  position: fixed;
+  left: 0px;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  height: 122rpx;
+  line-height: 40rpx;
+  text-align: center;
+  box-shadow: 0rpx -4rpx 14rpx -8rpx rgba(163, 163, 163, 0.83);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  background: white;
+}
+.next-publish .publish {
+  display: flex;
+  width: 70vw;
+  border-bottom: 2rpx solid rgba(187, 187, 187, 1);
+  height: 100rpx;
+  padding: 26rpx;
+
+}
+.next-publish .publish input {
+  width: 75%;
+  text-align: left;
+  margin-top: 9rpx;
+}
+.next-publish .publish .publish-comment {
+  width: 116rpx;
+  height: 60rpx;
+  border-radius: 8rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  text-align: center;
+  box-shadow: 2rpx 2rpx 12rpx 0rpx rgba(250, 191, 1, 0.7);
+  font-family: PingFang SC;
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  line-height: 56rpx;
+}
+
+.next-publish .chekckout-question {
+  width: 10vw;
+  line-height: 122rpx;
+  font-size: 76rpx;
+}
+.next-publish .next-question {
+ 
+}
+.next-publish .pre-question {
+  margin-left: 4.5vw;
+} */
+
   

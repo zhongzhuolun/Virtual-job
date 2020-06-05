@@ -44,10 +44,10 @@ exports.main = async (event, context) => {
       })
       if (event.ifLike !== -1) {
         // 代表用户点赞过了，此时应该是取消点赞
-        commentList[result].spot_count.splice(event.ifLike, 1)
+        commentList[result]["spot_count"].splice(event.ifLike, 1)
       } else {
         // 代表用户没有点赞过，此时应该为点赞
-        commentList[result].spot_count.push(event.myComment)
+        commentList[result]["spot_count"].push(event.myComment)
       }
       commentsForUser.where({
         _openid: event.dotUserId,
@@ -56,6 +56,9 @@ exports.main = async (event, context) => {
           commentList: commentList
         }
       })
+      console.log(result)
+
+    }).then(() => {
     })
   } 
 

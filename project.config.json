@@ -131,10 +131,10 @@
 					"scene": null
 				},
 				{
-					"id": 13,
+					"id": 11,
 					"name": "pages/home/wrongAll/wrongAll",
 					"pathName": "pages/home/wrongAll/wrongAll",
-					"query": "class='面试'",
+					"query": "class=%E7%AC%94%E8%AF%95&id=101",
 					"scene": null
 				},
 				{
@@ -173,10 +173,10 @@
 					"scene": null
 				},
 				{
-					"id": 19,
+					"id": 17,
 					"name": "pages/home/interviewAll/interviewAll",
 					"pathName": "pages/home/interviewAll/interviewAll",
-					"query": "type=audio",
+					"query": "id=102",
 					"scene": null
 				},
 				{
@@ -187,10 +187,10 @@
 					"scene": null
 				},
 				{
-					"id": 21,
+					"id": 19,
 					"name": "pages/questionBank/answerQuestions/answerQuestions",
 					"pathName": "pages/questionBank/answerQuestions/answerQuestions",
-					"query": "id=10",
+					"query": "id=101&modal=fighter",
 					"scene": null
 				},
 				{
@@ -236,10 +236,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 26,
 					"name": "pages/questionBank/viewQuestions/viewQuestions",
 					"pathName": "pages/questionBank/viewQuestions/viewQuestions",
-					"query": "id=20&type=result",
+					"query": "id=101&type=result",
 					"scene": null
 				},
 				{
@@ -250,17 +250,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 28,
 					"name": "pages/questionBank/answerInterviewQuestion/answerInterviewQuestion",
 					"pathName": "pages/questionBank/answerInterviewQuestion/answerInterviewQuestion",
-					"query": "id=10",
+					"query": "id=102",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 29,
 					"name": "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
 					"pathName": "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
-					"query": "id=10&class=面试",
+					"query": "id=102&type=result",
 					"scene": null
 				},
 				{

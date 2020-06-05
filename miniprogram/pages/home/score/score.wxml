@@ -15,54 +15,52 @@
 				<text>正确率/%</text>
 			</view>
 		</view>
-		<view wx:if="{{questionTypeNum.radio}}" class="row">
+		<view wx:if="{{bank.questionTypeNum.radio}}" class="row">
 			<view class="column">
-				<text>单选题({{questionTypeNum.radio}}道)</text>
+				<text>单选题({{bank.questionTypeNum.radio}}道)</text>
 			</view>
 			<view class="column">
-				<text>{{questionTypesRate.radio}}</text>
-			</view>
-		</view>
-		<view wx:if="{{questionTypeNum.checkbox}}" class="row">
-			<view class="column">
-				<text>多选题({{questionTypeNum.checkbox}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{questionTypesRate.checkbox}}</text>
+				<text>{{bank.accuracy.radio}}</text>
 			</view>
 		</view>
-		<view wx:if="{{questionTypeNum.judge}}" class="row">
+		<view wx:if="{{bank.questionTypeNum.checkbox}}" class="row">
 			<view class="column">
-				<text>判断题({{questionTypeNum.judge}}道)</text>
+				<text>多选题({{bank.questionTypeNum.checkbox}}道)</text>
 			</view>
 			<view class="column">
-				<text>{{questionTypesRate.judge}}</text>
-			</view>
-		</view>
-		<view wx:if="{{questionTypeNum.blank}}" class="row">
-			<view class="column">
-				<text>填空题({{questionTypeNum.blank}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{questionTypesRate.blank}}</text>
+				<text>{{bank.accuracy.checkbox}}</text>
 			</view>
 		</view>
-		<view wx:if="{{questionTypeNum.sort}}" class="row">
+		<view wx:if="{{bank.questionTypeNum.judge}}" class="row">
 			<view class="column">
-				<text>排序题({{questionTypeNum.sort}}道)</text>
+				<text>判断题({{bank.questionTypeNum.judge}}道)</text>
 			</view>
 			<view class="column">
-				<text>{{questionTypesRate.sort}}</text>
+				<text>{{bank.accuracy.judge}}</text>
 			</view>
 		</view>
-		<view wx:if="{{questionTypeNum.unsteady}}" class="row">
+		<view wx:if="{{bank.questionTypeNum.blank}}" class="row">
 			<view class="column">
-				<!-- <text>不定项选题\n({{questionTypeNum.unsteady}}道)</text> -->
-        <text>不定项选题</text>
-				<text>({{questionTypeNum.unsteady}}道)</text>
+				<text>填空题({{bank.questionTypeNum.blank}}道)</text>
 			</view>
 			<view class="column">
-				<text>{{questionTypesRate.unsteady}}</text>
+				<text>{{bank.accuracy.blank}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.sort}}" class="row">
+			<view class="column">
+				<text>排序题({{bank.questionTypeNum.sort}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{bank.accuracy.sort}}</text>
+			</view>
+		</view>
+		<view wx:if="{{bank.questionTypeNum.unsteady}}" class="row">
+			<view class="column">
+        <text>不定项选题({{bank.questionTypeNum.unsteady}}道)</text>
+			</view>
+			<view class="column">
+				<text>{{bank.accuracy.unsteady}}</text>
 			</view>
 		</view>
 

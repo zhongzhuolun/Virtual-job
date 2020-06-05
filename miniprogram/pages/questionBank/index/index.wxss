@@ -103,7 +103,7 @@ image {
 .bank-title {
   position: absolute;
   left: 40rpx;
-  width: 240rpx;
+  width: 460rpx;
   height: 84rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 30rpx;
@@ -144,7 +144,7 @@ image {
   font-size: 28rpx;
   text-align: center;
   font-family: PingFang SC;
-  border: 1rpx solid rgba(187, 187, 187, 1);
+  /* border: 1rpx solid rgba(187, 187, 187, 1); */
 }
 .limit-time {
   position: absolute;
@@ -195,7 +195,7 @@ image {
 .my-search {
   position: absolute;
   left: 80rpx;
-  top: 616rpx;
+  top: 47vh;
   width: 590rpx;
   height: 66rpx;
   line-height: 66rpx;
@@ -219,7 +219,7 @@ image {
 }
 .loading-img {
   position: absolute;
-  height: 600rpx;
+  height: 350rpx;
   width: 100%;
   background: white;
   z-index: 100;

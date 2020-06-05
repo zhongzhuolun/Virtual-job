@@ -5,7 +5,7 @@
     </text>
     <van-icon class="exam-icon" name="records" color="#ffc200" size="60rpx"/>
     <text class="exam">
-    考试
+    练习
     </text>
     <block wx:if="{{item.status.done}}">
       <!-- <view class="start-exam" style="background: #bbb">

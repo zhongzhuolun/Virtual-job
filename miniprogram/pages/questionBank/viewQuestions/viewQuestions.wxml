@@ -1,7 +1,5 @@
-<!--miniprogram/pages/home/wrongAll/wrongAll.wxml-->
-<scroll-view scroll-y="{{modalName==null}}">
 	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
-		<view slot="content">{{bank.title}}</view>
+		<view slot="content">查看试卷</view>
 		<view slot="backText"></view>
 	</cu-custom>
 	<wxs module="filter">
@@ -17,7 +15,7 @@
 		var isLike = function(id, arr) {
 			var like = false
 			if (arr.length > 0) {
-				for(var i = 0; i < arr.length; i++) {
+				for (var i = 0; i < arr.length; i++) {
 					if (id == arr[i].userId) {
 						like = true
 					}
@@ -33,15 +31,18 @@
 		}
 	</wxs>
 	<view class="bank-wrap">
-		<view class="bank-title">
-			<text>{{bank.title}} </text>
-		</view>
-				<view class="type-btns">
-			<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
+		<view class="bank-head">
+			<view class="bank-title">
+				<text>{{bank.title}} </text>
+			</view>
+			<view class="type-btns">
+				<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
 				<view class="menu" bindtap="handleMenu" data-target="Modal">
-				<text class="cuIcon-apps lg text-yellow"></text>
+					<text class="cuIcon-apps lg text-yellow"></text>
+				</view>
 			</view>
 		</view>
+
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
@@ -66,8 +67,6 @@
 
 				</view>
 			</view>
-		</view>
-		<view class="line">
 		</view>
 		<view class="bank" wx:key="id">
 			<block wx:if="{{bank.bank[questionIndex].type === '单选'}}">
@@ -186,7 +185,6 @@
 				</view>
 			</block>
 		</view>
-		<view style="margin-top: 40rpx" class="line"></view>
 		<view class="comments">
 			<view class="comment" wx:for="{{bank.bank[questionIndex].comments}}" wx:key="index">
 				<block wx-if="{{ifViewAllComments||index === 0}}">
@@ -196,15 +194,15 @@
 							<view class="user-name">{{item.user_name}} </view>
 						</view>
 						<view class="like-dot" id="{{item.user_id}}" data-commentid="{{item.commentId}}" data-index="{{index}}" bindtap="handleLike">
-								<text class="like cuIcon-appreciatefill {{filter.isLike(item.user_id,item.spot_count)? 'text-yellow' : 'text-grey'}}"></text>
+							<text class="like cuIcon-appreciatefill {{filter.isLike(userId,item.spot_count)? 'text-yellow' : 'text-grey'}}"></text>
 							<view class="dot-num">{{item.spot_count.length}}</view>
 						</view>
 					</view>
 					<view class="content">{{item.content}}
-						<view class="replay" data-index="{{index}}" data-commentid="{{item.commentId}}" bindtap="handleReplay" >
+						<view class="replay" data-index="{{index}}" data-commentid="{{item.commentId}}" bindtap="handleReplay">
 							<block wx:for="{{item.reply}}" wx:key="index">
 								<view class="replay-info" data-name="{{item.user_name}}" id="{{item.user_id}}">
-								<image src="{{item.avatar}}"></image>
+									<image src="{{item.avatar}}"></image>
 									<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-name">{{item.user_name}}\n </text>
 									<text data-name="{{item.user_name}}" id="{{item.user_id}}" class="replay-content">{{item.content}} </text>
 								</view>
@@ -217,26 +215,61 @@
 			</view>
 			<view class="view-all" bindtap="viewAllComments">
 				{{ifViewAllComments?'收起评论':'查看全部评论'}}</view>
+			<!-- <view class="publish">
+				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
+				<view bindtap="handlePublish" class="publish-comment">提交</view>
+			</view> -->
+		</view>
+	</view>
+	<view class="next-publish">
+		<block wx:if="{{ifViewWrong}}">
+			<view class="pre-question chekckout-question" bindtap="handlePre">
+				<!-- <text hidden="{{!(wrongIndex > 0)}}" class="cuIcon-pullleft text-yellow"></text> -->
+					<text class="cuIcon-pullleft  text-{{wrongIndex > 0?'yellow': 'gray'}}"></text>
+			</view>
 			<view class="publish">
 				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
 				<view bindtap="handlePublish" class="publish-comment">提交</view>
 			</view>
-		</view>
+			<view class="next-question chekckout-question" bindtap="handleNext">
+				<block wx:if="{{wrongIndex < wrongList.length - 1}}">
+					<text class="cuIcon-pullright text-yellow"></text>
+				</block>
+				<block wx:else>
+					<text class="cuIcon-roundcheck text-yellow"></text>
+				</block>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="pre-question chekckout-question" bindtap="handlePre">
+				<!-- <text hidden="{{!(questionIndex > 0)}}" class="cuIcon-pullleft text-yellow"></text> -->
+					<text class="cuIcon-pullleft  text-{{questionIndex > 0?'yellow': 'gray'}}"></text>
+			</view>
+			<view class="publish">
+				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
+				<view bindtap="handlePublish" class="publish-comment">发送</view>
+			</view>
+			<view class="next-question chekckout-question" bindtap="handleNext">
+				<block wx:if="{{questionIndex < bank.bank.length - 1}}">
+					<text class="cuIcon-pullright text-yellow"></text>
+				</block>
+				<block wx:else>
+					<text class="cuIcon-roundcheck text-yellow"></text>
+				</block>
+			</view>
+		</block>
+
 	</view>
-	<view class="next-size">
+
+	<!-- <view class="next-size">
 		<block wx:if="{{ifViewWrong}}">
 			<view class="next-question chekckout-question" bindtap="handleNext">
 				{{wrongIndex < wrongList.length - 1?'下一题':'查看总分'}}</view>
 			<view wx:if="{{wrongIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-			<view class="page-size">{{wrongIndex + 1}}/{{wrongList.length}}
-			</view>
 		</block>
 		<block wx:else>
 			<view class="next-question chekckout-question" bindtap="handleNext">
 				{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}</view>
 			<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-			<view class="page-size">{{questionIndex + 1}}/{{bank.bank.length}}
-			</view>
 		</block>
-	</view>
-</scroll-view>
+	</view> -->

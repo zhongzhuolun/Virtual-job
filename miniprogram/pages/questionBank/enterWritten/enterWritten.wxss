@@ -1,7 +1,7 @@
 .enterWritten{
   position: absolute;
   left: 238rpx;
-  top: 314rpx;
+  top: 23vh;
   width: 288rpx;
   height: 102rpx;
   color: rgba(12, 12, 12, 1);
@@ -12,7 +12,7 @@
 .line1{
   position: absolute;
   left: 72rpx;
-  top: 366rpx;
+  top: 27vh;
   width: 122rpx;
   height: NaNpx;
   border: 1rpx solid rgba(12, 12, 12, 1);
@@ -20,7 +20,7 @@
 .line2{
   position: absolute;
   left: 570rpx;
-  top: 366rpx;
+  top: 27vh;
   width: 122rpx;
   height: NaNpx;
   border: 1rpx solid rgba(12, 12, 12, 1);
@@ -28,11 +28,10 @@
 .frist1{
   position: absolute;
   left: 50%;
-  top: 510rpx;
+  top: 36vh;
   width: 80%;
   text-align: center;
   transform: translateX(-50%);
-  height: 80rpx;
   color: rgba(12, 12, 12, 1);
   font-size: 56rpx;
   text-align: left;
@@ -42,7 +41,7 @@
 .sentence{
   position: absolute;
   left: 232rpx;
-  top: 740rpx;
+  top: 61vh;
   width: 344rpx;
   height: 40rpx;
   color: rgba(12, 12, 12, 1);
@@ -53,7 +52,7 @@
 .startAnswer{
   position: absolute;
   left: 230rpx;
-  top: 986rpx;
+  top: 76vh;
   width: 288rpx;
   height: 118rpx;
   line-height: 118rpx;

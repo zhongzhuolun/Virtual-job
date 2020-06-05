@@ -32,9 +32,9 @@
 						</view>
 					</view>
 		</block>
-		<view wx:if="{{commentList.length === 0}}">
+		<view wx:if="{{replyList.length === 0}}">
 			<view class="item">
-				<text class="no-msg">暂时没有收到评论哦</text>
+				<text class="no-msg">暂时没有收到回复哦</text>
 			</view>
 		</view>
 
@@ -59,7 +59,7 @@
 						</view>
 					</view>
 		</block>
-		<view wx:if="{{commentList.length === 0}}">
+		<view wx:if="{{dotList.length === 0}}">
 			<view class="item">
 				<text class="no-msg">暂时没有收到点赞哦</text>
 			</view>

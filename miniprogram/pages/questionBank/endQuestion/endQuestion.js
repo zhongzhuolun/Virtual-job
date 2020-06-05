@@ -1,5 +1,7 @@
-// miniprogram/pages/questionBank/endQuestion/endQuestion.js
 const app = getApp()
+const db = wx.cloud.database()
+const writtenQuestions = db.collection('writtenQuestions')
+const writtenBankForUser = db.collection('writtenBankForUser')
 Page({
 
   /**
@@ -7,16 +9,19 @@ Page({
    */
   data: {
     finalCorrectRate: 0, // 最终总正确率
-    questionTypesRate: {}, // 每种题型的正确率
-    questionTypeNum: {}, // 每种题型的数量
-    title: '', // 题库的标题
     id: null, // 题库的id
   },
   // 处理总的正确率
-  handleFinalCorrectRate: function(data) {
-    let {accuracy, questionTypeNum} = data
+  handleFinalCorrectRate: function () {
+    let {
+      accuracy,
+      questionTypeNum
+    } = this.data.bank
     let finalCorrectRate = 0
-    let score = {sum: 0, allRate: 0}
+    let score = {
+      sum: 0,
+      allRate: 0
+    }
     for (const key in questionTypeNum) {
       if (questionTypeNum[key] !== 0) {
         // 代表题库中有该题型的题
@@ -24,22 +29,41 @@ Page({
       }
     }
     for (const key in accuracy) {
-        // 代表每钟题型的正确率相加
-        score.allRate += accuracy[key]
+      // 代表每钟题型的正确率相加
+      score.allRate += accuracy[key]
     }
-    finalCorrectRate = Math.floor(score.allRate/score.sum)
+    finalCorrectRate = Math.floor(score.allRate / score.sum)
     this.setData({
       finalCorrectRate,
-      questionTypesRate: accuracy,
-      questionTypeNum,
     })
-    
+
+  },
+  // 获取当前面试题库
+  getCurrentBank: function (bankId) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    writtenBankForUser.get().then((res) => {
+      let writtenBankList = res.data[0].writtenBankList
+      let result = writtenBankList.find((value) => {
+        return value.parentId == bankId
+      })
+      this.setData({
+        bank: result,
+      }, () => {
+        this.handleFinalCorrectRate()
+        wx.hideLoading()
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    this.setData({
+      id: options.id * 1
+    })
   },
 
   /**
@@ -53,19 +77,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const eventChannel = this.getOpenerEventChannel()
-    console.log(app.globalData.examBank)
-    let title = app.globalData.examBank.bank.title
-    let id = app.globalData.examBank.bank.parentId
-    this.setData({
-      title,
-      id
-    })
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-
-    eventChannel.on('getAccuracy', (accuracy) => {
-      this.handleFinalCorrectRate(accuracy)
-    })
+    this.getCurrentBank(this.data.id)
   },
 
   /**

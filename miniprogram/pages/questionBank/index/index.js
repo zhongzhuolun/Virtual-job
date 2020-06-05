@@ -41,7 +41,7 @@ Page({
     let item = {...this.data.item}
     this.refleshStatus(item)
   },
-  // 除了搜索
+  // 处理搜索
   handleSearch: function(e) {
     let value = e.detail.value
     this.setData({
@@ -332,35 +332,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  // pulling: function() {
-  //   this.setData({
-  //     ifRefresh: true
-  //   })
-  //   console.log('pull')
-  // },
-  // refresh: function() {
-   
-  //   this.myPullDownRefresh()
-
-  //   console.log('refresh')
-  // },
-  // restore: function() {
-  //   // this.myPullDownRefresh()
-  //   console.log('restore')
-  // },
-  // myPullDownRefresh: function(e) {
-  //   this.pageObj.pagesize = 0
-  //   this.setData({
-  //     ifPullDown: true,
-  //     ifRefresh: false
-  //   }, () => {
-  //     if(this.data.checkoutBank === 'written') {
-  //       this.handleWritten()
-  //     } else {
-  //       this.handleInterview()
-  //     }
-  //   })
-  // },
+  
   onPullDownRefresh: function (e) {
     this.pageObj.pagesize = 0
     this.setData({
@@ -383,7 +355,18 @@ Page({
     /**
    * 页面上拉触底事件的处理函数
    */
-  myReachBottom: function(e) {
+  // myReachBottom: function(e) {
+  //   this.pageObj.ifBottom = true
+  //   if (this.pageObj.ifAdd) {
+  //     this.pageObj.pagesize += 20
+  //     if(this.data.checkoutBank === 'written') {
+  //       this.handleWritten()
+  //     } else {
+  //       this.handleInterview()
+  //     }
+  //   } 
+  // },
+  onReachBottom: function (e) {
     this.pageObj.ifBottom = true
     if (this.pageObj.ifAdd) {
       this.pageObj.pagesize += 20
@@ -393,17 +376,6 @@ Page({
         this.handleInterview()
       }
     } 
-  },
-  onReachBottom: function (e) {
-    // this.pageObj.ifBottom = true
-    // if (this.pageObj.ifAdd) {
-    //   this.pageObj.pagesize += 20
-    //   if(this.data.checkoutBank === 'written') {
-    //     this.handleWritten()
-    //   } else {
-    //     this.handleInterview()
-    //   }
-    // } 
   
   },
 

@@ -32,6 +32,36 @@ radio.red {
 checkbox.red {
   border: 4rpx solid red !important;
 }
+.chekckout-question {
+  width: 164rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 36rpx;
+  text-align: center;
+  font-family: PingFang SC;
+  border: 4rpx solid rgba(0, 0, 0, 1);
+  line-height: 64rpx;
+}
+.next-question {
+  float: right;
+  margin-right: 40rpx;
+}
+.pre-question {
+  float: left;
+  margin-left: 40rpx;
+}
+.page-size {
+  margin: 0 auto;
+  width: 60rpx;
+  height: 40rpx;
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  padding-top: 100rpx;
+}
 .quetion-title {
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;

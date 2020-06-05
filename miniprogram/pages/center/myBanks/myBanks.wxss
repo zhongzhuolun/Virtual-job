@@ -76,7 +76,7 @@ image {
 .bank-title {
   position: absolute;
   left: 40rpx;
-  width: 240rpx;
+  width: 440rpx;
   height: 84rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 30rpx;
@@ -117,7 +117,6 @@ image {
   font-size: 28rpx;
   text-align: center;
   font-family: PingFang SC;
-  border: 1rpx solid rgba(187, 187, 187, 1);
 }
 .limit-time {
   position: absolute;

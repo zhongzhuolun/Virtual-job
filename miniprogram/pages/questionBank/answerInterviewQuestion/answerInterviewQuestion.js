@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    writtenBank: {}, // 面试题中包含当前用户所做的题库
+    bank: {}, // 面试题中包含当前用户所做的题库
     questionIndex: 0, // 当前题目的序列
     ifViewAllComments: false, // 查看所有评论
     ifCollect: false, // 是否收藏
@@ -35,8 +35,8 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let {questionIndex, writtenBank} = this.data
-      if (questionIndex < writtenBank.questions.length - 1) {
+    let {questionIndex, bank} = this.data
+      if (questionIndex < bank.questions.length - 1) {
         questionIndex++
         this.setData({
           questionIndex,
@@ -49,18 +49,17 @@ Page({
         // 代表查看总结
         this.handleBankStatus() // 更新题库简介状态
         this.handleBankStatusDetail() // 更新题库详情状态
-        wx.navigateTo({
-          url: `../endInterviewQuestion/endInterviewQuestion?id=${writtenBank.parentId}`,
-        })
+       
       }
   },
   // 处理上一题
   handlePre: function(e) {
-    wx.showLoading({
-      title: '加载中',
-    })
+   
     let {questionIndex} = this.data
       if (questionIndex > 0) {
+        wx.showLoading({
+          title: '加载中',
+        })
         questionIndex--
         this.setData({
           questionIndex
@@ -69,39 +68,44 @@ Page({
             complete: (res) => {},
           })
         })
+      } else {
+        wx.showToast({
+          title: '已经是第一题了哦',
+          icon: 'none'
+        })
       }
   },
   // 处理收藏(更新用户的题库状态以及题库详情)
   handleCollection(e) {
     wx.showLoading()
     let title = ''
-    let {writtenBank} = this.data
+    let {bank} = this.data
     let {ifCollect} = this.data
-    let bankId = writtenBank.parentId
+    let bankId = bank.parentId
     let statusObj = {
       id: bankId
     }
     if (ifCollect) {
-      writtenBank.status.collection = false
+      bank.status.collection = false
       title = '取消收藏成功'
       this.setData({
         ifCollect: false
       })
     } else {
-      writtenBank.status.collection = true
+      bank.status.collection = true
       title = '收藏成功'
       this.setData({
         ifCollect: true
       })
     }
-    statusObj.status = writtenBank.status
+    statusObj.status = bank.status
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
         let result = statusList.findIndex((value) => {
           return value.id == bankId
         })
         if(result !== -1) {
-          if (!writtenBank.status.collection) {
+          if (!bank.status.collection) {
             statusList[result].status.collection = false
           } else {
             statusList[result].status.collection = true
@@ -128,9 +132,9 @@ Page({
         return value.parentId == bankId
       })
       if(result !== -1) {
-        interviewBankList[result] = writtenBank
+        interviewBankList[result] = bank
       } else {
-        interviewBankList.push(writtenBank)
+        interviewBankList.push(bank)
       }
       wx.cloud.callFunction({
         name: 'updateInterviewBank',
@@ -143,7 +147,7 @@ Page({
   },
   // 获取当前题库状态
   getStatus: function() {
-    let id = this.data.writtenBank.parentId
+    let id = this.data.bank.parentId
     bankStatusList.get().then(res => {
       let statusList = res.data[0].statusList
       let ifCollect
@@ -185,8 +189,8 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let {questionIndex, writtenBank} = this.data
-    let tempFilePaths = writtenBank.questionsFileArry[questionIndex].tempFilePaths
+    let {questionIndex, bank} = this.data
+    let tempFilePaths = bank.questionsFileArry[questionIndex].tempFilePaths
     this.setData({
       tempFilePaths
     }, () => {
@@ -203,7 +207,7 @@ Page({
   },
     // 处理更新题库简介状态（只更新该用户的数据）
     handleBankStatus: function() {
-      let bank = this.data.writtenBank
+      let bank = this.data.bank
       let bankId = bank.parentId
       let statusObj = {
         id: bankId
@@ -233,9 +237,8 @@ Page({
   
     // 处理更新题库详情状态 （只更新该用户的数据）
     handleBankStatusDetail: function() {
-      let bank = this.data.writtenBank
+      let bank = this.data.bank
       let bankId = bank.parentId
-      // bank.questionsFileArry = this.data.questionsFileArry
       interviewBankForUser.get().then((res) => {
         let interviewBankList = res.data[0].interviewBankList
         let result = interviewBankList.findIndex((value) => {
@@ -251,7 +254,11 @@ Page({
           data: {
             interviewBankList,
           }
-        }).then(console.log)
+        }).then(() => {
+          wx.navigateTo({
+            url: `../endInterviewQuestion/endInterviewQuestion?id=${bank.parentId}`,
+          })
+        })
       })
     },
   /**
@@ -267,7 +274,7 @@ Page({
       console.log(res.data)
       this.setData({
         type: options.type, // 设置当前用户选择面试的类型
-        writtenBank: res.data[0] // 设置题库对象
+        bank: res.data[0] // 设置题库对象
       }, () => {
         wx.hideLoading({})
       })

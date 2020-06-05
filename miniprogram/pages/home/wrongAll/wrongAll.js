@@ -1,7 +1,6 @@
 // miniprogram/pages/home/wrongAll/wrongAll.js
 const app = getApp()
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
@@ -22,7 +21,6 @@ Page({
     modalName: null, // 模态框是否显示
     ifViewWrong: false, // 是否只看错题
     wrongIndex: 0, // 错题序列
-
     parentId: null, // 题库ID
     commentContent: '', // 评论的内容
     comment: {}, // 评论的对象
@@ -67,7 +65,14 @@ Page({
         })
       } else {
         // 代表查看总结
-        wx.navigateBack()
+        // wx.navigateBack()
+        wx.navigateTo({
+          url: `../score/score?id=${bank.parentId}`,
+          success: function (res) {
+            // 通过eventChannel向被打开页面传送数据
+            res.eventChannel.emit('acceptDataFromOpenerPage', bank.accuracy)
+          }
+        })
       }
     } else {
       if (questionIndex < bank.bank.length - 1) {
@@ -84,10 +89,8 @@ Page({
         })
       } else {
         // 代表查看总结
-        // wx.navigateBack()
         wx.navigateTo({
-          url: '../score/score',
-          events: {},
+          url: `../score/score?id=${bank.parentId}`,
           success: function (res) {
             // 通过eventChannel向被打开页面传送数据
             res.eventChannel.emit('acceptDataFromOpenerPage', bank.accuracy)
@@ -99,9 +102,7 @@ Page({
   },
   // 处理上一题
   handlePre: function (e) {
-    wx.showLoading({
-      title: '加载中',
-    })
+   
     let {
       questionIndex,
       correct_answer,
@@ -112,6 +113,9 @@ Page({
     } = this.data
     if (ifViewWrong) { // 代表是查看错题的状态
       if (wrongIndex > 0) {
+        wx.showLoading({
+          title: '加载中',
+        })
         this.updateMsg() // 更新评论
         wrongIndex--
         if (typeof wrongList[wrongIndex] !== 'object') {
@@ -130,11 +134,18 @@ Page({
           })
         })
       } else {
-        // 代表查看总结
-        wx.navigateBack()
+        // wx.navigateBack()
+        wx.showToast({
+          title: '已经是第一题了哦',
+          icon: 'none'
+        })
+
       }
     } else {
       if (questionIndex > 0) {
+        wx.showLoading({
+          title: '加载中',
+        })
         this.updateMsg() // 更新评论
         questionIndex--
         correct_answer = bank.bank[questionIndex].correct_answer.toString()
@@ -145,6 +156,11 @@ Page({
           wx.hideLoading({
             complete: (res) => {},
           })
+        })
+      } else {
+        wx.showToast({
+          title: '已经是第一题了哦',
+          icon: 'none'
         })
       }
     }
@@ -351,16 +367,17 @@ Page({
   },
   // 更新评论点赞回复
   updateMsg: function () {
-    let bankId = this.data.parentId
+    // let parentId = this.data.parentId
     let {
       bank,
-      questionIndex
+      questionIndex,
+      parentId
     } = this.data
-    writtenQuestions.get().then((res) => {
-      let writtenBankList = res.data
-      let result = writtenBankList.find((value) => {
-        return value.parentId == bankId
-      })
+    writtenQuestions.where({
+      parentId
+    }).get().then((res) => {
+      console.log(res.data)
+      let result = res.data[0]
       bank.bank[questionIndex].comments = result.bank[questionIndex].comments
       this.setData({
         bank
@@ -402,18 +419,23 @@ Page({
   },
   // 发表评论回复点赞后更新公有题库详情
   handleBankStatusDetail: function (obj, type) {
-    let bankId = this.data.parentId
+    wx.showLoading({
+      title: '加载中',
+    })
     let {
       bank,
       questionIndex,
-      userId
+      userId,
+      parentId
     } = this.data
-
-    writtenQuestions.get().then((res) => {
-      let writtenBankList = res.data
-      let result = writtenBankList.find((value) => {
-        return value.parentId == bankId
-      })
+    writtenQuestions.where({
+      parentId
+    }).get().then((res) => {
+      let result = res.data[0]
+      // let writtenBankList = res.data
+      // let result = writtenBankList.find((value) => {
+      //   return value.parentId == bankId
+      // })
       if (type === 'comment') {
         result.bank[questionIndex].comments.unshift(obj)
         bank.bank[questionIndex].comments = result.bank[questionIndex].comments
@@ -421,20 +443,22 @@ Page({
         result.bank[questionIndex].comments[this.index].reply.push(obj)
         bank.bank[questionIndex].comments[this.index].reply = result.bank[questionIndex].comments[this.index].reply
       } else {
-        let spotCount = result.bank[questionIndex].comments[this.index].spot_count
+        let spotCount = result.bank[questionIndex].comments[this.index]["spot_count"]
         let ifLike = spotCount.findIndex((value, index) => {
           return value.userId === userId
         })
+        this.ifLike = ifLike
+        this.updateComment(obj, 'dot')
         if (ifLike !== -1) {
           // 代表用户点赞过了，此时应该是取消点赞
-          result.bank[questionIndex].comments[this.index].spot_count.splice(ifLike, 1)
-          bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
+          result.bank[questionIndex].comments[this.index]["spot_count"].splice(ifLike, 1)
+          bank.bank[questionIndex].comments[this.index]["spot_count"] = result.bank[questionIndex].comments[this.index]["spot_count"]
           // spotCount.splice(ifLike, 1)
         } else {
           // 代表用户没有点赞过，此时应该为点赞
           // spotCount.push(obj)
-          result.bank[questionIndex].comments[this.index].spot_count.push(obj)
-          bank.bank[questionIndex].comments[this.index].spot_count = result.bank[questionIndex].comments[this.index].spot_count
+          result.bank[questionIndex].comments[this.index]["spot_count"].push(obj)
+          bank.bank[questionIndex].comments[this.index]["spot_count"] = result.bank[questionIndex].comments[this.index]["spot_count"]
         }
       }
 
@@ -442,6 +466,7 @@ Page({
         bank
       }, () => {
         this.handleBankForUser()
+        wx.hideLoading()
       })
       wx.cloud.callFunction({
         name: 'updateBankDetail',
@@ -480,7 +505,7 @@ Page({
   // 处理回复
   handleReplay: function (e) {
     console.log(e)
-    let index = e.currentTarget.dataset.index // 代表当前所点击要回复用户所在评论的序列号
+    let index = e.currentTarget.dataset.index * 1 // 代表当前所点击要回复用户所在评论的序列号
     this.index = index
     let id = e.currentTarget.id || e.target.id // 获取到被回复的用户的ID
     let name = e.currentTarget.dataset.name || e.target.dataset.name //获取被回复用户的昵称
@@ -599,10 +624,10 @@ Page({
         console.log(result)
       } else {
         myComment.ifView = false // 点赞
-        let spotCount = bank.bank[questionIndex].comments[this.index].spot_count
-        let ifLike = spotCount.findIndex((value, index) => {
-          return value.userId === userId
-        }) // 代表该用户是否点赞了，-1代表没有，其他代表有，且为对应的索引值
+        // let spotCount = bank.bank[questionIndex].comments[this.index]["spot_count"]
+        // let ifLike = spotCount.findIndex((value, index) => {
+        //   return value.userId === userId
+        // }) // 代表该用户是否点赞了，-1代表没有，其他代表有，且为对应的索引值
         let dotUserId = bank.bank[questionIndex].comments[this.index].user_id // 被点赞用户的ID
         wx.cloud.callFunction({
           name: 'updateCmoment',
@@ -610,7 +635,7 @@ Page({
             dotUserId,
             type,
             myComment,
-            ifLike,
+            ifLike: this.ifLike,
             commentId: this.commentId
           }
         }).then(console.log)
@@ -663,7 +688,7 @@ Page({
   // 处理点赞
   handleLike: function (e) {
     console.log(e)
-    let index = e.currentTarget.dataset.index
+    let index = e.currentTarget.dataset.index * 1
     this.index = index // 代表当前所点击评论的序列号
     let id = e.currentTarget.id // 获取到被点赞的用户的ID
     let commentId = e.currentTarget.dataset.commentid
@@ -683,7 +708,7 @@ Page({
     // 更新题库
     this.handleBankStatusDetail(dot, 'dot')
     // 告知被点赞用户
-    this.updateComment(dot, 'dot')
+    // this.updateComment(dot, 'dot')
     wx.hideLoading()
 
   },
@@ -710,7 +735,7 @@ Page({
     })
     this.setData({
       class: '笔试',
-      parentId: options.id
+      parentId: options.id * 1
     })
   },
 

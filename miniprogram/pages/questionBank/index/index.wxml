@@ -3,114 +3,111 @@
 	<view slot="content">题库</view>
 </cu-custom>
 <view class="my-search">
-<text class="cuIcon-search"></text>
-  <input type="text" value="{{searchValue}}"  bindinput="handleSearch" placeholder="查找试卷"></input>
+	<text class="cuIcon-search"></text>
+	<input type="text" value="{{searchValue}}" bindinput="handleSearch" placeholder="查找试卷"></input>
 </view>
 <view class="wrap">
-  <view style="background: #ffc000">
-  	<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
-		<text>笔试</text>
+	<view style="background: #ffc000">
+		<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
+			<text>笔试</text>
+		</view>
+		<view class="interview {{checkoutBank === 'interview'?'active':''}}" bindtap="handleInterview">
+			<text>面试</text>
+		</view>
 	</view>
-	<view class="interview {{checkoutBank === 'interview'?'active':''}}" bindtap="handleInterview">
-		<text>面试</text>
-	</view>
-  </view>
 
-  <view class="swiper-wrap" >
-  <swiper indicator-dots="{{true}}" autoplay="{{true}}">
-		<swiper-item>
-			<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/36801589026721_.pic_hd.jpg"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35101589021877_.pic_hd.jpg"></image>
-		</swiper-item>
-    		<swiper-item>
-			<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35091589021877_.pic_hd.jpg"></image>
-		</swiper-item>
-	</swiper>
-  </view>
+	<view class="swiper-wrap">
+		<swiper indicator-dots="{{true}}" autoplay="{{true}}">
+			<swiper-item>
+				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/36801589026721_.pic_hd.jpg"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35101589021877_.pic_hd.jpg"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35091589021877_.pic_hd.jpg"></image>
+			</swiper-item>
+		</swiper>
+	</view>
 
 	<view class="title">
 		<view class="linel"></view>
 		<text>在线答题</text>
 		<view class="liner"></view>
 	</view>
-  <block wx:if="{{loginStatus}}">
- 
-    <view class="bank-wrap">
-      <van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
-        <van-tab title="精选">
-        <view hidden="{{!isLoading}}" class="loading-img">
-           <image  src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
-        </view>
-          <block hidden="{{isLoading}}" wx:if="{{item.bankList.length > 0}}">
-          <scroll-view  bindscrolltolower="myReachBottom" scroll-y="true" style="height: 600rpx;">
-            <view wx:for="{{item.bankList}}" wx:key="id">
-              <template is="bankItem" data="{{item}}" />
-            </view>
-          </scroll-view>
-            
-          </block>
-          <block wx:else>
-          <view class="no-bank">
-            <text>很抱歉，该行业暂时没收录题库</text>
-          </view>
-          </block>
-        </van-tab>
-        <van-tab title="收藏">
-          <view hidden="{{!isLoading}}" class="loading-img">
-            <image  src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
-          </view>
-          <block hidden="{{isLoading}}"  wx:if="{{colBankList.length > 0}}">
-            <!-- <view wx:for="{{item.bankList}}" wx:key="id">
-              <template is="bankItem" data="{{item}}" />
-            </view> -->
-          <scroll-view bindscrolltoupper="" bindscrolltolower="{{myReachBottom}}" scroll-y="true" style="height: 600rpx;">
-            <view wx:for="{{colBankList}}" wx:key="id">
-              <template is="bankItem" data="{{item}}" />
-            </view>
-          </scroll-view>
+	<block wx:if="{{loginStatus}}">
 
-          </block>
-          <block wx:else>
-          <view class="no-bank">
-            暂时没有该行业收藏的试卷哦~
-          </view>
-          </block>
-        </van-tab>
-        <!-- <block wx:if="{{checkoutBank == 'interview'}}"> -->
-        <van-tab  disabled="{{checkoutBank === 'interview'}}" title="错题集">
-          <view hidden="{{!isLoading}}" class="loading-img">
-            <image  src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
-          </view>
-          <block  hidden="{{isLoading}}" wx:if="{{errBankList.length > 0}}">
-          <scroll-view scroll-y="true" style="height: 600rpx;">
-            
-            <view wx:for="{{errBankList}}" wx:key="id">
-              <template is="bankItem" data="{{item}}" />
-            </view>
-          </scroll-view>
-          </block>
+		<view class="bank-wrap">
+			<van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
+				<van-tab title="精选">
+					<view hidden="{{!isLoading}}" class="loading-img">
+						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
+					</view>
+				
+					<block hidden="{{isLoading}}" wx:if="{{item.bankList.length > 0}}">
+						<!-- <scroll-view bindscrolltolower="myReachBottom" scroll-y="true" style="height: 600rpx;"> -->
+							<view wx:for="{{item.bankList}}" wx:key="id">
+								<template is="bankItem" data="{{item}}" />
+							</view>
+						<!-- </scroll-view> -->
 
-          <block wx:else>
-          <view class="no-bank">
-            暂时没有出现该行业的错题哦~
-          </view>
-          </block>
-        </van-tab>
-        <!-- </block> -->
-        
-      </van-tabs>
-    </view>
-  </block>
-  <block wx:else>
-    <view class="bank-wrap">
-      <navigator url="../../authorization/authorization">
-        <view class="confirm">登陆</view>
-            <view wx:for="{{item.bankList}}" wx:key="id">
-              <template is="bankItem" data="{{item}}" />
-            </view>
-      </navigator>
-    </view>
-  </block>
+					</block>
+					<block wx:else>
+						<view class="no-bank">
+							<text>很抱歉，该行业暂时没收录题库</text>
+						</view>
+					</block>
+				</van-tab>
+				<van-tab title="收藏">
+					<view hidden="{{!isLoading}}" class="loading-img">
+						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
+					</view>
+					<block hidden="{{isLoading}}" wx:if="{{colBankList.length > 0}}">
+						<!-- <scroll-view bindscrolltoupper="" bindscrolltolower="{{myReachBottom}}" scroll-y="true" style="height: 600rpx;"> -->
+							<view wx:for="{{colBankList}}" wx:key="id">
+								<template is="bankItem" data="{{item}}" />
+							</view>
+						<!-- </scroll-view> -->
+
+					</block>
+					<block wx:else>
+						<view class="no-bank">
+							暂时没有该行业收藏的试卷哦~
+						</view>
+					</block>
+				</van-tab>
+				<!-- <block wx:if="{{checkoutBank == 'interview'}}"> -->
+				<van-tab disabled="{{checkoutBank === 'interview'}}" title="错题集">
+					<view hidden="{{!isLoading}}" class="loading-img">
+						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
+					</view>
+					<block hidden="{{isLoading}}" wx:if="{{errBankList.length > 0}}">
+						<!-- <scroll-view scroll-y="true" style="height: 600rpx;"> -->
+
+							<view wx:for="{{errBankList}}" wx:key="id">
+								<template is="bankItem" data="{{item}}" />
+							</view>
+						<!-- </scroll-view> -->
+					</block>
+
+					<block wx:else>
+						<view class="no-bank">
+							暂时没有出现该行业的错题哦~
+						</view>
+					</block>
+				</van-tab>
+
+			</van-tabs>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="bank-wrap">
+			<navigator url="../../authorization/authorization">
+				<view class="confirm">登陆</view>
+				<view wx:for="{{item.bankList}}" wx:key="id">
+					<template is="bankItem" data="{{item}}" />
+				</view>
+			</navigator>
+		</view>
+	</block>
 </view>

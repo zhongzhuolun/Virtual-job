@@ -120,7 +120,7 @@ Page({
     accuracy.sort = (accuracy.sort/(questionTypeNum.sort === 0 ? 1: questionTypeNum.sort)).toFixed(4)*100
     console.log(accuracy)
 
-    return {accuracy, questionTypeNum}
+    return accuracy
   },
 
   // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户,分数评判暂时不需要）
@@ -259,7 +259,18 @@ Page({
         data: {
           writtenBankList,
         }
-      }).then(console.log)
+      }).then(() => {
+        wx.navigateTo({
+          url: '../score/score?id=' + this.data.bank.parentId ,
+          success: function(res) {
+            // 通过eventChannel向被打开页面传送数据
+            // res.eventChannel.emit('acceptDataFromOpenerPage', accuracy)
+            // that.setData({
+            //   wrongList: []
+            // }) 
+          }
+        })
+      })
     })
   },
 
@@ -267,11 +278,8 @@ Page({
   handleComplete: function(e) {
     // 处理错题和分数评判(分数评判功能可能会取消)
     this.handleWrongAndScore()
-    // let item = this.handleCorrectRate() // 获取题型的正确率
     let accuracy = this.handleCorrectRate() // 获取题型的正确率
-
     this.handleBankStatus() // 更新题库简介状态
-    // this.handleBankStatusDetail(item) // 更新题库详情状态
     this.handleBankStatusDetail(accuracy) // 更新题库详情状态
     // 跳转到分数界面，并将数据传送过去，包括分数和比例
     let examBank = {
@@ -283,18 +291,7 @@ Page({
     app.globalData.examBank = examBank
     clearInterval(this.pageObj.timer)
     this.pageObj.timer = null
-    wx.navigateTo({
-      url: '../score/score?id=' + this.data.bank.parentId ,
-      events: {
-      },
-      success: function(res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', accuracy)
-        that.setData({
-          wrongList: []
-        }) 
-      }
-    })
+  
 
     // 跳转后应该清楚上一次的错题序列
 
@@ -322,7 +319,6 @@ Page({
       type
     })
     this.data.chooseValue[this.data.index] = e.detail.value;
-    // this.handleBankStatusDetail()
 
   },
 
@@ -335,7 +331,6 @@ Page({
       type
     })
     this.data.chooseValue[this.data.index] = e.detail.value.sort()
-    // this.handleBankStatusDetail()
 
   },
 
@@ -475,7 +470,6 @@ Page({
   onHide: function () {
     clearInterval(this.pageObj.timer)
     this.pageObj.timer = null
-    // this.handleBankStatusDetail()
   },
 
   /**

@@ -1,5 +1,6 @@
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
-	<view slot="content">{{questions.title}}</view>
+	<!-- <view slot="content">{{questions.title}}</view> -->
+	<view slot="content">录音回放</view>
 	<view slot="backText"></view>
 </cu-custom>
 <view class="wrap">

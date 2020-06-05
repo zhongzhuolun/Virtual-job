@@ -122,7 +122,11 @@ image {
   font-size: 39rpx;
 }
 
-
+.msg .img-wrap, .feedback .img-wrap {
+  width: 85rpx;
+  height: 85rpx;
+  margin: 10rpx 10rpx 0 10rpx;
+}
 .agree-policy {
   position: absolute;
   bottom: 1vh;
@@ -134,4 +138,16 @@ image {
 .agree-policy text:nth-child(4) {
   color: #ffc200;
   font-family: PingFangSC-regular;
+}
+button.feedback {
+  background-color: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  line-height: 45rpx;
+  overflow: auto;
+
+}
+.my-message button::after {
+  content: none;
+  border: none !important;
 }

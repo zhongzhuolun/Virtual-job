@@ -1,13 +1,9 @@
 
 .type-btns {
-  position: absolute;
-  right: 27rpx;
   font-size: 64rpx;
-  top: 12vh;
 }
 
 .score-time {
-  margin-left: 34rpx;
   height: 40rpx;
   color: rgba(16, 16, 16, 1);
   font-size: 28rpx;
@@ -104,7 +100,7 @@
   text-decoration: underline;
   margin-top: 10rpx;
 }
-.publish {
+/* .publish {
   position: relative;
 }
 .publish input {
@@ -145,7 +141,7 @@
   text-align: center;
   font-family: PingFang SC;
   border: 4rpx solid rgba(0, 0, 0, 1);
-  line-height: 72rpx;
+  line-height: 64rpx;
 }
 .next-question {
   float: right;
@@ -154,7 +150,60 @@
 .pre-question {
   float: left;
   margin-left: 40rpx;
+} */
+.next-publish {
+  position: fixed;
+  left: 0px;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  height: 122rpx;
+  line-height: 40rpx;
+  text-align: center;
+  box-shadow: 0rpx -4rpx 14rpx -8rpx rgba(163, 163, 163, 0.83);
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  background: white;
 }
+.next-publish .publish {
+  display: flex;
+  width: 70vw;
+  border-bottom: 2rpx solid rgba(187, 187, 187, 1);
+  height: 100rpx;
+  padding: 26rpx;
+  margin: 0 10rpx;
+}
+.next-publish .publish input {
+  width: 75%;
+  text-align: left;
+  margin-top: 9rpx;
+}
+.next-publish .publish .publish-comment {
+  width: 116rpx;
+  height: 60rpx;
+  border-radius: 8rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  font-size: 28rpx;
+  text-align: center;
+  box-shadow: 2rpx 2rpx 12rpx 0rpx rgba(250, 191, 1, 0.7);
+  font-family: PingFang SC;
+  border: 2rpx solid rgba(255, 255, 255, 0);
+  line-height: 56rpx;
+}
+
+.next-publish .chekckout-question {
+  width: 10vw;
+  line-height: 122rpx;
+  font-size: 76rpx;
+}
+/* .next-publish .next-question {
+ 
+} */
+.next-publish .pre-question {
+  margin-left: 3.5vw;
+}
+
+
 .page-size {
   margin: 0 auto;
   width: 60rpx;

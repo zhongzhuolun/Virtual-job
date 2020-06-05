@@ -1,6 +1,7 @@
 <!--miniprogram/pages/questionBank/answerQuestions/answerQuestions.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
-	<view slot="content">{{bank.title}}</view>
+	<!-- <view slot="content">{{bank.title}}</view> -->
+	<view slot="content">笔试答题</view>
 	<view slot="backText"></view>
 </cu-custom>
 <wxs module="filter">

@@ -32,7 +32,8 @@
 }
 .wrap {
   position: relative;
-  width: 616rpx;
+  /* width: 616rpx; */
+  width: 655rpx;
   line-height: 40rpx;
   border-radius: 50rpx;
   background-color: rgba(255, 255, 255, 0.51);
@@ -40,7 +41,8 @@
   box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
   border: 2rpx solid rgba(255, 255, 255, 0);
   margin: 100rpx auto;
-  padding: 24rpx;
+  /* padding: 24rpx; */
+  padding: 30rpx;
 }
 .title {
   color: rgba(16, 16, 16, 1);
@@ -51,8 +53,10 @@
   word-break: break-all;
 }
 .data {
-  width: 89%;
-	margin: 40rpx auto;
+  /* width: 89%; */
+  width: 99%;
+	/* margin: 40rpx auto; */
+	margin: 60rpx auto;
 	border: 4rpx solid black;
   color: rgba(16, 16, 16, 1);
   font-size: 32rpx;
@@ -64,14 +68,19 @@
 	font-size: 36rpx;
 }
 .data .row {
-	border-top: 4rpx solid black;
+  border-top: 4rpx solid black;
+  /* 需同步更改 */
+  height: 8vh; 
 }
 .data .row:nth-child(1) {
 	border-top: none;
 }
 .data .column {
 	display: inline-block;
-	width: 50%;
+  width: 50%;
+  /* 需同步更改 */
+  height: 100%;
+  line-height: 8vh; 
 }
 .data .column:nth-child(1) {
 	border-right: 4rpx solid black;

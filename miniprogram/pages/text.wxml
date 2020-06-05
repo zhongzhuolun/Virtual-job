@@ -3,7 +3,7 @@
 	<view slot="content">text</view>
 </cu-custom>
 <button bindtap="getBankList">
-  获取题库简介
+  获取题库简介ID
 </button>
 <text>
 面试

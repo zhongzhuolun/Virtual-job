@@ -17,7 +17,8 @@ Page({
     recordState: false, // 录音状态
     content: '', // 用于转化为语音的问题字符串
     type: '', // 当前是录音还是录像
-    questionObj: {}, // 整个面试题库的对象
+    // questionObj: {}, // 整个面试题库的对象
+    bank: {}, // 整个面试题库的对象
     questions: [], // 问题得到序列
     tempFilePaths: [], // 保存录音音频链接的数组
     ifEnd: false,
@@ -50,7 +51,7 @@ Page({
         type: options.type, // 设置当前用户选择面试的类型
         questions, // 设置问题数组
         content: questions[0].title, // 默认以第一题的内容为初始值
-        questionObj: res.data[0] // 设置题库对象
+        bank: res.data[0] // 设置题库对象
       }, () => {
         wx.hideLoading({})
       })
@@ -114,7 +115,7 @@ Page({
     let {
       tempFilePaths,
       questionsFileArry,
-      questionObj
+      bank
     } = this.data
     let nowIndex = this.pageObj.nowIndex // 获取当前问题的索引
     let date = new Date()
@@ -141,15 +142,7 @@ Page({
           }, () => {
             console.log(questionsFileArry)
             this.handleBankStatusDetail()
-            if (this.data.ifEnd) {
-              wx.navigateTo({
-                url: '../endInterview/endInterview?id=' + questionObj.parentId,
-                success: function(res) {
-                  // 通过eventChannel向被打开页面传送数据
-                  res.eventChannel.emit('questionsFileArry', { questionsFileArry })
-                }
-              })
-            }
+            
           })
         
         },
@@ -347,18 +340,14 @@ Page({
   // 答题结束
   handleEnd: function (e) {
     let {
-      questionObj
+      bank
     } = this.data
     this.setData({
       ifEnd: true
     }, () => {
       this.stop()
       this.handleBankStatus() // 更新题库简介状态
-      // this.handleBankStatusDetail() // 更新题库详情状态
-      app.globalData.writtenBank = questionObj
-      // wx.navigateTo({
-      //   url: '../endInterview/endInterview?id=' + questionObj.parentId,
-      // })
+      app.globalData.writtenBank = bank
     })
   },
   // 再听一次
@@ -381,7 +370,7 @@ Page({
   },
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function () {
-    let bank = this.data.questionObj
+    let bank = this.data.bank
     let bankId = bank.parentId
     let statusObj = {
       id: bankId
@@ -410,9 +399,8 @@ Page({
   },
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function () {
-    let {questionsFileArry} = this.data
-    console.log(questionsFileArry)
-    let bank = this.data.questionObj
+    let {questionsFileArry, bank} = this.data
+    // let bank = this.data.bank
     let bankId = bank.parentId
     bank.questionsFileArry = questionsFileArry
     bank.status.done = true
@@ -432,7 +420,17 @@ Page({
         data: {
           interviewBankList,
         }
-      }).then(console.log)
+      }).then(() => {
+        if (this.data.ifEnd) {
+          wx.navigateTo({
+            url: '../endInterview/endInterview?id=' + bank.parentId,
+            success: function(res) {
+              // 通过eventChannel向被打开页面传送数据
+              res.eventChannel.emit('questionsFileArry', { questionsFileArry })
+            }
+          })
+        }
+      })
     })
   },
   /**
@@ -457,15 +455,15 @@ Page({
    */
   onUnload: function () {
     let {
-      questionObj,ifEnd
+      bank,ifEnd
     } = this.data
     if (!ifEnd) {
       this.stop()
       this.handleBankStatus() // 更新题库简介状态
       this.handleBankStatusDetail() // 更新题库详情状态
-      app.globalData.writtenBank = questionObj
+      app.globalData.writtenBank = bank
       wx.navigateTo({
-        url: '../endInterview/endInterview?id=' + questionObj.parentId,
+        url: '../endInterview/endInterview?id=' + bank.parentId,
       })
       this.setData({
         ifEnd: false
