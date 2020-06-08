@@ -274,7 +274,7 @@
   color: red;
 }
 .correct-blank {
-  color: yellow;
+  color: #fabf01;
 }
 .radio-question,
 .checkbox-question,
@@ -287,6 +287,7 @@
   text-align: left;
   font-family: PingFangSC-regular;
   margin-bottom: 15rpx;
+  padding-right: 5vw;
 }
 
 .my-choosebox {
@@ -338,8 +339,13 @@ checkbox.red {
   margin-top: 28rpx;
   font-family: PingFangSC-regular;
 }
+.question-title text {
+  width: 100%;
+  word-break: break-all;
+  /* display: inline-block; */
+}
 .blank-question input, .sort-question input {
-  width: 690rpx;
+  width: 680rpx;
   height: 72rpx;
   color: rgba(136, 136, 136, 1);
   font-size: 28rpx;

@@ -66,6 +66,7 @@ Page({
     this.innerAudioContext = wx.createInnerAudioContext()
     console.log(src)
     this.innerAudioContext.src = src;
+    this.innerAudioContext.autoplay = true
     this.innerAudioContext.play(); //播放音频
     this.innerAudioContext.onPlay(() => {
       console.log('开始播放', this.pageObj.i)
@@ -140,19 +141,19 @@ Page({
    */
   onShow: function () {
     this.getCurrentBank(this.data.id)
-    const eventChannel = this.getOpenerEventChannel()
+    // const eventChannel = this.getOpenerEventChannel()
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    console.log(eventChannel)
-    if (eventChannel.on) {
-      eventChannel.on('questionsFileArry', (questionsFileArry) => {
-        console.log(questionsFileArry.questionsFileArry)
-        this.setData({
-          questionsFileArry: questionsFileArry.questionsFileArry
-        }, () => {
-          this.mergeAudio()
-        })
-      })
-    }
+    // console.log(eventChannel)
+    // if (eventChannel.on) {
+    //   eventChannel.on('questionsFileArry', (questionsFileArry) => {
+    //     console.log(questionsFileArry.questionsFileArry)
+    //     this.setData({
+    //       questionsFileArry: questionsFileArry.questionsFileArry
+    //     }, () => {
+    //       this.mergeAudio()
+    //     })
+    //   })
+    // }
 
   },
 

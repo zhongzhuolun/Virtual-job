@@ -43,6 +43,12 @@ page {
   padding: 34rpx;
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
 }
+.radio-question,
+.checkbox-question,
+.blank-question,
+.sort-question {
+  padding-right: 0vw;
+}
 
 
 .my-choosebox checkbox[checked] {

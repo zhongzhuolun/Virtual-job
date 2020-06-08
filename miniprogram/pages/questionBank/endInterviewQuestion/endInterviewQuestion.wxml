@@ -24,6 +24,6 @@
 	</view>
 </view>
 <view class="btns">
-	<button class="allExam" bindtap="viewAll">查看完整试卷 </button>
 	<button class="questiobBank" bindtap="toIndex">返回题库</button>
+	<button class="allExam" bindtap="viewAll">查看试卷 </button>
 </view>

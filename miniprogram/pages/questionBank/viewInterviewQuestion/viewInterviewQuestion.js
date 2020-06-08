@@ -29,12 +29,43 @@ Page({
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
     audioPlay: 'init', // 录音播放状态
+    // topNum: 0, // 竖直滚动距离
   },
-
+ //回到顶部
+//  goTop: function () {  // 一键回到顶部
+//   this.setData({
+//     topNum: 0
+//     });
+//   },
+  goBottom: function() {
+    wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+      // 使页面滚动到底部
+      wx.pageScrollTo({
+        scrollTop: rect.bottom
+      })
+    }).exec()
+  },
+  goTop: function() {
+    wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+      // 使页面滚动到底部
+      wx.pageScrollTo({
+        scrollTop: rect.top
+      })
+    }).exec()
+  },
   // 处理下一题
   handleNext: function (e) {
     wx.showLoading({
       title: '加载中',
+    })
+    let that = this
+    wx.getSystemInfo({
+      success:function(res) {
+        console.log(res.windowHeight)
+        that.setData({
+          mainH: res.windowHeight
+        })
+      }
     })
     this.stop()
     this.updateMsg() // 更新评论
@@ -44,16 +75,16 @@ Page({
       parentId
     } = this.data
     if (questionIndex < bank.questions.length - 1) {
+      this.goTop()
       questionIndex++
       this.setData({
         questionIndex,
       }, () => {
-        wx.hideLoading({
-          complete: (res) => {},
-        })
+        wx.hideLoading()
       })
     } else {
       // 代表查看总结
+      wx.hideLoading()
       wx.navigateTo({
         url: '../endInterviewQuestion/endInterviewQuestion?id=' + parentId,
       })
@@ -67,7 +98,6 @@ Page({
   },
   // 处理上一题
   handlePre: function (e) {
-   
     let {
       questionIndex
     } = this.data
@@ -77,6 +107,7 @@ Page({
        wx.showLoading({
         title: '加载中',
       })
+      this.goTop()
       questionIndex--
       this.setData({
         questionIndex
@@ -189,6 +220,7 @@ Page({
   skipQuestion: function (e) {
     let id = e.target.id * 1
     this.hideModal()
+    this.goTop()
     this.setData({
       questionIndex: id - 1,
       commentContent: '',
@@ -560,6 +592,7 @@ Page({
       this.handleBankStatusDetail(comment, 'comment')
       // 更新用户评论数据库
       this.updateComment(comment, 'comment')
+      this.goBottom()
     } else {
       // 拿到回复
       let reply = this.createReplay(userId)

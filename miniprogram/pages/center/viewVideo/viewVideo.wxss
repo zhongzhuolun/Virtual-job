@@ -46,10 +46,12 @@ page {
 }
 
 .video-wrap {
-  width: 680rpx;
+  width: 616rpx;
   height: 170rpx;
   line-height: 40rpx;
   border-radius: 20rpx;
   border: 2rpx solid rgba(187, 187, 187, 1);
+  margin: 0 auto;
   margin-top: 20rpx;
+
 }

@@ -30,9 +30,27 @@ Page({
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
     audioPlay: 'init', // 录音播放状态
-
+    // topNum: 0,
   },
-
+  goBottom: function() {
+    wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+      // 使页面滚动到底部
+      wx.pageScrollTo({
+        scrollTop: rect.bottom
+      })
+    }).exec()
+  },
+  goTop: function () {  // 一键回到顶部
+    // this.setData({
+    //   topNum: 0
+    //   });
+      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.top
+        })
+      }).exec()
+    },
   // 处理下一题
   handleNext: function (e) {
     wx.showLoading({
@@ -46,7 +64,7 @@ Page({
     } = this.data
     if (questionIndex < bank.questions.length - 1) {
       this.updateMsg() // 更新评论
-
+      this.goTop()
       questionIndex++
       this.setData({
         questionIndex,
@@ -77,6 +95,7 @@ Page({
       wx.showLoading({
         title: '加载中',
       })
+      this.goTop()
       this.updateMsg() // 更新评论
       questionIndex--
       this.setData({
@@ -191,6 +210,7 @@ Page({
     let id = e.target.id * 1
     this.hideModal()
     this.stop()
+    this.goTop()
     this.setData({
       questionIndex: id - 1,
       commentContent: '',
@@ -556,6 +576,7 @@ Page({
       this.handleBankStatusDetail(comment, 'comment')
       // 更新用户评论数据库
       this.updateComment(comment, 'comment')
+      this.goBottom()
     } else {
       // 拿到回复
       let reply = this.createReplay(userId)

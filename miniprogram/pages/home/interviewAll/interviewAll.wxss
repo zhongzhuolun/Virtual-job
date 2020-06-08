@@ -11,6 +11,7 @@ page {
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
   padding: 26rpx;
 }
+
 .bank-head .bank-title {
   font-size: 50rpx;
   color: rgba(16, 16, 16, 1);
@@ -28,7 +29,9 @@ page {
   padding: 34rpx;
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
 }
-
+.radio-question {
+  padding-right: 0vw;
+}
 .audio-play {
   width: 120rpx;
   height: 60rpx;

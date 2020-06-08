@@ -49,7 +49,7 @@ page {
   top: 666rpx;
   width: 172rpx;
   height: 72rpx;
-  line-height: 72rpx;
+  line-height: 64rpx;
   border-radius: 10rpx;
   text-align: center;
   border: 4rpx solid rgba(0, 0, 0, 1);
@@ -78,7 +78,7 @@ page {
 }
 .txt6{
   position: absolute;
-  left: 252rpx;
+  left: 50%;
   top: 996rpx;
   width: 246rpx;
   height: 72rpx;
@@ -90,13 +90,14 @@ page {
   text-align: center;
   font-family: Microsoft Yahei;
   border: 4rpx solid rgba(255, 255, 255, 1);
+  transform: translateX(-50%);
 }
 .txt7{
   position: absolute;
-  left: 432rpx;
+  left: 414rpx;
   top: 79vh;
-  width: 300rpx;
-  height: 300rpx;
+  width: 350rpx;
+  height: 350rpx;
 }
 .img1{
   position: absolute;

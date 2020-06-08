@@ -4,7 +4,7 @@
 	<view slot="backText">面试现场</view>
 </cu-custom>
 <view class="wrap">
-	<block wx:if="{{banksList.length > 0}}">
+	<block wx:if="{{banksList[0].questionsFileArry.length > 0}}">
 			<block wx:for="{{banksList}}" wx:key="parentId">
 				<block wx:if="{{item.questionsFileArry.length > 0}}">
 				<navigator url="../viewVideo/viewVideo?id={{item.parentId}}">

@@ -22,7 +22,6 @@
 		<view class="item">
 			<text class="title">{{index + 1}}.{{item.title}}</text>
 			<view class="video-wrap">
-			
         <view wx:if="{{item.audioPlay === 'play'}}" class="audio-status" bindtap="stop" id="{{index}}">
 					<text class="text-yellow cuIcon-stop"></text>
 				</view>

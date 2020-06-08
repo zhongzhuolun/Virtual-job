@@ -1,3 +1,4 @@
+	<!-- <scroll-view scroll-y scroll-top="{{topNum}}"  enable-back-to-top="true"> -->
 	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 		<view slot="content">查看试卷</view>
 		<view slot="backText"></view>
@@ -20,7 +21,7 @@
 			isLike: isLike
 		}
 	</wxs>
-	<view class="bank-wrap">
+	<view id="page" class="bank-wrap">
 	<view class="bank-head">
 			<view class="bank-title">
 				<text>{{bank.title}} </text>
@@ -61,8 +62,8 @@
 	
 		<view class="bank">
 			<view class="radio-question">
-				<view class="quetion-title">
-					<text style="font-size: 36rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
+				<view class="question-title">
+					<text style="font-size: 32rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
 						<view wx:if="{{questionsFileArry.length > 0}}"  class="audio-play">
 						<view wx:if="{{audioPlay === 'init'}}" bindtap="play" >
 							<text class="cuIcon-notificationfill text-yellow">
@@ -82,7 +83,7 @@
 				</view>
 				<view class="correct-analyse">
 					<view wx:if="{{bank.questions[questionIndex].analyse}}">解析：\n{{bank.questions[questionIndex].analyse}}</view>
-					<view>参考答案：<text class="text-yellow">\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
+					<view>参考答案：<text>\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
 				</view>
 			</view>
 		</view>
@@ -123,6 +124,7 @@
 			</view> -->
 		</view>
 	</view>
+<!-- </scroll-view> -->
 
 	<view class="next-publish">
 			<view class="pre-question chekckout-question" bindtap="handlePre">
@@ -141,7 +143,6 @@
 				</block>
 			</view>
 	</view>
-
 
 	<!-- <view class="next-size">
 		<view class="next-question chekckout-question" bindtap="handleNext">

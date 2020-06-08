@@ -2,10 +2,11 @@
 page {
   background: white;
 }
+
 .written, .interview{
   display: inline-block;
   height: 154rpx;
-  width: 374rpx;
+  width: 375rpx;
   line-height: 154rpx;
   border-radius: 8rpx;
   text-align: center;
@@ -13,6 +14,9 @@ page {
   background: #fff;
 }
 
+.written {
+  width: 376rpx;
+}
 .written text, .interview text {
   width: 64rpx;
   height: 46rpx;

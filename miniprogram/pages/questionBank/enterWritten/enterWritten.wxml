@@ -24,7 +24,7 @@
 					</view>
 					<view class="content-wrap">
 						<text>斗者意境</text>
-						<text>整套试卷做完再查看答案</text>
+						<text>完成整套试卷再查看答案</text>
 					</view>
 				</view>
 				<view class="sage" bindtap="handleSage">

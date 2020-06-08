@@ -59,41 +59,24 @@ Page({
   // 播放语音
   yuyinPlay: function (src) {
     let {tempFilePaths} = this.data
-    // this.innerAudioContext = wx.createInnerAudioContext()
-    const innerAudioContext = wx.createInnerAudioContext()
+    this.innerAudioContext = wx.createInnerAudioContext()
     this.innerAudioContext = innerAudioContext
     console.log(src)
-    // this.innerAudioContext.src = src;
-    innerAudioContext.src = src;
-    // this.innerAudioContext.play(); //播放音频
-    innerAudioContext.play(); //播放音频
-    // this.innerAudioContext.audioPlay = true //播放音频
-    innerAudioContext.audioPlay = true //播放音频
-    // this.innerAudioContext.onPlay(() => {
-    //   console.log('开始播放', this.pageObj.i)
-    // })
+    this.innerAudioContext.src = src;
+    this.innerAudioContext.play(); //播放音频
+    this.innerAudioContext.autoplay = true
+    this.innerAudioContext.onPlay(() => {
+      console.log('开始播放', this.pageObj.i)
+    })
     innerAudioContext.onPlay(() => {
       console.log('开始播放', this.pageObj.i)
     })
-    // this.innerAudioContext.onEnded(() => {
-    //   this.pageObj.i++
-    //   console.log('播放结束', this.pageObj.i)
-    //   if (this.pageObj.i < tempFilePaths.length) {
-    //     console.log('进入新的播放', this.pageObj.i)
-    //     this.innerAudioContext = null
-    //     this.yuyinPlay(tempFilePaths[this.pageObj.i])
-    //   } else {
-    //     this.pageObj.i = 0
-    //     this.setData({
-    //       audioPlay: false
-    //     })
-    //   }
-    // })
-     innerAudioContext.onEnded(() => {
+    this.innerAudioContext.onEnded(() => {
       this.pageObj.i++
       console.log('播放结束', this.pageObj.i)
       if (this.pageObj.i < tempFilePaths.length) {
         console.log('进入新的播放', this.pageObj.i)
+        this.innerAudioContext = null
         this.yuyinPlay(tempFilePaths[this.pageObj.i])
       } else {
         this.pageObj.i = 0

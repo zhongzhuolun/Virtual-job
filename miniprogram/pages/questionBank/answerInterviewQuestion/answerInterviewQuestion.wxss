@@ -1,7 +1,9 @@
 page {
   background-color: rgba(255, 255, 255, 1);
 }
-
+scroll-view {
+  height: 100%;
+}
 .bank-head {
   display: flex;
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
@@ -10,6 +12,9 @@ page {
 .bank-wrap {
   background: white;
   padding-bottom: 8vh;
+}
+.radio-question {
+  padding-right: 0vw;
 }
 .bank-head .bank-title {
   font-size: 50rpx;

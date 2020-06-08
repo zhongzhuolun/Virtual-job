@@ -27,7 +27,7 @@
 }
 
 
-.blankBox{
+.blankBox {
   margin: 0 auto;
   width: 616rpx;
   min-height: 550rpx;
@@ -43,13 +43,13 @@
   font-family: Arial;
   border: 2rpx solid rgba(255, 255, 255, 0);
 }
-.answer1{
+.answer1 {
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
   text-align: left;
   font-family: PingFangSC-regular;
 }
-.allExam,.questiobBank{
+.allExam,.questiobBank {
   width: 302rpx;
   height: 76rpx;
   border-radius: 20rpx;
@@ -60,7 +60,7 @@
   font-family: Microsoft Yahei;
   border: 4rpx solid rgba(0, 0, 0, 1);  
 }
-.allExam{
+.questiobBank {
   float: left;
 }
 .btns {

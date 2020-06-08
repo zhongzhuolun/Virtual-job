@@ -17,7 +17,7 @@
 	<view class="bank" wx:for="{{bank.bank}}" wx:key="id">
 		<block wx:if="{{item.type === '单选'}}">
 			<view class="radio-question">
-				<view class="quetion-title">
+				<view class="question-title">
 					<text>{{item.id}}. {{item.title}}<text class="text-yellow">【单选】</text>
 					</text>
 				</view>
@@ -32,7 +32,7 @@
 		</block>
 		<block wx:elif="{{item.type === '多选'}}">
 			<view class="checkbox-question">
-				<view class="quetion-title">
+				<view class="question-title">
 					<text>{{item.id}}. {{item.title}}<text class="text-yellow">【多选】</text></text>
 				</view>
 				<checkbox-group data-type="{{item.type}}" id="{{item.id}}" bindchange="checkboxChange" class="checkbox-group">
@@ -47,7 +47,7 @@
 		</block>
 		<block wx:elif="{{item.type === '不定项选'}}">
 			<view class="checkbox-question">
-				<view class="quetion-title">
+				<view class="question-title">
 					<text>{{item.id}}. {{item.title}}<text class="text-yellow">【不定项选】</text></text>
 				</view>
 				<checkbox-group bindchange="checkboxChange" data-type="{{item.type}}" id="{{item.id}}" class="checkbox-group">
@@ -61,7 +61,7 @@
 		</block>
 		<block wx:elif="{{item.type === '判断'}}">
 			<view class="radio-question">
-				<view class="quetion-title">
+				<view class="question-title">
 					<text>{{item.id}}. {{item.title}}<text class="text-yellow">【判断】</text></text>
 				</view>
 				<radio-group class="radio-group" data-type="{{item.type}}" id="{{item.id}}" bindchange="radioChange">
@@ -75,7 +75,7 @@
 		</block>
 		<block wx:elif="{{item.type === '填空'}}">
 			<view class="blank-question">
-				<view class="quetion-title">
+				<view class="question-title">
 					<text>{{item.id}}. {{item.title}}<text class="text-yellow">【填空】</text></text>
 				</view>
 				<view bindtap="handleTap" data-type="{{item.type}}" id="{{item.id}}" wx:for="{{item.correct_answer}}" wx:key="key" wx:for-index="key" wx:for-item="value">
@@ -85,7 +85,7 @@
 		</block>
 		<block wx:elif="{{item.type === '排序'}}">
 			<view class="sort-question">
-				<view class="quetion-title">
+				<view class="question-title">
 					<text>{{item.id}}. {{item.title}}<text class="text-yellow">【排序】</text></text>
 				</view>
 				<view wx:for="{{item.options}}" wx:key="key" wx:for-index="key" wx:for-item="value">

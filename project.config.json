@@ -138,10 +138,10 @@
 					"scene": null
 				},
 				{
-					"id": 14,
+					"id": 12,
 					"name": "pages/home/examWritten/examWritten",
 					"pathName": "pages/home/examWritten/examWritten",
-					"query": "id=10",
+					"query": "id=89",
 					"scene": null
 				},
 				{
@@ -303,6 +303,13 @@
 					"name": "pages/home/enterWritten/enterWritten",
 					"pathName": "pages/home/enterWritten/enterWritten",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/questionBank/endQuestion/endQuestion",
+					"pathName": "pages/questionBank/endQuestion/endQuestion",
+					"query": "id=89",
 					"scene": null
 				}
 			]

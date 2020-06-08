@@ -16,7 +16,7 @@ Page({
     examType: app.globalData.examType,
     bank: {}, // 从数据库中获取的题目
     index: 0, // 专门给填空题使用的
-    myIndex: 0, //
+    nowIndex: null, // 标志用户做到的最后的一道题
     chooseValue: [], // 选择的答案序列
     wrongList: [], // 错误的题目集合
     blankArry: [], // 专门用于存储填空题答案的数组
@@ -35,10 +35,23 @@ Page({
     wrongIndex: 0, // 错题序列
     ifViewAnwser: false, // 是否查看答案
     ifSubmitOne: true, // 是否是处于单道题目的提交状态
-    writtenBank: {}
+    writtenBank: {},
+    clearValue: '', // 清除填空题答案
+    // topNum: 0,
   },
+  goTop: function () {  // 一键回到顶部
+    // this.setData({
+    //   topNum: 0
+    //   });
+      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.top
+        })
+      }).exec()
+    },
   // 处理确定提交 （此时真正提交）
-  handleComplete: function (e) {
+  handleComplete: function () {
     // 处理错题和分数评判(分数评判功能可能会取消)
     // this.handleWrongAndScore()
     let accuracy = this.handleCorrectRate() // 获取题型的正确率
@@ -112,8 +125,6 @@ Page({
     accuracy.blank = (accuracy.blank / (questionTypeNum.blank === 0 ? 1 : questionTypeNum.blank)).toFixed(4) * 100
     accuracy.sort = (accuracy.sort / (questionTypeNum.sort === 0 ? 1 : questionTypeNum.sort)).toFixed(4) * 100
     console.log(accuracy, questionTypeNum)
-
-    // return {accuracy, questionTypeNum}
     return accuracy
   },
   // 处理错题和分数评判（功能针对所有用户，但获得的分数只针对该用户,分数评判暂时不需要）
@@ -180,10 +191,7 @@ Page({
       bank
     })
   },
-  // 处理本地存储 （只针对登录用户，定时调用，特殊情况提示调用）
-  handleStorage: function () {
 
-  },
   // 处理更新题库简介状态（只更新该用户的数据）
   handleBankStatus: function (accuracy) {
     let {
@@ -285,16 +293,7 @@ Page({
       })
     })
   },
-  // 专门给填空题使用的
-  handleTap: function (e) {
-    console.log(e.currentTarget.dataset.type)
-    let type = e.currentTarget.dataset.type
-    let index = e.currentTarget.id * 1 - 1
-    this.setData({
-      index,
-      type
-    })
-  },
+
   // 处理单选，判断
   radioChange: function (e) {
     let index = e.currentTarget.id * 1 - 1
@@ -325,6 +324,16 @@ Page({
       chooseValue
     })
     // this.data.chooseValue[this.data.index] = e.detail.value.sort();
+  },
+  // 专门给填空题使用的
+  handleTap: function (e) {
+    console.log(e.currentTarget.dataset.type)
+    let type = e.currentTarget.dataset.type
+    let index = e.currentTarget.id * 1 - 1
+    this.setData({
+      index,
+      type
+    })
   },
   // 处理填空，排序
   inputChange: function (e) {
@@ -360,8 +369,6 @@ Page({
       this.setData({
         chooseValue
       })
-
-      // this.data.chooseValue[this.data.index] = value
     }
   },
   // 处理查看答案
@@ -376,13 +383,25 @@ Page({
       chooseValue,
       questionIndex,
       bank,
-      questionModal
+      questionModal,
     } = this.data
-    if (!chooseValue[questionIndex] && bank.bank[questionIndex].type !== '填空') {
-      wx.showToast({
-        title: '答案不能为空',
-        icon: 'none'
-      })
+    this.setData({
+      blankArry: [],
+      clearValue: ''
+    }) // 每次提交题目后都要重置填空题的数据
+    
+    if (!chooseValue[questionIndex]) {
+      if (bank.bank[questionIndex].type === '填空' || bank.bank[questionIndex].type === '排序') {
+        // 代表没有填空，为了防止因为出现没有填空而导致的数组长度不一致
+        // chooseValue[questionIndex] = ['未作答']
+        chooseValue[questionIndex] = ['']
+      } else {
+        wx.showToast({
+          title: '答案不能为空',
+          icon: 'none'
+        })
+      }
+      
     } else {
       if (questionModal === 'fighter') {
         this.handleWrongAndScore()
@@ -416,19 +435,38 @@ Page({
       bank,
       chooseValue,
       ifSubmitOne,
-      ifViewAnwser
+      ifViewAnwser,
+      nowIndex
     } = this.data
     if (questionIndex < bank.bank.length - 1) {
       questionIndex++
+      // nowIndex++
+      this.goTop()
       correct_answer = bank.bank[questionIndex].correct_answer.toString()
-      if (!chooseValue[questionIndex]) {
-        console.log(chooseValue[questionIndex], '未作答')
-        ifSubmitOne = true
-        ifViewAnwser = false
+      if (nowIndex) { // 如果标志存在证明此时用户至少点击了一次上一题
+        if (questionIndex === nowIndex) { // 如果用户点击的下一题的序列等于当前标志的序列，则代表已经到了未提交的那一题
+          console.log(chooseValue[questionIndex], '未作答')
+          ifSubmitOne = true
+          ifViewAnwser = false
+          this.setData({ // 当到了未提交的那一题之后，需要重置标志
+            nowIndex: null
+          })
+        } else {
+          console.log(chooseValue[questionIndex], '已作答')
+          ifSubmitOne = false
+          ifViewAnwser = true
+        }
+        
       } else {
-        console.log(chooseValue[questionIndex], '已作答')
-        ifSubmitOne = false
-        ifViewAnwser = true
+        if (!chooseValue[questionIndex]) { 
+          console.log(chooseValue[questionIndex], '未作答')
+          ifSubmitOne = true
+          ifViewAnwser = false
+        } else {
+          console.log(chooseValue[questionIndex], '已作答')
+          ifSubmitOne = false
+          ifViewAnwser = true
+        }
       }
       this.setData({
         questionIndex,
@@ -447,12 +485,19 @@ Page({
     let {
       questionIndex,
       correct_answer,
-      bank
+      bank,
+      ifSubmitOne,
+      nowIndex
     } = this.data
     if (questionIndex > 0) {
+      this.goTop()
+      if (ifSubmitOne) {
+        nowIndex = questionIndex
+      }
       questionIndex--
       correct_answer = bank.bank[questionIndex].correct_answer.toString()
       this.setData({
+        nowIndex,
         questionIndex,
         correct_answer,
         ifSubmitOne: false,

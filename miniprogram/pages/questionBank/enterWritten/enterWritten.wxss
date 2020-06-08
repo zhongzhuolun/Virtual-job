@@ -40,14 +40,14 @@
 }
 .sentence{
   position: absolute;
-  left: 232rpx;
   top: 61vh;
-  width: 344rpx;
-  height: 40rpx;
   color: rgba(12, 12, 12, 1);
-  font-size: 28rpx;
-  text-align: left;
+  font-size: 32rpx;
   font-family: PingFangSC-regular;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 .startAnswer{
   position: absolute;

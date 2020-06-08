@@ -110,6 +110,9 @@ Page({
   },
   // 停止录音
   stop: function () {
+    wx.showLoading({
+      title: '加载中'
+    })
     const recorderManager = wx.getRecorderManager()
     let that = this
     let {
@@ -130,7 +133,6 @@ Page({
         tempFilePath
       } = res
       tempFilePaths.push(tempFilePath)
-      // questionsFileArry[nowIndex].tempFilePaths.push(tempFilePath)
       wx.cloud.uploadFile({
         cloudPath: `${date.getTime()}.mp3`, // 上传至云端的路径
         filePath: tempFilePath, // 小程序临时文件路径
@@ -141,6 +143,7 @@ Page({
             questionsFileArry
           }, () => {
             console.log(questionsFileArry)
+            wx.hideLoading()
             this.handleBankStatusDetail()
             
           })
@@ -352,7 +355,6 @@ Page({
   },
   // 再听一次
   handleAgain: function (e) {
-    this.stop()
     let {
       questionsFileArry,
       btnDisabled
@@ -362,6 +364,7 @@ Page({
     }
     let nowIndex = this.pageObj.nowIndex
     questionsFileArry.splice(nowIndex, 1)
+    this.stop()
     this.setData({
       questionsFileArry
     }, () => {
@@ -424,10 +427,10 @@ Page({
         if (this.data.ifEnd) {
           wx.navigateTo({
             url: '../endInterview/endInterview?id=' + bank.parentId,
-            success: function(res) {
-              // 通过eventChannel向被打开页面传送数据
-              res.eventChannel.emit('questionsFileArry', { questionsFileArry })
-            }
+            // success: function(res) {
+            //   // 通过eventChannel向被打开页面传送数据
+            //   res.eventChannel.emit('questionsFileArry', { questionsFileArry })
+            // }
           })
         }
       })

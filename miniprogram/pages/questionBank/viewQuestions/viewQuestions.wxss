@@ -1,7 +1,9 @@
 page {
   background: white;
 }
-
+scroll-view {
+  height: 100%;
+}
 .bank-wrap {
   background: white;
   padding-bottom: 8vh;
@@ -26,7 +28,12 @@ page {
 /* .type-btns {
   font-size: 64rpx;
 } */
-
+.radio-question,
+.checkbox-question,
+.blank-question,
+.sort-question {
+  padding-right: 0vw;
+}
 .bank {
   padding: 34rpx;
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);

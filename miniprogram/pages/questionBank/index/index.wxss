@@ -41,6 +41,7 @@ page {
 }
 .swiper-wrap {
   padding-bottom: 50rpx;
+  position: relative;
 }
 swiper {
   width: 100%;
@@ -171,16 +172,16 @@ image {
   top: 125rpx;
 }
 .view-result {
-    left: 208rpx;
-    top: 129rpx;
-    width: 113rpx;
-    height: 40rpx;
-    color: rgba(139, 137, 129, 1);
-    font-size: 28rpx;
-    text-align: left;
-    font-family: PingFangSC-regular;
-    position: absolute;
-    border-bottom: 1rpx solid;
+  left: 208rpx;
+  top: 129rpx;
+  width: 113rpx;
+  height: 40rpx;
+  color: rgba(139, 137, 129, 1);
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  position: absolute;
+  border-bottom: 1rpx solid;
 }
 .no-bank {
   background: white;
@@ -194,8 +195,9 @@ image {
 }
 .my-search {
   position: absolute;
+  bottom: 2vh;
   left: 80rpx;
-  top: 47vh;
+  /* top: 47vh; */
   width: 590rpx;
   height: 66rpx;
   line-height: 66rpx;
@@ -203,7 +205,7 @@ image {
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0rpx 4rpx 10rpx 0rpx rgba(155, 155, 155, 0.51);
   border: 2rpx solid rgba(255, 255, 255, 0);
-  z-index: 9999;
+  /* z-index: 9999; */
   font-size: 32rpx;
   line-height: 66rpx;
   font-family: Helvetica-regular;

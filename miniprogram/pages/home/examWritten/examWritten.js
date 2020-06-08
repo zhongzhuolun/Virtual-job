@@ -298,17 +298,7 @@ Page({
 
   },
 
-  // 专门给填空题使用的
-  handleTap: function(e) {
-    console.log(e.currentTarget.dataset.type)
-    let type = e.currentTarget.dataset.type
-    let index = e.currentTarget.id*1 - 1
-    this.setData({
-      index,
-      type
-    })
-
-  },
+ 
 
   // 处理单选，判断
   radioChange: function(e) {
@@ -333,13 +323,44 @@ Page({
     this.data.chooseValue[this.data.index] = e.detail.value.sort()
 
   },
+ // 专门给填空题使用的
+ handleTap: function(e) {
+  let oldIndex = this.data.index
+  let blankArry = this.data.blankArry
+  let chooseValue = this.data.chooseValue
+  console.log(e.currentTarget.dataset.type, oldIndex)
+  let type = e.currentTarget.dataset.type
+  let index = e.currentTarget.id*1 - 1
+  blankArry = chooseValue[index] || []
+  // if (oldIndex !== index) { // 代表切换了题目
+  //   // blankArry = []
+  //   if(chooseValue.length > 0 && chooseValue[index] ) {
+  //     console.log('有值')
+  //     // 代表被切换过去的题目里面有值
+  //     blankArry = chooseValue[index]
+  //   } else {
+  //     console.log('没有值')
+  //     // 代表被切换过去的题目里面没有值
+  //     blankArry = []
+  //   }
+  // } else { // 代表没有切换题目
+  //   // blankArry = chooseValue[oldIndex]
+  // }
 
+  this.setData({
+    index,
+    type,
+    blankArry
+  })
+
+},
   // 处理填空，排序
   inputChange: function(e) {
     let type = e.currentTarget.dataset.type
     let index = e.currentTarget.id*1 - 1
     let value = e.detail.value.trim().toLowerCase()
-    let index1 = e.target.dataset.index
+    let index1 = e.target.dataset.index // 代表所填的是哪一个空
+    console.log(index1, index)
     let blankArry = this.data.blankArry
     if (type && index) {
       this.setData({

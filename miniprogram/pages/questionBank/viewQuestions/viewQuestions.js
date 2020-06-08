@@ -29,8 +29,27 @@ Page({
     userId: '', // 用户的ID
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
+    // topNum: 0,
   },
-
+  goTop: function () {  // 一键回到顶部
+    // this.setData({
+    //   topNum: 0
+    //   });
+      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.top
+        })
+      }).exec()
+    },
+    goBottom: function() {
+      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.bottom
+        })
+      }).exec()
+    },
   // 处理下一题
   handleNext: function (e) {
     wx.showLoading({
@@ -45,9 +64,11 @@ Page({
       wrongIndex
     } = this.data
     let that = this
+   
     if (ifViewWrong) { // 代表是查看错题的状态
       if (wrongIndex < wrongList.length - 1) {
         this.updateMsg() // 更新评论
+        this.goTop()
         wrongIndex++
         if (typeof wrongList[wrongIndex] !== 'object') {
           questionIndex = wrongList[wrongIndex]
@@ -60,9 +81,7 @@ Page({
           correct_answer,
           wrongIndex
         }, () => {
-          wx.hideLoading({
-            complete: (res) => {},
-          })
+          wx.hideLoading()
         })
       } else {
         // 代表查看总结
@@ -90,15 +109,14 @@ Page({
     } else {
       if (questionIndex < bank.bank.length - 1) {
         this.updateMsg() // 更新评论
+        this.goTop()
         questionIndex++
         correct_answer = bank.bank[questionIndex].correct_answer.toString()
         this.setData({
           questionIndex,
           correct_answer,
         }, () => {
-          wx.hideLoading({
-            complete: (res) => {},
-          })
+          wx.hideLoading()
         })
       } else {
         // 代表查看总结
@@ -113,14 +131,6 @@ Page({
             }) 
           }
         })
-        // wx.navigateTo({
-        //   url: '../endQuestion/endQuestion',
-        //   events: {},
-        //   success: function (res) {
-        //     // 通过eventChannel向被打开页面传送数据
-        //     res.eventChannel.emit('getAccuracy', bank.accuracy)
-        //   }
-        // })
       }
     }
     this.setData({
@@ -145,6 +155,7 @@ Page({
         wx.showLoading({
           title: '加载中',
         })
+        this.goTop()
         this.updateMsg() // 更新评论
         wrongIndex--
         if (typeof wrongList[wrongIndex] !== 'object') {
@@ -175,6 +186,7 @@ Page({
         wx.showLoading({
           title: '加载中',
         })
+        this.goTop()
         this.updateMsg() // 更新评论
         questionIndex--
         correct_answer = bank.bank[questionIndex].correct_answer.toString()
@@ -318,7 +330,7 @@ Page({
   // 根据指定序号跳转题目
   skipQuestion: function (e) {
     let id = e.target.id * 1
-    // let
+    this.goTop()
     this.hideModal()
     let {
       questionIndex,
@@ -698,6 +710,7 @@ Page({
       this.handleBankStatusDetail(comment, 'comment')
       // 更新用户评论数据库
       this.updateComment(comment, 'comment')
+      this.goBottom()
     } else {
       // 拿到回复
       let reply = this.createReplay(userId)

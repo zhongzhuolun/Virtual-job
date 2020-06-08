@@ -51,7 +51,7 @@ Page({
     let that = this
     wx.showModal({
       title: '考试须知',
-      content: '面试考试前需要您授权录音功能，面试考试过程中，如果中途退出答题，将视为提交试卷。',
+      content: '模拟面试前需要您授权录音功能，面试过程中，如果中途退出答题，将视为提交试卷。',
       confirmText: '我知道了',
       cancelText: '暂不考试',
       success: (res) => {

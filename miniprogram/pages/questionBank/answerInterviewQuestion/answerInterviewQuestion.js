@@ -22,7 +22,19 @@ Page({
     type: '', // 当前是录音还是录像
     tempFilePaths: [], // 用于存储音频的链接
     ifViewAnwser: false, // 是否查看答案
+    // topNum: 0,
   },
+  goTop: function () {  // 一键回到顶部
+    // this.setData({
+    //   topNum: 0
+    //   });
+      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.top
+        })
+      }).exec()
+    },
   // 处理查看所有评论
   viewAllComments: function(e) {
     console.log(e)
@@ -40,6 +52,7 @@ Page({
         questionIndex++
         this.setData({
           questionIndex,
+          ifViewAnwser: false
         }, () => {
           wx.hideLoading({
             complete: (res) => {},
@@ -60,9 +73,11 @@ Page({
         wx.showLoading({
           title: '加载中',
         })
+        this.goTop()
         questionIndex--
         this.setData({
-          questionIndex
+          questionIndex,
+          ifViewAnwser: true
         }, () => {
           wx.hideLoading({
             complete: (res) => {},
@@ -180,6 +195,7 @@ Page({
   skipQuestion: function(e) {
     let id = e.target.id*1
     this.hideModal()
+    this.goTop()
     this.setData({
       questionIndex: id-1
     })

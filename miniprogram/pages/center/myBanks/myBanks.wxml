@@ -20,7 +20,7 @@
 				</text>
 				<van-icon class="exam-icon" name="records" color="#ffc200" size="60rpx" />
 				<text class="exam">
-			考试
+			试卷
 			</text>
 				<block wx:if="{{item.status.done}}">
 					<navigator url="../../questionBank/enterWritten/enterWritten?id={{item.parentId}}">

@@ -81,13 +81,8 @@ scroll-view {
   left: 0;
 }
 .detail {
-  position: absolute;
-  left: 66rpx;
-  top: 44%;
-  transform: translateY(-50%);
-  /* top: 314rpx; */
+  margin: 20vh auto 60rpx;
   width: 616rpx;
-  height: 430rpx;
   line-height: 52rpx;
   border-radius: 50rpx;
   background-color: rgba(255, 255, 255, 0.47);
@@ -97,8 +92,12 @@ scroll-view {
   box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
   font-family: -apple-system;
   border: 1rpx solid rgba(255, 255, 255, 0);
-  padding: 120rpx;
+  padding: 100rpx;
   line-height: 64rpx;
+}
+.detail text {
+  word-break: break-all;
+
 }
 .show {
   display: block;
@@ -110,13 +109,18 @@ scroll-view {
   height: 100vh;
   overflow: hidden;
 }
+.unfinished {
+  padding: 0 100rpx;
 
+}
 .my-btn {
-  position: absolute;
+  /* position: absolute; */
+  display: inline-block;
+
   width: 246rpx;
   height: 94rpx;
   /* top: 796rpx; */
-  bottom: 26%;
+  /* bottom: 26%; */
 
   line-height: 90rpx;
   border-radius: 20rpx;
@@ -132,6 +136,7 @@ scroll-view {
   left: 112rpx;
 }
 .unfinished .complete {
-  left: 408rpx;
+  /* left: 408rpx; */
+  float: right;
 }
 

@@ -55,8 +55,9 @@
   font-family: PingFangSC-regular;
   line-height: 70rpx;
   word-break: break-all;
-  width: 448rpx;
   margin: 0 auto;
+  width: 529rpx;
+  margin-top: 40rpx;
 }
 .data {
   /* width: 89%; */
@@ -97,7 +98,7 @@
 .motto {
   text-align: center;
   color: rgba(12, 12, 12, 1);
-  font-size: 28rpx;
+  font-size: 32rpx;
   font-family: PingFangSC-regular;
   margin-top: 60rpx;
 }

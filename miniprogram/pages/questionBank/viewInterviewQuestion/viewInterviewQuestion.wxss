@@ -1,6 +1,9 @@
 page {
   background-color: rgba(255, 255, 255, 1);
 }
+scroll-view {
+  height: 100%;
+}
 .bank-wrap {
   background: white;
   padding-bottom: 8vh;
@@ -30,7 +33,9 @@ page {
   border-bottom: 2rpx solid rgba(187, 187, 187, 1);
 }
 
-
+.radio-question {
+  padding-right: 0vw;
+}
 .audio-play {
   width: 120rpx;
   height: 60rpx;

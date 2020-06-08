@@ -53,7 +53,8 @@
   text-align: left;
   font-family: PingFangSC-regular;
   display: inline-block;
-  width: 76vw;
+  width: 73vw;
+  line-height: 50rpx;
 }
 .checked-industry .confirm {
   width: 160rpx;

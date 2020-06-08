@@ -64,6 +64,9 @@ image {
   padding: 20rpx;
   width: 400rpx;
 }
+.content text:nth-child(2){
+  font-size: 32rpx;
+}
 .to-center {
   width: 70rpx;
   height: 70rpx;

@@ -2,10 +2,7 @@
 <cu-custom bgColor="bg-yellow">
 	<view slot="content">题库</view>
 </cu-custom>
-<view class="my-search">
-	<text class="cuIcon-search"></text>
-	<input type="text" value="{{searchValue}}" bindinput="handleSearch" placeholder="查找试卷"></input>
-</view>
+
 <view class="wrap">
 	<view style="background: #ffc000">
 		<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
@@ -17,7 +14,7 @@
 	</view>
 
 	<view class="swiper-wrap">
-		<swiper indicator-dots="{{true}}" autoplay="{{true}}">
+		<swiper indicator-dots="{{true}}" circular autoplay="{{true}}">
 			<swiper-item>
 				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/36801589026721_.pic_hd.jpg"></image>
 			</swiper-item>
@@ -28,6 +25,10 @@
 				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35091589021877_.pic_hd.jpg"></image>
 			</swiper-item>
 		</swiper>
+		<view class="my-search">
+			<text class="cuIcon-search"></text>
+			<input type="text" value="{{searchValue}}" bindinput="handleSearch" placeholder="查找试卷"></input>
+		</view>
 	</view>
 
 	<view class="title">
@@ -40,9 +41,9 @@
 		<view class="bank-wrap">
 			<van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
 				<van-tab title="精选">
-					<view hidden="{{!isLoading}}" class="loading-img">
+					<!-- <view hidden="{{!isLoading}}" class="loading-img">
 						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
-					</view>
+					</view> -->
 				
 					<block hidden="{{isLoading}}" wx:if="{{item.bankList.length > 0}}">
 						<!-- <scroll-view bindscrolltolower="myReachBottom" scroll-y="true" style="height: 600rpx;"> -->
@@ -59,9 +60,9 @@
 					</block>
 				</van-tab>
 				<van-tab title="收藏">
-					<view hidden="{{!isLoading}}" class="loading-img">
+					<!-- <view hidden="{{!isLoading}}" class="loading-img">
 						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
-					</view>
+					</view> -->
 					<block hidden="{{isLoading}}" wx:if="{{colBankList.length > 0}}">
 						<!-- <scroll-view bindscrolltoupper="" bindscrolltolower="{{myReachBottom}}" scroll-y="true" style="height: 600rpx;"> -->
 							<view wx:for="{{colBankList}}" wx:key="id">
@@ -78,9 +79,9 @@
 				</van-tab>
 				<!-- <block wx:if="{{checkoutBank == 'interview'}}"> -->
 				<van-tab disabled="{{checkoutBank === 'interview'}}" title="错题集">
-					<view hidden="{{!isLoading}}" class="loading-img">
+					<!-- <view hidden="{{!isLoading}}" class="loading-img">
 						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
-					</view>
+					</view> -->
 					<block hidden="{{isLoading}}" wx:if="{{errBankList.length > 0}}">
 						<!-- <scroll-view scroll-y="true" style="height: 600rpx;"> -->
 

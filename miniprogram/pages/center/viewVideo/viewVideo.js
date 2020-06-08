@@ -58,6 +58,7 @@ Page({
     this.innerAudioContext = wx.createInnerAudioContext()
     console.log(src)
     this.innerAudioContext.src = src;
+    this.innerAudioContext.autoplay = true
     this.innerAudioContext.play(); //播放音频
     this.innerAudioContext.onPlay(() => {
       console.log('开始播放', this.pageObj.i)
@@ -139,6 +140,7 @@ Page({
       if (audioPlay === 'init') {
         this.yuyinPlay(questionsFileArry[questionIndex].tempFilePaths[1])
       } else {
+        this.innerAudioContext.autoplay = true
         this.innerAudioContext.play()
       }
       questionsFileArry[questionIndex].audioPlay = 'play'

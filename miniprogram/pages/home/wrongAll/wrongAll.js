@@ -29,8 +29,28 @@ Page({
     userId: '', // 用户的ID
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
-  },
+    // topNum: 0,
 
+  },
+  goBottom: function() {
+    wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+      // 使页面滚动到底部
+      wx.pageScrollTo({
+        scrollTop: rect.bottom
+      })
+    }).exec()
+  },
+  goTop: function () {  // 一键回到顶部
+    // this.setData({
+    //   topNum: 0
+    //   });
+      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.top
+        })
+      }).exec()
+    },
   // 处理下一题
   handleNext: function (e) {
     wx.showLoading({
@@ -46,6 +66,7 @@ Page({
     } = this.data
     if (ifViewWrong) { // 代表是查看错题的状态
       if (wrongIndex < wrongList.length - 1) {
+        this.goTop()
         this.updateMsg() // 更新评论
         wrongIndex++
         if (typeof wrongList[wrongIndex] !== 'object') {
@@ -77,6 +98,7 @@ Page({
     } else {
       if (questionIndex < bank.bank.length - 1) {
         this.updateMsg() // 更新评论
+        this.goTop()
         questionIndex++
         correct_answer = bank.bank[questionIndex].correct_answer.toString()
         this.setData({
@@ -113,6 +135,7 @@ Page({
     } = this.data
     if (ifViewWrong) { // 代表是查看错题的状态
       if (wrongIndex > 0) {
+        this.goTop()
         wx.showLoading({
           title: '加载中',
         })
@@ -146,6 +169,7 @@ Page({
         wx.showLoading({
           title: '加载中',
         })
+        this.goTop()
         this.updateMsg() // 更新评论
         questionIndex--
         correct_answer = bank.bank[questionIndex].correct_answer.toString()
@@ -287,6 +311,7 @@ Page({
   skipQuestion: function (e) {
     let id = e.target.id * 1
     this.hideModal()
+    this.goTop()
     let {
       questionIndex,
       bank,
@@ -671,6 +696,7 @@ Page({
       this.handleBankStatusDetail(comment, 'comment')
       // 更新用户评论数据库
       this.updateComment(comment, 'comment')
+      this.goBottom()
     } else {
       // 拿到回复
       let reply = this.createReplay(userId)
