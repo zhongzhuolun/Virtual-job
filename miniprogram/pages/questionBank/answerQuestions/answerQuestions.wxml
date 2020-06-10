@@ -182,14 +182,14 @@
 <block wx:if="{{questionModal === 'fighter'}}">
 	<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
 	<view wx:else class="next-question chekckout-question" bindtap="handleNext">
-		{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
+		{{questionIndex < bank.bank.length - 1?'下一题':'查看结果'}}
 	</view>
 	<!-- <view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view> -->
 </block>
 <block wx:else>
 	<view wx:if="{{ifSubmitOne}}" class="next-question chekckout-question" bindtap="handleOneCommit">确定</view>
 	<view wx:else class="next-question chekckout-question" bindtap="handleNext">
-		{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}
+		{{questionIndex < bank.bank.length - 1?'下一题':'查看结果'}}
 	</view>
 	<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
 </block>

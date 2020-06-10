@@ -47,13 +47,16 @@
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
-					<view wx:if="{{bank.wrongList.length > 0}}" class="cu-btn bg-yellow" bindtap="checkType">
+				<!-- <view wx:if="{{bank.wrongList.length > 0}}" class="cu-btn bg-yellow" bindtap="checkType">
 						{{ifViewWrong?'完整试卷':'只看错题'}}
-					</view>
+					</view> -->
 					<view class="action" bindtap="hideModal">
 						<text class="cuIcon-close text-red" style="font-size: 48rpx;"></text>
 					</view>
 				</view>
+				<view wx:if="{{bank.wrongList.length > 0}}" class="type-btn bg-yellow" bindtap="checkType">
+						{{ifViewWrong?'完整试卷':'只看错题'}}
+					</view>
 				<view class="question-index-wrap">
 					<block wx:if="{{ifViewWrong}}">
 						<block wx:for="{{bank.bank}}" wx:key="index">
@@ -67,6 +70,7 @@
 					</block>
 
 				</view>
+			
 			</view>
 		</view>
 		<view class="bank" wx:key="id">

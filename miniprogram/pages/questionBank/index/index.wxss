@@ -145,7 +145,8 @@ image {
   font-size: 28rpx;
   text-align: center;
   font-family: PingFang SC;
-  /* border: 1rpx solid rgba(187, 187, 187, 1); */
+
+  /* font-size: 36rpx; */
 }
 .limit-time {
   position: absolute;

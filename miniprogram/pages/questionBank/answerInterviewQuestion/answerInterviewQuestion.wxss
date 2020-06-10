@@ -22,13 +22,20 @@ scroll-view {
   text-align: left;
   font-family: PingFangSC-regular;
   width: 83vw;
+}
+/* 备用方案 */
+/* .bank-head .bank-title > text{
+  font-size: 50rpx;
+  color: rgba(16, 16, 16, 1);
+  text-align: left;
+  font-family: PingFangSC-regular;
+  width: 83vw;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-
-}
+} */
 .next-publish .publish {
   border-bottom: none;
 }

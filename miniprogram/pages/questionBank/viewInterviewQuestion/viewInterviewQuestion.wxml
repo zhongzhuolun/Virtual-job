@@ -63,7 +63,7 @@
 		<view class="bank">
 			<view class="radio-question">
 				<view class="question-title">
-					<text style="font-size: 32rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
+					<text style="font-size: 38rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
 						<view wx:if="{{questionsFileArry.length > 0}}"  class="audio-play">
 						<view wx:if="{{audioPlay === 'init'}}" bindtap="play" >
 							<text class="cuIcon-notificationfill text-yellow">
@@ -83,7 +83,7 @@
 				</view>
 				<view class="correct-analyse">
 					<view wx:if="{{bank.questions[questionIndex].analyse}}">解析：\n{{bank.questions[questionIndex].analyse}}</view>
-					<view>参考答案：<text>\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
+					<view class="text-yellow">参考答案：<text style="color:black">\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
 				</view>
 			</view>
 		</view>

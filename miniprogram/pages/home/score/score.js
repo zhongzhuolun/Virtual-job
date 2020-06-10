@@ -11,8 +11,11 @@ Page({
   },
     // 处理总的正确率
     handleFinalCorrectRate: function() {
-      // let {accuracy, questionTypeNum} = data
-      let {accuracy, questionTypeNum} = this.data.bank
+      let bank = this.data.bank
+      let {
+        accuracy,
+        questionTypeNum,
+      } = bank
       let finalCorrectRate = 0
       let score = {sum: 0, allRate: 0}
       for (const key in questionTypeNum) {
@@ -26,9 +29,17 @@ Page({
           score.allRate += accuracy[key]
       }
       finalCorrectRate = Math.floor(score.allRate/score.sum)
+      accuracy.radio = accuracy.radio.toFixed(2)
+      accuracy.checkbox = accuracy.checkbox.toFixed(2)
+      accuracy.judge = accuracy.judge.toFixed(2)
+      accuracy.blank = accuracy.blank.toFixed(2)
+      accuracy.sort = accuracy.sort.toFixed(2)
+      accuracy.unsteady = accuracy.unsteady.toFixed(2)
       this.setData({
         finalCorrectRate,
+        bank
       })
+
       
     },
      // 获取当前面试题库

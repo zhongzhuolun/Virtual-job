@@ -17,6 +17,7 @@ Page({
     commentList: [],
     allMsgNum: 0
   },
+  // 处理我的题库
   myBanks: function(e) {
     if (!this.data.loginStatus) {
       wx.navigateTo({
@@ -29,6 +30,7 @@ Page({
       })
     }
   },
+  // 处理面试现场
   interviewCurrent: function(e) {
     if (!this.data.loginStatus) {
       wx.navigateTo({
@@ -41,7 +43,7 @@ Page({
       })
     }
   },
-
+  // 处理查看我的消息
   myMsg: function(e) {
     if (!this.data.loginStatus) {
       wx.navigateTo({
@@ -54,7 +56,7 @@ Page({
       })
     }
   },
-
+  // 处理意见反馈
   feedback: function(e) {
     if (!this.data.loginStatus) {
       wx.navigateTo({
@@ -93,8 +95,19 @@ Page({
       })
     })
   },
-
-
+  // 查看用户协议
+  userAgreement: function() {
+    wx.navigateTo({
+      url: '../agreePolicy/agreePolicy?type=userAgreement',
+    })
+  },
+  // 查看隐私政策
+  privacyPolicy: function() {
+    wx.navigateTo({
+      url: '../agreePolicy/agreePolicy?type=privacyPolicy',
+    })
+  },
+  // 处理登录
   handleLogin: function(e) {
     wx.showLoading({
       title: '加载中',

@@ -49,20 +49,22 @@
   text-align: left;
   font-family: PingFangSC-regular;
 }
-.allExam,.questiobBank{
-  width: 302rpx;
-  height: 76rpx;
+.allExam, .questiobBank{
+  width: 246rpx;
+  height: 94rpx;
+  line-height: 90rpx;
   border-radius: 20rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);
-  font-size: 30rpx;
+  font-size: 36rpx;
   text-align: center;
-  font-family: Microsoft Yahei;
-  border: 4rpx solid rgba(0, 0, 0, 1);  
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
+  font-family: PingFang SC;
+  border: 2rpx solid rgba(0, 0, 0, 1);
 }
 .allExam{
   float: left;
 }
 .btns {
-  padding: 58rpx;
+  padding: 45rpx 115rpx;
 }

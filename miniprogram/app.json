@@ -20,14 +20,14 @@
     "pages/center/InterviewScenes/InterviewScenes",
     "pages/center/myBanks/myBanks",
     "pages/center/myMsg/myMsg",
-    "pages/center/feedback/feedback",
     "pages/center/viewReplay/viewReplay",
     "pages/home/interviewAll/interviewAll",
     "pages/authorization/authorization",
     "pages/questionBank/viewInterviewQuestion/viewInterviewQuestion",
     "pages/questionBank/answerInterviewQuestion/answerInterviewQuestion",
-    "pages/text",
-    "pages/center/viewVideo/viewVideo"
+    "pages/manage/manage",
+    "pages/center/viewVideo/viewVideo",
+    "pages/center/agreePolicy/agreePolicy"
   ],
   "window": {
     "navigationStyle": "custom"

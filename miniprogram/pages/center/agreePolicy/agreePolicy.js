@@ -1,4 +1,4 @@
-// miniprogram/pages/center/feedback/feedback.js
+// miniprogram/pages/center/agreePolicy/agreePolicy.js
 Page({
 
   /**
@@ -12,7 +12,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      type: options.type
+    })
   },
 
   /**

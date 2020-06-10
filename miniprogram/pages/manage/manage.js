@@ -1,14 +1,11 @@
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
-const bankStatusList = db.collection('bank-status')
-const interviewQuestions = db.collection('interviewQuestions')
-const writtenQuestions = db.collection('writtenQuestions')
-const _ = db.command
-import {banks} from '../data/interviewBank'
-import {detailBanks} from '../data/interviewDetail'
-
-import {banks1} from '../data/writtenBank'
-import {detailBanks1} from '../data/writtenDetail'
+// 面试题库
+import {banks} from '../../data/interviewBank'
+import {detailBanks} from '../../data/interviewDetail'
+// 笔试题库
+import {banks1} from '../../data/writtenBank'
+import {detailBanks1} from '../../data/writtenDetail'
 Page({
 
   /**
@@ -16,7 +13,7 @@ Page({
    */
   data: {
     bankIndex: 0, // 
-    id: 102, // 题库的ID
+    id: 103, // 题库的ID
     banks, // 面试题库简介
     detailBanks, // 面试题库详情
     banks1, // 笔试题库简介
@@ -71,22 +68,27 @@ Page({
       v.comments = []
     })
     console.log(value)
-    wx.cloud.callFunction({
-      name: 'addDetailBank',
-      data: {
-        detailBank: value
-      },
-    }).then((res) => {
-      console.log('增加')
-      if (bankIndex < detailBanks.length - 1) {
-        bankIndex++
-        this.setData({
-          bankIndex,
-        }, () => {
-          this.addDetail(detailBanks[bankIndex])
-        })
-      }
+    this.setData({
+      id: id + 1
+    }, () => {
+      wx.cloud.callFunction({
+        name: 'addDetailBank',
+        data: {
+          detailBank: value
+        },
+      }).then((res) => {
+        console.log('增加')
+        if (bankIndex < detailBanks.length - 1) {
+          bankIndex++
+          this.setData({
+            bankIndex,
+          }, () => {
+            this.addDetail(detailBanks[bankIndex])
+          })
+        }
+      })
     })
+    
 
   },
   // 是否新增面试题库简介
@@ -119,22 +121,27 @@ Page({
       "collection": false // 收藏
     }
     value.class = '面试题'
-    wx.cloud.callFunction({
-      name: 'addBank',
-      data: {
-        bank: value
-      },
-    }).then((res) => {
-      console.log('增加')
-      if (bankIndex < banks.length - 1) {
-        bankIndex++
-        this.setData({
-          bankIndex,
-        }, () => {
-          this.add(banks[bankIndex])
-        })
-      }
+    this.setData({
+      id: id + 1
+    }, () => {
+      wx.cloud.callFunction({
+        name: 'addBank',
+        data: {
+          bank: value
+        },
+      }).then((res) => {
+        console.log('增加')
+        if (bankIndex < banks.length - 1) {
+          bankIndex++
+          this.setData({
+            bankIndex,
+          }, () => {
+            this.add(banks[bankIndex])
+          })
+        }
+      })
     })
+    
 
   },
 

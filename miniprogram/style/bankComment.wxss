@@ -215,14 +215,23 @@
   padding-top: 100rpx;
 }
 
-.cu-btn {
-  position: relative;
-  left: -24%;
+.type-btn  {
+  font-size: 24rpx;
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 8rpx;
+  background-color: rgba(250, 191, 1, 1);
+  color: rgba(16, 16, 16, 1);
+  text-align: center;
+  font-family: PingFang SC;
+  margin: 0 auto;
 }
 .cu-dialog {
+  background: white;
   border-radius: 11px;
-  box-shadow: 0px 1px 4px 0px rgba(250, 191, 1, 0.47);
-  border: 2px solid rgba(250, 191, 1, 1);
+  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(250, 191, 1, 0.47);
+  border: 4rpx solid rgba(250, 191, 1, 1);
 }
 .cu-dialog .cubar {
   padding-top: 30rpx;
@@ -230,10 +239,22 @@
 .question-index-wrap {
   display: flex;
   padding: 80rpx;
+  padding-top: 40rpx;
   flex-wrap: wrap;
   justify-content: space-around;
   background: white;
 }
+.cu-bar {
+  min-height: 40rpx;
+}
+.bank-wrap .cu-modal .cu-dialog>.cu-bar:first-child .action {
+  margin-top: 20rpx;
+  min-width: 100rpx;
+  margin-right: 0;
+  min-height: 40rpx;
+  
+  }
+  
 .question-index-wrap .question-index {
   width: 72rpx;
   height: 72rpx;

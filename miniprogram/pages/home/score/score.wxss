@@ -2,21 +2,21 @@
   margin: 0 auto;
   overflow: hidden;
   width: 80vw;
-  padding: 20rpx;
+  padding: 20rpx 35rpx;
 }
 .btn-wrap button {
-  width: 264rpx;
-  height: 76rpx;
+  float: left;
+  width: 246rpx;
+  height: 94rpx;
+  line-height: 90rpx;
   border-radius: 20rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
   text-align: center;
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
-  font-family: Microsoft Yahei;
+  font-family: PingFang SC;
   border: 2rpx solid rgba(0, 0, 0, 1);
-  line-height: 70rpx;
-  float: left;
 
 }
 .button1 {

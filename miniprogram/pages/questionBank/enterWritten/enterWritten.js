@@ -26,7 +26,7 @@ Page({
   },
  // 处理开始笔试考试
  handleStartWrittenExam: function(modal) {
-  let {bank, examType} = this.data
+  let {bank} = this.data
   let bankId = bank.id
   let statusObj = {
     id: bankId
@@ -50,17 +50,18 @@ Page({
         data: {
           statusList,
         }
-      }).then(console.log)
-      if (examType == 'written') {
-        this.handleBankStatusDetail()
-        wx.navigateTo({
-          url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
-        })
-      } else {
-        wx.navigateTo({
-          url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`
-        })
-      }
+      }).then(() => {
+        this.handleBankStatusDetail(modal)
+      })
+      // if (examType == 'written') {
+      //   wx.navigateTo({
+      //     url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
+      //   })
+      // } else {
+      //   wx.navigateTo({
+      //     url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`
+      //   })
+      // }
     
 })
 },
@@ -83,8 +84,9 @@ Page({
     this.handleStartWrittenExam()
   },
   // 处理更新题库详情状态 （只更新该用户的数据）
-  handleBankStatusDetail: function(accuracy) {
-    // let typeNum = data // 拿到用户每种题型的正确率和题库中每种题型的数量
+  handleBankStatusDetail: function(modal) {
+  let {examType} = this.data
+  if (examType === 'written') {
     writtenQuestions.where({
       parentId: this.data.bank.id
     }).get().then((res) => {
@@ -107,9 +109,45 @@ Page({
           data: {
             writtenBankList,
           }
-        }).then(console.log)
+        }).then(() => {
+            wx.navigateTo({
+              url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
+            })
+        })
       })
     })
+  } else {
+    interviewQuestions.where({
+      parentId: this.data.bank.id
+    }).get().then((res) => {
+      let bank = res.data[0]
+      let bankId = bank.parentId
+      bank.status.doing = true
+      bank.status.done = false
+      interviewBankForUser.get().then((res) => {
+        let interviewBankList = res.data[0].interviewBankList
+        let result = interviewBankList.findIndex((value) => {
+          return value.parentId == bankId
+        })
+        if(result !== -1) {
+          interviewBankList[result] = bank
+        } else {
+          interviewBankList.push(bank)
+        }
+        wx.cloud.callFunction({
+          name: 'updateInterviewBank',
+          data: {
+            interviewBankList,
+          }
+        }).then(() => {
+          wx.navigateTo({
+            url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`
+          })
+        })
+      })
+    })
+  }
+  
     
    
   },

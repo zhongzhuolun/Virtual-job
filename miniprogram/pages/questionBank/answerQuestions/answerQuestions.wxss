@@ -28,13 +28,19 @@ scroll-view {
   color: rgba(16, 16, 16, 1);
   text-align: left;
   font-family: PingFangSC-regular;
+}
+/* .bank-head .bank-title > text {
+  font-size: 50rpx;
+  color: rgba(16, 16, 16, 1);
+  text-align: left;
+  font-family: PingFangSC-regular;
   width: 100vw;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-}
+} */
 .my-choosebox radio[checked] {
   border: 4rpx solid black;
 }

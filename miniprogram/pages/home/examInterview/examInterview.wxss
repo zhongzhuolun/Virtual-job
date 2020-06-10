@@ -79,18 +79,17 @@ page {
 .txt6{
   position: absolute;
   left: 50%;
-  top: 996rpx;
-  width: 246rpx;
-  height: 72rpx;
-  border-radius: 20rpx;
-  line-height: 69rpx;
+  top: 78vh;
+  transform: translateX(-50%);
+  width: 180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 8rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);
-  font-size: 39rpx;
+  font-size: 36rpx;
   text-align: center;
-  font-family: Microsoft Yahei;
-  border: 4rpx solid rgba(255, 255, 255, 1);
-  transform: translateX(-50%);
+  font-family: PingFang SC;
 }
 .txt7{
   position: absolute;

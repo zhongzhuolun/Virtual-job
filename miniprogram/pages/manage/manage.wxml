@@ -1,6 +1,6 @@
 <!--miniprogram/pages/text.wxml-->
 <cu-custom bgColor="bg-yellow" >
-	<view slot="content">text</view>
+	<view slot="content">题库管理</view>
 </cu-custom>
 <button bindtap="getBankList">
   获取题库简介ID

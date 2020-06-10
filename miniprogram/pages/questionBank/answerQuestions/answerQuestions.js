@@ -423,8 +423,11 @@ Page({
           ifViewAnwser: true,
         })
       }
-      this.handleBankStatus() // 更新题库简介状态
-      this.handleBankStatusDetail()
+      if (questionIndex < bank.bank.length - 1) {
+        this.handleBankStatus() // 更新题库简介状态
+        this.handleBankStatusDetail()
+      }
+    
     }
   },
   // 处理下一题

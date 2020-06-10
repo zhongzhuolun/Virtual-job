@@ -43,10 +43,9 @@ scroll-view {
 
 .submit {
   position: relative;
-  left: 254rpx;
-  width: 242rpx;
-  height: 70rpx;
-  line-height: 64rpx;
+  left: 50%;
+  width: 224rpx;
+  height: 72rpx;
   border-radius: 20rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(16, 16, 16, 1);
@@ -54,7 +53,8 @@ scroll-view {
   text-align: center;
   font-family: PingFang SC;
   border: 4rpx solid rgba(0, 0, 0, 1);
-  transform: translate3d(0, 100%, 0);
+  line-height: 64rpx;
+  transform: translate3d(-50%, 100%, 0);
 }
 .timer {
   position: fixed;
@@ -114,14 +114,9 @@ scroll-view {
 
 }
 .my-btn {
-  /* position: absolute; */
   display: inline-block;
-
   width: 246rpx;
   height: 94rpx;
-  /* top: 796rpx; */
-  /* bottom: 26%; */
-
   line-height: 90rpx;
   border-radius: 20rpx;
   background-color: rgba(250, 191, 1, 1);
@@ -130,7 +125,7 @@ scroll-view {
   text-align: center;
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
   font-family: PingFang SC;
-  border: 4rpx solid rgba(0, 0, 0, 1);
+  border: 2rpx solid rgba(0, 0, 0, 1);
 }
 .unfinished .continute {
   left: 112rpx;

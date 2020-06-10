@@ -239,7 +239,7 @@
 					"id": 26,
 					"name": "pages/questionBank/viewQuestions/viewQuestions",
 					"pathName": "pages/questionBank/viewQuestions/viewQuestions",
-					"query": "id=101&type=result",
+					"query": "class=%E7%AC%94%E8%AF%95&id=13",
 					"scene": null
 				},
 				{
@@ -310,6 +310,13 @@
 					"name": "pages/questionBank/endQuestion/endQuestion",
 					"pathName": "pages/questionBank/endQuestion/endQuestion",
 					"query": "id=89",
+					"scene": null
+				},
+				{
+					"id": 37,
+					"name": "pages/center/agreePolicy/agreePolicy",
+					"pathName": "pages/center/agreePolicy/agreePolicy",
+					"query": "type=userAgreement",
 					"scene": null
 				}
 			]
