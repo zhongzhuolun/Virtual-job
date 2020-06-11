@@ -1,9 +1,9 @@
 page {
   background: white;
 }
-.written, .interview{
+.written, .interview {
   display: inline-block;
-  width: 366rpx;
+  width: 367rpx;
   opacity: 0.8;
   line-height: 104rpx;
   border-radius: 8rpx;
@@ -15,7 +15,7 @@ page {
   left: 0px;
 }
 .wrap .active {
-  width: 384rpx;
+  width: 385rpx;
   opacity: 1;
 }
 

@@ -176,7 +176,7 @@
 					"id": 17,
 					"name": "pages/home/interviewAll/interviewAll",
 					"pathName": "pages/home/interviewAll/interviewAll",
-					"query": "id=102",
+					"query": "id=108",
 					"scene": null
 				},
 				{
@@ -201,9 +201,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/text",
-					"pathName": "pages/text",
+					"id": 21,
+					"name": "pages/manage/manage",
+					"pathName": "pages/manage/manage",
 					"query": "",
 					"scene": null
 				},

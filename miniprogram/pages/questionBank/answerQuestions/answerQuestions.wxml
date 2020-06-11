@@ -193,8 +193,4 @@
 	</view>
 	<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
 </block>
-<!-- <view class="next-size">
-	<view class="page-size">{{questionIndex + 1}}/{{bank.bank.length}}
-	</view>
-</view> -->
-	<!-- </scroll-view> -->
+

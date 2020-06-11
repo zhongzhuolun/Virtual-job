@@ -43,7 +43,7 @@ scroll-view {
   border-radius: 20rpx 20rpx;
   font-size: 40rpx;
   text-align: center;
-  line-height: 60rpx;
+  line-height: 56rpx;
 }
 .audio-play .cuIcon-notificationfill  {
   margin-left: 2rpx;

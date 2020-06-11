@@ -17,10 +17,13 @@
 	</view>
 </view>
 <view class="blankBox">
-	<view class="answer1">面试常见评分标准：
-		<view> ⭕衣着整洁整齐 </view> 
-		<view>⭕面带笑容 </view>
-		<view>⭕语言流畅无语病</view>
+	<view class="answer1">面试常见注意事项/技巧：
+		<view>▪️ 穿着打扮得体； </view> 
+		<view>▪️ 言行举止符合礼节； </view>
+		<view>▪️ 保持笑容，不做多余的动作；</view>
+		<view>▪️ 控制好自我情绪；</view>
+		<view>▪️ 注意自己的表达逻辑；</view>
+		<view>▪️ 面带微笑答题，且要有眼神交流；</view>
 	</view>
 </view>
 <view class="btns">

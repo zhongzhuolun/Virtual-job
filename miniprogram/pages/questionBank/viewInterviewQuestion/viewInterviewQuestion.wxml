@@ -70,12 +70,10 @@
 							</text>
 						</view>
 						<view wx:if="{{audioPlay === 'play'}}" bindtap="stop">
-						
 							<text class="cuIcon-stop text-yellow">
 							</text>
 						</view>
 						<view wx:if="{{audioPlay === 'pause'}}" bindtap="play" >
-						
 							<text class="cuIcon-playfill text-yellow">
 							</text>
 						</view>
@@ -83,7 +81,7 @@
 				</view>
 				<view class="correct-analyse">
 					<view wx:if="{{bank.questions[questionIndex].analyse}}">解析：\n{{bank.questions[questionIndex].analyse}}</view>
-					<view class="text-yellow">参考答案：<text style="color:black">\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
+					<view class="text-yellow" wx:if="{{bank.questions[questionIndex].refer_answer}}">参考答案：<text style="color:black">\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
 				</view>
 			</view>
 		</view>

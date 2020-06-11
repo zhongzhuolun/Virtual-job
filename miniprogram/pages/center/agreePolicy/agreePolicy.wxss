@@ -6,7 +6,7 @@ page {
   padding: 40rpx;
 }
 .header {
-  text-indent: 1em;
+  text-indent: 2em;
 }
 .header text {
   font-weight: bold;
@@ -20,11 +20,11 @@ page {
   font-size: 28rpx;
 }
 .body .content {
-  text-indent: 1em;
+  text-indent: 2em;
   display: inline-block;
 }
 .footer {
-  text-indent: 1em;
+  text-indent: 2em;
 }
 .footer .digest {
   margin-bottom: 20rpx;

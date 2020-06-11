@@ -49,19 +49,11 @@ page {
 .sort-question {
   padding-right: 0vw;
 }
-
-
 .my-choosebox checkbox[checked] {
   border: 4rpx solid transparent;
   background: white;
 }
-
 radio.red {
   border: 4rpx solid red !important;
 }
-checkbox.red {
-  border: 4rpx solid red !important;
-}
-checkbox.yellow {
-  border: 4rpx solid #ffc200 !important;
-}
+

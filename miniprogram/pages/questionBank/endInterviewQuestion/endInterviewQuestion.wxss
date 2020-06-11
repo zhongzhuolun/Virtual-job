@@ -14,7 +14,7 @@
   text-align: center;
   box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(169, 169, 169, 0.4);
   border: 2rpx solid rgba(250, 191, 1, 1);
-  padding: 26rpx;
+  padding: 18rpx;
 
 }
 .video1 .audio-status {
@@ -38,19 +38,20 @@
   color: rgba(16, 16, 16, 1);
   font-size: 36rpx;
   text-align: left;
-  padding: 26rpx;
+  padding: 76rpx 40rpx;
   box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
   font-family: Arial;
   border: 2rpx solid rgba(255, 255, 255, 0);
 }
 .answer1 {
   color: rgba(16, 16, 16, 1);
+  line-height: 60rpx;
   font-size: 36rpx;
   text-align: left;
   font-family: PingFangSC-regular;
 }
-.allExam,.questiobBank {
 
+.allExam,.questiobBank {
   width: 246rpx;
   height: 94rpx;
   line-height: 90rpx;

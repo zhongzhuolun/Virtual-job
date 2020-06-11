@@ -63,9 +63,9 @@ checkbox.mychecked {
 radio.red {
   border: 4rpx solid red !important;
 }
-checkbox.red {
+/* checkbox.red {
   border: 4rpx solid red !important;
-}
+} */
 .chekckout-question {
   width: 164rpx;
   height: 72rpx;
@@ -86,22 +86,8 @@ checkbox.red {
   float: left;
   margin-left: 40rpx;
 }
-.page-size {
-  margin: 0 auto;
-  width: 60rpx;
-  height: 40rpx;
-  color: rgba(16, 16, 16, 1);
-  font-size: 28rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-  padding-top: 100rpx;
-}
-/* .quetion-title {
-  color: rgba(16, 16, 16, 1);
-  font-size: 36rpx;
-  text-align: left;
-  font-family: PingFangSC-regular;
-} */
+
+
 
 
 

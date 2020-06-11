@@ -17,6 +17,7 @@ Page({
     tempFilePaths: [], // 用于存储音频的链接
     questionsFileArry: [], // 所有问题语音的集合
     audioPlay: false, // 录音播放状态，false为没有播放
+    tips: [], // 随机提示
   },
 
   // 获取当前面试题库

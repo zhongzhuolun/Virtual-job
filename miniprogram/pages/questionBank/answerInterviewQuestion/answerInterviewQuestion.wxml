@@ -50,7 +50,7 @@
 			<view class="bank">
 				<view class="radio-question">
 					<view class="question-title">
-						<text style="font-size: 32rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
+						<text style="font-size: 38rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
 					</view>
 					<!-- <view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser"> -->
 					<view class="view-answer" bindtap="viewAnwser">
