@@ -1,7 +1,6 @@
-const app = getApp()
 const db = wx.cloud.database()
-const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -13,6 +12,7 @@ Page({
     audioPlay: 'init', // 录音播放状态
     audioPlayAll: false, // 所有录音播放的状态
     tempFilePaths: [], // 用于存储音频的链接
+    buttonClicked: false,
 
   },
   getCurrentBank: function(id) {
@@ -60,6 +60,9 @@ Page({
     this.innerAudioContext.src = src;
     this.innerAudioContext.autoplay = true
     this.innerAudioContext.play(); //播放音频
+    // setTimeout(()=> {
+    //   utils.buttonUsable(this)
+    // }, 1000)
     this.innerAudioContext.onPlay(() => {
       console.log('开始播放', this.pageObj.i)
     })
@@ -78,6 +81,7 @@ Page({
   },
   // 播放录音
   playAll: function () {
+    utils.buttonClicked(this)
     let ifPlay = true
     let {questionsFileArry} = this.data
     questionsFileArry.forEach((value, index) => {
@@ -96,6 +100,8 @@ Page({
   },
   // 暂停播放
   stopAll: function (e) {
+    // this.innerAudioContext.pause()
+    // this.innerAudioContext = null
     this.setData({
       audioPlayAll: false
     }, () => {
@@ -123,6 +129,7 @@ Page({
   },
    // 控制播放录音
   play: function (e) {
+    utils.buttonClicked(this)
     let questionIndex = e.currentTarget.id * 1
     let {questionsFileArry, audioPlayAll} = this.data
     let ifPlay = true
@@ -153,7 +160,6 @@ Page({
         icon: 'none'
       })
     }
-    
   },
   // 暂停播放
   stop: function (e) {
@@ -162,7 +168,7 @@ Page({
     let questionIndex = e.currentTarget.id * 1
     this.questionIndex = questionIndex
     questionsFileArry[questionIndex].audioPlay = 'pause'
-
+ 
     this.setData({
       questionsFileArry
     }, () => {
@@ -177,6 +183,9 @@ Page({
     let {questionsFileArry} = this.data
     this.innerAudioContext = wx.createInnerAudioContext()
     this.innerAudioContext.src = src
+    // setTimeout(()=> {
+    //   utils.buttonUsable(this)
+    // }, 1000)
     if (src) {
       this.innerAudioContext.autoplay = true
     } else {
@@ -187,13 +196,21 @@ Page({
     }
     this.innerAudioContext.onEnded(() => {
       console.log('播放结束')
-      if (this.questionIndex) {
+      console.log(this.questionIndex)
+      if (this.questionIndex || this.questionIndex === 0) {
         questionsFileArry[this.questionIndex].audioPlay = 'init'
       }
       this.setData({
         questionsFileArry
       })
     })
+  },
+  // 结束语音
+  end: function (e) {
+    if (this.innerAudioContext) {
+      this.innerAudioContext.pause()
+      this.innerAudioContext = null
+    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -205,6 +222,7 @@ Page({
     }, () => {
       this.getCurrentBank(id)
     })
+    utils.buttonUsable(this)
   },
 
 
@@ -212,14 +230,13 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.innerAudioContext.stop()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.end()
   },
 
   /**

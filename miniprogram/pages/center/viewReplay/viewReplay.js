@@ -1,6 +1,7 @@
 const db = wx.cloud.database()
 const commentsForUser = db.collection('commentsForUser')
 const banksList = db.collection('banks-list')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -13,6 +14,7 @@ Page({
     dotList: [], // 点赞数组
     reply: {}, // 回复对象
     dot: {}, // 点赞对象 
+    buttonClicked: false,
   },
   // 获取未读消息
   getMsg: function () {
@@ -55,6 +57,8 @@ Page({
   },
   // 处理查看消息
   handleViewComment: function (e) {
+    utils.buttonDisable(this)
+    utils.showLoading('加载中')
     let {
       type,
       commentList,
@@ -89,6 +93,7 @@ Page({
     }, () => {
       this.updateComment(comment, 'comment')
       this.getBank(comment.bankId, comment.questionIndex)
+      utils.hideLoading()
     })
 
   },
@@ -119,11 +124,11 @@ Page({
         // 前往指定题库界面
         if (bank.class === '面试题') {
           wx.navigateTo({
-            url: `../../questionBank/viewInterviewQuestion/viewInterviewQuestion?id=${bank.id}&questionIndex=${questionIndex}`,
+            url: `../../questionBank/viewInterviewQuestion/viewInterviewQuestion?id=${bank.id}&viewType=viewComment&questionIndex=${questionIndex}`,
           })
         } else {
           wx.navigateTo({
-            url: '../../questionBank/viewQuestions/viewQuestions?id=' + bank.id,
+            url: `../../questionBank/viewQuestions/viewQuestions?id=${bank.id}&viewType=viewComment&questionIndex=${questionIndex}`,
           })
         }
       })
@@ -150,13 +155,14 @@ Page({
    */
   onShow: function () {
     this.getMsg()
+    utils.buttonUsable(this)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    utils.buttonUsable(this)
   },
 
   /**

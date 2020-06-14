@@ -44,6 +44,7 @@ scroll-view {
 .my-choosebox radio[checked] {
   border: 4rpx solid black;
 }
+
 .my-choosebox radio {
   transform: scale(0.6);
   border-radius: 50%;
@@ -51,7 +52,8 @@ scroll-view {
   background: transparent;
 }
 .my-choosebox checkbox[checked] {
-  border: 4rpx solid black;
+  /* border: 4rpx solid black !important; */
+  border: 4rpx solid black ;
   background: black;
 }
 radio.mychecked {
@@ -63,9 +65,9 @@ checkbox.mychecked {
 radio.red {
   border: 4rpx solid red !important;
 }
-/* checkbox.red {
+checkbox.red {
   border: 4rpx solid red !important;
-} */
+}
 .chekckout-question {
   width: 164rpx;
   height: 72rpx;

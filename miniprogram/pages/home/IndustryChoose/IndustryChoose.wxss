@@ -83,7 +83,7 @@
   border-radius: 24rpx;
   color: rgba(16, 16, 16, 1);
   margin-top: 20rpx;
-  line-height: 50rpx;
+  line-height: 52rpx;
   text-align: center;
   box-shadow: 0rpx 4rpx 4rpx 0rpx rgba(178, 178, 178, 0.4);
   font-family: -apple-system;

@@ -68,10 +68,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "pages/questionBank/enterWritten/enterWritten",
 					"pathName": "pages/questionBank/enterWritten/enterWritten",
-					"query": "",
+					"query": "id=13&type=start",
 					"scene": null
 				},
 				{
@@ -169,7 +169,7 @@
 					"id": 16,
 					"name": "pages/home/endInterview/endInterview",
 					"pathName": "pages/home/endInterview/endInterview",
-					"query": "id=10",
+					"query": "id=109",
 					"scene": null
 				},
 				{

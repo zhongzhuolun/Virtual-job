@@ -35,7 +35,6 @@
 .wrap {
 
   position: relative;
-  /* width: 616rpx; */
   width: 655rpx;
   line-height: 40rpx;
   border-radius: 50rpx;
@@ -44,7 +43,6 @@
   box-shadow: 0rpx 8rpx 18rpx 0rpx rgba(178, 178, 178, 0.4);
   border: 2rpx solid rgba(255, 255, 255, 0);
   margin: 100rpx auto;
-  /* padding: 40rpx; */
   padding: 30rpx;
 
 }
@@ -60,9 +58,7 @@
   margin-top: 40rpx;
 }
 .data {
-  /* width: 89%; */
   width: 99%;
-  /* margin: 40rpx auto; */
 	margin: 60rpx auto;
 	border: 4rpx solid black;
   color: rgba(16, 16, 16, 1);

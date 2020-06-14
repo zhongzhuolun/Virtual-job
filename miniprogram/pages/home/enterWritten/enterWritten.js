@@ -3,7 +3,6 @@ const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const writtenQuestions = db.collection('writtenQuestions')
-const writtenBankForUser = db.collection('writtenBankForUser')
 Page({
 
   /**
@@ -47,7 +46,7 @@ Page({
                   statusList,
                 }
               }).then(console.log)
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '../examWritten/examWritten?id=' + bankId
               })
         })

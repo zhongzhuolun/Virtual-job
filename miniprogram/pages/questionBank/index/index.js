@@ -1,4 +1,3 @@
-// miniprogram/pages/questionBank/index/index.js
 const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
@@ -279,7 +278,13 @@ Page({
         })
     })
   },
-
+  // 处理轮播图
+  handelBanner(e) {
+    let id = e.target.id
+    // wx.navigateTo({
+    //   url: '../banner/banner?bannerid=' + id,
+    // })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

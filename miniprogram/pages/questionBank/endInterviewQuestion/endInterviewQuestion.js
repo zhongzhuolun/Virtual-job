@@ -1,5 +1,4 @@
 const db = wx.cloud.database()
-const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
 Page({
 

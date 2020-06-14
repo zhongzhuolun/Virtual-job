@@ -1,11 +1,6 @@
-const app = getApp()
 const db = wx.cloud.database()
-const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
-const plugin = requirePlugin("WechatSI") // 引入文字转语音的插件
-const manager = plugin.getRecordRecognitionManager() // 获取文字转语音的插件对象
-const recorderManager = wx.getRecorderManager() // 获取录音对象
-
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -18,6 +13,7 @@ Page({
     questionsFileArry: [], // 所有问题语音的集合
     audioPlay: false, // 录音播放状态，false为没有播放
     tips: [], // 随机提示
+    buttonClicked: false,
   },
 
   // 获取当前面试题库
@@ -87,6 +83,7 @@ Page({
   },
   // 播放录音
   play: function () {
+    utils.buttonClicked(this)
     this.setData({
       audioPlay: true
     }, () => {
@@ -121,6 +118,13 @@ Page({
       url: `../interviewAll/interviewAll?id=${id}`,
     })
   },
+  // 结束语音
+  end: function (e) {
+    if (this.innerAudioContext) {
+      this.innerAudioContext.pause()
+      this.innerAudioContext = null
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -142,36 +146,23 @@ Page({
    */
   onShow: function () {
     this.getCurrentBank(this.data.id)
-    // const eventChannel = this.getOpenerEventChannel()
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    // console.log(eventChannel)
-    // if (eventChannel.on) {
-    //   eventChannel.on('questionsFileArry', (questionsFileArry) => {
-    //     console.log(questionsFileArry.questionsFileArry)
-    //     this.setData({
-    //       questionsFileArry: questionsFileArry.questionsFileArry
-    //     }, () => {
-    //       this.mergeAudio()
-    //     })
-    //   })
-    // }
-
+    utils.buttonUsable(this)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    if (this.innerAudioContext) {
-      this.innerAudioContext.stop()
-    }
+    this.setData({
+      audioPlay: false
+    })
     this.pageObj.i = 0
   },
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.end()
   },
 
   /**

@@ -1,78 +1,38 @@
-	<!-- <scroll-view scroll-y scroll-top="{{topNum}}" enable-back-to-top="true"> -->
-		<cu-custom bgColor="bg-yellow" isBack="{{true}}">
-			<view slot="content">面试答题</view>
-			<view slot="backText"></view>
-		</cu-custom>
-
-		<view class="bank-wrap" id="page">
-			<view class="bank-head">
-				<view class="bank-title">
-					<text>{{bank.title}} </text>
-					<view class="score-time">
-						<text class="time">题目数量：{{bank.count}}道</text>
-					</view>
-				</view>
-				<!-- <view class="type-btns">
-				<text bindtap="handleCollection" class="cuIcon-favorfill text-yellow lg cuIcon-{{ifCollect?'favorfill': 'favor'}}"></text>
-				<view class="menu" bindtap="handleMenu" data-target="Modal">
-					<text class="cuIcon-apps lg text-yellow"></text>
-				</view>
-			</view> -->
-			</view>
-
-			<!-- <view class="bank-title">
-			<text>{{bank.title}} </text>
-		</view>
-		<view class="score-time">
-			<text class="time">题目数量：{{bank.count}}道</text>
-		</view> -->
-			<!-- <view class="type-btns">
-			<view class="menu" bindtap="handleMenu" data-target="Modal">
-				<text class="cuIcon-apps lg text-yellow"></text>
-			</view>
-		</view> -->
-			<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
-				<view class="cu-dialog" catchtap>
-					<view class="cu-bar bg-white justify-end">
-						<view class="action" bindtap="hideModal">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="question-index-wrap">
-						<block wx:for="{{bank.questions}}" wx:key="id">
-							<view class="question-index correct" bindtap="skipQuestion" id="{{item.id}}">{{item.id}}</view>
-						</block>
-					</view>
-				</view>
-			</view>
-			<view class="line">
-			</view>
-			<view class="bank">
-				<view class="radio-question">
-					<view class="question-title">
-						<text style="font-size: 38rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
-					</view>
-					<!-- <view wx:if="{{questionModal !== 'fighter'}}" class="view-answer" bindtap="viewAnwser"> -->
-					<view class="view-answer" bindtap="viewAnwser">
-						{{ifViewAnwser?'收起答案':'查看答案'}}
-					</view>
-					<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
-						<view wx:if="{{bank.questions[questionIndex].analyse}}">解析：\n{{bank.questions[questionIndex].analyse}}</view>
-						<view>参考答案：<text >\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
-					</view>
+	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
+		<view slot="content">面试答题</view>
+		<view slot="backText"></view>
+	</cu-custom>
+	<view class="bank-wrap" id="page">
+		<view class="bank-head">
+			<view class="bank-title">
+				<text>{{bank.title}} </text>
+				<view class="score-time">
+					<text class="time">题目数量：{{bank.count}}道</text>
 				</view>
 			</view>
 		</view>
-	<!-- </scroll-view> -->
-
+		<view class="bank">
+			<view class="radio-question">
+				<view class="question-title">
+					<text style="font-size: 38rpx;" >{{bank.questions[questionIndex].id}}. {{bank.questions[questionIndex].title}}</text>
+				</view>
+				<view class="view-answer" bindtap="viewAnwser">
+					{{ifViewAnwser?'收起答案':'查看答案'}}
+				</view>
+				<view hidden="{{!ifViewAnwser}}" class="correct-analyse">
+					<view wx:if="{{bank.questions[questionIndex].analyse}}">解析：\n{{bank.questions[questionIndex].analyse}}</view>
+					<view>参考答案：<text >\n{{bank.questions[questionIndex].refer_answer}}</text></view> <br />
+				</view>
+			</view>
+		</view>
+	</view>
 	<view class="next-publish">
 		<view class="pre-question chekckout-question" bindtap="handlePre">
 			<text class="cuIcon-pullleft  text-{{questionIndex > 0?'yellow': 'gray'}}"></text>
 		</view>
 		<view class="publish">
-
 		</view>
-		<view class="next-question chekckout-question" bindtap="handleNext">
+		<view class="next-question chekckout-question" bindtap="{{!buttonClicked?'handleNext':''}}">
 			<block wx:if="{{questionIndex < bank.questions.length - 1}}">
 				<text class="cuIcon-pullright text-yellow"></text>
 			</block>
@@ -81,10 +41,3 @@
 			</block>
 		</view>
 	</view>
-	<!-- <view class="next-question chekckout-question" bindtap="handleNext">
-		{{questionIndex < bank.questions.length - 1?'下一题':'查看总结'}}</view>
-	<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-	<view class="next-size">
-		<view class="page-size">{{questionIndex + 1}}/{{bank.questions.length}}
-		</view>
-	</view> -->

@@ -1,31 +1,27 @@
-<cu-custom bgColor="bg-yellow" isBack="{{true}}" >
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content">模拟面试</view>
 	<view slot="backText"></view>
 </cu-custom>
- <block wx:if="{{type === 'audio'}}">
-<view class="bank-wrap">
-	<view class="bank-title">
-		<text>{{bank.title}}</text>
-	</view>
-	<view class="score-time">
-		<text class="time">题目数量：{{bank.count}}道</text>
-	</view>
+<block wx:if="{{type === 'audio'}}">
+	<view class="bank-wrap">
+		<view class="bank-title">
+			<text>{{bank.title}}</text>
+		</view>
+		<view class="score-time">
+			<text class="time">题目数量：{{bank.count}}道</text>
+		</view>
 		<view class="line">
+		</view>
 	</view>
-</view>
+	<image src="../../../images/icon/people.png" class="img1"></image>
+	<image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain" disabled="{{btnDisabled}}"></image>
+	<view class="txt3">面试官</view>
+	<view class="txt4">若没有听清题目，可点击</view>
+	<image src="../../../images/icon/graysou.png" class="img3"></image>
+	<view class="txt5">请面试官再讲一遍</view>
+	<button class="txt6" disabled="{{btnDisabled}}" hidden="{{src}}" bindtap="handleStart">开始</button>
+	<button class="txt6" disabled="{{btnDisabled}}" hidden="{{(!src)&&(!disabled)}}" bindtap="handleNext">下一题</button>
+	<button class="txt6" disabled="{{btnDisabled}}" hidden="{{!(src&&disabled)}}" bindtap="handleEnd">结束</button>
 
-<image src="../../../images/icon/people.png" class="img1"></image>
-<image src="../../../images/icon/lightsou.png" class="img2" bindtap="handleAgain" disabled="{{btnDisabled}}"></image>
-<view class="txt3">面试官</view>
-<view class="txt4">若没有听清题目，可点击</view>
-<image src="../../../images/icon/graysou.png" class="img3"></image>
-<view class="txt5">请面试官再讲一遍</view>
-<button class="txt6" disabled="{{btnDisabled}}" hidden="{{src}}" bindtap="handleStart">开始</button>
-<button class="txt6" disabled="{{btnDisabled}}" hidden="{{(!src)&&(!disabled)}}" bindtap="handleNext">下一题</button>
-<button class="txt6" disabled="{{btnDisabled}}" hidden="{{!(src&&disabled)}}" bindtap="handleEnd">结束</button>
-
-<image class="txt7" hidden="{{!recordState}}"  src="../../../images/icon/luzhi....gif"></image>
+	<image class="txt7" hidden="{{!recordState}}" src="../../../images/icon/luzhi....gif"></image>
 </block>
-<block wx:else>
-</block> 
-

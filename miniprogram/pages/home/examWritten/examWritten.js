@@ -1,6 +1,5 @@
 // miniprogram/pages/home/examWritten/examWritten.js
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
@@ -260,7 +259,7 @@ Page({
           writtenBankList,
         }
       }).then(() => {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../score/score?id=' + this.data.bank.parentId ,
           success: function(res) {
             // 通过eventChannel向被打开页面传送数据

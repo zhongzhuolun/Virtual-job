@@ -1,4 +1,6 @@
-
+scroll-view {
+  height: 100%;
+}
 .type-btns {
   font-size: 64rpx;
 }
@@ -205,7 +207,7 @@
 .question-index-wrap .question-index {
   width: 72rpx;
   height: 72rpx;
-  line-height: 72rpx;
+  line-height: 68rpx;
   background-color: rgba(255, 255, 255, 0);
   font-size: 36rpx;
   text-align: center;
@@ -304,7 +306,7 @@ checkbox.red {
   background: red !important;
 }
 checkbox.yellow {
-  border: 4rpx solid #ffc200 !important;
+  border: 4rpx solid #ffc200;
   background: #ffc200 !important;
 }
 .yourblank {

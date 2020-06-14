@@ -3,10 +3,6 @@ const db = wx.cloud.database()
 const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const app = getApp()
-const recorderManager = wx.getRecorderManager()
-const innerAudioContext = wx.createInnerAudioContext()
-const plugin = requirePlugin("WechatSI")
-const manager = plugin.getRecordRecognitionManager()
 Page({
   data: {
     bank: {},
@@ -36,7 +32,7 @@ Page({
           statusList,
         }
       }).then(console.log)
-      wx.navigateTo({
+      wx.redirectTo({
         url: `../examInterview/examInterview?type=${type}&id=${bankId}`
       })
     })

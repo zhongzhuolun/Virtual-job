@@ -44,10 +44,6 @@ scroll-view {
 .next-size {
   z-index: 0;
 }
-/* checkbox.yellow {
-  border: 4rpx solid #ffc200 !important;
-  background: #ffc200 !important;
-} */
 
 
 

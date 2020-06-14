@@ -1,32 +1,23 @@
-<!--miniprogram/pages/center/InterviewScenes/InterviewScenes.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
 	<view slot="backText">面试现场</view>
 </cu-custom>
 <view class="wrap">
-	<block wx:if="{{banksList[0].questionsFileArry.length > 0}}">
-			<block wx:for="{{banksList}}" wx:key="parentId">
-				<block wx:if="{{item.questionsFileArry.length > 0}}">
-				<navigator url="../viewVideo/viewVideo?id={{item.parentId}}">
-					<view class="item">
-						<text class="title">{{item.title}}</text>
-						<text class="cuIcon-playfill text-yellow"></text>
-					</view>
-				</navigator>
-			</block>
+	<block wx:for="{{banksList}}" wx:key="parentId">
+		<block wx:if="{{item.questionsFileArry.length > 0}}">
+			<navigator url="../viewVideo/viewVideo?id={{item.parentId}}">
+				<view class="item">
+					<text class="title">{{item.title}}</text>
+					<text class="cuIcon-playfill text-yellow"></text>
+				</view>
+			</navigator>
 		</block>
 	</block>
-	<block wx:else>
-		<view class="bank-wrap">
-			<view class="bank" style="padding: 40rpx;">
-				<view>
-					<text class="text-yellow">暂无面试现场</text>
-				</view>
-				<view>
-					<text class="text-yellow">（tips：只有在首页进行模拟面试的面试现场才会显示哦）</text>
-				</view>
+	<view class="bank-wrap">
+		<view class="item" style="padding-top: 30rpx;">
+			<view>
+				<text class="text-yellow">（tips：只有在首页进行模拟面试的面试现场才会显示哦）</text>
 			</view>
 		</view>
-	</block>
-
+	</view>
 </view>

@@ -7,6 +7,7 @@ const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
 const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -16,7 +17,8 @@ Page({
     examType: '',
     bank: {},
     industry: '',
-    modalName: null
+    modalName: null,
+    buttonClicked: false,
   },
   // 处理模态框的打开
   handleStart: function(e) {
@@ -26,6 +28,10 @@ Page({
   },
  // 处理开始笔试考试
  handleStartWrittenExam: function(modal) {
+   wx.showLoading({
+     title: '加载中',
+   })
+  utils.buttonDisable(this)
   let {bank} = this.data
   let bankId = bank.id
   let statusObj = {
@@ -52,23 +58,16 @@ Page({
         }
       }).then(() => {
         this.handleBankStatusDetail(modal)
+        wx.hideLoading()
       })
-      // if (examType == 'written') {
-      //   wx.navigateTo({
-      //     url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
-      //   })
-      // } else {
-      //   wx.navigateTo({
-      //     url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`
-      //   })
-      // }
     
 })
 },
   // 处理模态框的关闭
   hideModal: function(e) {
     this.setData({
-      modalName: null
+      modalName: null,
+      buttonClicked: true
     })
   },
   // 处理斗者意境
@@ -85,7 +84,11 @@ Page({
   },
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function(modal) {
+  wx.showLoading({
+    title: '加载中',
+  })
   let {examType} = this.data
+  let that = this
   if (examType === 'written') {
     writtenQuestions.where({
       parentId: this.data.bank.id
@@ -110,8 +113,12 @@ Page({
             writtenBankList,
           }
         }).then(() => {
+            wx.hideLoading()
             wx.navigateTo({
-              url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`
+              url: `../answerQuestions/answerQuestions?id=${bankId}&modal=${modal}`,
+              success: function() {
+                utils.buttonUsable(that)
+              }
             })
         })
       })
@@ -130,7 +137,7 @@ Page({
           return value.parentId == bankId
         })
         if(result !== -1) {
-          interviewBankList[result] = bank
+          interviewBankList[result].status = bank.status
         } else {
           interviewBankList.push(bank)
         }
@@ -140,8 +147,12 @@ Page({
             interviewBankList,
           }
         }).then(() => {
+          wx.hideLoading()
           wx.navigateTo({
-            url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`
+            url: `../answerInterviewQuestion/answerInterviewQuestion?id=${bankId}`,
+            success: function() {
+              utils.buttonUsable(that)
+            }
           })
         })
       })
@@ -199,16 +210,15 @@ Page({
         wx.hideLoading()
       })
     })
-    // this.setData({
-    //   industry
-    // })
+    utils.buttonUsable(this)
+   
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    // utils.buttonUsable(this)
   },
 
   /**

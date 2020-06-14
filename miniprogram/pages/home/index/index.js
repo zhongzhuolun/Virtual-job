@@ -1,4 +1,3 @@
-// miniprogram/pages/home/index/index.js
 const app = getApp()
 Page({
 

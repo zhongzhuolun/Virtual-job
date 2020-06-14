@@ -1,12 +1,10 @@
 // miniprogram/pages/questionBank/answerQuestions/answerQuestions.js
 const app = getApp()
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
-const interviewQuestions = db.collection('interviewQuestions')
-const interviewBankForUser = db.collection('interviewBankForUser')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -37,6 +35,7 @@ Page({
     ifSubmitOne: true, // 是否是处于单道题目的提交状态
     writtenBank: {},
     clearValue: '', // 清除填空题答案
+    buttonClicked: false,
     // topNum: 0,
   },
   goTop: function () {  // 一键回到顶部
@@ -53,7 +52,7 @@ Page({
   // 处理确定提交 （此时真正提交）
   handleComplete: function () {
     // 处理错题和分数评判(分数评判功能可能会取消)
-    // this.handleWrongAndScore()
+    utils.buttonDisable(this)
     let accuracy = this.handleCorrectRate() // 获取题型的正确率
     this.handleBankStatus(accuracy) // 更新题库简介状态
     this.handleBankStatusDetail(accuracy) // 更新题库详情状态
@@ -280,10 +279,11 @@ Page({
         }
       }).then(() => {
         if (accuracy) {
-          wx.navigateTo({
+          wx.redirectTo({
             url: `../endQuestion/endQuestion?id=${bank.parentId}`,
             events: {},
             success: function (res) {
+              utils.buttonUsable(that)
               that.setData({
                 wrongList: []
               })
@@ -574,6 +574,7 @@ Page({
     this.setData({
       examType: app.globalData.examType
     })
+    utils.buttonUsable(this)
   },
 
   /**

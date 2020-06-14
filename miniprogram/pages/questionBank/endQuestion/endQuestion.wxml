@@ -1,127 +1,75 @@
-
-<cu-custom bgColor="bg-yellow"> 
-	<view slot="content">答题结果</view>
-</cu-custom>
-
-<view class="wrap">
-	<view class="title">
-		{{bank.title}}
+<scroll-view scroll-y>
+	<cu-custom bgColor="bg-yellow">
+		<view slot="content">答题结果</view>
+	</cu-custom>
+	<view class="wrap">
+		<view class="title">
+			{{bank.title}}
+		</view>
+		<view class="motto">
+			“每日一套，早日offer”
+		</view>
+		<view class="data">
+			<view class="row">
+				<view class="column">
+					<text>题型</text>
+				</view>
+				<view class="column">
+					<text>正确率</text>
+				</view>
+			</view>
+			<view wx:if="{{bank.questionTypeNum.radio}}" class="row">
+				<view class="column">
+					<text>单选题({{bank.questionTypeNum.radio}}道)</text>
+				</view>
+				<view class="column">
+					<text>{{bank.accuracy.radio}}</text>
+				</view>
+			</view>
+			<view wx:if="{{bank.questionTypeNum.checkbox}}" class="row">
+				<view class="column">
+					<text>多选题({{bank.questionTypeNum.checkbox}}道)</text>
+				</view>
+				<view class="column">
+					<text>{{bank.accuracy.checkbox}}</text>
+				</view>
+			</view>
+			<view wx:if="{{bank.questionTypeNum.judge}}" class="row">
+				<view class="column">
+					<text>判断题({{bank.questionTypeNum.judge}}道)</text>
+				</view>
+				<view class="column">
+					<text>{{bank.accuracy.judge}}</text>
+				</view>
+			</view>
+			<view wx:if="{{bank.questionTypeNum.blank}}" class="row">
+				<view class="column">
+					<text>填空题({{bank.questionTypeNum.blank}}道)</text>
+				</view>
+				<view class="column">
+					<text>{{bank.accuracy.blank}}</text>
+				</view>
+			</view>
+			<view wx:if="{{bank.questionTypeNum.sort}}" class="row">
+				<view class="column">
+					<text>排序题({{bank.questionTypeNum.sort}}道)</text>
+				</view>
+				<view class="column">
+					<text>{{bank.accuracy.sort}}</text>
+				</view>
+			</view>
+			<view wx:if="{{bank.questionTypeNum.unsteady}}" class="row">
+				<view class="column">
+					<text>不定项选题({{bank.questionTypeNum.unsteady}}道)</text>
+				</view>
+				<view class="column">
+					<text>{{bank.accuracy.unsteady}}</text>
+				</view>
+			</view>
+		</view>
 	</view>
-	<view class="motto">
-	“每日一套，早日offer”
+	<view class="btn-wrap">
+		<navigator url="../index/index" open-type="switchTab"><button class="button1">返回题库</button></navigator>
+		<navigator url="../viewQuestions/viewQuestions?class=笔试&id={{id}}"><button class="button2">查看试卷</button></navigator>
 	</view>
-	<view class="data">
-		<view class="row">
-			<view class="column">
-				<text>题型</text>
-			</view>
-			<view class="column">
-				<text>正确率</text>
-			</view>
-		</view>
-		<!-- <view wx:if="{{bank.questionTypeNum.radio}}" class="row">
-			<view class="column">
-				<text>单选题</text>
-			</view>
-			<view class="column">
-				<text>{{bank.questionTypeNum.radio}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.checkbox}}" class="row">
-			<view class="column">
-				<text>多选题</text>
-			</view>
-			<view class="column">
-				<text>{{bank.questionTypeNum.checkbox}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.judge}}" class="row">
-			<view class="column">
-				<text>判断题</text>
-			</view>
-			<view class="column">
-				<text>{{bank.questionTypeNum.judge}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.blank}}" class="row">
-			<view class="column">
-				<text>填空题</text>
-			</view>
-			<view class="column">
-				<text>{{bank.questionTypeNum.blank}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.sort}}" class="row">
-			<view class="column">
-				<text>排序题</text>
-			</view>
-			<view class="column">
-				<text>{{bank.questionTypeNum.sort}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.unsteady}}" class="row">
-			<view class="column">
-				<text>不定项选题</text>
-			</view>
-			<view class="column">
-				<text>{{bank.questionTypeNum.unsteady}}</text>
-			</view>
-		</view> -->
-				<view wx:if="{{bank.questionTypeNum.radio}}" class="row">
-			<view class="column">
-				<text>单选题({{bank.questionTypeNum.radio}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{bank.accuracy.radio}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.checkbox}}" class="row">
-			<view class="column">
-				<text>多选题({{bank.questionTypeNum.checkbox}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{bank.accuracy.checkbox}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.judge}}" class="row">
-			<view class="column">
-				<text>判断题({{bank.questionTypeNum.judge}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{bank.accuracy.judge}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.blank}}" class="row">
-			<view class="column">
-				<text>填空题({{bank.questionTypeNum.blank}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{bank.accuracy.blank}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.sort}}" class="row">
-			<view class="column">
-				<text>排序题({{bank.questionTypeNum.sort}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{bank.accuracy.sort}}</text>
-			</view>
-		</view>
-		<view wx:if="{{bank.questionTypeNum.unsteady}}" class="row">
-			<view class="column">
-        <text>不定项选题({{bank.questionTypeNum.unsteady}}道)</text>
-			</view>
-			<view class="column">
-				<text>{{bank.accuracy.unsteady}}</text>
-			</view>
-		</view>
-
-	</view>
-</view>
-<view class="btn-wrap">
-<navigator url="../index/index" open-type="switchTab"><button  class="button1">返回题库</button></navigator>
-<navigator url="../viewQuestions/viewQuestions?class=笔试&id={{id}}"><button class="button2">查看试卷</button></navigator>
-</view>
-
-
-
+</scroll-view>

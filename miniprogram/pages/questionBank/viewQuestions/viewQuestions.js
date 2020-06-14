@@ -6,6 +6,7 @@ const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
 const commentsForUser = db.collection('commentsForUser')
 const moment = require('../../../utils/moment')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -29,7 +30,7 @@ Page({
     userId: '', // 用户的ID
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
-    // topNum: 0,
+    buttonClicked: false,
   },
   goTop: function () {  // 一键回到顶部
     // this.setData({
@@ -42,14 +43,14 @@ Page({
         })
       }).exec()
     },
-    goBottom: function() {
-      wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
-        // 使页面滚动到底部
-        wx.pageScrollTo({
-          scrollTop: rect.bottom
-        })
-      }).exec()
-    },
+  goBottom: function() {
+    wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
+      // 使页面滚动到底部
+      wx.pageScrollTo({
+        scrollTop: rect.bottom
+      })
+    }).exec()
+  },
   // 处理下一题
   handleNext: function (e) {
     wx.showLoading({
@@ -90,21 +91,12 @@ Page({
           events: {
           },
           success: function(res) {
+            utils.buttonClicked(that, 1000)
             that.setData({
               wrongList: []
             }) 
           }
         })
-
-
-        // wx.navigateTo({
-        //   url: '../endQuestion/endQuestion',
-        //   events: {},
-        //   success: function (res) {
-        //     // 通过eventChannel向被打开页面传送数据
-        //     res.eventChannel.emit('getAccuracy', bank.accuracy)
-        //   }
-        // })
       }
     } else {
       if (questionIndex < bank.bank.length - 1) {
@@ -391,6 +383,7 @@ Page({
       }, () => {
         this.getStatus()
         this.updateMsg()
+        this.viewComment()
       })
       wx.hideLoading()
       app.globalData.examBank.bank = result
@@ -753,6 +746,17 @@ Page({
     wx.hideLoading()
 
   },
+  // 查看评论
+  viewComment: function() {
+    let {viewType} = this.data
+    if (viewType === 'viewComment') {
+      this.setData({
+        ifViewAllComments: true
+      }, () => {
+        this.goBottom()
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -775,7 +779,8 @@ Page({
     this.setData({
       class: '笔试',
       parentId: options.id * 1,
-      questionIndex: options.questionIndex * 1 || 0
+      questionIndex: options.questionIndex * 1 || 0,
+      viewType: options.viewType, // 如果为viewComment，则代表是查看评论
     })
 
   },
@@ -788,6 +793,7 @@ Page({
    */
   onShow: function () {
     this.getCurrentBank(this.data.parentId)
+    utils.buttonUsable(this)
   },
 
   /**

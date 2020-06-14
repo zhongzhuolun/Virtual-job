@@ -1,0 +1,36 @@
+page {
+  height: 100%;
+  background-color: white;
+}
+.wrap {
+  padding: 40rpx;
+}
+.header {
+  text-indent: 2em;
+}
+.header text {
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.body > view {
+  margin: 20rpx 0;
+}
+.body .title {
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.body .content {
+  text-indent: 2em;
+  display: inline-block;
+}
+.footer {
+  text-indent: 2em;
+}
+.footer .digest {
+  margin-bottom: 20rpx;
+
+}
+.footer .attention {
+  font-weight: bold;
+  font-size: 28rpx;
+}

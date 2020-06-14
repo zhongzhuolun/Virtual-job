@@ -1,36 +1,20 @@
-const db = wx.cloud.database()
-const interviewBankForUser = db.collection('interviewBankForUser')
+// miniprogram/pages/questionBank/banner/banner.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    banksList: [],
-    industry: wx.getStorageSync('industry')
+
   },
-  getData: function() {
-    wx.showLoading({
-      title: '加载中',
-    })
-    let {banksList, industry} = this.data
-      interviewBankForUser.get().then((res) => {
-        banksList = res.data[0].interviewBankList
-        banksList = banksList.filter((value, index) => {
-          return value.industry === industry
-        })
-        this.setData({
-          banksList
-        }, () => {
-          wx.hideLoading()
-        })
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      type: options.bannerid
+    })
   },
 
   /**
@@ -44,11 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      industry: wx.getStorageSync('industry')
-    }, () => {
-      this.getData()
-    })
+
   },
 
   /**

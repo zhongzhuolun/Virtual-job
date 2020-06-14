@@ -2,14 +2,13 @@
 	<view slot="content">小黄求职</view>
 </cu-custom>
 <view class="wrap">
-  <view class="offer">
-  <image src="../../../images/logo/logo.png"></image>
-  </view>
-    <button bindtap="handleWritten"  class="written">
-      <text>笔试</text>
-    </button>
-     <button bindtap="handleInterview" class="interview">
-      <text>面试</text>
-    </button>
+	<view class="offer">
+		<image src="../../../images/logo/logo.png"></image>
+	</view>
+	<button bindtap="handleWritten" class="written">
+		<text>笔试</text>
+	</button>
+	<button bindtap="handleInterview" class="interview">
+		<text>面试</text>
+	</button>
 </view>
-

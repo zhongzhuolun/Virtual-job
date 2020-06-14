@@ -1,6 +1,4 @@
-const app = getApp()
 const db = wx.cloud.database()
-const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
 Page({
 
@@ -120,6 +118,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '自定义分享标题',
+      path: '/page/user?id=123'
+     }
   }
 })

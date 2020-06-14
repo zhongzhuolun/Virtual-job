@@ -1,8 +1,6 @@
-<!--miniprogram/pages/center/index/index.wxml-->
 <cu-custom bgColor="bg-yellow">
 	<view slot="content">个人中心</view>
 </cu-custom>
-
 <view class="wrap">
 	<block wx:if="{{userInfo.nickName}}">
 		<navigator url="../myCenter/myCenter">
@@ -26,7 +24,7 @@
 			<view class="img-wrap">
 				<image src="../../../images/icon/headphone.png" class="headphone"></image>
 			</view>
-			<view style="width: 279rpx;"> 
+			<view style="width: 279rpx;">
 				<text class="no-login">未登录</text>
 			</view>
 			<view class="login-btn">
@@ -34,10 +32,6 @@
 			</view>
 		</view>
 	</block>
-
-
-
-
 	<view class="my-bank">
 		<view class="banks" bindtap="myBanks">
 			<view class="img-wrap">
@@ -58,8 +52,6 @@
 			</view>
 		</view>
 	</view>
-
-
 	<view class="my-message">
 		<view class="msg" bindtap="myMsg">
 			<view class="img-wrap">
@@ -74,7 +66,7 @@
 			</view>
 
 		</view>
-		
+
 		<button class="feedback" open-type="feedback">
 			<view class="img-wrap">
 				<image src="../../../images/icon/message.png" class="message"></image>
@@ -84,7 +76,6 @@
 				<text>期待收到您的意见和建议</text>
 			</view>
 		</button>
-
 	</view>
 	<view class="agree-policy">
 		<text>点击查看</text>

@@ -6,6 +6,8 @@ const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
 const commentsForUser = db.collection('commentsForUser')
 const moment = require('../../../utils/moment')
+import utils from '../../../utils/utils'
+
 Page({
 
   /**
@@ -30,7 +32,7 @@ Page({
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
     audioPlay: 'init', // 录音播放状态
-    // topNum: 0,
+    buttonClicked: false,
   },
   goBottom: function() {
     wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
@@ -75,6 +77,7 @@ Page({
       })
     } else {
       // 代表查看总结
+      utils.buttonClicked(this, 1000)
       wx.navigateTo({
         url: '../endInterview/endInterview?id=' + parentId,
       })
@@ -656,6 +659,7 @@ Page({
 
   // 控制播放录音
   play: function () {
+    utils.buttonClicked(this)
     let {questionsFileArry, questionIndex, audioPlay} = this.data
     if (audioPlay === 'init') {
       this.yuyinPlay(questionsFileArry[questionIndex].tempFilePaths[1])
@@ -697,18 +701,26 @@ Page({
       })
     })
   },
+  // 结束语音
+  end: function (e) {
+    if (this.innerAudioContext) {
+      this.innerAudioContext.pause()
+      this.innerAudioContext = null
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     this.getCurrentBank(this.data.parentId)
+    utils.buttonUsable(this)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.stop()
+    // this.stop()
     this.setData({
       audioPlay: 'init'
     })
@@ -718,7 +730,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.end()
   },
 
   /**

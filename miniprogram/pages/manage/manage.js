@@ -13,7 +13,7 @@ Page({
    */
   data: {
     bankIndex: 0, // 
-    id: 103, // 题库的ID
+    id: 122, // 题库的ID
     banks, // 面试题库简介
     detailBanks, // 面试题库详情
     banks1, // 笔试题库简介

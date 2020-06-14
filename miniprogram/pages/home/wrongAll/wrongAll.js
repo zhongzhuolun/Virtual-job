@@ -1,4 +1,3 @@
-// miniprogram/pages/home/wrongAll/wrongAll.js
 const app = getApp()
 const db = wx.cloud.database()
 const bankStatusList = db.collection('bank-status')
@@ -6,6 +5,7 @@ const writtenQuestions = db.collection('writtenQuestions')
 const writtenBankForUser = db.collection('writtenBankForUser')
 const commentsForUser = db.collection('commentsForUser')
 const moment = require('../../../utils/moment')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -13,7 +13,6 @@ Page({
    */
   data: {
     class: '', // 当前是面试还是笔试
-    // examBank: {}, // 笔试题中包含当前用户所做的题库，错误集合，选择的集合
     questionIndex: 0, // 当前题目的序列
     correct_answer: '', // 正确答案
     ifViewAllComments: false, // 查看所有评论
@@ -29,8 +28,7 @@ Page({
     userId: '', // 用户的ID
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
-    // topNum: 0,
-
+    buttonClicked: false,
   },
   goBottom: function() {
     wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
@@ -87,6 +85,7 @@ Page({
       } else {
         // 代表查看总结
         // wx.navigateBack()
+        utils.buttonClicked(this, 1000)
         wx.navigateTo({
           url: `../score/score?id=${bank.parentId}`,
           success: function (res) {
@@ -111,6 +110,7 @@ Page({
         })
       } else {
         // 代表查看总结
+        utils.buttonClicked(this, 1000)
         wx.navigateTo({
           url: `../score/score?id=${bank.parentId}`,
           success: function (res) {
@@ -124,7 +124,6 @@ Page({
   },
   // 处理上一题
   handlePre: function (e) {
-   
     let {
       questionIndex,
       correct_answer,
@@ -777,8 +776,7 @@ Page({
    */
   onShow: function () {
     this.getCurrentBank(this.data.parentId)
-
-    // this.getStatus()
+    utils.buttonUsable(this)
   },
 
   /**

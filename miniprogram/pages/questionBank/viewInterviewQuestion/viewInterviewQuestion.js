@@ -5,6 +5,7 @@ const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
 const commentsForUser = db.collection('commentsForUser')
 const moment = require('../../../utils/moment')
+import utils from '../../../utils/utils'
 Page({
 
   /**
@@ -29,14 +30,9 @@ Page({
     placeHolderValue: '发表你对这道题的想法', // 评论框中的placeholder的值
     autoFocus: false, // 是否自动聚焦
     audioPlay: 'init', // 录音播放状态
-    // topNum: 0, // 竖直滚动距离
+    buttonClicked: false,
   },
- //回到顶部
-//  goTop: function () {  // 一键回到顶部
-//   this.setData({
-//     topNum: 0
-//     });
-//   },
+
   goBottom: function() {
     wx.createSelectorQuery().select('#page').boundingClientRect(function(rect){
       // 使页面滚动到底部
@@ -85,6 +81,7 @@ Page({
     } else {
       // 代表查看总结
       wx.hideLoading()
+      utils.buttonClicked(this, 1000)
       wx.navigateTo({
         url: '../endInterviewQuestion/endInterviewQuestion?id=' + parentId,
       })
@@ -282,6 +279,7 @@ Page({
       }, () => {
         this.updateMsg()
         this.getStatus()
+        this.viewComment()
       })
       wx.hideLoading()
       app.globalData.examBank.bank = result
@@ -636,6 +634,17 @@ Page({
     // this.updateComment(dot, 'dot')
     wx.hideLoading()
   },
+    // 查看评论
+  viewComment: function() {
+    let {viewType} = this.data
+    if (viewType === 'viewComment') {
+      this.setData({
+        ifViewAllComments: true
+      }, () => {
+        this.goBottom()
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -658,7 +667,8 @@ Page({
     this.setData({
       class: '面试',
       parentId: options.id * 1,
-      questionIndex: options.questionIndex * 1 || 0
+      questionIndex: options.questionIndex * 1 || 0,
+      viewType: options.viewType, // 如果为viewComment，则代表是查看评论
     })
   },
   /**
@@ -668,6 +678,7 @@ Page({
 
   // 控制播放录音
   play: function () {
+    utils.buttonClicked(this)
     let {
       questionsFileArry,
       questionIndex,
@@ -691,6 +702,13 @@ Page({
         this.innerAudioContext.pause()
       }
     })
+  },
+  // 结束语音
+  end: function (e) {
+    if (this.innerAudioContext) {
+      this.innerAudioContext.pause()
+      this.innerAudioContext = null
+    }
   },
   // 真正播放语音
   yuyinPlay: function (src) {
@@ -718,13 +736,13 @@ Page({
    */
   onShow: function () {
     this.getCurrentBank(this.data.parentId)
+    utils.buttonUsable(this)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.stop()
     this.setData({
       audioPlay: 'init'
     })
@@ -734,7 +752,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.end()
   },
 
   /**

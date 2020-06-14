@@ -1,8 +1,6 @@
 // miniprogram/pages/center/index/index.js
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const commentsForUser = db.collection('commentsForUser')
-const bankStatusList = db.collection('bank-status')
 const app = getApp()
 Page({
 

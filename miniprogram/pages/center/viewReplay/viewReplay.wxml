@@ -1,4 +1,3 @@
-<!--miniprogram/pages/center/viewReplay/viewReplay.wxml-->
 <cu-custom bgColor="bg-yellow" isBack="{{true}}">
 	<view slot="content"></view>
 	<block wx:if="{{type === 'reply'}}">
@@ -14,50 +13,49 @@
 <view class="wrap">
 	<block wx:if="{{type === 'reply'}}">
 		<block wx:for="{{replyList}}" wx:key="index">
-					<view class="item" id="{{item.replyId}}" data-index="{{item.questionIndex}}" data-commentid="{{item.commentId}}" bindtap="handleViewComment">
-						<view class="avatar">
-							<image src="{{item.avatar}}"></image>
-						</view>
-						<view class="content">
-							<view class="user">
-								<text class="user-name">{{item.user_name}}</text>
-								<text class="replay">回复了你的评论</text>
-							</view>
-							<view class="time">
-								<text>{{item.create_time}}</text>
-							</view>
-						</view>
-						<view class="dot" wx:if="{{!item.ifView}}">
-							<text class="cuIcon-title text-yellow"></text>
-						</view>
+			<view class="item" id="{{item.replyId}}" data-index="{{item.questionIndex}}" data-commentid="{{item.commentId}}" bindtap="{{!buttonClicked?'handleViewComment':''}}">
+				<view class="avatar">
+					<image src="{{item.avatar}}"></image>
+				</view>
+				<view class="content">
+					<view class="user">
+						<text class="user-name">{{item.user_name}}</text>
+						<text class="replay">回复了你的评论</text>
 					</view>
+					<view class="time">
+						<text>{{item.create_time}}</text>
+					</view>
+				</view>
+				<view class="dot" wx:if="{{!item.ifView}}">
+					<text class="cuIcon-title text-yellow"></text>
+				</view>
+			</view>
 		</block>
 		<view wx:if="{{replyList.length === 0}}">
 			<view class="item">
 				<text class="no-msg">暂时没有收到回复哦</text>
 			</view>
 		</view>
-
 	</block>
 	<block wx:elif="{{type === 'appre'}}">
 		<block wx:for="{{dotList}}" wx:key="index">
-					<view class="item" id="{{item.dotId}}" data-commentid="{{item.commentId}}" bindtap="handleViewComment">
-						<view class="avatar">
-							<image src="{{item.avatar}}"></image>
-						</view>
-						<view class="content">
-							<view class="user">
-								<text class="user-name">{{item.useName}}</text>
-								<text class="replay">点赞了你的评论</text>
-							</view>
-							<view class="time">
-								<text>{{item.create_time}}</text>
-							</view>
-						</view>
-						<view class="dot" wx:if="{{!item.ifView}}">
-							<text class="cuIcon-title text-yellow"></text>
-						</view>
+			<view class="item" id="{{item.dotId}}" data-commentid="{{item.commentId}}" bindtap="{{!buttonClicked?'handleViewComment':''}}">
+				<view class="avatar">
+					<image src="{{item.avatar}}"></image>
+				</view>
+				<view class="content">
+					<view class="user">
+						<text class="user-name">{{item.useName}}</text>
+						<text class="replay">点赞了你的评论</text>
 					</view>
+					<view class="time">
+						<text>{{item.create_time}}</text>
+					</view>
+				</view>
+				<view class="dot" wx:if="{{!item.ifView}}">
+					<text class="cuIcon-title text-yellow"></text>
+				</view>
+			</view>
 		</block>
 		<view wx:if="{{dotList.length === 0}}">
 			<view class="item">

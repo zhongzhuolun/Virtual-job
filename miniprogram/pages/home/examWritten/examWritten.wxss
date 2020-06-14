@@ -1,5 +1,6 @@
 scroll-view {
   background: white;
+  height: 100%;
 }
 .bank-wrap {
   background: white;
@@ -83,7 +84,6 @@ scroll-view {
 .detail {
   margin: 20vh auto 60rpx;
   width: 616rpx;
-  line-height: 52rpx;
   border-radius: 50rpx;
   background-color: rgba(255, 255, 255, 0.47);
   color: rgba(16, 16, 16, 1);

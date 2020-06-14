@@ -1,13 +1,10 @@
 const db = wx.cloud.database()
-const banksList = db.collection('banks-list')
 const bankStatusList = db.collection('bank-status')
 const interviewQuestions = db.collection('interviewQuestions')
 const interviewBankForUser = db.collection('interviewBankForUser')
 const plugin = requirePlugin("WechatSI") // 引入文字转语音的插件
 const manager = plugin.getRecordRecognitionManager() // 获取文字转语音的插件对象
-const recorderManager = wx.getRecorderManager() // 获取录音对象
-const cameraContext = wx.createCameraContext()
-let app = getApp()
+const app = getApp()
 Page({
 
   /**
@@ -79,6 +76,7 @@ Page({
   // 开始录音
   getlocat: function () {
     let that = this
+    this.recorderManager = wx.getRecorderManager()
     wx.authorize({
       scope: 'scope.record',
       success() {
@@ -95,14 +93,14 @@ Page({
           recordState: true
         })
         // 开始录音
-        recorderManager.start(options)
+        that.recorderManager.start(options)
         // 监听录音开始过程
-        recorderManager.onStart(() => {
-          
+        that.recorderManager.onStart(() => {
+
           console.log('recorder start')
         })
         // 监听录音失败
-        recorderManager.onError((res) => {
+        that.recorderManager.onError((res) => {
           console.log(res);
         })
       }
@@ -113,8 +111,7 @@ Page({
     wx.showLoading({
       title: '加载中'
     })
-    const recorderManager = wx.getRecorderManager()
-    let that = this
+    // const recorderManager = wx.getRecorderManager()
     let {
       tempFilePaths,
       questionsFileArry,
@@ -122,43 +119,40 @@ Page({
     } = this.data
     let nowIndex = this.pageObj.nowIndex // 获取当前问题的索引
     let date = new Date()
-    that.setData({
+    this.setData({
       recordState: false
     })
-    recorderManager.stop()
-    recorderManager.onStop((res) => {
-      console.log('recorder stop', res)
-      
-      const {
-        tempFilePath
-      } = res
-      tempFilePaths.push(tempFilePath)
-      wx.cloud.uploadFile({
-        cloudPath: `${date.getTime()}.mp3`, // 上传至云端的路径
-        filePath: tempFilePath, // 小程序临时文件路径
-        success: res => {
-          // 返回文件 ID
-          questionsFileArry[nowIndex].tempFilePaths.push(res.fileID)
-          this.setData({
-            questionsFileArry
-          }, () => {
-            console.log(questionsFileArry)
-            wx.hideLoading()
-            this.handleBankStatusDetail()
-            
-          })
-        
-        },
-        fail: console.error
+    if (this.recorderManager) {
+      this.recorderManager.stop()
+      this.recorderManager.onStop((res) => {
+        console.log('recorder stop', res)
+
+        const {
+          tempFilePath
+        } = res
+        tempFilePaths.push(tempFilePath)
+        wx.cloud.uploadFile({
+          cloudPath: `${date.getTime()}.mp3`, // 上传至云端的路径
+          filePath: tempFilePath, // 小程序临时文件路径
+          success: res => {
+            // 返回文件 ID
+            questionsFileArry[nowIndex].tempFilePaths.push(res.fileID)
+            this.setData({
+              questionsFileArry
+            }, () => {
+              console.log(questionsFileArry)
+              wx.hideLoading()
+              this.handleBankStatusDetail()
+            })
+          },
+          fail: console.error
+        })
+        this.setData({
+          tempFilePaths
+        })
       })
-      this.setData({
-        tempFilePaths
-      })
-    })
-  },
-  // 播放录音
-  play: function () {
-    this.yuyinPlay(this.data.tempFilePaths[0], 'mine')
+    }
+
   },
   // 识别语音 -- 初始化
   initRecord: function () {
@@ -254,56 +248,42 @@ Page({
       }
     })
   },
-
   // 播放语音
-  yuyinPlay: function (e, type) {
-    console.log(e, type)
+  yuyinPlay: function (e) {
+    // wx.showLoading({
+    //   title: '组织语言中',
+    // })
+    this.innerAudioContext = wx.createInnerAudioContext()
 
-    const innerAudioContext = wx.createInnerAudioContext()
-    if (type === 'mine') {
-      // 测试能否正常播放多条语音
-      innerAudioContext.autoplay = true
-      innerAudioContext.src = e;
-    } else {
-      if (this.data.src == '') {
-        console.log(暂无语音);
-        return;
-      }
-
-      innerAudioContext.src = this.data.src //设置音频地址
+    if (this.data.src == '') {
+      console.log(暂无语音);
+      return;
     }
-    innerAudioContext.play(); //播放音频
-
-    innerAudioContext.onPlay(() => {
+    this.innerAudioContext.src = this.data.src //设置音频地址
+    this.innerAudioContext.autoplay = true
+    this.innerAudioContext.play(); //播放音频
+    this.innerAudioContext.onPlay(() => {
       this.setData({
         btnDisabled: true
       })
       console.log('开始播放', this.pageObj.i)
-
-      if (type === 'mine') {
-        this.pageObj.i++
-        console.log(this.pageObj.i)
-      }
     })
-    innerAudioContext.onEnded(() => {
+    this.innerAudioContext.onEnded(() => {
       console.log('播放结束', this.pageObj.i)
       this.setData({
         btnDisabled: false
       })
-      if (this.pageObj.i < this.data.tempFilePaths.length && type === 'mine') {
-        this.yuyinPlay(this.data.tempFilePaths[this.pageObj.i], 'mine')
-      } else {
-        // 开启录音
-        console.log('开启录音')
-        this.getlocat()
-      }
+      // 开启录音
+      console.log('开启录音')
+      this.getlocat()
     })
 
   },
   // 结束语音
   end: function (e) {
-    const innerAudioContext = wx.createInnerAudioContext()
-    innerAudioContext.pause(); //暂停音频
+    if (this.innerAudioContext) {
+      this.innerAudioContext.pause()
+    }
   },
   // 开始答题
   handleStart: function (e) {
@@ -315,6 +295,9 @@ Page({
       success(res) {
         if (res.confirm) {
           that.wordYun()
+          that.setData({
+            btnDisabled: true
+          })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -402,7 +385,10 @@ Page({
   },
   // 处理更新题库详情状态 （只更新该用户的数据）
   handleBankStatusDetail: function () {
-    let {questionsFileArry, bank} = this.data
+    let {
+      questionsFileArry,
+      bank
+    } = this.data
     // let bank = this.data.bank
     let bankId = bank.parentId
     bank.questionsFileArry = questionsFileArry
@@ -425,12 +411,8 @@ Page({
         }
       }).then(() => {
         if (this.data.ifEnd) {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../endInterview/endInterview?id=' + bank.parentId,
-            // success: function(res) {
-            //   // 通过eventChannel向被打开页面传送数据
-            //   res.eventChannel.emit('questionsFileArry', { questionsFileArry })
-            // }
           })
         }
       })
@@ -440,6 +422,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      btnDisabled: false
+    })
   },
   pageObj: {
     nowIndex: 0,
@@ -450,7 +435,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
@@ -458,14 +443,16 @@ Page({
    */
   onUnload: function () {
     let {
-      bank,ifEnd
+      bank,
+      ifEnd
     } = this.data
     if (!ifEnd) {
       this.stop()
+      this.end()
       this.handleBankStatus() // 更新题库简介状态
       this.handleBankStatusDetail() // 更新题库详情状态
       app.globalData.writtenBank = bank
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../endInterview/endInterview?id=' + bank.parentId,
       })
       this.setData({

@@ -27,7 +27,8 @@
     "pages/questionBank/answerInterviewQuestion/answerInterviewQuestion",
     "pages/manage/manage",
     "pages/center/viewVideo/viewVideo",
-    "pages/center/agreePolicy/agreePolicy"
+    "pages/center/agreePolicy/agreePolicy",
+    "pages/questionBank/banner/banner"
   ],
   "window": {
     "navigationStyle": "custom"

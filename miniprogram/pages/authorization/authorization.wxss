@@ -49,11 +49,11 @@
   text-align: center;
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(0, 0, 0, 0.33);
   font-family: PingFang SC;
-  border: 4rpx solid rgba(0, 0, 0, 1);
+  border: 2rpx solid rgba(0, 0, 0, 1);
 }
 .unfinished .continute {
-  left: 112rpx;
+  left: 102rpx;
 }
 .unfinished .complete {
-  left: 408rpx;
+  right: 102rpx;
 }

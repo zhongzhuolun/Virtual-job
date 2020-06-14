@@ -2,7 +2,6 @@
 <cu-custom bgColor="bg-yellow">
 	<view slot="content">题库</view>
 </cu-custom>
-
 <view class="wrap">
 	<view style="background: #ffc000">
 		<view class="written {{checkoutBank === 'written'?'active':''}}" bindtap="handleWritten">
@@ -12,17 +11,16 @@
 			<text>面试</text>
 		</view>
 	</view>
-
 	<view class="swiper-wrap">
 		<swiper indicator-dots="{{true}}" circular autoplay="{{true}}">
 			<swiper-item>
-				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/36801589026721_.pic_hd.jpg"></image>
+				<image id='1' bindtap="handelBanner" src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/36801589026721_.pic_hd.jpg"></image>
 			</swiper-item>
 			<swiper-item>
-				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35101589021877_.pic_hd.jpg"></image>
+				<image id='2' bindtap="handelBanner" src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35101589021877_.pic_hd.jpg"></image>
 			</swiper-item>
 			<swiper-item>
-				<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35091589021877_.pic_hd.jpg"></image>
+				<image id='3' bindtap="handelBanner" src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/banners/35091589021877_.pic_hd.jpg"></image>
 			</swiper-item>
 		</swiper>
 		<view class="my-search">
@@ -30,28 +28,24 @@
 			<input type="text" value="{{searchValue}}" bindinput="handleSearch" placeholder="查找试卷"></input>
 		</view>
 	</view>
-
 	<view class="title">
 		<view class="linel"></view>
 		<text>在线答题</text>
 		<view class="liner"></view>
 	</view>
 	<block wx:if="{{loginStatus}}">
-
 		<view class="bank-wrap">
 			<van-tabs active="{{ active }}" color="#EFB806" bind:change="onChange">
 				<van-tab title="精选">
 					<!-- <view hidden="{{!isLoading}}" class="loading-img">
 						<image src="cloud://virtual-bxkak.7669-virtual-bxkak-1301807690/loading/WechatIMG501.png"></image>
 					</view> -->
-				
 					<block hidden="{{isLoading}}" wx:if="{{item.bankList.length > 0}}">
 						<!-- <scroll-view bindscrolltolower="myReachBottom" scroll-y="true" style="height: 600rpx;"> -->
-							<view wx:for="{{item.bankList}}" wx:key="id">
-								<template is="bankItem" data="{{item}}" />
-							</view>
+						<view wx:for="{{item.bankList}}" wx:key="id">
+							<template is="bankItem" data="{{item}}" />
+						</view>
 						<!-- </scroll-view> -->
-
 					</block>
 					<block wx:else>
 						<view class="no-bank">
@@ -65,9 +59,9 @@
 					</view> -->
 					<block hidden="{{isLoading}}" wx:if="{{colBankList.length > 0}}">
 						<!-- <scroll-view bindscrolltoupper="" bindscrolltolower="{{myReachBottom}}" scroll-y="true" style="height: 600rpx;"> -->
-							<view wx:for="{{colBankList}}" wx:key="id">
-								<template is="bankItem" data="{{item}}" />
-							</view>
+						<view wx:for="{{colBankList}}" wx:key="id">
+							<template is="bankItem" data="{{item}}" />
+						</view>
 						<!-- </scroll-view> -->
 
 					</block>
@@ -85,9 +79,9 @@
 					<block hidden="{{isLoading}}" wx:if="{{errBankList.length > 0}}">
 						<!-- <scroll-view scroll-y="true" style="height: 600rpx;"> -->
 
-							<view wx:for="{{errBankList}}" wx:key="id">
-								<template is="bankItem" data="{{item}}" />
-							</view>
+						<view wx:for="{{errBankList}}" wx:key="id">
+							<template is="bankItem" data="{{item}}" />
+						</view>
 						<!-- </scroll-view> -->
 					</block>
 

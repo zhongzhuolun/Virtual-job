@@ -1,4 +1,3 @@
-// miniprogram/pages/center/myCenter/myCenter.js
 Page({
 
   /**

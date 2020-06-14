@@ -3,7 +3,7 @@ page {
 }
 .written, .interview {
   display: inline-block;
-  width: 367rpx;
+  width: 366rpx;
   opacity: 0.8;
   line-height: 104rpx;
   border-radius: 8rpx;
@@ -21,7 +21,7 @@ page {
 
 .interview {
   left: 384rpx;
-  width: 366rpx;
+  width: 365rpx;
   opacity: 0.8;
 }
 .interview.active {
@@ -145,8 +145,6 @@ image {
   font-size: 28rpx;
   text-align: center;
   font-family: PingFang SC;
-
-  /* font-size: 36rpx; */
 }
 .limit-time {
   position: absolute;
@@ -198,17 +196,14 @@ image {
   position: absolute;
   bottom: 2vh;
   left: 80rpx;
-  /* top: 47vh; */
   width: 590rpx;
   height: 66rpx;
-  line-height: 66rpx;
+  line-height: 62rpx;
   border-radius: 100rpx;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0rpx 4rpx 10rpx 0rpx rgba(155, 155, 155, 0.51);
   border: 2rpx solid rgba(255, 255, 255, 0);
-  /* z-index: 9999; */
   font-size: 32rpx;
-  line-height: 66rpx;
   font-family: Helvetica-regular;
 }
 .my-search input {

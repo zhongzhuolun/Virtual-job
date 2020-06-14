@@ -23,7 +23,7 @@ image {
   top: 55vh;
   width: 248rpx;
   height: 254rpx;
-  line-height: 254rpx;
+  line-height: 250rpx;
   background-color: rgba(85, 65, 3, 1);
   font-size: 72rpx;
   text-align: center;

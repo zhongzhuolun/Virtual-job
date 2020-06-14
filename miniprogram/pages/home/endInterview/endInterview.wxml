@@ -1,35 +1,35 @@
-
-<cu-custom bgColor="bg-yellow">
-	<view slot="content">答题结果</view>
-</cu-custom>
-<view class="{{questionsFileArry.length === 0? 'hide': ''}}" >
-	<view wx:if="{{!audioPlay}}" class="video1" bindtap="play">
-		<text>回放完整过程</text>
-		<view class="audio-status">
-			<text  class="text-yellow cuIcon-playfill"></text>
+<scroll-view scroll-y>
+	<cu-custom bgColor="bg-yellow">
+		<view slot="content">答题结果</view>
+	</cu-custom>
+	<view class="{{questionsFileArry.length === 0? 'hide': ''}}">
+		<view wx:if="{{!audioPlay}}" class="video1" bindtap="{{!buttonClicked?'play':''}}">
+			<text>回放完整过程</text>
+			<view class="audio-status">
+				<text  class="text-yellow cuIcon-playfill"></text>
+			</view>
+		</view>
+		<view wx:else class="video1" bindtap="{{!buttonClicked?'stop':''}}">
+			<text>正在播放录音</text>
+			<view class="audio-status">
+				<text class="text-yellow cuIcon-stop"></text>
+			</view>
 		</view>
 	</view>
-	<view wx:else class="video1" bindtap="stop">
-		<text>正在播放录音</text>
-		<view class="audio-status">
-			<text class="text-yellow cuIcon-stop"></text>
+	<view class="blankBox">
+		<view class="answer1">面试常见注意事项/技巧：
+			<view>▪️ 穿着打扮得体； </view>
+			<view>▪️ 言行举止符合礼节； </view>
+			<view>▪️ 保持笑容，不做多余的动作；</view>
+			<view>▪️ 控制好自我情绪；</view>
+			<view>▪️ 注意自己的表达逻辑；</view>
+			<view>▪️ 面带微笑答题，且要有眼神交流；</view>
 		</view>
 	</view>
-</view>
-<view class="blankBox">
-	<view class="answer1">面试常见注意事项/技巧：
-		<view>▪️ 穿着打扮得体； </view> 
-		<view>▪️ 言行举止符合礼节； </view>
-		<view>▪️ 保持笑容，不做多余的动作；</view>
-		<view>▪️ 控制好自我情绪；</view>
-		<view>▪️ 注意自己的表达逻辑；</view>
-		<view>▪️ 面带微笑答题，且要有眼神交流；</view>
+	<view class="btns">
+		<button class="allExam" bindtap="toIndex">
+			返回首页
+		</button>
+		<button class="questiobBank" bindtap="viewAll">查看试卷</button>
 	</view>
-</view>
-<view class="btns">
-	<button class="allExam" bindtap="toIndex">
-	返回首页
-	</button>
-	<button class="questiobBank" bindtap="viewAll">查看试卷</button>
-</view>
-
+</scroll-view>

@@ -32,7 +32,7 @@ page {
   width: 40rpx;
   height: 56rpx;
   line-height: 56rpx;
-  padding: 0 0 0 20rpx;
+  padding: 0 0 0 16rpx;
 }
 
 .bank-wrap {

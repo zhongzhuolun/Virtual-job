@@ -1,4 +1,3 @@
-	<!-- <scroll-view scroll-y scroll-top="{{topNum}}"  enable-back-to-top="true"> -->
 	<cu-custom bgColor="bg-yellow" isBack="{{true}}">
 		<view slot="content">查看试卷</view>
 		<view slot="backText"></view>
@@ -43,20 +42,16 @@
 				</view>
 			</view>
 		</view>
-
 		<view class="cu-modal {{modalName=='Modal'?'show':''}}" bindtap="hideModal">
 			<view class="cu-dialog" catchtap>
 				<view class="cu-bar bg-white justify-end">
-				<!-- <view wx:if="{{bank.wrongList.length > 0}}" class="cu-btn bg-yellow" bindtap="checkType">
-						{{ifViewWrong?'完整试卷':'只看错题'}}
-					</view> -->
 					<view class="action" bindtap="hideModal">
 						<text class="cuIcon-close text-red" style="font-size: 48rpx;"></text>
 					</view>
 				</view>
 				<view wx:if="{{bank.wrongList.length > 0}}" class="type-btn bg-yellow" bindtap="checkType">
-						{{ifViewWrong?'完整试卷':'只看错题'}}
-					</view>
+					{{ifViewWrong?'完整试卷':'只看错题'}}
+				</view>
 				<view class="question-index-wrap">
 					<block wx:if="{{ifViewWrong}}">
 						<block wx:for="{{bank.bank}}" wx:key="index">
@@ -70,7 +65,7 @@
 					</block>
 
 				</view>
-			
+
 			</view>
 		</view>
 		<view class="bank" wx:key="id">
@@ -220,25 +215,20 @@
 			</view>
 			<view class="view-all" bindtap="viewAllComments">
 				{{ifViewAllComments?'收起评论':'查看全部评论'}}</view>
-			<!-- <view class="publish">
-				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
-				<view bindtap="handlePublish" class="publish-comment">提交</view>
-			</view> -->
+
 		</view>
 	</view>
-<!-- </scroll-view> -->
 
 	<view class="next-publish">
 		<block wx:if="{{ifViewWrong}}">
 			<view class="pre-question chekckout-question" bindtap="handlePre">
-				<!-- <text hidden="{{!(wrongIndex > 0)}}" class="cuIcon-pullleft text-yellow"></text> -->
-					<text class="cuIcon-pullleft  text-{{wrongIndex > 0?'yellow': 'gray'}}"></text>
+				<text class="cuIcon-pullleft  text-{{wrongIndex > 0?'yellow': 'gray'}}"></text>
 			</view>
 			<view class="publish">
 				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
 				<view bindtap="handlePublish" class="publish-comment">提交</view>
 			</view>
-			<view class="next-question chekckout-question" bindtap="handleNext">
+			<view class="next-question chekckout-question" bindtap="{{!buttonClicked?'handleNext':''}}">
 				<block wx:if="{{wrongIndex < wrongList.length - 1}}">
 					<text class="cuIcon-pullright text-yellow"></text>
 				</block>
@@ -249,14 +239,13 @@
 		</block>
 		<block wx:else>
 			<view class="pre-question chekckout-question" bindtap="handlePre">
-				<!-- <text hidden="{{!(questionIndex > 0)}}" class="cuIcon-pullleft text-yellow"></text> -->
-					<text class="cuIcon-pullleft  text-{{questionIndex > 0?'yellow': 'gray'}}"></text>
+				<text class="cuIcon-pullleft  text-{{questionIndex > 0?'yellow': 'gray'}}"></text>
 			</view>
 			<view class="publish">
 				<input placeholder="{{placeHolderValue}}" value="{{commentContent}}" bindblur="handleBlur" bindinput="handleComment" bindtap="handleInput" focus="{{autoFocus}}"></input>
 				<view bindtap="handlePublish" class="publish-comment">发送</view>
 			</view>
-			<view class="next-question chekckout-question" bindtap="handleNext">
+			<view class="next-question chekckout-question" bindtap="{{!buttonClicked?'handleNext':''}}">
 				<block wx:if="{{questionIndex < bank.bank.length - 1}}">
 					<text class="cuIcon-pullright text-yellow"></text>
 				</block>
@@ -265,18 +254,4 @@
 				</block>
 			</view>
 		</block>
-
 	</view>
-
-	<!-- <view class="next-size">
-		<block wx:if="{{ifViewWrong}}">
-			<view class="next-question chekckout-question" bindtap="handleNext">
-				{{wrongIndex < wrongList.length - 1?'下一题':'查看总分'}}</view>
-			<view wx:if="{{wrongIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-		</block>
-		<block wx:else>
-			<view class="next-question chekckout-question" bindtap="handleNext">
-				{{questionIndex < bank.bank.length - 1?'下一题':'查看总分'}}</view>
-			<view wx:if="{{questionIndex > 0}}" class="pre-question chekckout-question" bindtap="handlePre">上一题</view>
-		</block>
-	</view> -->

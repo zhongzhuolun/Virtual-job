@@ -41,7 +41,7 @@
   margin-top: 10vh;
   width: 220rpx;
   height: 104rpx;
-  line-height: 104rpx;
+  line-height: 100rpx;
   border-radius: 50rpx;
   background-color: rgba(250, 191, 1, 1);
   color: rgba(0, 0, 0, 1);
